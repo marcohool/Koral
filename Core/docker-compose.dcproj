@@ -7,7 +7,7 @@
     <ProjectGuid>ec185ca1-e8da-4615-a5d6-10ac8f5c3cfb</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>core.api</DockerServiceName>
+    <DockerServiceName>core.API</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
