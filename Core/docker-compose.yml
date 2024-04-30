@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  core.api:
+    image: ${DOCKER_REGISTRY-}coreapi
+    container_name: core.api
+    build:
+      context: .
+      dockerfile: Core.Api/Dockerfile
+    depends_on:
+      - sqlserver
+
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: core.sqlserver
+    restart: unless-stopped
+    environment:
+      MSSQL_SA_PASSWORD: "Password123!"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - "./data-mssql:/var/opt/mssql/data"
+    ports:
+      - 5050:1433
