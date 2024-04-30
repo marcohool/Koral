@@ -2,11 +2,11 @@ version: '3.4'
 
 services:
   core.api:
-    image: ${DOCKER_REGISTRY-}coreapi
+    image: ${DOCKER_REGISTRY-}core.api
     container_name: core.api
     build:
       context: .
-      dockerfile: Core.Api/Dockerfile
+      dockerfile: src/Core.Api/Dockerfile
     depends_on:
       - sqlserver
 
