@@ -1,5 +1,3 @@
 ﻿namespace Core.API.Services;
 
-public interface IClothingItemService
-{
-}
+public interface IClothingItemService { }

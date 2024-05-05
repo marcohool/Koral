@@ -1,5 +1,3 @@
 ﻿namespace Core.API.Repository;
 
-public class ClothingItemRepository
-{
-}
+public class ClothingItemRepository { }
