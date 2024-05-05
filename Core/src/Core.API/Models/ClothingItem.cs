@@ -5,6 +5,8 @@ namespace Core.API.Models;
 
 public class ClothingItem
 {
+    public int Id { get; set; }
+
     [Required]
     public required string Name { get; set; }
 

@@ -1,4 +1,6 @@
-﻿using Core.API.Services;
+﻿using Core.API.Models;
+using Core.API.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 namespace Core.API.Configuration;
@@ -10,6 +12,11 @@ public static class ServiceConfiguration
         IConfiguration configuration
     )
     {
+        // Add DB Context
+        services.AddDbContext<ApplicationDBContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+        );
+
         services.AddSwaggerGen();
 
         // Register services for Dependency Injection
