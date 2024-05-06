@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.API.IntegrationTests.Controllers;
 
-public class ClohtingItemTests : BaseIntegrationTest
+public class ClothingItemTests(IntegrationTestWebApplicationFactory factory)
+    : BaseIntegrationTest(factory)
 {
-    public ClohtingItemTests(CustomWebApplicationFactory factory)
-        : base(factory) { }
-
     [Fact]
     public async Task GetClothingItems_ReturnsSuccessStatusCode()
     {
@@ -18,9 +17,9 @@ public class ClohtingItemTests : BaseIntegrationTest
         HttpClient client = this.HttpClient;
 
         // Act
-        HttpResponseMessage response = await client.GetAsync("/clothingitems");
+        HttpResponseMessage response = await client.GetAsync("/clothingitem");
 
         // Assert
-        response.EnsureSuccessStatusCode();
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 }

@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.API.IntegrationTests;
 
-public class BaseIntegrationTest : IClassFixture<CustomWebApplicationFactory>
+public class BaseIntegrationTest : IClassFixture<IntegrationTestWebApplicationFactory>
 {
-    protected BaseIntegrationTest(CustomWebApplicationFactory factory)
+    protected BaseIntegrationTest(IntegrationTestWebApplicationFactory factory)
     {
         this.HttpClient = factory.CreateClient();
     }

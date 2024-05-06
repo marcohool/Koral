@@ -7,7 +7,7 @@ using Testcontainers.MsSql;
 
 namespace Core.API.IntegrationTests;
 
-public class CustomWebApplicationFactory : WebApplicationFactory<Program>, IAsyncLifetime
+public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
     private readonly MsSqlContainer msSqlContainer = new MsSqlBuilder().Build();
 
@@ -24,12 +24,23 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>, IAsyn
 
             services.AddDbContext<ApplicationDBContext>(options =>
             {
-                options.UseSqlServer(this.msSqlContainer.GetConnectionString());
+                options.UseSqlServer(
+                    this.msSqlContainer.GetConnectionString(),
+                    config => config.MigrationsAssembly("Core.API")
+                );
             });
         });
     }
 
-    public Task InitializeAsync() => this.msSqlContainer.StartAsync();
+    public async Task InitializeAsync()
+    {
+        await this.msSqlContainer.StartAsync();
+
+        await this
+            .Services.CreateScope()
+            .ServiceProvider.GetRequiredService<ApplicationDBContext>()
+            .Database.MigrateAsync();
+    }
 
     public new Task DisposeAsync() => this.msSqlContainer.StopAsync();
 }
