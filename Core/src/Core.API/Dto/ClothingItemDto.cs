@@ -1,18 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.API.Models;
+namespace Core.API.Dto;
 
 /// <summary>
-/// The <see cref="ClothingItem"/> class.
+/// The <see cref="ClothingItemDto"/> class.
 /// </summary>
-public class ClothingItem
+public class ClothingItemDto
 {
-    /// <summary>
-    /// The ID of the clothing item.
-    /// </summary>
-    public int Id { get; set; }
-
     /// <summary>
     /// The name of the clothing item.
     /// </summary>

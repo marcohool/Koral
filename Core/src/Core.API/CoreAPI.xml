@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Core.API</name>
+    </assembly>
+    <members>
+        <member name="T:Core.API.Configuration.ServiceConfiguration">
+            <summary>
+            The <see cref="T:Core.API.Configuration.ServiceConfiguration"/> class.
+            </summary>
+        </member>
+        <member name="M:Core.API.Configuration.ServiceConfiguration.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Congifures the services for the application.
+            </summary>
+            <param name="services">Instance of <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</param>
+            <param name="configuration">Instance of <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>.</param>
+            <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</returns>
+        </member>
+        <member name="T:Core.API.Controllers.ClothingItemController">
+            <summary>
+            The <see cref="T:Core.API.Controllers.ClothingItemController"/> class."
+            </summary>
+            <remarks>
+            Initialises a new instace of the <see cref="T:Core.API.Controllers.ClothingItemController"/> class.
+            </remarks>
+            <param name="clothingItemService"></param>
+        </member>
+        <member name="M:Core.API.Controllers.ClothingItemController.#ctor(Core.API.Services.IClothingItemService)">
+            <summary>
+            The <see cref="T:Core.API.Controllers.ClothingItemController"/> class."
+            </summary>
+            <remarks>
+            Initialises a new instace of the <see cref="T:Core.API.Controllers.ClothingItemController"/> class.
+            </remarks>
+            <param name="clothingItemService"></param>
+        </member>
+        <member name="M:Core.API.Controllers.ClothingItemController.GetClothingItems">
+            <summary>
+            Gets a list of all clothing items from the database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Core.API.Dto.ClothingItemDto">
+            <summary>
+            The <see cref="T:Core.API.Dto.ClothingItemDto"/> class.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItemDto.Name">
+            <summary>
+            The name of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItemDto.Description">
+            <summary>
+            The description of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItemDto.Brand">
+            <summary>
+            The brand of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItemDto.Category">
+            <summary>
+            The category of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItemDto.Colour">
+            <summary>
+            The colour of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItemDto.Price">
+            <summary>
+            The price of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItemDto.ImageURL">
+            <summary>
+            The image URL of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItemDto.SourceURL">
+            <summary>
+            The source URL of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItemDto.LastChecked">
+            <summary>
+            The date the clothing item was last crawled.
+            </summary>
+        </member>
+        <member name="T:Core.API.Migrations.Init">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.Init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.Init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Core.API.Models.ApplicationDBContext">
+            <summary>
+            The <see cref="T:Core.API.Models.ApplicationDBContext"/> class.
+            </summary>
+            <remarks>
+            Initialises a new instance of the <see cref="T:Core.API.Models.ApplicationDBContext"/> class.
+            </remarks>
+            <param name="options"></param>
+        </member>
+        <member name="M:Core.API.Models.ApplicationDBContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            The <see cref="T:Core.API.Models.ApplicationDBContext"/> class.
+            </summary>
+            <remarks>
+            Initialises a new instance of the <see cref="T:Core.API.Models.ApplicationDBContext"/> class.
+            </remarks>
+            <param name="options"></param>
+        </member>
+        <member name="P:Core.API.Models.ApplicationDBContext.ClothingItems">
+            <summary>
+            The <see cref="P:Core.API.Models.ApplicationDBContext.ClothingItems"/> property represeting the clothing items in the database.
+            </summary>
+        </member>
+        <member name="T:Core.API.Models.ClothingItem">
+            <summary>
+            The <see cref="T:Core.API.Models.ClothingItem"/> class.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ClothingItem.Id">
+            <summary>
+            The ID of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ClothingItem.Name">
+            <summary>
+            The name of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ClothingItem.Description">
+            <summary>
+            The description of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ClothingItem.Brand">
+            <summary>
+            The brand of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ClothingItem.Category">
+            <summary>
+            The category of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ClothingItem.Colour">
+            <summary>
+            The colour of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ClothingItem.Price">
+            <summary>
+            The price of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ClothingItem.ImageURL">
+            <summary>
+            The image URL of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ClothingItem.SourceURL">
+            <summary>
+            The source URL of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ClothingItem.LastChecked">
+            <summary>
+            The date the clothing item was last crawled.
+            </summary>
+        </member>
+        <member name="T:Core.API.Repository.ClothingItemRepository">
+            <summary>
+            The <see cref="T:Core.API.Repository.ClothingItemRepository"/> class.
+            </summary>
+            <remarks>
+            Initialises a new instance of the <see cref="T:Core.API.Repository.ClothingItemRepository"/> class.
+            </remarks>
+            <param name="context"></param>
+        </member>
+        <member name="M:Core.API.Repository.ClothingItemRepository.#ctor(Core.API.Models.ApplicationDBContext)">
+            <summary>
+            The <see cref="T:Core.API.Repository.ClothingItemRepository"/> class.
+            </summary>
+            <remarks>
+            Initialises a new instance of the <see cref="T:Core.API.Repository.ClothingItemRepository"/> class.
+            </remarks>
+            <param name="context"></param>
+        </member>
+        <member name="M:Core.API.Repository.ClothingItemRepository.GetClothingItemsAsync">
+            <summary>
+            Gets a list of all clothing items from the database.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Core.API.Repository.IClothingItemRepository">
+            <summary>
+            Interface for the <see cref="T:Core.API.Repository.IClothingItemRepository"/> class.
+            </summary>
+        </member>
+        <member name="M:Core.API.Repository.IClothingItemRepository.GetClothingItemsAsync">
+            <summary>
+            Gets a list of all clothing items from the database.
+            </summary>
+            <returns>A list of <see cref="T:Core.API.Dto.ClothingItemDto"/> objects.</returns>
+        </member>
+        <member name="T:Core.API.Services.ClothingItemService">
+            <summary>
+            The <see cref="T:Core.API.Services.ClothingItemService"/> class.
+            </summary>
+        </member>
+        <member name="M:Core.API.Services.ClothingItemService.#ctor(Core.API.Repository.IClothingItemRepository)">
+            <summary>
+            The <see cref="T:Core.API.Services.ClothingItemService"/> class.
+            </summary>
+        </member>
+        <member name="M:Core.API.Services.ClothingItemService.GetClothingItemsAsync">
+            <summary>
+            Gets a list of all clothing items from the database.
+            </summary>
+            <returns>A list of <see cref="T:Core.API.Dto.ClothingItemDto"/> objects</returns>
+        </member>
+        <member name="T:Core.API.Services.IClothingItemService">
+            <summary>
+            Interface for the <see cref="T:Core.API.Services.IClothingItemService"/> class.
+            </summary>
+        </member>
+        <member name="M:Core.API.Services.IClothingItemService.GetClothingItemsAsync">
+            <summary>
+            Gets a list of all clothing items from the database.
+            </summary>
+            <returns>A list of <see cref="T:Core.API.Dto.ClothingItemDto"/> objects</returns>
+        </member>
+    </members>
+</doc>
