@@ -243,5 +243,10 @@
             </summary>
             <returns>A list of <see cref="T:Core.API.Dto.ClothingItemDto"/> objects</returns>
         </member>
+        <member name="T:Program">
+            <summary>
+            The <see cref="T:Program"/> class.
+            </summary>
+        </member>
     </members>
 </doc>

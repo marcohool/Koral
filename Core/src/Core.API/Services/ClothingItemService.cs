@@ -24,7 +24,10 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
         }
         catch (Exception e)
         {
-            throw new Exception(e.Message);
+            throw new InvalidOperationException(
+                "An error occurred while retrieving clothing items.",
+                e
+            );
         }
     }
 }
