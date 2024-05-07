@@ -26,4 +26,22 @@ public class ClothingItemController(IClothingItemService clothingItemService) : 
     {
         return this.Ok(await this.clothingItemService.GetClothingItemsAsync());
     }
+
+    /// <summary>
+    /// Gets a clothing item from the database by its ID.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<ClothingItemDto>> GetClothingItem(int id)
+    {
+        ClothingItemDto? clothingItem = await this.clothingItemService.GetClothingItemAsync(id);
+
+        if (clothingItem is null)
+        {
+            return this.NotFound();
+        }
+
+        return this.Ok(clothingItem);
+    }
 }

@@ -22,4 +22,17 @@ public class ClothingItemTests(IntegrationTestWebApplicationFactory factory)
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
+
+    [Fact]
+    public async Task GetClothingItem_ReturnsSuccessStatusCode()
+    {
+        // Arrange
+        HttpClient client = this.HttpClient;
+
+        // Act
+        HttpResponseMessage response = await client.GetAsync("/clothingitem/1");
+
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+    }
 }

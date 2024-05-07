@@ -13,4 +13,11 @@ public interface IClothingItemService
     /// </summary>
     /// <returns>A list of <see cref="ClothingItemDto"/> objects</returns>
     Task<IEnumerable<ClothingItemDto>> GetClothingItemsAsync();
+
+    /// <summary>
+    /// Gets a clothing item from the database by its ID.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    Task<ClothingItemDto?> GetClothingItemAsync(int id);
 }
