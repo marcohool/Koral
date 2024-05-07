@@ -41,6 +41,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Core.API.Controllers.ClothingItemController.GetClothingItem(System.Int32)">
+            <summary>
+            Gets a clothing item from the database by its ID.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Core.API.Dto.ClothingItemDto">
             <summary>
             The <see cref="T:Core.API.Dto.ClothingItemDto"/> class.
@@ -188,7 +195,6 @@
             <remarks>
             Initialises a new instance of the <see cref="T:Core.API.Repository.ClothingItemRepository"/> class.
             </remarks>
-            <param name="context"></param>
         </member>
         <member name="M:Core.API.Repository.ClothingItemRepository.#ctor(Core.API.Models.ApplicationDBContext)">
             <summary>
@@ -197,13 +203,12 @@
             <remarks>
             Initialises a new instance of the <see cref="T:Core.API.Repository.ClothingItemRepository"/> class.
             </remarks>
-            <param name="context"></param>
         </member>
         <member name="M:Core.API.Repository.ClothingItemRepository.GetClothingItemsAsync">
-            <summary>
-            Gets a list of all clothing items from the database.
-            </summary>
-            <returns></returns>
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Repository.ClothingItemRepository.GetClothingItemAsync(System.Int32)">
+            <inheritdoc />
         </member>
         <member name="T:Core.API.Repository.IClothingItemRepository">
             <summary>
@@ -216,21 +221,30 @@
             </summary>
             <returns>A list of <see cref="T:Core.API.Dto.ClothingItemDto"/> objects.</returns>
         </member>
+        <member name="M:Core.API.Repository.IClothingItemRepository.GetClothingItemAsync(System.Int32)">
+            <summary>
+            Gets a clothing item from the database by its ID.
+            </summary>
+            <param name="id">The ID of the clothing item.</param>
+            <returns>The <see cref="T:Core.API.Dto.ClothingItemDto"/> object if found, otherwise null.</returns>
+        </member>
         <member name="T:Core.API.Services.ClothingItemService">
             <summary>
             The <see cref="T:Core.API.Services.ClothingItemService"/> class.
             </summary>
+            <param name="clothingItemRepository">Instance of <see cref="T:Core.API.Repository.IClothingItemRepository"/>.</param>
         </member>
         <member name="M:Core.API.Services.ClothingItemService.#ctor(Core.API.Repository.IClothingItemRepository)">
             <summary>
             The <see cref="T:Core.API.Services.ClothingItemService"/> class.
             </summary>
+            <param name="clothingItemRepository">Instance of <see cref="T:Core.API.Repository.IClothingItemRepository"/>.</param>
         </member>
         <member name="M:Core.API.Services.ClothingItemService.GetClothingItemsAsync">
-            <summary>
-            Gets a list of all clothing items from the database.
-            </summary>
-            <returns>A list of <see cref="T:Core.API.Dto.ClothingItemDto"/> objects</returns>
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Services.ClothingItemService.GetClothingItemAsync(System.Int32)">
+            <inheritdoc />
         </member>
         <member name="T:Core.API.Services.IClothingItemService">
             <summary>
@@ -242,6 +256,13 @@
             Gets a list of all clothing items from the database.
             </summary>
             <returns>A list of <see cref="T:Core.API.Dto.ClothingItemDto"/> objects</returns>
+        </member>
+        <member name="M:Core.API.Services.IClothingItemService.GetClothingItemAsync(System.Int32)">
+            <summary>
+            Gets a clothing item from the database by its ID.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="T:Program">
             <summary>

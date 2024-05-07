@@ -3,13 +3,22 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Respawn;
 using Testcontainers.MsSql;
 
 namespace Core.API.IntegrationTests;
 
 public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
-    private readonly MsSqlContainer msSqlContainer = new MsSqlBuilder().Build();
+    private readonly MsSqlContainer msSqlContainer;
+    private Respawner respawner;
+
+    public IntegrationTestWebApplicationFactory()
+    {
+        this.msSqlContainer = new MsSqlBuilder()
+            .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
+            .Build();
+    }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -40,7 +49,12 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
             .Services.CreateScope()
             .ServiceProvider.GetRequiredService<ApplicationDBContext>()
             .Database.MigrateAsync();
+
+        this.respawner = await Respawner.CreateAsync(this.msSqlContainer.GetConnectionString());
     }
 
     public new Task DisposeAsync() => this.msSqlContainer.StopAsync();
+
+    public async Task ResetDatabase() =>
+        await this.respawner.ResetAsync(this.msSqlContainer.GetConnectionString());
 }
