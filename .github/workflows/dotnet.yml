@@ -15,6 +15,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      cache-key: ${{ steps.dotnet-cache.outputs.cache-key }}
 
     steps:
     - uses: actions/checkout@v4
@@ -24,11 +26,37 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
+    - name: Cache .NET packages
+      uses: actions/cache@v3
+      id: dotnet-cache
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-dotnet-${{ hashFiles('**/Core.sln') }}
+        restore-keys: |
+          ${{ runner.os }}-dotnet-    
+
     - name: Restore dependencies
       run: dotnet restore ./Core/Core.sln
 
     - name: Build
       run: dotnet build ./Core/Core.sln --no-restore
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Cache .NET packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ needs.build.outputs.cache-key }}
 
     - name: Test
       run: dotnet test ./Core/Core.sln --no-build --verbosity normal
