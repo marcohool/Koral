@@ -41,24 +41,10 @@ public class ClothingItemRepository(ApplicationDBContext context) : IClothingIte
     {
         try
         {
-            ClothingItem dbClothingItem = this.context.ClothingItems.First(x =>
-                x.Id == clothingItem.Id
-            );
-
-            dbClothingItem.Name = clothingItem.Name;
-            dbClothingItem.Description = clothingItem.Description;
-            dbClothingItem.Brand = clothingItem.Brand;
-            dbClothingItem.Category = clothingItem.Category;
-            dbClothingItem.Colour = clothingItem.Colour;
-            dbClothingItem.Price = clothingItem.Price;
-            dbClothingItem.ImageURL = clothingItem.ImageURL;
-            dbClothingItem.SourceURL = clothingItem.SourceURL;
-            dbClothingItem.LastChecked = clothingItem.LastChecked;
-
-            this.context.Update(dbClothingItem);
+            this.context.Update(clothingItem);
             await this.context.SaveChangesAsync();
 
-            return dbClothingItem;
+            return clothingItem;
         }
         catch (Exception e)
         {
@@ -67,5 +53,12 @@ public class ClothingItemRepository(ApplicationDBContext context) : IClothingIte
                 e
             );
         }
+    }
+
+    /// <inheritdoc />
+    public async Task DeleteClothingItem(ClothingItem clothingItem)
+    {
+        this.context.Remove(clothingItem);
+        await this.context.SaveChangesAsync();
     }
 }

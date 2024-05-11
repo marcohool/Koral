@@ -35,8 +35,7 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
     /// <inheritdoc />
     public async Task<ClothingItemResponse?> GetClothingItemAsync(int id)
     {
-        ClothingItem? clothingItem = null;
-
+        ClothingItem? clothingItem;
         try
         {
             clothingItem = await this.clothingItemRepository.GetClothingItemAsync(id);
@@ -94,6 +93,26 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
         {
             throw new InvalidOperationException(
                 "An error occurred while updating the clothing item.",
+                e
+            );
+        }
+    }
+
+    /// <inheritdoc />
+    public async Task DeleteClothingItem(int id)
+    {
+        ClothingItem? clothingItem =
+            await this.clothingItemRepository.GetClothingItemAsync(id)
+            ?? throw new KeyNotFoundException("The clothing item does not exist.");
+
+        try
+        {
+            await this.clothingItemRepository.DeleteClothingItem(clothingItem);
+        }
+        catch (Exception e)
+        {
+            throw new InvalidOperationException(
+                "An error occurred while deleting the clothing item.",
                 e
             );
         }

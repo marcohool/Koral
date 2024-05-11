@@ -59,13 +59,20 @@
             <summary>
             Updates a clothing item in the database.
             </summary>
-            <param name="id">The id of the clothing item</param>
+            <param name="id">The id of the clothing item.</param>
             <param name="clothingItemRequest">The updated details of the clothing item</param>
             <returns>The updated clothing item.</returns>
         </member>
+        <member name="M:Core.API.Controllers.ClothingItemController.DeleteClothingItem(System.Int32)">
+            <summary>
+            Deletes a clothing item from the database.
+            </summary>
+            <param name="id">The id of the clothing item.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
+        </member>
         <member name="T:Core.API.Dto.ClothingItem.ClothingItemRequest">
             <summary>
-            The <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/> class.
+            The <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/> record.
             </summary>
         </member>
         <member name="P:Core.API.Dto.ClothingItem.ClothingItemRequest.Name">
@@ -121,7 +128,7 @@
         </member>
         <member name="T:Core.API.Dto.ClothingItem.ClothingItemResponse">
             <summary>
-            The <see cref="T:Core.API.Dto.ClothingItem.ClothingItemResponse"/> class.
+            The <see cref="T:Core.API.Dto.ClothingItem.ClothingItemResponse"/> record.
             </summary>
         </member>
         <member name="M:Core.API.Dto.ClothingItem.ClothingItemResponse.#ctor(Core.API.Models.ClothingItem)">
@@ -304,6 +311,9 @@
         <member name="M:Core.API.Repository.ClothingItemRepository.UpdateClothingItemAsync(Core.API.Models.ClothingItem)">
             <inheritdoc />
         </member>
+        <member name="M:Core.API.Repository.ClothingItemRepository.DeleteClothingItem(Core.API.Models.ClothingItem)">
+            <inheritdoc />
+        </member>
         <member name="T:Core.API.Repository.IClothingItemRepository">
             <summary>
             Interface for the <see cref="T:Core.API.Repository.IClothingItemRepository"/> class.
@@ -319,7 +329,7 @@
             <summary>
             Gets a clothing item from the database by its ID.
             </summary>
-            <param name="id">The ID of the clothing item.</param>
+            <param name="id">The id of the clothing item.</param>
             <returns>The <see cref="T:Core.API.Models.ClothingItem"/> object if found, otherwise null.</returns>
         </member>
         <member name="M:Core.API.Repository.IClothingItemRepository.CreateClothingItemAsync(Core.API.Models.ClothingItem)">
@@ -335,6 +345,13 @@
             </summary>
             <param name="clothingItem">Instance of <see cref="T:Core.API.Models.ClothingItem"/>.</param>
             <returns>The updated <see cref="T:Core.API.Models.ClothingItem"/>.</returns>
+        </member>
+        <member name="M:Core.API.Repository.IClothingItemRepository.DeleteClothingItem(Core.API.Models.ClothingItem)">
+            <summary>
+            Deletes a clothing item from the database.
+            </summary>
+            <param name="clothingItem">Instance of <see cref="T:Core.API.Models.ClothingItem"/>.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
         </member>
         <member name="T:Core.API.Services.ClothingItemService">
             <summary>
@@ -358,6 +375,9 @@
             <inheritdoc />
         </member>
         <member name="M:Core.API.Services.ClothingItemService.UpdateClothingItemAsync(System.Int32,Core.API.Dto.ClothingItem.ClothingItemRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Services.ClothingItemService.DeleteClothingItem(System.Int32)">
             <inheritdoc />
         </member>
         <member name="T:Core.API.Services.IClothingItemService">
@@ -392,6 +412,13 @@
             <param name="id">The id of the clothing item</param>
             <param name="clothingItemDto">The updated details of the clothing item</param>
             <returns>A <see cref="T:Core.API.Dto.ClothingItem.ClothingItemResponse"/> representing the updated clothing item.</returns>
+        </member>
+        <member name="M:Core.API.Services.IClothingItemService.DeleteClothingItem(System.Int32)">
+            <summary>
+            Deletes a clothing item from the database.
+            </summary>
+            <param name="id">The id of the clothing item</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
         </member>
         <member name="T:Program">
             <summary>
