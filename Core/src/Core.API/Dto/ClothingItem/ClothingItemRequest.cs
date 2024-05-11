@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Core.API.Dto.ClothingItem;
 
 /// <summary>
-/// The <see cref="ClothingItemRequest"/> class.
+/// The <see cref="ClothingItemRequest"/> record.
 /// </summary>
-public class ClothingItemRequest
+public record ClothingItemRequest
 {
     /// <summary>
     /// The name of the clothing item.

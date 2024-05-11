@@ -34,9 +34,11 @@ public class ClothingItemController(IClothingItemService clothingItemService) : 
     /// <param name="id">Id of the clothing item.</param>
     /// <returns>Instance of <see cref="ClothingItemRequest"/>.</returns>
     [HttpGet("{id:int}", Name = "GetClothingItem")]
-    public async Task<ActionResult<ClothingItemRequest>> GetClothingItem(int id)
+    public async Task<ActionResult<ClothingItemResponse>> GetClothingItem(int id)
     {
-        ClothingItemRequest? clothingItem = await this.clothingItemService.GetClothingItemAsync(id);
+        ClothingItemResponse? clothingItem = await this.clothingItemService.GetClothingItemAsync(
+            id
+        );
 
         if (clothingItem is null)
         {
@@ -66,6 +68,35 @@ public class ClothingItemController(IClothingItemService clothingItemService) : 
                 new { id = clothingItemResponse.Id },
                 clothingItemResponse
             );
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// Updates a clothing item in the database.
+    /// </summary>
+    /// <param name="id">The id of the clothing item</param>
+    /// <param name="clothingItemRequest">The updated details of the clothing item</param>
+    /// <returns>The updated clothing item.</returns>
+    [HttpPut]
+    [Route("{id:int}")]
+    public async Task<ActionResult<ClothingItemResponse>> UpdateClothingItem(
+        int id,
+        [FromBody] ClothingItemRequest clothingItemRequest
+    )
+    {
+        try
+        {
+            return this.Ok(
+                await this.clothingItemService.UpdateClothingItemAsync(id, clothingItemRequest)
+            );
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return this.NotFound(ex.Message);
         }
         catch (Exception ex)
         {

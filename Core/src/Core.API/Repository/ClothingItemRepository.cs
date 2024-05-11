@@ -1,4 +1,5 @@
-﻿using Core.API.Dto.ClothingItem;
+﻿using System.Drawing;
+using Core.API.Dto.ClothingItem;
 using Core.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,42 +16,15 @@ public class ClothingItemRepository(ApplicationDBContext context) : IClothingIte
     private readonly ApplicationDBContext context = context;
 
     /// <inheritdoc />
-    public async Task<List<ClothingItemRequest>> GetClothingItemsAsync()
+    public async Task<List<ClothingItem>> GetClothingItemsAsync()
     {
-        return await this
-            .context.ClothingItems.Select(c => new ClothingItemRequest
-            {
-                Name = c.Name,
-                Description = c.Description,
-                Brand = c.Brand,
-                Category = c.Category,
-                Colour = c.Colour,
-                Price = c.Price,
-                ImageURL = c.ImageURL,
-                SourceURL = c.SourceURL,
-                LastChecked = c.LastChecked
-            })
-            .ToListAsync();
+        return await this.context.ClothingItems.ToListAsync();
     }
 
     /// <inheritdoc />
-    public async Task<ClothingItemRequest?> GetClothingItemAsync(int id)
+    public async Task<ClothingItem?> GetClothingItemAsync(int id)
     {
-        return await this
-            .context.ClothingItems.Where(c => c.Id == id)
-            .Select(c => new ClothingItemRequest
-            {
-                Name = c.Name,
-                Description = c.Description,
-                Brand = c.Brand,
-                Category = c.Category,
-                Colour = c.Colour,
-                Price = c.Price,
-                ImageURL = c.ImageURL,
-                SourceURL = c.SourceURL,
-                LastChecked = c.LastChecked
-            })
-            .FirstOrDefaultAsync();
+        return await this.context.ClothingItems.Where(c => c.Id == id).FirstOrDefaultAsync();
     }
 
     /// <inheritdoc />
@@ -60,5 +34,38 @@ public class ClothingItemRepository(ApplicationDBContext context) : IClothingIte
         await this.context.SaveChangesAsync();
 
         return clothingItem;
+    }
+
+    /// <inheritdoc />
+    public async Task<ClothingItem> UpdateClothingItemAsync(ClothingItem clothingItem)
+    {
+        try
+        {
+            ClothingItem dbClothingItem = this.context.ClothingItems.First(x =>
+                x.Id == clothingItem.Id
+            );
+
+            dbClothingItem.Name = clothingItem.Name;
+            dbClothingItem.Description = clothingItem.Description;
+            dbClothingItem.Brand = clothingItem.Brand;
+            dbClothingItem.Category = clothingItem.Category;
+            dbClothingItem.Colour = clothingItem.Colour;
+            dbClothingItem.Price = clothingItem.Price;
+            dbClothingItem.ImageURL = clothingItem.ImageURL;
+            dbClothingItem.SourceURL = clothingItem.SourceURL;
+            dbClothingItem.LastChecked = clothingItem.LastChecked;
+
+            this.context.Update(dbClothingItem);
+            await this.context.SaveChangesAsync();
+
+            return dbClothingItem;
+        }
+        catch (Exception e)
+        {
+            throw new InvalidOperationException(
+                "An error occurred while updating the clothing item.",
+                e
+            );
+        }
     }
 }
