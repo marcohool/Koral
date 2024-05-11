@@ -39,64 +39,144 @@
             <summary>
             Gets a list of all clothing items from the database.
             </summary>
-            <returns></returns>
+            <returns>A list of <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/>.</returns>
         </member>
         <member name="M:Core.API.Controllers.ClothingItemController.GetClothingItem(System.Int32)">
             <summary>
             Gets a clothing item from the database by its ID.
             </summary>
-            <param name="id"></param>
-            <returns></returns>
+            <param name="id">Id of the clothing item.</param>
+            <returns>Instance of <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/>.</returns>
         </member>
-        <member name="T:Core.API.Dto.ClothingItemDto">
+        <member name="M:Core.API.Controllers.ClothingItemController.CreateClothingItem(Core.API.Dto.ClothingItem.ClothingItemRequest)">
             <summary>
-            The <see cref="T:Core.API.Dto.ClothingItemDto"/> class.
+            Creates a new clothing item in the database.
+            </summary>
+            <param name="clothingItemRequest">Instance of <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/>.</param>
+            <returns>The created clothing item.</returns>
+        </member>
+        <member name="T:Core.API.Dto.ClothingItem.ClothingItemRequest">
+            <summary>
+            The <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/> class.
             </summary>
         </member>
-        <member name="P:Core.API.Dto.ClothingItemDto.Name">
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemRequest.Name">
             <summary>
             The name of the clothing item.
             </summary>
         </member>
-        <member name="P:Core.API.Dto.ClothingItemDto.Description">
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemRequest.Description">
             <summary>
             The description of the clothing item.
             </summary>
         </member>
-        <member name="P:Core.API.Dto.ClothingItemDto.Brand">
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemRequest.Brand">
             <summary>
             The brand of the clothing item.
             </summary>
         </member>
-        <member name="P:Core.API.Dto.ClothingItemDto.Category">
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemRequest.Category">
             <summary>
             The category of the clothing item.
             </summary>
         </member>
-        <member name="P:Core.API.Dto.ClothingItemDto.Colour">
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemRequest.Colour">
             <summary>
             The colour of the clothing item.
             </summary>
         </member>
-        <member name="P:Core.API.Dto.ClothingItemDto.Price">
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemRequest.Price">
             <summary>
             The price of the clothing item.
             </summary>
         </member>
-        <member name="P:Core.API.Dto.ClothingItemDto.ImageURL">
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemRequest.ImageURL">
             <summary>
             The image URL of the clothing item.
             </summary>
         </member>
-        <member name="P:Core.API.Dto.ClothingItemDto.SourceURL">
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemRequest.SourceURL">
             <summary>
             The source URL of the clothing item.
             </summary>
         </member>
-        <member name="P:Core.API.Dto.ClothingItemDto.LastChecked">
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemRequest.LastChecked">
             <summary>
             The date the clothing item was last crawled.
             </summary>
+        </member>
+        <member name="M:Core.API.Dto.ClothingItem.ClothingItemRequest.ToClothingItemModel">
+            <summary>
+            Converts the <see cref="T:Core.API.Dto.ClothingItem.ClothingItemResponse"/> to a <see cref="T:Core.API.Models.ClothingItem"/>.
+            </summary>
+            <returns><see cref="T:Core.API.Models.ClothingItem"/> object.</returns>
+        </member>
+        <member name="T:Core.API.Dto.ClothingItem.ClothingItemResponse">
+            <summary>
+            The <see cref="T:Core.API.Dto.ClothingItem.ClothingItemResponse"/> class.
+            </summary>
+        </member>
+        <member name="M:Core.API.Dto.ClothingItem.ClothingItemResponse.#ctor(Core.API.Models.ClothingItem)">
+            <summary>
+            Initialises a new instance of the <see cref="T:Core.API.Dto.ClothingItem.ClothingItemResponse"/> class.
+            </summary>
+            <param name="clothingItem">Instance of <see cref="T:Core.API.Models.ClothingItem"/>.</param>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemResponse.Id">
+            <summary>
+            The ID of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemResponse.Name">
+            <summary>
+            The name of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemResponse.Description">
+            <summary>
+            The description of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemResponse.Brand">
+            <summary>
+            The brand of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemResponse.Category">
+            <summary>
+            The category of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemResponse.Colour">
+            <summary>
+            The colour of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemResponse.Price">
+            <summary>
+            The price of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemResponse.ImageURL">
+            <summary>
+            The image URL of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemResponse.SourceURL">
+            <summary>
+            The source URL of the clothing item.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ClothingItem.ClothingItemResponse.LastChecked">
+            <summary>
+            The date the clothing item was last crawled.
+            </summary>
+        </member>
+        <member name="M:Core.API.Dto.ClothingItem.ClothingItemResponse.ToClothingItemModel">
+            <summary>
+            Converts the <see cref="T:Core.API.Dto.ClothingItem.ClothingItemResponse"/> to a <see cref="T:Core.API.Models.ClothingItem"/>.
+            </summary>
+            <returns><see cref="T:Core.API.Models.ClothingItem"/> object.</returns>
         </member>
         <member name="T:Core.API.Migrations.Init">
             <inheritdoc />
@@ -210,6 +290,9 @@
         <member name="M:Core.API.Repository.ClothingItemRepository.GetClothingItemAsync(System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:Core.API.Repository.ClothingItemRepository.CreateClothingItemAsync(Core.API.Models.ClothingItem)">
+            <inheritdoc />
+        </member>
         <member name="T:Core.API.Repository.IClothingItemRepository">
             <summary>
             Interface for the <see cref="T:Core.API.Repository.IClothingItemRepository"/> class.
@@ -219,14 +302,21 @@
             <summary>
             Gets a list of all clothing items from the database.
             </summary>
-            <returns>A list of <see cref="T:Core.API.Dto.ClothingItemDto"/> objects.</returns>
+            <returns>A list of <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/> objects.</returns>
         </member>
         <member name="M:Core.API.Repository.IClothingItemRepository.GetClothingItemAsync(System.Int32)">
             <summary>
             Gets a clothing item from the database by its ID.
             </summary>
             <param name="id">The ID of the clothing item.</param>
-            <returns>The <see cref="T:Core.API.Dto.ClothingItemDto"/> object if found, otherwise null.</returns>
+            <returns>The <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/> object if found, otherwise null.</returns>
+        </member>
+        <member name="M:Core.API.Repository.IClothingItemRepository.CreateClothingItemAsync(Core.API.Models.ClothingItem)">
+            <summary>
+            Creates a new clothing item in the database.
+            </summary>
+            <param name="clothingItem">Instance of <see cref="T:Core.API.Models.ClothingItem"/>.</param>
+            <returns>The created clothing item.</returns>
         </member>
         <member name="T:Core.API.Services.ClothingItemService">
             <summary>
@@ -246,6 +336,9 @@
         <member name="M:Core.API.Services.ClothingItemService.GetClothingItemAsync(System.Int32)">
             <inheritdoc />
         </member>
+        <member name="M:Core.API.Services.ClothingItemService.CreateClothingItemAsync(Core.API.Dto.ClothingItem.ClothingItemRequest)">
+            <inheritdoc />
+        </member>
         <member name="T:Core.API.Services.IClothingItemService">
             <summary>
             Interface for the <see cref="T:Core.API.Services.IClothingItemService"/> class.
@@ -255,14 +348,21 @@
             <summary>
             Gets a list of all clothing items from the database.
             </summary>
-            <returns>A list of <see cref="T:Core.API.Dto.ClothingItemDto"/> objects</returns>
+            <returns>A list of <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/> objects</returns>
         </member>
         <member name="M:Core.API.Services.IClothingItemService.GetClothingItemAsync(System.Int32)">
             <summary>
             Gets a clothing item from the database by its ID.
             </summary>
-            <param name="id"></param>
-            <returns></returns>
+            <param name="id">Clothing item ID.</param>
+            <returns>The created <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/> item or null.</returns>
+        </member>
+        <member name="M:Core.API.Services.IClothingItemService.CreateClothingItemAsync(Core.API.Dto.ClothingItem.ClothingItemRequest)">
+            <summary>
+            Creates a new clothing item in the database.
+            </summary>
+            <param name="clothingItemDto">Instance of <see cref="T:Core.API.Dto.ClothingItem.ClothingItemResponse"/>.</param>
+            <returns>The created clothing item.</returns>
         </member>
         <member name="T:Program">
             <summary>
