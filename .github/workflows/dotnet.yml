@@ -42,8 +42,9 @@ jobs:
       run: dotnet build ./Core/Core.sln --no-restore
 
   test:
+    needs: build
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v4
 
