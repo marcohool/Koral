@@ -90,4 +90,73 @@ public class ClothingItemTests(IntegrationTestWebApplicationFactory factory)
         createdClothingItem.Should().BeOfType<ClothingItem>();
         createdClothingItem.Should().NotBeNull();
     }
+
+    [Fact]
+    public async Task PutClothingItem_UpdatesClothingItem_ReturnsSuccessStatusCode()
+    {
+        // Arrange
+        HttpClient client = this.HttpClient;
+
+        ClothingItem clothingItem =
+            new()
+            {
+                Id = 1,
+                Name = "Test Updated Clothing Item",
+                Description = "Test Updated Description",
+                Brand = "Test Updated Brand",
+                Category = "Test Updated Category",
+                Colour = "Test Updated Colour",
+                Price = 20.99m,
+                ImageURL = "https://test.com/updated-image.jpg",
+                SourceURL = "https://test.com/updated",
+                LastChecked = DateTime.Now
+            };
+
+        string json = JsonConvert.SerializeObject(clothingItem);
+        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        // Act
+        HttpResponseMessage response = await client.PutAsync("/clothingitem/1", content);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        ClothingItem? updatedClothingItem = JsonConvert.DeserializeObject<ClothingItem>(
+            await response.Content.ReadAsStringAsync()
+        );
+
+        updatedClothingItem.Should().BeOfType<ClothingItem>();
+        updatedClothingItem.Should().NotBeNull();
+    }
+
+    [Fact]
+    public async Task PutClothingItem_NonexistentClothingItem_ReturnsNotFoundStatusCode()
+    {
+        // Arrange
+        HttpClient client = this.HttpClient;
+
+        ClothingItem clothingItem =
+            new()
+            {
+                Id = 999,
+                Name = "Test Updated Clothing Item",
+                Description = "Test Updated Description",
+                Brand = "Test Updated Brand",
+                Category = "Test Updated Category",
+                Colour = "Test Updated Colour",
+                Price = 20.99m,
+                ImageURL = "https://test.com/updated-image.jpg",
+                SourceURL = "https://test.com/updated",
+                LastChecked = DateTime.Now
+            };
+
+        string json = JsonConvert.SerializeObject(clothingItem);
+        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        // Act
+        HttpResponseMessage response = await client.PutAsync("/clothingitem/999", content);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
 }

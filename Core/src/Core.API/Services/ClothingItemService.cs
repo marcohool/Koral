@@ -1,4 +1,5 @@
 ﻿using Core.API.Dto.ClothingItem;
+using Core.API.Models;
 using Core.API.Repository;
 
 namespace Core.API.Services;
@@ -13,11 +14,14 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
     private readonly IClothingItemRepository clothingItemRepository = clothingItemRepository;
 
     /// <inheritdoc />
-    public async Task<IEnumerable<ClothingItemRequest>> GetClothingItemsAsync()
+    public async Task<IEnumerable<ClothingItemResponse>> GetClothingItemsAsync()
     {
         try
         {
-            return await this.clothingItemRepository.GetClothingItemsAsync();
+            List<ClothingItem> clothingItems =
+                await this.clothingItemRepository.GetClothingItemsAsync();
+
+            return clothingItems.Select(item => new ClothingItemResponse(item)).ToList();
         }
         catch (Exception e)
         {
@@ -29,11 +33,13 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
     }
 
     /// <inheritdoc />
-    public async Task<ClothingItemRequest?> GetClothingItemAsync(int id)
+    public async Task<ClothingItemResponse?> GetClothingItemAsync(int id)
     {
+        ClothingItem? clothingItem = null;
+
         try
         {
-            return await this.clothingItemRepository.GetClothingItemAsync(id);
+            clothingItem = await this.clothingItemRepository.GetClothingItemAsync(id);
         }
         catch (Exception e)
         {
@@ -42,6 +48,8 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
                 e
             );
         }
+
+        return clothingItem != null ? new ClothingItemResponse(clothingItem) : null;
     }
 
     /// <inheritdoc />
@@ -61,6 +69,31 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
         {
             throw new InvalidOperationException(
                 "An error occurred while creating the clothing item.",
+                e
+            );
+        }
+    }
+
+    /// <inheritdoc />
+    public async Task<ClothingItemResponse> UpdateClothingItemAsync(
+        int id,
+        ClothingItemRequest clothingItemDto
+    )
+    {
+        ClothingItem? clothingItem =
+            await this.clothingItemRepository.GetClothingItemAsync(id)
+            ?? throw new KeyNotFoundException("The clothing item does not exist.");
+
+        try
+        {
+            return new ClothingItemResponse(
+                await this.clothingItemRepository.UpdateClothingItemAsync(clothingItem)
+            );
+        }
+        catch (Exception e)
+        {
+            throw new InvalidOperationException(
+                "An error occurred while updating the clothing item.",
                 e
             );
         }

@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Core.API.Dto.ClothingItem;
 
 /// <summary>
-/// The <see cref="ClothingItemResponse"/> class.
+/// The <see cref="ClothingItemResponse"/> record.
 /// </summary>
 public record ClothingItemResponse
 {
