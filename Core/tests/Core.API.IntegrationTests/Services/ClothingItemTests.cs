@@ -53,4 +53,41 @@ public class ClothingItemTests(IntegrationTestWebApplicationFactory factory)
         clothingItem.Should().BeOfType<ClothingItem>();
         clothingItem.Should().NotBeNull();
     }
+
+    [Fact]
+    public async Task PostClothingItem_ReturnsCreatedStatusCode()
+    {
+        // Arrange
+        HttpClient client = this.HttpClient;
+
+        ClothingItem clothingItem =
+            new()
+            {
+                Name = "Test Clothing Item",
+                Description = "Test Description",
+                Brand = "Test Brand",
+                Category = "Test Category",
+                Colour = "Test Colour",
+                Price = 9.99m,
+                ImageURL = "https://test.com/image.jpg",
+                SourceURL = "https://test.com",
+                LastChecked = DateTime.Now
+            };
+
+        string json = JsonConvert.SerializeObject(clothingItem);
+        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        // Act
+        HttpResponseMessage response = await client.PostAsync("/clothingitem", content);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.Created);
+
+        ClothingItem? createdClothingItem = JsonConvert.DeserializeObject<ClothingItem>(
+            await response.Content.ReadAsStringAsync()
+        );
+
+        createdClothingItem.Should().BeOfType<ClothingItem>();
+        createdClothingItem.Should().NotBeNull();
+    }
 }

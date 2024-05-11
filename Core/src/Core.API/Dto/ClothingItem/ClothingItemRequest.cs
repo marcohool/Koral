@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.API.Dto;
+namespace Core.API.Dto.ClothingItem;
 
 /// <summary>
-/// The <see cref="ClothingItemDto"/> class.
+/// The <see cref="ClothingItemRequest"/> class.
 /// </summary>
-public class ClothingItemDto
+public class ClothingItemRequest
 {
     /// <summary>
     /// The name of the clothing item.
@@ -62,4 +62,22 @@ public class ClothingItemDto
     /// </summary>
     [Required]
     public required DateTime LastChecked { get; set; }
+
+    /// <summary>
+    /// Converts the <see cref="ClothingItemResponse"/> to a <see cref="Models.ClothingItem"/>.
+    /// </summary>
+    /// <returns><see cref="Models.ClothingItem"/> object.</returns>
+    public Models.ClothingItem ToClothingItemModel() =>
+        new()
+        {
+            Name = this.Name,
+            Description = this.Description,
+            Brand = this.Brand,
+            Category = this.Category,
+            Colour = this.Colour,
+            Price = this.Price,
+            ImageURL = this.ImageURL,
+            SourceURL = this.SourceURL,
+            LastChecked = this.LastChecked
+        };
 }

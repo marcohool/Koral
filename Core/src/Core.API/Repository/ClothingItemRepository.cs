@@ -1,4 +1,4 @@
-﻿using Core.API.Dto;
+﻿using Core.API.Dto.ClothingItem;
 using Core.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,10 +15,10 @@ public class ClothingItemRepository(ApplicationDBContext context) : IClothingIte
     private readonly ApplicationDBContext context = context;
 
     /// <inheritdoc />
-    public Task<List<ClothingItemDto>> GetClothingItemsAsync()
+    public async Task<List<ClothingItemRequest>> GetClothingItemsAsync()
     {
-        return this
-            .context.ClothingItems.Select(c => new ClothingItemDto
+        return await this
+            .context.ClothingItems.Select(c => new ClothingItemRequest
             {
                 Name = c.Name,
                 Description = c.Description,
@@ -34,11 +34,11 @@ public class ClothingItemRepository(ApplicationDBContext context) : IClothingIte
     }
 
     /// <inheritdoc />
-    public Task<ClothingItemDto?> GetClothingItemAsync(int id)
+    public async Task<ClothingItemRequest?> GetClothingItemAsync(int id)
     {
-        return this
+        return await this
             .context.ClothingItems.Where(c => c.Id == id)
-            .Select(c => new ClothingItemDto
+            .Select(c => new ClothingItemRequest
             {
                 Name = c.Name,
                 Description = c.Description,
@@ -51,5 +51,14 @@ public class ClothingItemRepository(ApplicationDBContext context) : IClothingIte
                 LastChecked = c.LastChecked
             })
             .FirstOrDefaultAsync();
+    }
+
+    /// <inheritdoc />
+    public async Task<ClothingItem> CreateClothingItemAsync(ClothingItem clothingItem)
+    {
+        await this.context.AddAsync(clothingItem);
+        await this.context.SaveChangesAsync();
+
+        return clothingItem;
     }
 }

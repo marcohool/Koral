@@ -1,6 +1,7 @@
-﻿using Core.API.Dto;
+﻿using Core.API.Dto.ClothingItem;
 using Core.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Core.API.Controllers;
 
@@ -20,9 +21,9 @@ public class ClothingItemController(IClothingItemService clothingItemService) : 
     /// <summary>
     /// Gets a list of all clothing items from the database.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>A list of <see cref="ClothingItemRequest"/>.</returns>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ClothingItemDto>>> GetClothingItems()
+    public async Task<ActionResult<IEnumerable<ClothingItemRequest>>> GetClothingItems()
     {
         return this.Ok(await this.clothingItemService.GetClothingItemsAsync());
     }
@@ -30,12 +31,12 @@ public class ClothingItemController(IClothingItemService clothingItemService) : 
     /// <summary>
     /// Gets a clothing item from the database by its ID.
     /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    [HttpGet("{id:int}")]
-    public async Task<ActionResult<ClothingItemDto>> GetClothingItem(int id)
+    /// <param name="id">Id of the clothing item.</param>
+    /// <returns>Instance of <see cref="ClothingItemRequest"/>.</returns>
+    [HttpGet("{id:int}", Name = "GetClothingItem")]
+    public async Task<ActionResult<ClothingItemRequest>> GetClothingItem(int id)
     {
-        ClothingItemDto? clothingItem = await this.clothingItemService.GetClothingItemAsync(id);
+        ClothingItemRequest? clothingItem = await this.clothingItemService.GetClothingItemAsync(id);
 
         if (clothingItem is null)
         {
@@ -43,5 +44,32 @@ public class ClothingItemController(IClothingItemService clothingItemService) : 
         }
 
         return this.Ok(clothingItem);
+    }
+
+    /// <summary>
+    /// Creates a new clothing item in the database.
+    /// </summary>
+    /// <param name="clothingItemRequest">Instance of <see cref="ClothingItemRequest"/>.</param>
+    /// <returns>The created clothing item.</returns>
+    [HttpPost]
+    public async Task<ActionResult<ClothingItemResponse>> CreateClothingItem(
+        [FromBody] ClothingItemRequest clothingItemRequest
+    )
+    {
+        try
+        {
+            ClothingItemResponse clothingItemResponse =
+                await this.clothingItemService.CreateClothingItemAsync(clothingItemRequest);
+
+            return this.CreatedAtRoute(
+                "GetClothingItem",
+                new { id = clothingItemResponse.Id },
+                clothingItemResponse
+            );
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
     }
 }
