@@ -17,7 +17,7 @@ public interface IClothingItemRepository
     /// <summary>
     /// Gets a clothing item from the database by its ID.
     /// </summary>
-    /// <param name="id">The ID of the clothing item.</param>
+    /// <param name="id">The id of the clothing item.</param>
     /// <returns>The <see cref="ClothingItem"/> object if found, otherwise null.</returns>
     Task<ClothingItem?> GetClothingItemAsync(int id);
 
@@ -34,4 +34,11 @@ public interface IClothingItemRepository
     /// <param name="clothingItem">Instance of <see cref="ClothingItem"/>.</param>
     /// <returns>The updated <see cref="ClothingItem"/>.</returns>
     Task<ClothingItem> UpdateClothingItemAsync(ClothingItem clothingItem);
+
+    /// <summary>
+    /// Deletes a clothing item from the database.
+    /// </summary>
+    /// <param name="clothingItem">Instance of <see cref="ClothingItem"/>.</param>
+    /// <returns>A <see cref="Task"/> representing the operation.</returns>
+    Task DeleteClothingItem(ClothingItem clothingItem);
 }

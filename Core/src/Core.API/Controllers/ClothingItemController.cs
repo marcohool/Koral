@@ -78,7 +78,7 @@ public class ClothingItemController(IClothingItemService clothingItemService) : 
     /// <summary>
     /// Updates a clothing item in the database.
     /// </summary>
-    /// <param name="id">The id of the clothing item</param>
+    /// <param name="id">The id of the clothing item.</param>
     /// <param name="clothingItemRequest">The updated details of the clothing item</param>
     /// <returns>The updated clothing item.</returns>
     [HttpPut]
@@ -93,6 +93,31 @@ public class ClothingItemController(IClothingItemService clothingItemService) : 
             return this.Ok(
                 await this.clothingItemService.UpdateClothingItemAsync(id, clothingItemRequest)
             );
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return this.NotFound(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// Deletes a clothing item from the database.
+    /// </summary>
+    /// <param name="id">The id of the clothing item.</param>
+    /// <returns>A <see cref="Task"/> representing the operation.</returns>
+    [HttpDelete]
+    [Route("{id:int}")]
+    public async Task<ActionResult> DeleteClothingItem(int id)
+    {
+        try
+        {
+            await this.clothingItemService.DeleteClothingItem(id);
+
+            return this.NoContent();
         }
         catch (KeyNotFoundException ex)
         {

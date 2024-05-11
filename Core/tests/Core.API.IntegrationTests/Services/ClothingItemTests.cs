@@ -75,7 +75,7 @@ public class ClothingItemTests(IntegrationTestWebApplicationFactory factory)
             };
 
         string json = JsonConvert.SerializeObject(clothingItem);
-        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+        StringContent content = new(json, Encoding.UTF8, "application/json");
 
         // Act
         HttpResponseMessage response = await client.PostAsync("/clothingitem", content);
@@ -151,10 +151,36 @@ public class ClothingItemTests(IntegrationTestWebApplicationFactory factory)
             };
 
         string json = JsonConvert.SerializeObject(clothingItem);
-        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+        StringContent content = new(json, Encoding.UTF8, "application/json");
 
         // Act
         HttpResponseMessage response = await client.PutAsync("/clothingitem/999", content);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task DeleteClothingItem_ReturnsNoContentCode()
+    {
+        // Arrange
+        HttpClient client = this.HttpClient;
+
+        // Act
+        HttpResponseMessage response = await client.DeleteAsync("/clothingitem/1");
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.NoContent);
+    }
+
+    [Fact]
+    public async Task DeleteClothingItem_NonexistentClothingItem_ReturnsNotFoundStatusCode()
+    {
+        // Arrange
+        HttpClient client = this.HttpClient;
+
+        // Act
+        HttpResponseMessage response = await client.DeleteAsync("/clothingitem/999");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);

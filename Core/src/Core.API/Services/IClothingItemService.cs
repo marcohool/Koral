@@ -36,4 +36,11 @@ public interface IClothingItemService
     /// <param name="clothingItemDto">The updated details of the clothing item</param>
     /// <returns>A <see cref="ClothingItemResponse"/> representing the updated clothing item.</returns>
     Task<ClothingItemResponse> UpdateClothingItemAsync(int id, ClothingItemRequest clothingItemDto);
+
+    /// <summary>
+    /// Deletes a clothing item from the database.
+    /// </summary>
+    /// <param name="id">The id of the clothing item</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    Task DeleteClothingItem(int id);
 }
