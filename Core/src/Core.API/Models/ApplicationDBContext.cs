@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.API.Models;
@@ -16,4 +17,23 @@ public class ApplicationDBContext(DbContextOptions options) : IdentityDbContext<
     /// The <see cref="ClothingItems"/> property represeting the clothing items in the database.
     /// </summary>
     public DbSet<ClothingItem> ClothingItems { get; set; }
+
+    /// <summary>
+    /// The <see cref="OnModelCreating"/> method.
+    /// </summary>
+    /// <param name="builder">Instance of <see cref="ModelBuilder"/>.</param>
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.Entity<ClothingItem>().ToTable("ClothingItems");
+
+        List<IdentityRole> roles =
+        [
+            new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
+            new IdentityRole { Name = "User", NormalizedName = "USER" }
+        ];
+
+        builder.Entity<IdentityRole>().HasData(roles);
+    }
 }
