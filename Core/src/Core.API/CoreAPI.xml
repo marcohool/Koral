@@ -205,6 +205,18 @@
         <member name="M:Core.API.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Core.API.Migrations.Identity">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.Identity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.Identity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.Identity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Core.API.Models.ApplicationDBContext">
             <summary>
             The <see cref="T:Core.API.Models.ApplicationDBContext"/> class.
@@ -212,7 +224,7 @@
             <remarks>
             Initialises a new instance of the <see cref="T:Core.API.Models.ApplicationDBContext"/> class.
             </remarks>
-            <param name="options"></param>
+            <param name="options">The options used to configure the database connection.</param>
         </member>
         <member name="M:Core.API.Models.ApplicationDBContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
             <summary>
@@ -221,7 +233,7 @@
             <remarks>
             Initialises a new instance of the <see cref="T:Core.API.Models.ApplicationDBContext"/> class.
             </remarks>
-            <param name="options"></param>
+            <param name="options">The options used to configure the database connection.</param>
         </member>
         <member name="P:Core.API.Models.ApplicationDBContext.ClothingItems">
             <summary>

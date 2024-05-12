@@ -1,7 +1,11 @@
-﻿using Core.API.Models;
+﻿using System.Text;
+using Core.API.Models;
 using Core.API.Repository;
 using Core.API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace Core.API.Configuration;
@@ -22,12 +26,48 @@ public static class ServiceConfiguration
         IConfiguration configuration
     )
     {
+        services.AddSwaggerGen();
+
         // Add DB Context
         services.AddDbContext<ApplicationDBContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
         );
 
-        services.AddSwaggerGen();
+        // Add Identity
+        services
+            .AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 12;
+            })
+            .AddEntityFrameworkStores<ApplicationDBContext>();
+
+        // Add Authentication
+        services
+            .AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme =
+                    options.DefaultChallengeScheme =
+                    options.DefaultForbidScheme =
+                    options.DefaultScheme =
+                    options.DefaultSignInScheme =
+                    options.DefaultSignOutScheme =
+                        JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = configuration["JWT:Issuer"],
+                    ValidateAudience = true,
+                    ValidAudience = configuration["JWT:Audience"],
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(configuration["JWT:SigningKey"]!)
+                    ),
+                };
+            });
 
         // Register services for Dependency Injection
         services
