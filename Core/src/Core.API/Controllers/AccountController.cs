@@ -1,6 +1,7 @@
-﻿using Core.API.Models;
+﻿using Core.API.Dto.Account;
+using Core.API.Models;
+using Core.API.Services;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.API.Controllers;
@@ -9,45 +10,52 @@ namespace Core.API.Controllers;
 [ApiController]
 public class AccountController : ControllerBase
 {
-    private readonly UserManager<AppUser> userManager;
+    private readonly IAccountService accountService;
 
-    public AccountController(UserManager<AppUser> userManager)
+    public AccountController(IAccountService accountService)
     {
-        this.userManager = userManager;
+        this.accountService = accountService;
     }
 
     [HttpPost("register")]
     public async Task<ActionResult> Register([FromBody] RegisterRequest registerRequest)
     {
-        try
-        {
-            if (!this.ModelState.IsValid)
-                return this.BadRequest(
-                    this.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)
-                );
-
-            AppUser createdUser =
-                new() { UserName = registerRequest.Email, Email = registerRequest.Email };
-
-            IdentityResult registerResult = await this.userManager.CreateAsync(
-                createdUser,
-                registerRequest.Password
+        if (!this.ModelState.IsValid)
+            return this.BadRequest(
+                this.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)
             );
 
-            if (registerResult.Succeeded)
-            {
-                IdentityResult roleResult = await this.userManager.AddToRoleAsync(
-                    createdUser,
-                    "User"
-                );
+        try
+        {
+            await this.accountService.RegisterUser(registerRequest);
 
-                if (roleResult.Succeeded)
-                    return this.Ok("User created");
+            return this.Ok("User created");
+        }
+        catch (Exception ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
+    }
 
-                return this.BadRequest(roleResult.Errors);
-            }
+    [HttpPost("login")]
+    public async Task<ActionResult> Login([FromBody] LoginRequest loginRequest)
+    {
+        try
+        {
+            AppUser user = await this.userManager.FindByEmailAsync(loginRequest.Email);
 
-            return this.BadRequest(registerResult.Errors);
+            if (user is null)
+                return this.BadRequest("User not found");
+
+            bool passwordValid = await this.userManager.CheckPasswordAsync(
+                user,
+                loginRequest.Password
+            );
+
+            if (!passwordValid)
+                return this.BadRequest("Invalid password");
+
+            return this.Ok("User logged in");
         }
         catch (Exception ex)
         {
