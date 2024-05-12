@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Core.API.IntegrationTests.TestHelpers;
 using Core.API.Models;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit.Sdk;
 
 namespace Core.API.IntegrationTests;
 
+[Collection("IntegrationTest")]
 public class BaseIntegrationTest : IClassFixture<IntegrationTestWebApplicationFactory>
 {
     protected BaseIntegrationTest(IntegrationTestWebApplicationFactory factory)
