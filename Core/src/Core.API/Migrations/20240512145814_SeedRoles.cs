@@ -19,7 +19,8 @@ namespace Core.API.Migrations
                 {
                     { "1e10f5c3-54a6-4dc4-b968-3f2002304da5", null, "User", "USER" },
                     { "bd91e2d5-8e11-4649-92b5-25715dfb402c", null, "Admin", "ADMIN" }
-                });
+                }
+            );
         }
 
         /// <inheritdoc />
@@ -28,12 +29,14 @@ namespace Core.API.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "1e10f5c3-54a6-4dc4-b968-3f2002304da5");
+                keyValue: "1e10f5c3-54a6-4dc4-b968-3f2002304da5"
+            );
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "bd91e2d5-8e11-4649-92b5-25715dfb402c");
+                keyValue: "bd91e2d5-8e11-4649-92b5-25715dfb402c"
+            );
         }
     }
 }
