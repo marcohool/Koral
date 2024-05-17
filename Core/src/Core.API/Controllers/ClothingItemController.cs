@@ -111,7 +111,7 @@ public class ClothingItemController(IClothingItemService clothingItemService) : 
     /// <returns>A <see cref="Task"/> representing the operation.</returns>
     [HttpDelete]
     [Route("{id:int}")]
-    public async Task<ActionResult> DeleteClothingItem(int id)
+    public async Task<IActionResult> DeleteClothingItem(int id)
     {
         try
         {

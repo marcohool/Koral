@@ -26,7 +26,37 @@ public static class ServiceConfiguration
         IConfiguration configuration
     )
     {
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition(
+                "Bearer",
+                new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter a valid token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                }
+            );
+            options.AddSecurityRequirement(
+                new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                }
+            );
+        });
 
         // Add DB Context
         services.AddDbContext<ApplicationDBContext>(options =>
@@ -74,7 +104,8 @@ public static class ServiceConfiguration
         // Register services for Dependency Injection
         services
             .AddScoped<IClothingItemService, ClothingItemService>()
-            .AddScoped<IClothingItemRepository, ClothingItemRepository>();
+            .AddScoped<IClothingItemRepository, ClothingItemRepository>()
+            .AddScoped<IAuthorisationService, AccountService>();
 
         services.AddControllers();
 

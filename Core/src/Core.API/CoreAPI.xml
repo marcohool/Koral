@@ -17,6 +17,31 @@
             <param name="configuration">Instance of <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>.</param>
             <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> instance.</returns>
         </member>
+        <member name="T:Core.API.Controllers.AccountController">
+            <summary>
+            The <see cref="T:Core.API.Controllers.AccountController"/> class.
+            </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:Core.API.Controllers.AccountController"/> class.
+            </remarks>
+            <param name="accountService">Instance of <see cref="T:Core.API.Services.IAuthorisationService"/>.</param>
+        </member>
+        <member name="M:Core.API.Controllers.AccountController.#ctor(Core.API.Services.IAuthorisationService)">
+            <summary>
+            The <see cref="T:Core.API.Controllers.AccountController"/> class.
+            </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:Core.API.Controllers.AccountController"/> class.
+            </remarks>
+            <param name="accountService">Instance of <see cref="T:Core.API.Services.IAuthorisationService"/>.</param>
+        </member>
+        <member name="M:Core.API.Controllers.AccountController.Register(Core.API.Dto.Account.RegisterRequest)">
+            <summary>
+            Registers a new user.
+            </summary>
+            <param name="registerRequest">Instance of <see cref="T:Core.API.Dto.Account.RegisterRequest"/>.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
+        </member>
         <member name="T:Core.API.Controllers.ClothingItemController">
             <summary>
             The <see cref="T:Core.API.Controllers.ClothingItemController"/> class."
@@ -69,6 +94,61 @@
             </summary>
             <param name="id">The id of the clothing item.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
+        </member>
+        <member name="T:Core.API.Dto.Account.AuthResponse">
+            <summary>
+            The <see cref="T:Core.API.Dto.Account.AuthResponse"/> class.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.Account.AuthResponse.Succeeded">
+            <summary>
+            Gets or sets a value indicating whether the operation succeeded.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.Account.AuthResponse.IsNotAllowed">
+            <summary>
+            Gets or sets a value indicating whether the user is not allowed.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.Account.AuthResponse.IsLockedOut">
+            <summary>
+            Gets or sets a value indicating whether the user is locked out.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.Account.AuthResponse.Token">
+            <summary>
+            Gets or sets the JWT token.
+            </summary>
+        </member>
+        <member name="T:Core.API.Dto.Account.LoginRequest">
+            <summary>
+            Represents a request to log in a user.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.Account.LoginRequest.Email">
+            <summary>
+            The user's email address which acts as a user name.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.Account.LoginRequest.Password">
+            <summary>
+            The user's password.
+            </summary>
+        </member>
+        <member name="T:Core.API.Dto.Account.RegisterRequest">
+            <summary>
+            Represents a request to register a new user.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.Account.RegisterRequest.Email">
+            <summary>
+            The user's email address which acts as a user name.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.Account.RegisterRequest.Password">
+            <summary>
+            The user's password.
+            </summary>
         </member>
         <member name="T:Core.API.Dto.ClothingItem.ClothingItemRequest">
             <summary>
@@ -383,6 +463,37 @@
             <param name="clothingItem">Instance of <see cref="T:Core.API.Models.ClothingItem"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
         </member>
+        <member name="T:Core.API.Services.AccountService">
+            <summary>
+            The <see cref="T:Core.API.Services.IAuthorisationService"/> interface.
+            </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:Core.API.Services.AccountService"/> class.
+            </remarks>
+            <param name="userManager">Instance of user manager.</param>
+            <param name="signinManager">Instance of signin manager.</param>
+            <param name="configuration">Instance of <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>.</param>
+        </member>
+        <member name="M:Core.API.Services.AccountService.#ctor(Microsoft.AspNetCore.Identity.UserManager{Core.API.Models.AppUser},Microsoft.AspNetCore.Identity.SignInManager{Core.API.Models.AppUser},Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            The <see cref="T:Core.API.Services.IAuthorisationService"/> interface.
+            </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:Core.API.Services.AccountService"/> class.
+            </remarks>
+            <param name="userManager">Instance of user manager.</param>
+            <param name="signinManager">Instance of signin manager.</param>
+            <param name="configuration">Instance of <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>.</param>
+        </member>
+        <member name="M:Core.API.Services.AccountService.RegisterUser(Core.API.Dto.Account.RegisterRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Services.AccountService.LoginUser(Core.API.Dto.Account.LoginRequest)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Services.AccountService.CreateToken(Core.API.Models.AppUser)">
+            <inheritdoc />
+        </member>
         <member name="T:Core.API.Services.ClothingItemService">
             <summary>
             The <see cref="T:Core.API.Services.ClothingItemService"/> class.
@@ -409,6 +520,25 @@
         </member>
         <member name="M:Core.API.Services.ClothingItemService.DeleteClothingItem(System.Int32)">
             <inheritdoc />
+        </member>
+        <member name="T:Core.API.Services.IAuthorisationService">
+            <summary>
+            Interface for the <see cref="T:Core.API.Services.IAuthorisationService"/> class.
+            </summary>
+        </member>
+        <member name="M:Core.API.Services.IAuthorisationService.RegisterUser(Core.API.Dto.Account.RegisterRequest)">
+            <summary>
+            Registers a new user.
+            </summary>
+            <param name="registerRequest">The user registration details.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Core.API.Services.IAuthorisationService.LoginUser(Core.API.Dto.Account.LoginRequest)">
+            <summary>
+            Logs in a user.
+            </summary>
+            <param name="loginRequest">The user login details</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
         </member>
         <member name="T:Core.API.Services.IClothingItemService">
             <summary>

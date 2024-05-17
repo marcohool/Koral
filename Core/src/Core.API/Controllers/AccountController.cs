@@ -6,19 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.API.Controllers;
 
+/// <summary>
+/// The <see cref="AccountController"/> class.
+/// </summary>
+/// <remarks>
+/// Initializes a new instance of the <see cref="AccountController"/> class.
+/// </remarks>
+/// <param name="accountService">Instance of <see cref="IAuthorisationService"/>.</param>
 [Route("[controller]")]
 [ApiController]
-public class AccountController : ControllerBase
+public class AccountController(IAuthorisationService accountService) : ControllerBase
 {
-    private readonly IAccountService accountService;
+    private readonly IAuthorisationService accountService = accountService;
 
-    public AccountController(IAccountService accountService)
-    {
-        this.accountService = accountService;
-    }
-
+    /// <summary>
+    /// Registers a new user.
+    /// </summary>
+    /// <param name="registerRequest">Instance of <see cref="RegisterRequest"/>.</param>
+    /// <returns>A <see cref="Task"/> representing the operation.</returns>
     [HttpPost("register")]
-    public async Task<ActionResult> Register([FromBody] RegisterRequest registerRequest)
+    public async Task<IActionResult> Register([FromBody] RegisterRequest registerRequest)
     {
         if (!this.ModelState.IsValid)
             return this.BadRequest(
@@ -38,28 +45,29 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult> Login([FromBody] LoginRequest loginRequest)
+    public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
     {
-        try
-        {
-            AppUser user = await this.userManager.FindByEmailAsync(loginRequest.Email);
-
-            if (user is null)
-                return this.BadRequest("User not found");
-
-            bool passwordValid = await this.userManager.CheckPasswordAsync(
-                user,
-                loginRequest.Password
+        if (!this.ModelState.IsValid)
+            return this.BadRequest(
+                this.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)
             );
 
-            if (!passwordValid)
-                return this.BadRequest("Invalid password");
+        try
+        {
+            AuthResponse authResponse = await this.accountService.LoginUser(loginRequest);
 
-            return this.Ok("User logged in");
+            return authResponse switch
+            {
+                { Succeeded: true } => this.Ok(authResponse.Token),
+                { Succeeded: false } => this.BadRequest("Invalid username/password"),
+                { IsNotAllowed: true } => this.BadRequest("User is not allowed"),
+                { IsLockedOut: true } => this.BadRequest("User is locked out"),
+                _ => throw new InvalidOperationException("Uncaught authentiation response"),
+            };
         }
         catch (Exception ex)
         {
-            return this.BadRequest(ex.Message);
+            return this.StatusCode(500, ex.Message);
         }
     }
 }
