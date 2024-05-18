@@ -144,9 +144,20 @@ namespace Core.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("ContentType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("ImageSize")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -191,13 +202,13 @@ namespace Core.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "43d7690f-02a7-437e-9989-365f7efd9b78",
+                            Id = "eca98bef-52ff-4820-b086-3bae6a078123",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a0fb16f6-827b-4b4d-befb-ec4cc7d47087",
+                            Id = "973e9151-e1a5-4160-ad89-a34073e87f4f",
                             Name = "User",
                             NormalizedName = "USER"
                         });

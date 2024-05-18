@@ -101,10 +101,18 @@ public static class ServiceConfiguration
                 };
             });
 
+        // Configure settings
+        services.Configure<ImageUploadSettings>(configuration.GetSection("ImageUploadSettings"));
+
+        // Add HttpContextAccessor
+        services.AddHttpContextAccessor();
+
         // Register services for Dependency Injection
         services
-            .AddScoped<IClothingItemService, ClothingItemService>()
             .AddScoped<IClothingItemRepository, ClothingItemRepository>()
+            .AddScoped<IImageUploadRepository, ImageUploadRepository>()
+            .AddScoped<IClothingItemService, ClothingItemService>()
+            .AddScoped<IImageUploadService, ImageUploadService>()
             .AddScoped<IAuthorisationService, AccountService>();
 
         services.AddControllers();
