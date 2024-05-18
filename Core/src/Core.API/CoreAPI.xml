@@ -309,6 +309,18 @@
         <member name="M:Core.API.Migrations.SeedRoles.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Core.API.Migrations.CreateImageUpload">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.CreateImageUpload.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.CreateImageUpload.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.CreateImageUpload.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:Core.API.Models.ApplicationDBContext">
             <summary>
             The <see cref="T:Core.API.Models.ApplicationDBContext"/> class.
@@ -332,18 +344,33 @@
             The <see cref="P:Core.API.Models.ApplicationDBContext.ClothingItems"/> property represeting the clothing items in the database.
             </summary>
         </member>
+        <member name="P:Core.API.Models.ApplicationDBContext.ImageUploads">
+            <summary>
+            The <see cref="P:Core.API.Models.ApplicationDBContext.ImageUploads"/> property representing the image uploads in the database.
+            </summary>
+        </member>
         <member name="M:Core.API.Models.ApplicationDBContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             The <see cref="M:Core.API.Models.ApplicationDBContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)"/> method.
             </summary>
             <param name="builder">Instance of <see cref="T:Microsoft.EntityFrameworkCore.ModelBuilder"/>.</param>
         </member>
+        <member name="T:Core.API.Models.AppUser">
+            <summary>
+            The <see cref="T:Core.API.Models.AppUser"/> class.
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.AppUser.ImageUploads">
+            <summary>
+            The <see cref="T:Core.API.Models.ImageUpload"/> property representing images uploaded by this user.
+            </summary>
+        </member>
         <member name="T:Core.API.Models.ClothingItem">
             <summary>
             The <see cref="T:Core.API.Models.ClothingItem"/> class.
             </summary>
         </member>
-        <member name="P:Core.API.Models.ClothingItem.Id">
+        <member name="P:Core.API.Models.ClothingItem.ClothingItemId">
             <summary>
             The ID of the clothing item.
             </summary>
@@ -391,6 +418,11 @@
         <member name="P:Core.API.Models.ClothingItem.LastChecked">
             <summary>
             The date the clothing item was last crawled.
+            </summary>
+        </member>
+        <member name="T:Core.API.Models.ImageUpload">
+            <summary>
+            The <see cref="T:Core.API.Models.ImageUpload"/> class.
             </summary>
         </member>
         <member name="T:Core.API.Repository.ClothingItemRepository">

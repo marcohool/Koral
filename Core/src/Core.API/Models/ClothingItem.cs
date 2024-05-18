@@ -11,7 +11,7 @@ public class ClothingItem
     /// <summary>
     /// The ID of the clothing item.
     /// </summary>
-    public int Id { get; set; }
+    public int ClothingItemId { get; set; }
 
     /// <summary>
     /// The name of the clothing item.

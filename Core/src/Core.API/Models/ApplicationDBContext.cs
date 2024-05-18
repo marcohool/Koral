@@ -19,6 +19,11 @@ public class ApplicationDBContext(DbContextOptions options) : IdentityDbContext<
     public DbSet<ClothingItem> ClothingItems { get; set; }
 
     /// <summary>
+    /// The <see cref="ImageUploads"/> property representing the image uploads in the database.
+    /// </summary>
+    public DbSet<ImageUpload> ImageUploads { get; set; }
+
+    /// <summary>
     /// The <see cref="OnModelCreating"/> method.
     /// </summary>
     /// <param name="builder">Instance of <see cref="ModelBuilder"/>.</param>

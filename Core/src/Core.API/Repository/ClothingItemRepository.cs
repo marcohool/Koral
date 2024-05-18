@@ -24,7 +24,9 @@ public class ClothingItemRepository(ApplicationDBContext context) : IClothingIte
     /// <inheritdoc />
     public async Task<ClothingItem?> GetClothingItemAsync(int id)
     {
-        return await this.context.ClothingItems.Where(c => c.Id == id).FirstOrDefaultAsync();
+        return await this
+            .context.ClothingItems.Where(c => c.ClothingItemId == id)
+            .FirstOrDefaultAsync();
     }
 
     /// <inheritdoc />

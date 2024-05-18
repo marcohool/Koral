@@ -16,7 +16,7 @@ public record ClothingItemResponse
     [SetsRequiredMembers]
     public ClothingItemResponse(Models.ClothingItem clothingItem)
     {
-        this.Id = clothingItem.Id;
+        this.Id = clothingItem.ClothingItemId;
         this.Name = clothingItem.Name;
         this.Description = clothingItem.Description;
         this.Brand = clothingItem.Brand;
