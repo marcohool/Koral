@@ -60,7 +60,7 @@ public class ApplicationDBContextHelper
         [
             new ClothingItem
             {
-                Id = 1,
+                ClothingItemId = 1,
                 Name = "T-Shirt",
                 Description = "A short-sleeved top",
                 Category = "T-Shirts",
@@ -71,7 +71,7 @@ public class ApplicationDBContextHelper
             },
             new ClothingItem
             {
-                Id = 2,
+                ClothingItemId = 2,
                 Name = "Jeans",
                 Description = "A pair of denim trousers",
                 Category = "Jeans",
