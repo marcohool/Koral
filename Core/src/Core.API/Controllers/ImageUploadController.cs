@@ -5,12 +5,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.API.Controllers;
 
+/// <summary>
+/// The <see cref="ImageUploadController"/> class.
+/// </summary>
+/// <param name="imageUploadService"></param>
 [Route("[controller]")]
 [ApiController]
 public class ImageUploadController(IImageUploadService imageUploadService) : ControllerBase
 {
     private readonly IImageUploadService imageUploadService = imageUploadService;
 
+    /// <summary>
+    /// Uploads an image.
+    /// </summary>
+    /// <param name="imageUpload"></param>
+    /// <returns>A <see cref="Task"/> representing the operation.</returns>
     [Authorize]
     [HttpPost]
     public async Task<IActionResult> UploadImage([FromForm] ImageUploadRequest imageUpload)

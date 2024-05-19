@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace Core.API.Services;
 
+/// <inheritdoc/>
 public class ImageUploadService(
     IOptions<ImageUploadSettings> imageUploadSettings,
     IImageUploadRepository imageUploadRepository,
@@ -26,6 +27,7 @@ public class ImageUploadService(
         .Value
         .AllowedFileExtensions;
 
+    /// <inheritdoc/>
     public async Task<ImageUploadResponse> UploadImageAsync(ImageUploadRequest imageUpload)
     {
         IFormFile imageFile = imageUpload.ImageFile;
@@ -57,7 +59,7 @@ public class ImageUploadService(
                     ImageSize = fileSize,
                     ContentType = imageFile.ContentType,
                     UploadedAt = DateTime.UtcNow,
-                    Status = "Pending",
+                    Status = "Uploaded",
                     AppUser = user
                 }
             );
@@ -71,6 +73,8 @@ public class ImageUploadService(
         }
         catch (Exception ex)
         {
+            // To-do: Delete the uploaded image file if the database operation
+
             return new ImageUploadResponse { Success = false, ErrorMessage = ex.Message };
         }
     }
