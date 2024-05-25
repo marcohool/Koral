@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Core.API.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240518170343_CreateImageUpload")]
+    [Migration("20240519172802_CreateImageUpload")]
     partial class CreateImageUpload
     {
         /// <inheritdoc />
@@ -205,13 +205,13 @@ namespace Core.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eca98bef-52ff-4820-b086-3bae6a078123",
+                            Id = "bd91e2d5-8e11-4649-92b5-25715dfb402c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "973e9151-e1a5-4160-ad89-a34073e87f4f",
+                            Id = "1e10f5c3-54a6-4dc4-b968-3f2002304da5",
                             Name = "User",
                             NormalizedName = "USER"
                         });

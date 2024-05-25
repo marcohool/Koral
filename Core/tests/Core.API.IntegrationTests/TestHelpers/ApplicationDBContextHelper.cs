@@ -13,7 +13,6 @@ public class ApplicationDBContextHelper
     public void InitialiseDbForTests(ApplicationDBContext context)
     {
         InsertWithIdentity(context, this.CreateClothingItems(), "ClothingItems");
-        Insert(context, this.CreateIdentityRoles());
     }
 
     private static void InsertWithIdentity<T>(
@@ -79,25 +78,6 @@ public class ApplicationDBContextHelper
                 Price = 19.99m,
                 SourceURL = "https://www.example.com/jeans",
                 LastChecked = DateTime.Now,
-            }
-        ];
-    }
-
-    private List<IdentityRole> CreateIdentityRoles()
-    {
-        return
-        [
-            new IdentityRole
-            {
-                Id = this.roleId1,
-                Name = "Admin",
-                NormalizedName = "ADMIN"
-            },
-            new IdentityRole
-            {
-                Id = this.roleId2,
-                Name = "User",
-                NormalizedName = "USER"
             }
         ];
     }

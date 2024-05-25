@@ -3,6 +3,7 @@ using Core.API.Models;
 using Core.API.Repository;
 using Core.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -100,6 +101,18 @@ public static class ServiceConfiguration
                     ),
                 };
             });
+
+        // Add Authorization
+        services.AddAuthorization(options =>
+        {
+            AuthorizationPolicy defaultPolicy = new AuthorizationPolicyBuilder(
+                JwtBearerDefaults.AuthenticationScheme
+            )
+                .RequireAuthenticatedUser()
+                .Build();
+
+            options.DefaultPolicy = defaultPolicy;
+        });
 
         // Configure settings
         services.Configure<ImageUploadSettings>(configuration.GetSection("ImageUploadSettings"));

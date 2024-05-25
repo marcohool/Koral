@@ -35,8 +35,18 @@ public class ApplicationDBContext(DbContextOptions options) : IdentityDbContext<
 
         List<IdentityRole> roles =
         [
-            new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
-            new IdentityRole { Name = "User", NormalizedName = "USER" }
+            new IdentityRole
+            {
+                Id = "bd91e2d5-8e11-4649-92b5-25715dfb402c",
+                Name = "Admin",
+                NormalizedName = "ADMIN"
+            },
+            new IdentityRole
+            {
+                Id = "1e10f5c3-54a6-4dc4-b968-3f2002304da5",
+                Name = "User",
+                NormalizedName = "USER"
+            }
         ];
 
         builder.Entity<IdentityRole>().HasData(roles);

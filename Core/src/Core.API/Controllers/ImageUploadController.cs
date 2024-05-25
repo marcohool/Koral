@@ -20,8 +20,8 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
     /// </summary>
     /// <param name="imageUpload"></param>
     /// <returns>A <see cref="Task"/> representing the operation.</returns>
-    [Authorize]
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> UploadImage([FromForm] ImageUploadRequest imageUpload)
     {
         try

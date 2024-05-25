@@ -4,6 +4,21 @@
         <name>Core.API</name>
     </assembly>
     <members>
+        <member name="T:Core.API.Configuration.ImageUploadSettings">
+            <summary>
+            The <see cref="T:Core.API.Configuration.ImageUploadSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Core.API.Configuration.ImageUploadSettings.MaxFileSize">
+            <summary>
+            Gets or sets the maximum file size.
+            </summary>
+        </member>
+        <member name="P:Core.API.Configuration.ImageUploadSettings.AllowedFileExtensions">
+            <summary>
+            Gets or sets the allowed file extensions.
+            </summary>
+        </member>
         <member name="T:Core.API.Configuration.ServiceConfiguration">
             <summary>
             The <see cref="T:Core.API.Configuration.ServiceConfiguration"/> class.
@@ -41,6 +56,14 @@
             </summary>
             <param name="registerRequest">Instance of <see cref="T:Core.API.Dto.Account.RegisterRequest"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
+        </member>
+        <member name="M:Core.API.Controllers.AccountController.Login(Core.API.Dto.Account.LoginRequest)">
+            <summary>
+            Logs in a user.
+            </summary>
+            <param name="loginRequest">Instance of <see cref="T:Core.API.Dto.Account.LoginRequest"/>.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
+            <exception cref="T:System.InvalidOperationException">Uncaught authentication error.</exception>
         </member>
         <member name="T:Core.API.Controllers.ClothingItemController">
             <summary>
@@ -93,6 +116,25 @@
             Deletes a clothing item from the database.
             </summary>
             <param name="id">The id of the clothing item.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
+        </member>
+        <member name="T:Core.API.Controllers.ImageUploadController">
+            <summary>
+            The <see cref="T:Core.API.Controllers.ImageUploadController"/> class.
+            </summary>
+            <param name="imageUploadService"></param>
+        </member>
+        <member name="M:Core.API.Controllers.ImageUploadController.#ctor(Core.API.Services.IImageUploadService)">
+            <summary>
+            The <see cref="T:Core.API.Controllers.ImageUploadController"/> class.
+            </summary>
+            <param name="imageUploadService"></param>
+        </member>
+        <member name="M:Core.API.Controllers.ImageUploadController.UploadImage(Core.API.Dto.ImageUpload.ImageUploadRequest)">
+            <summary>
+            Uploads an image.
+            </summary>
+            <param name="imageUpload"></param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
         </member>
         <member name="T:Core.API.Dto.Account.AuthResponse">
@@ -273,6 +315,16 @@
             </summary>
             <returns><see cref="T:Core.API.Models.ClothingItem"/> object.</returns>
         </member>
+        <member name="T:Core.API.Dto.ImageUpload.ImageUploadRequest">
+            <summary>
+            The <see cref="T:Core.API.Dto.ImageUpload.ImageUploadRequest"/> class.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ImageUpload.ImageUploadRequest.ImageFile">
+            <summary>
+            Gets or sets the image file.
+            </summary>
+        </member>
         <member name="T:Core.API.Dto.ImageUpload.ImageUploadResponse">
             <summary>
             The <see cref="T:Core.API.Dto.ImageUpload.ImageUploadResponse"/> class.
@@ -450,6 +502,51 @@
             The <see cref="T:Core.API.Models.ImageUpload"/> class.
             </summary>
         </member>
+        <member name="P:Core.API.Models.ImageUpload.ImageUploadId">
+            <summary>
+            Image upload id
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.AppUserId">
+            <summary>
+            App user id
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.ImageName">
+            <summary>
+            Image file name
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.ImagePath">
+            <summary>
+            Image file path
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.ImageSize">
+            <summary>
+            Image file size
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.ContentType">
+            <summary>
+            Image file content type
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.UploadedAt">
+            <summary>
+            Time image was uploaded
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.Status">
+            <summary>
+            Image upload status
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.AppUser">
+            <summary>
+            The app user associated with the image upload
+            </summary>
+        </member>
         <member name="T:Core.API.Repository.ClothingItemRepository">
             <summary>
             The <see cref="T:Core.API.Repository.ClothingItemRepository"/> class.
@@ -519,6 +616,27 @@
             </summary>
             <param name="clothingItem">Instance of <see cref="T:Core.API.Models.ClothingItem"/>.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
+        </member>
+        <member name="T:Core.API.Repository.IImageUploadRepository">
+            <summary>
+            The <see cref="T:Core.API.Repository.IImageUploadRepository"/> interface.
+            </summary>
+        </member>
+        <member name="M:Core.API.Repository.IImageUploadRepository.CreateImageUpload(Core.API.Models.ImageUpload)">
+            <summary>
+            Creates a new image upload.
+            </summary>
+            <param name="imageUpload">Instance of <see cref="T:Core.API.Models.ImageUpload"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Core.API.Repository.ImageUploadRepository">
+            <inheritdoc/>
+        </member>
+        <member name="M:Core.API.Repository.ImageUploadRepository.#ctor(Core.API.Models.ApplicationDBContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Core.API.Repository.ImageUploadRepository.CreateImageUpload(Core.API.Models.ImageUpload)">
+            <inheritdoc/>
         </member>
         <member name="T:Core.API.Services.AccountService">
             <summary>
@@ -636,6 +754,27 @@
             </summary>
             <param name="id">The id of the clothing item</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Core.API.Services.IImageUploadService">
+            <summary>
+            The <see cref="T:Core.API.Services.IImageUploadService"/> interface.
+            </summary>
+        </member>
+        <member name="M:Core.API.Services.IImageUploadService.UploadImageAsync(Core.API.Dto.ImageUpload.ImageUploadRequest)">
+            <summary>
+            Handles image uploading processes.
+            </summary>
+            <param name="imageUpload">Instance of <see cref="T:Core.API.Dto.ImageUpload.ImageUploadRequest"/>.</param>
+            <returns>Instance of <see cref="T:Core.API.Dto.ImageUpload.ImageUploadResponse"/>.</returns>
+        </member>
+        <member name="T:Core.API.Services.ImageUploadService">
+            <inheritdoc/>
+        </member>
+        <member name="M:Core.API.Services.ImageUploadService.#ctor(Microsoft.Extensions.Options.IOptions{Core.API.Configuration.ImageUploadSettings},Core.API.Repository.IImageUploadRepository,Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.UserManager{Core.API.Models.AppUser},Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Core.API.Services.ImageUploadService.UploadImageAsync(Core.API.Dto.ImageUpload.ImageUploadRequest)">
+            <inheritdoc/>
         </member>
         <member name="T:Program">
             <summary>

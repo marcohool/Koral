@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Core.API.IntegrationTests.TestHelpers;
 using Core.API.Models;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit.Sdk;
 
@@ -16,6 +19,8 @@ public class BaseIntegrationTest : IClassFixture<IntegrationTestWebApplicationFa
     protected BaseIntegrationTest(IntegrationTestWebApplicationFactory factory)
     {
         this.HttpClient = factory.CreateClient();
+
+        this.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Test");
 
         this.DbContext = factory
             .Services.CreateScope()

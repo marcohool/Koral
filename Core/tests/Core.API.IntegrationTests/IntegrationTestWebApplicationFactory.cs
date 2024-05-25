@@ -1,6 +1,9 @@
 ﻿using Core.API.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Respawn;
@@ -38,6 +41,24 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
                     config => config.MigrationsAssembly("Core.API")
                 );
             });
+        });
+
+        builder.ConfigureTestServices(services =>
+        {
+            services
+                .AddAuthentication(TestAuthHandler.AuthenticationScheme)
+                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>(
+                    TestAuthHandler.AuthenticationScheme,
+                    options => { }
+                );
+
+            AuthorizationPolicy defaultPolicy = new AuthorizationPolicyBuilder(
+                TestAuthHandler.AuthenticationScheme
+            )
+                .RequireAuthenticatedUser()
+                .Build();
+
+            services.AddAuthorizationBuilder().SetDefaultPolicy(defaultPolicy);
         });
     }
 
