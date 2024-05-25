@@ -11,6 +11,7 @@ public class ApplicationDBContextHelper
     {
         InsertWithIdentity(context, CreateClothingItems(), "ClothingItems");
         Insert(context, CreateAppUsers());
+        Insert(context, CreateRoles());
     }
 
     private static void InsertWithIdentity<T>(
@@ -89,6 +90,25 @@ public class ApplicationDBContextHelper
                 Id = "1",
                 UserName = "test.email@email.com",
                 Email = "test.email@email.com"
+            }
+        ];
+    }
+
+    private static List<IdentityRole> CreateRoles()
+    {
+        return
+        [
+            new IdentityRole
+            {
+                Id = "1",
+                Name = "Admin",
+                NormalizedName = "ADMIN"
+            },
+            new IdentityRole
+            {
+                Id = "2",
+                Name = "User",
+                NormalizedName = "USER"
             }
         ];
     }
