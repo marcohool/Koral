@@ -25,4 +25,14 @@
 	<ProjectReference Include="..\..\src\Core.API\Core.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StaticFiles\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="StaticFiles\Images\sample-10mb.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

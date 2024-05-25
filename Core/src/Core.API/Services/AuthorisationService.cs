@@ -86,12 +86,14 @@ public class AccountService(
 
         List<Claim> claims =
         [
-            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.NameIdentifier, user.Id)
         ];
 
-        string signingKey = this.configuration["JWT:SigningKey"] ?? throw new ArgumentException("");
+        string signingKey =
+            this.configuration["JWT:SigningKey"]
+            ?? throw new ArgumentException("JWT signing key not configured.");
 
         SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(signingKey));
 

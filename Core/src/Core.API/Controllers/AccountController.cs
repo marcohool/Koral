@@ -44,6 +44,12 @@ public class AccountController(IAuthorisationService accountService) : Controlle
         }
     }
 
+    /// <summary>
+    /// Logs in a user.
+    /// </summary>
+    /// <param name="loginRequest">Instance of <see cref="LoginRequest"/>.</param>
+    /// <returns>A <see cref="Task"/> representing the operation.</returns>
+    /// <exception cref="InvalidOperationException">Uncaught authentication error.</exception>
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
     {

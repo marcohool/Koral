@@ -100,7 +100,7 @@ public class ClothingItemTests(IntegrationTestWebApplicationFactory factory)
         ClothingItem clothingItem =
             new()
             {
-                Id = 1,
+                ClothingItemId = 1,
                 Name = "Test Updated Clothing Item",
                 Description = "Test Updated Description",
                 Brand = "Test Updated Brand",
@@ -138,7 +138,7 @@ public class ClothingItemTests(IntegrationTestWebApplicationFactory factory)
         ClothingItem clothingItem =
             new()
             {
-                Id = 999,
+                ClothingItemId = 999,
                 Name = "Test Updated Clothing Item",
                 Description = "Test Updated Description",
                 Brand = "Test Updated Brand",

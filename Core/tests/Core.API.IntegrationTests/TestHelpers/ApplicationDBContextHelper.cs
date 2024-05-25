@@ -7,13 +7,11 @@ namespace Core.API.IntegrationTests.TestHelpers;
 
 public class ApplicationDBContextHelper
 {
-    private readonly string roleId1 = Guid.NewGuid().ToString();
-    private readonly string roleId2 = Guid.NewGuid().ToString();
-
     public void InitialiseDbForTests(ApplicationDBContext context)
     {
-        InsertWithIdentity(context, this.CreateClothingItems(), "ClothingItems");
-        Insert(context, this.CreateIdentityRoles());
+        InsertWithIdentity(context, CreateClothingItems(), "ClothingItems");
+        Insert(context, CreateAppUsers());
+        Insert(context, CreateRoles());
     }
 
     private static void InsertWithIdentity<T>(
@@ -54,13 +52,13 @@ public class ApplicationDBContextHelper
         context.SaveChanges();
     }
 
-    private List<ClothingItem> CreateClothingItems()
+    private static List<ClothingItem> CreateClothingItems()
     {
         return
         [
             new ClothingItem
             {
-                Id = 1,
+                ClothingItemId = 1,
                 Name = "T-Shirt",
                 Description = "A short-sleeved top",
                 Category = "T-Shirts",
@@ -71,7 +69,7 @@ public class ApplicationDBContextHelper
             },
             new ClothingItem
             {
-                Id = 2,
+                ClothingItemId = 2,
                 Name = "Jeans",
                 Description = "A pair of denim trousers",
                 Category = "Jeans",
@@ -83,19 +81,32 @@ public class ApplicationDBContextHelper
         ];
     }
 
-    private List<IdentityRole> CreateIdentityRoles()
+    private static List<AppUser> CreateAppUsers()
+    {
+        return
+        [
+            new AppUser
+            {
+                Id = "1",
+                UserName = "test.email@email.com",
+                Email = "test.email@email.com"
+            }
+        ];
+    }
+
+    private static List<IdentityRole> CreateRoles()
     {
         return
         [
             new IdentityRole
             {
-                Id = this.roleId1,
+                Id = "1",
                 Name = "Admin",
                 NormalizedName = "ADMIN"
             },
             new IdentityRole
             {
-                Id = this.roleId2,
+                Id = "2",
                 Name = "User",
                 NormalizedName = "USER"
             }
