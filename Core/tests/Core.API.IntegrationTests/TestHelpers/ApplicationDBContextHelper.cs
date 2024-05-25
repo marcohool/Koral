@@ -10,9 +10,12 @@ public class ApplicationDBContextHelper
     private readonly string roleId1 = Guid.NewGuid().ToString();
     private readonly string roleId2 = Guid.NewGuid().ToString();
 
+    private readonly string userId = Guid.NewGuid().ToString();
+
     public void InitialiseDbForTests(ApplicationDBContext context)
     {
         InsertWithIdentity(context, this.CreateClothingItems(), "ClothingItems");
+        Insert(context, this.CreateAppUsers());
     }
 
     private static void InsertWithIdentity<T>(
@@ -78,6 +81,38 @@ public class ApplicationDBContextHelper
                 Price = 19.99m,
                 SourceURL = "https://www.example.com/jeans",
                 LastChecked = DateTime.Now,
+            }
+        ];
+    }
+
+    private List<AppUser> CreateAppUsers()
+    {
+        return
+        [
+            new AppUser
+            {
+                Id = "1",
+                UserName = "test.email@email.com",
+                Email = "test.email@email.com"
+            }
+        ];
+    }
+
+    private List<IdentityRole> CreateIdentityRoles()
+    {
+        return
+        [
+            new IdentityRole
+            {
+                Id = this.roleId1,
+                Name = "User",
+                NormalizedName = "USER"
+            },
+            new IdentityRole
+            {
+                Id = this.roleId2,
+                Name = "Admin",
+                NormalizedName = "ADMIN"
             }
         ];
     }

@@ -122,6 +122,12 @@ public class ImageUploadService(
 
     private async Task<AppUser?> GetCurrentUserAsync()
     {
+        IHttpContextAccessor accessor = this.httpContextAccessor;
+
+        HttpContext? content = accessor.HttpContext;
+
+        ClaimsPrincipal? user2 = content?.User;
+
         ClaimsPrincipal? user = this.httpContextAccessor.HttpContext?.User;
         return user != null ? await this.userManager.GetUserAsync(user) : null;
     }

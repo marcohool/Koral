@@ -29,6 +29,6 @@ public class ImageUploadTests(IntegrationTestWebApplicationFactory factory)
         HttpResponseMessage response = await client.PostAsync("/imageupload", content);
 
         // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        response.StatusCode.Should().Be(HttpStatusCode.Created);
     }
 }

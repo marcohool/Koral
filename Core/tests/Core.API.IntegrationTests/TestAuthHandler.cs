@@ -24,6 +24,7 @@ public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions
         List<Claim> claims =
         [
             new Claim(ClaimTypes.Email, "test.email@email.com"),
+            new Claim(ClaimTypes.NameIdentifier, "1"),
             new Claim(JwtRegisteredClaimNames.Sub, "1"),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         ];
