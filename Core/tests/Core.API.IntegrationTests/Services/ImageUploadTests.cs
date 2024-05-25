@@ -8,7 +8,7 @@ public class ImageUploadTests(IntegrationTestWebApplicationFactory factory)
     : BaseIntegrationTest(factory)
 {
     [Fact]
-    public async Task UploadImage_ReturnsSuccessStatusCode()
+    public async Task UploadImage_ReturnsCreatedStatusCode()
     {
         // Arrange
         HttpClient client = this.HttpClient;

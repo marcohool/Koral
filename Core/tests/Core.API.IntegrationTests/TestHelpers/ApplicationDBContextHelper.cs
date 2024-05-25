@@ -7,15 +7,10 @@ namespace Core.API.IntegrationTests.TestHelpers;
 
 public class ApplicationDBContextHelper
 {
-    private readonly string roleId1 = Guid.NewGuid().ToString();
-    private readonly string roleId2 = Guid.NewGuid().ToString();
-
-    private readonly string userId = Guid.NewGuid().ToString();
-
     public void InitialiseDbForTests(ApplicationDBContext context)
     {
-        InsertWithIdentity(context, this.CreateClothingItems(), "ClothingItems");
-        Insert(context, this.CreateAppUsers());
+        InsertWithIdentity(context, CreateClothingItems(), "ClothingItems");
+        Insert(context, CreateAppUsers());
     }
 
     private static void InsertWithIdentity<T>(
@@ -56,7 +51,7 @@ public class ApplicationDBContextHelper
         context.SaveChanges();
     }
 
-    private List<ClothingItem> CreateClothingItems()
+    private static List<ClothingItem> CreateClothingItems()
     {
         return
         [
@@ -85,7 +80,7 @@ public class ApplicationDBContextHelper
         ];
     }
 
-    private List<AppUser> CreateAppUsers()
+    private static List<AppUser> CreateAppUsers()
     {
         return
         [
@@ -94,25 +89,6 @@ public class ApplicationDBContextHelper
                 Id = "1",
                 UserName = "test.email@email.com",
                 Email = "test.email@email.com"
-            }
-        ];
-    }
-
-    private List<IdentityRole> CreateIdentityRoles()
-    {
-        return
-        [
-            new IdentityRole
-            {
-                Id = this.roleId1,
-                Name = "User",
-                NormalizedName = "USER"
-            },
-            new IdentityRole
-            {
-                Id = this.roleId2,
-                Name = "Admin",
-                NormalizedName = "ADMIN"
             }
         ];
     }

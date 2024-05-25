@@ -16,6 +16,8 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
     private readonly MsSqlContainer msSqlContainer;
     private Respawner respawner;
 
+    private readonly string tempWebRoot = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
     public IntegrationTestWebApplicationFactory()
     {
         this.msSqlContainer = new MsSqlBuilder()
@@ -60,6 +62,8 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
 
             services.AddAuthorizationBuilder().SetDefaultPolicy(defaultPolicy);
         });
+
+        builder.UseWebRoot(this.tempWebRoot);
     }
 
     public async Task InitializeAsync()
@@ -74,7 +78,13 @@ public class IntegrationTestWebApplicationFactory : WebApplicationFactory<Progra
         this.respawner = await Respawner.CreateAsync(this.msSqlContainer.GetConnectionString());
     }
 
-    public new Task DisposeAsync() => this.msSqlContainer.StopAsync();
+    public new async Task DisposeAsync()
+    {
+        if (Directory.Exists(this.tempWebRoot))
+            Directory.Delete(this.tempWebRoot, true);
+
+        await this.msSqlContainer.StopAsync();
+    }
 
     public async Task ResetDatabase() =>
         await this.respawner.ResetAsync(this.msSqlContainer.GetConnectionString());
