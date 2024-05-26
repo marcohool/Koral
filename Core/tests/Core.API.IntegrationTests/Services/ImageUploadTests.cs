@@ -1,12 +1,34 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
+using Core.API.Models;
 using FluentAssertions;
+using Newtonsoft.Json;
 
 namespace Core.API.IntegrationTests.Services;
 
 public class ImageUploadTests(IntegrationTestWebApplicationFactory factory)
     : BaseIntegrationTest(factory)
 {
+    [Fact]
+    public async Task GetImageUploads_ReturnsListOfImageUploads()
+    {
+        // Arrange
+        HttpClient client = this.HttpClient;
+
+        // Act
+        HttpResponseMessage response = await client.GetAsync("/imageupload");
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        List<ImageUpload>? imageUploads = JsonConvert.DeserializeObject<List<ImageUpload>>(
+            await response.Content.ReadAsStringAsync()
+        );
+
+        imageUploads.Should().BeOfType<List<ImageUpload>>();
+        imageUploads.Should().HaveCount(1);
+    }
+
     [Fact]
     public async Task UploadImage_ReturnsCreatedStatusCode()
     {

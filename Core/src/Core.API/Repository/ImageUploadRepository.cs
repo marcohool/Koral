@@ -1,4 +1,5 @@
 ﻿using Core.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.API.Repository;
 
@@ -6,6 +7,12 @@ namespace Core.API.Repository;
 public class ImageUploadRepository(ApplicationDBContext context) : IImageUploadRepository
 {
     private readonly ApplicationDBContext context = context;
+
+    /// <inheritdoc/>
+    public async Task<List<ImageUpload>> GetImageUploads(string userId)
+    {
+        return await this.context.ImageUploads.Where(i => i.AppUserId == userId).ToListAsync();
+    }
 
     /// <inheritdoc/>
     public async Task<ImageUpload> CreateImageUpload(ImageUpload imageUpload)
