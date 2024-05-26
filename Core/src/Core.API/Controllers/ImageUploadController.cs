@@ -30,9 +30,6 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
                 imageUpload
             );
 
-            if (!response.Success)
-                return this.BadRequest(response.ErrorMessage);
-
             return this.CreatedAtAction(
                 nameof(GetImageUpload),
                 new { id = response.ImageId },
