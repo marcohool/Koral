@@ -8,6 +8,12 @@ namespace Core.API.Services;
 public interface IImageUploadService
 {
     /// <summary>
+    /// Gets a list of all image uploads.
+    /// </summary>
+    /// <returns>A list of <see cref="ImageUploadResponse"/> objects.</returns>
+    Task<IEnumerable<ImageUploadResponse>> GetImageUploadsAsync();
+
+    /// <summary>
     /// Handles image uploading processes.
     /// </summary>
     /// <param name="imageUpload">Instance of <see cref="ImageUploadRequest"/>.</param>

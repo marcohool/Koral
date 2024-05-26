@@ -16,6 +16,17 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
     private readonly IImageUploadService imageUploadService = imageUploadService;
 
     /// <summary>
+    /// Gets a list of all image uploads.
+    /// </summary>
+    /// <returns>A list of <see cref="ImageUploadResponse"/> objects.</returns>
+    [HttpGet]
+    [Authorize]
+    public async Task<ActionResult<IEnumerable<ImageUploadResponse>>> GetImageUploads()
+    {
+        return this.Ok(await this.imageUploadService.GetImageUploadsAsync());
+    }
+
+    /// <summary>
     /// Uploads an image.
     /// </summary>
     /// <param name="imageUpload"></param>
@@ -40,12 +51,6 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
         {
             return this.BadRequest(e.Message);
         }
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> GetImageUploads()
-    {
-        return this.Ok();
     }
 
     [HttpGet]

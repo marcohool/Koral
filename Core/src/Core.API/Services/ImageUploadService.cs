@@ -28,6 +28,18 @@ public class ImageUploadService(
         .AllowedFileExtensions;
 
     /// <inheritdoc/>
+    public async Task<IEnumerable<ImageUploadResponse>> GetImageUploadsAsync()
+    {
+        AppUser user =
+            await this.GetCurrentUserAsync()
+            ?? throw new UnauthorizedAccessException("Current user not found.");
+
+        List<ImageUpload> imageUploads = await this.imageUploadRepository.GetImageUploads(user.Id);
+
+        return imageUploads.Select(upload => new ImageUploadResponse(upload)).ToList();
+    }
+
+    /// <inheritdoc/>
     public async Task<ImageUploadResponse> UploadImageAsync(ImageUploadRequest imageUpload)
     {
         IFormFile imageFile = imageUpload.ImageFile;
@@ -59,11 +71,7 @@ public class ImageUploadService(
                 }
             );
 
-            return new ImageUploadResponse
-            {
-                ImageId = upload.ImageUploadId,
-                ImagePath = upload.ImagePath
-            };
+            return new ImageUploadResponse(upload);
         }
         catch (Exception)
         {
