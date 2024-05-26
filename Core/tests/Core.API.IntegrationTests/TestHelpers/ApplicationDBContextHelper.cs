@@ -12,6 +12,7 @@ public class ApplicationDBContextHelper
         InsertWithIdentity(context, CreateClothingItems(), "ClothingItems");
         Insert(context, CreateAppUsers());
         Insert(context, CreateRoles());
+        Insert(context, CreateImageUploads(context));
     }
 
     private static void InsertWithIdentity<T>(
@@ -90,6 +91,12 @@ public class ApplicationDBContextHelper
                 Id = "1",
                 UserName = "test.email@email.com",
                 Email = "test.email@email.com"
+            },
+            new AppUser
+            {
+                Id = "2",
+                UserName = "test2.email@email.com",
+                Email = "test2.email@email.com"
             }
         ];
     }
@@ -110,6 +117,38 @@ public class ApplicationDBContextHelper
                 Name = "User",
                 NormalizedName = "USER"
             }
+        ];
+    }
+
+    private static List<ImageUpload> CreateImageUploads(ApplicationDBContext context)
+    {
+        AppUser user1 = context.Users.First(u => u.Id == "1");
+        AppUser user2 = context.Users.First(u => u.Id == "2");
+
+        return
+        [
+            new ImageUpload
+            {
+                ImagePath = "/app/wwwroot/uploads/1.jpg",
+                ImageName = "1.jpg",
+                ImageSize = 1024,
+                ContentType = "image/jpeg",
+                UploadedAt = DateTime.Now,
+                Status = "Uploaded",
+                AppUserId = "1",
+                AppUser = user1,
+            },
+            new ImageUpload
+            {
+                ImagePath = "/app/wwwroot/uploads/2.jpg",
+                ImageName = "2.jpg",
+                ImageSize = 1024,
+                ContentType = "image/jpeg",
+                UploadedAt = DateTime.Now,
+                Status = "Uploaded",
+                AppUserId = "2",
+                AppUser = user2,
+            },
         ];
     }
 }
