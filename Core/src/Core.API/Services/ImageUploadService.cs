@@ -35,19 +35,14 @@ public class ImageUploadService(
         (bool isValid, string? errorMessage) = this.ValidateImageFile(imageFile);
 
         if (!isValid)
-            return new ImageUploadResponse { Success = false, ErrorMessage = errorMessage };
+            throw new InvalidOperationException(errorMessage);
 
-        AppUser? user = await this.GetCurrentUserAsync();
-
-        if (user == null)
-            return new ImageUploadResponse
-            {
-                Success = false,
-                ErrorMessage = "User not authenticated."
-            };
+        AppUser? user =
+            await this.GetCurrentUserAsync() ?? throw new KeyNotFoundException("User not found.");
 
         (string fileName, string filePath, long fileSize) = await this.CreateImage(imageFile);
 
+#pragma warning disable S2737 // "catch" clauses should do more than rethrow
         try
         {
             ImageUpload upload = await this.imageUploadRepository.CreateImageUpload(
@@ -66,17 +61,16 @@ public class ImageUploadService(
 
             return new ImageUploadResponse
             {
-                Success = true,
                 ImageId = upload.ImageUploadId,
                 ImagePath = upload.ImagePath
             };
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             // To-do: Delete the uploaded image file if the database operation
-
-            return new ImageUploadResponse { Success = false, ErrorMessage = ex.Message };
+            throw;
         }
+#pragma warning restore S2737 // "catch" clauses should do more than rethrow
     }
 
     private (bool isValid, string? errorMessage) ValidateImageFile(IFormFile imageFile)
@@ -122,12 +116,6 @@ public class ImageUploadService(
 
     private async Task<AppUser?> GetCurrentUserAsync()
     {
-        IHttpContextAccessor accessor = this.httpContextAccessor;
-
-        HttpContext? content = accessor.HttpContext;
-
-        ClaimsPrincipal? user2 = content?.User;
-
         ClaimsPrincipal? user = this.httpContextAccessor.HttpContext?.User;
         return user != null ? await this.userManager.GetUserAsync(user) : null;
     }
