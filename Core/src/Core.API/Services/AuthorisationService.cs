@@ -34,27 +34,18 @@ public class AccountService(
         AppUser createdUser =
             new() { UserName = registerRequest.Email, Email = registerRequest.Email };
 
-        try
-        {
-            IdentityResult registerResult = await this.userManager.CreateAsync(
-                createdUser,
-                registerRequest.Password
-            );
+        IdentityResult registerResult = await this.userManager.CreateAsync(
+            createdUser,
+            registerRequest.Password
+        );
 
-            if (!registerResult.Succeeded)
-                throw new InvalidOperationException("An error occurred while registering the user");
+        if (!registerResult.Succeeded)
+            throw new InvalidOperationException("An error occurred while registering the user");
 
-            IdentityResult roleResult = await this.userManager.AddToRoleAsync(createdUser, "User");
+        IdentityResult roleResult = await this.userManager.AddToRoleAsync(createdUser, "User");
 
-            if (!roleResult.Succeeded)
-                throw new InvalidOperationException(
-                    "An error occurred while assigning the user role"
-                );
-        }
-        catch (Exception ex)
-        {
-            throw new InvalidOperationException("An error occurred while registering the user", ex);
-        }
+        if (!roleResult.Succeeded)
+            throw new InvalidOperationException("An error occurred while assigning the user role");
     }
 
     /// <inheritdoc />

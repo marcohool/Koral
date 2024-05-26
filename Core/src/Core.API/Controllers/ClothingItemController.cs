@@ -40,12 +40,7 @@ public class ClothingItemController(IClothingItemService clothingItemService) : 
             id
         );
 
-        if (clothingItem is null)
-        {
-            return this.NotFound();
-        }
-
-        return this.Ok(clothingItem);
+        return clothingItem is null ? this.NotFound() : this.Ok(clothingItem);
     }
 
     /// <summary>
