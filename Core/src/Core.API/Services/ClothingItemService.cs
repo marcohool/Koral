@@ -16,37 +16,16 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
     /// <inheritdoc />
     public async Task<IEnumerable<ClothingItemResponse>> GetClothingItemsAsync()
     {
-        try
-        {
-            List<ClothingItem> clothingItems =
-                await this.clothingItemRepository.GetClothingItemsAsync();
+        List<ClothingItem> clothingItems =
+            await this.clothingItemRepository.GetClothingItemsAsync();
 
-            return clothingItems.Select(item => new ClothingItemResponse(item)).ToList();
-        }
-        catch (Exception e)
-        {
-            throw new InvalidOperationException(
-                "An error occurred while retrieving clothing items.",
-                e
-            );
-        }
+        return clothingItems.Select(item => new ClothingItemResponse(item)).ToList();
     }
 
     /// <inheritdoc />
     public async Task<ClothingItemResponse?> GetClothingItemAsync(int id)
     {
-        ClothingItem? clothingItem;
-        try
-        {
-            clothingItem = await this.clothingItemRepository.GetClothingItemAsync(id);
-        }
-        catch (Exception e)
-        {
-            throw new InvalidOperationException(
-                "An error occurred while retrieving the clothing item.",
-                e
-            );
-        }
+        ClothingItem? clothingItem = await this.clothingItemRepository.GetClothingItemAsync(id);
 
         return clothingItem != null ? new ClothingItemResponse(clothingItem) : null;
     }
@@ -56,21 +35,11 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
         ClothingItemRequest clothingItemDto
     )
     {
-        try
-        {
-            return new ClothingItemResponse(
-                await this.clothingItemRepository.CreateClothingItemAsync(
-                    clothingItemDto.ToClothingItemModel()
-                )
-            );
-        }
-        catch (Exception e)
-        {
-            throw new InvalidOperationException(
-                "An error occurred while creating the clothing item.",
-                e
-            );
-        }
+        return new ClothingItemResponse(
+            await this.clothingItemRepository.CreateClothingItemAsync(
+                clothingItemDto.ToClothingItemModel()
+            )
+        );
     }
 
     /// <inheritdoc />
@@ -81,21 +50,11 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
     {
         ClothingItem? clothingItem =
             await this.clothingItemRepository.GetClothingItemAsync(id)
-            ?? throw new KeyNotFoundException("The clothing item does not exist.");
+            ?? throw new KeyNotFoundException();
 
-        try
-        {
-            return new ClothingItemResponse(
-                await this.clothingItemRepository.UpdateClothingItemAsync(clothingItem)
-            );
-        }
-        catch (Exception e)
-        {
-            throw new InvalidOperationException(
-                "An error occurred while updating the clothing item.",
-                e
-            );
-        }
+        return new ClothingItemResponse(
+            await this.clothingItemRepository.UpdateClothingItemAsync(clothingItem)
+        );
     }
 
     /// <inheritdoc />
@@ -103,18 +62,8 @@ public class ClothingItemService(IClothingItemRepository clothingItemRepository)
     {
         ClothingItem? clothingItem =
             await this.clothingItemRepository.GetClothingItemAsync(id)
-            ?? throw new KeyNotFoundException("The clothing item does not exist.");
+            ?? throw new KeyNotFoundException();
 
-        try
-        {
-            await this.clothingItemRepository.DeleteClothingItem(clothingItem);
-        }
-        catch (Exception e)
-        {
-            throw new InvalidOperationException(
-                "An error occurred while deleting the clothing item.",
-                e
-            );
-        }
+        await this.clothingItemRepository.DeleteClothingItem(clothingItem);
     }
 }
