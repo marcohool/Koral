@@ -330,16 +330,6 @@
             The <see cref="T:Core.API.Dto.ImageUpload.ImageUploadResponse"/> class.
             </summary>
         </member>
-        <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.Success">
-            <summary>
-            Gets or sets a value indicating whether the image upload was successful.
-            </summary>
-        </member>
-        <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.ErrorMessage">
-            <summary>
-            Gets or sets the error message.
-            </summary>
-        </member>
         <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.ImageId">
             <summary>
             Gets or sets the image ID.
