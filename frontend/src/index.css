@@ -1,0 +1,13 @@
+:root {
+  --navbar-height: 5.5rem;
+  --primary: #f3f3f3;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  padding-top: var(--navbar-height);
+}
