@@ -1,1 +1,48 @@
+:root {
+  --navbar-height: 5.5rem;
+  --white: #ffffff;
+  --background: #faf1f1;
+  --background-rgba: rgba(250, 241, 241, 0.6);
+  --primary: #af8d80;
+  --secondary: #dab8ab;
+  --black: #1e1818;
+}
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "General Sans", sans-serif;
+  font-weight: 500;
+  background-color: var(--background);
+}
+
+button {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  line-height: 2rem;
+  padding: 0.7rem 2.75rem;
+  cursor: pointer;
+  border: 0;
+  font-family: "General Sans", sans-serif;
+  font-weight: 500;
+  transition:
+    all 0.25s,
+    color 0.25s;
+}
+
+.btn-primary-outline {
+  background-color: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+}
+
+.btn-primary-outline:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  border: 2px solid var(--primary);
+}
+
+.content {
+  padding-top: var(--navbar-height);
+}
