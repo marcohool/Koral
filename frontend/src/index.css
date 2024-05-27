@@ -1,6 +1,11 @@
 :root {
   --navbar-height: 5.5rem;
-  --primary: #f3f3f3;
+  --white: #ffffff;
+  --background: #faf1f1;
+  --background-rgba: rgba(250, 241, 241, 0.6);
+  --primary: #af8d80;
+  --secondary: #dab8ab;
+  --black: #1e1818;
 }
 
 body {
@@ -8,6 +13,7 @@ body {
   padding: 0;
   font-family: "General Sans", sans-serif;
   font-weight: 500;
+  background-color: var(--background);
 }
 
 .content {

@@ -1,5 +1,5 @@
 :root {
-  --blur--strength: 10px;
+  --blur--strength: 5px;
 }
 
 .navbar {
@@ -22,7 +22,7 @@
 }
 
 .background-blur {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: var(--background-rgba);
   backdrop-filter: blur(var(--blur--strength));
 }
 
