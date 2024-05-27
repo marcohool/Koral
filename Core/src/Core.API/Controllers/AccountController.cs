@@ -34,9 +34,14 @@ public class AccountController(IAuthorisationService accountService) : Controlle
 
         try
         {
-            await this.accountService.RegisterUser(registerRequest);
+            RegisterResponse registerResponse = await this.accountService.RegisterUser(
+                registerRequest
+            );
 
-            return this.Ok("User created");
+            if (!registerResponse.Succeeded)
+                return this.BadRequest(registerResponse.Errors);
+
+            return this.Ok("User reigstered successfully");
         }
         catch (Exception ex)
         {

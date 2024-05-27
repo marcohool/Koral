@@ -29,7 +29,7 @@ public class AccountService(
     private readonly IConfiguration configuration = configuration;
 
     /// <inheritdoc />
-    public async Task RegisterUser(RegisterRequest registerRequest)
+    public async Task<RegisterResponse> RegisterUser(RegisterRequest registerRequest)
     {
         AppUser createdUser =
             new() { UserName = registerRequest.Email, Email = registerRequest.Email };
@@ -40,12 +40,21 @@ public class AccountService(
         );
 
         if (!registerResult.Succeeded)
-            throw new InvalidOperationException("An error occurred while registering the user");
+            return new RegisterResponse
+            {
+                Succeeded = false,
+                Errors = registerResult.Errors.Select(e => e.Description)
+            };
 
         IdentityResult roleResult = await this.userManager.AddToRoleAsync(createdUser, "User");
 
         if (!roleResult.Succeeded)
-            throw new InvalidOperationException("An error occurred while assigning the user role");
+            return new RegisterResponse
+            {
+                Succeeded = false,
+                Errors = roleResult.Errors.Select(e => e.Description)
+            };
+        return new RegisterResponse { Succeeded = true };
     }
 
     /// <inheritdoc />
