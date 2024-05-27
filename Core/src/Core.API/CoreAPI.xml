@@ -198,6 +198,21 @@
             The user's password.
             </summary>
         </member>
+        <member name="T:Core.API.Dto.Account.RegisterResponse">
+            <summary>
+            The <see cref="T:Core.API.Dto.Account.RegisterResponse"/> class.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.Account.RegisterResponse.Succeeded">
+            <summary>
+            Gets or sets a value indicating whether the operation succeeded.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.Account.RegisterResponse.Errors">
+            <summary>
+            Gets or sets a value indicating whether the user is not allowed.
+            </summary>
+        </member>
         <member name="T:Core.API.Dto.ClothingItem.ClothingItemRequest">
             <summary>
             The <see cref="T:Core.API.Dto.ClothingItem.ClothingItemRequest"/> record.

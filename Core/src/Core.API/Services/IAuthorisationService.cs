@@ -13,7 +13,7 @@ public interface IAuthorisationService
     /// </summary>
     /// <param name="registerRequest">The user registration details.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    Task RegisterUser(RegisterRequest registerRequest);
+    Task<RegisterResponse> RegisterUser(RegisterRequest registerRequest);
 
     /// <summary>
     /// Logs in a user.
