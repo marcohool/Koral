@@ -1,3 +1,10 @@
-.temp {
-  height: 200vh;
+.hero__section {
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  top: calc(-1 * var(--navbar-height));
+  height: calc(100vh + var(--navbar-height));
+  min-height: 60rem;
+  width: 100%;
+  z-index: -1;
 }
