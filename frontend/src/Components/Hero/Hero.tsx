@@ -14,7 +14,7 @@ const Hero: React.FC<Props> = () => {
     if (parallax.current) {
       console.log(parallax.current.current);
       const scrollY = parallax.current.current;
-      const widthValue = Math.max(100 - scrollY * 0.035, 80);
+      const widthValue = Math.max(100 - scrollY * 0.05, 80);
       setWidth({ width: `${widthValue}%` });
     }
   };
@@ -49,6 +49,15 @@ const Hero: React.FC<Props> = () => {
               Get Started
               <FaArrowDown className="hero__button-arrow" />
             </button>
+          </div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={1.6} factor={0.4}>
+          <div className="hero__end">
+            <h2 className="hero__end-title">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+              ultrices malesuada enim ut varius. Curabitur lacinia mauris semper
+              massa luctus, non elementum diam hendrerit.
+            </h2>
           </div>
         </ParallaxLayer>
       </Parallax>
