@@ -14,7 +14,7 @@ const Hero: React.FC<Props> = () => {
     if (parallax.current) {
       console.log(parallax.current.current);
       const scrollY = parallax.current.current;
-      const widthValue = Math.max(100 - scrollY * 0.025, 92.5);
+      const widthValue = Math.max(100 - scrollY * 0.035, 80);
       setWidth({ width: `${widthValue}%` });
     }
   };
