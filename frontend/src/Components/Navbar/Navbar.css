@@ -18,6 +18,7 @@
 
 .scrolled {
   height: var(--navbar-height-scrolled);
+  background-color: var(--background-rgba);
   color: var(--black);
 }
 
@@ -38,11 +39,6 @@
 
 .navbar__end > ul {
   list-style: none;
-}
-
-.background-blur {
-  background-color: var(--background-rgba);
-  backdrop-filter: blur(var(--blur--strength));
 }
 
 /* Hamburger menu  */
@@ -72,29 +68,25 @@
     z-index: 200;
   }
 
-  .navbar {
-    background-color: var(--primary);
-    z-index: 100;
-  }
-
   .navbar__end {
     flex-direction: column;
     position: absolute;
     align-items: center;
-    top: -11rem;
+    top: -15rem;
     left: 0;
     width: 100%;
     transition: top ease-out 0.4s;
-    background-color: var(--primary);
+    background-color: var(--background-rgba);
+    gap: 0;
     z-index: -1;
   }
 
   .navbar__end ul {
-    padding: 1rem 0;
+    padding: 2rem 0;
   }
 
   .navbar__end.active {
-    top: var(--navbar-height);
+    top: var(--navbar-height-scrolled);
   }
 
   .nav__hamburger.active :nth-child(1) {

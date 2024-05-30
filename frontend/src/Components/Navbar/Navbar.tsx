@@ -7,6 +7,7 @@ interface Props {
 
 const Navbar: React.FC<Props> = ({ isScrolled }) => {
   const [navActive, setNavActive] = useState(false);
+  const [forceScrolled, setForceScrolled] = useState(false);
 
   const toggleNav = () => {
     setNavActive(!navActive);
@@ -20,6 +21,12 @@ const Navbar: React.FC<Props> = ({ isScrolled }) => {
     const handleResize = () => {
       if (window.innerWidth <= 500) {
         closeMenu();
+      }
+
+      if (window.innerWidth <= 700) {
+        setForceScrolled(true);
+      } else {
+        setForceScrolled(false);
       }
     };
     window.addEventListener("resize", handleResize);
@@ -37,7 +44,7 @@ const Navbar: React.FC<Props> = ({ isScrolled }) => {
 
   return (
     <nav
-      className={`navbar ${navActive ? "active" : ""}  ${isScrolled ? "scrolled background-blur " : ""}`}
+      className={`navbar ${navActive ? "active" : ""}  ${isScrolled ? "scrolled" : ""} ${forceScrolled ? "scrolled" : ""}`}
     >
       <div className="navbar__start">Koral</div>
       <a
