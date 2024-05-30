@@ -1,11 +1,18 @@
 :root {
-  --navbar-height: 5.5rem;
+  --navbar-height: 8rem;
+  --navbar-height-scrolled: 4rem;
   --white: #ffffff;
   --background: #faf1f1;
-  --background-rgba: rgba(250, 241, 241, 0.6);
+  --background-rgba: rgba(250, 241, 241, 1);
   --primary: #af8d80;
   --secondary: #dab8ab;
   --black: #1e1818;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -41,8 +48,4 @@ button {
   background-color: var(--primary);
   color: var(--white);
   border: 2px solid var(--primary);
-}
-
-.content {
-  padding-top: var(--navbar-height);
 }

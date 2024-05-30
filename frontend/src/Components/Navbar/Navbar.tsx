@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 
-interface Props {}
+interface Props {
+  isScrolled: boolean;
+}
 
-const Navbar: React.FC<Props> = () => {
+const Navbar: React.FC<Props> = ({ isScrolled }) => {
   const [navActive, setNavActive] = useState(false);
 
   const toggleNav = () => {
@@ -34,7 +36,9 @@ const Navbar: React.FC<Props> = () => {
   }, []);
 
   return (
-    <nav className={`navbar background-blur ${navActive ? "active" : ""}`}>
+    <nav
+      className={`navbar ${navActive ? "active" : ""}  ${isScrolled ? "scrolled background-blur " : ""}`}
+    >
       <div className="navbar__start">Koral</div>
       <a
         className={`nav__hamburger ${navActive ? "active" : ""}`}
