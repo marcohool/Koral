@@ -1,5 +1,6 @@
 :root {
   --blur--strength: 5px;
+  --navbar-scrolled-transition: all 0.4s ease-out;
 }
 
 .navbar {
@@ -7,19 +8,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 3rem;
+  padding: 0 4rem;
   height: var(--navbar-height);
   left: 0;
   right: 0;
-  transition: all 0.5s ease-in-out;
+  color: var(--white);
+  transition: var(--navbar-scrolled-transition);
 }
 
 .scrolled {
   height: var(--navbar-height-scrolled);
+  color: var(--black);
+}
+
+.navbar__start {
+  font-size: 3.75rem;
+  transition: var(--navbar-scrolled-transition);
+}
+
+.scrolled .navbar__start {
+  font-size: 2rem;
 }
 
 .navbar__end {
   display: flex;
+  font-size: 1rem;
+  gap: 9rem;
 }
 
 .navbar__end > ul {
