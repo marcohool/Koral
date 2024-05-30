@@ -11,6 +11,11 @@
   height: var(--navbar-height);
   left: 0;
   right: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.scrolled {
+  height: var(--navbar-height-scrolled);
 }
 
 .navbar__end {

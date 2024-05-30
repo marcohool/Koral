@@ -4,18 +4,38 @@ import { FaArrowDown } from "react-icons/fa";
 import { animated, useSpring } from "@react-spring/web";
 import { IParallax, Parallax, ParallaxLayer } from "@react-spring/parallax";
 
-interface Props {}
+interface Props {
+  updateScroll: (value: boolean) => void;
+}
 
-const Hero: React.FC<Props> = () => {
+const Hero: React.FC<Props> = ({ updateScroll }) => {
   const parallax = useRef<IParallax>(null);
   const [{ width }, setWidth] = useSpring(() => ({ width: "100%" }));
 
+  function transformNumber(input: number, scaleStart: number) {
+    if (input < 0) input = 0;
+    if (input > 1000) input = 1000;
+
+    if (input < scaleStart) return 0;
+
+    return ((input - scaleStart) / (1000 - scaleStart)) * 1000;
+  }
+
   const handleScroll = () => {
     if (parallax.current) {
-      console.log(parallax.current.current);
       const scrollY = parallax.current.current;
-      const widthValue = Math.max(100 - scrollY * 0.05, 80);
+
+      const widthValue = Math.max(
+        100 - transformNumber(scrollY, 400) * 0.05,
+        80,
+      );
       setWidth({ width: `${widthValue}%` });
+
+      if (scrollY == 0) {
+        updateScroll(false);
+      } else {
+        updateScroll(true);
+      }
     }
   };
 
