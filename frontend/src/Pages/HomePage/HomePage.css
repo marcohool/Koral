@@ -8,3 +8,54 @@
   width: 100%;
   z-index: -1;
 }
+
+.background-video {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 1.25rem;
+  object-fit: cover;
+  z-index: -1;
+  min-width: 45rem;
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  padding: 0 2rem;
+  height: 100%;
+}
+
+.hero__title {
+  font-weight: normal;
+  font-size: 6rem;
+  color: var(--white);
+  max-width: 55rem;
+  text-align: center;
+}
+
+.hero__button-arrow {
+  margin-left: 0.75rem;
+  font-size: 1rem;
+}
+
+.hero__end {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero__end-title {
+  max-width: 60rem;
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin: 0 4rem;
+}
