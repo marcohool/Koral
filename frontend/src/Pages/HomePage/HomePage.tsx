@@ -36,6 +36,15 @@ const HomePage: React.FC<Props> = () => {
       } else {
         setIsScrolled(true);
       }
+
+      if (scrollY >= 1000 && scrollY <= 2000) {
+        const opacity = 1 - (scrollY - 1000) / 1000;
+        console.log(opacity);
+        const element = document.querySelector(
+          ".product__overview",
+        ) as HTMLElement;
+        element!.style.opacity = opacity.toString();
+      }
     }
   };
 
@@ -53,8 +62,10 @@ const HomePage: React.FC<Props> = () => {
     <div>
       <Navbar isScrolled={isScrolled} />
       {/* Cannot separate Parallax layers into components due to react-spring limitations */}
+
+      {/*Hero Section*/}
       <div className="hero__section">
-        <Parallax ref={parallax} className="parallax__main" pages={2}>
+        <Parallax ref={parallax} className="parallax__main" pages={4}>
           <ParallaxLayer offset={0} factor={1.6}>
             <animated.video
               className="background-video"
@@ -83,6 +94,13 @@ const HomePage: React.FC<Props> = () => {
               </h2>
             </div>
           </ParallaxLayer>
+          {/*End of hero section*/}
+
+          {/*Product Overview Section*/}
+          <ParallaxLayer offset={2} factor={1}>
+            <div className="product__overview"></div>
+          </ParallaxLayer>
+          {/*Product Overview Section*/}
         </Parallax>
       </div>
     </div>
