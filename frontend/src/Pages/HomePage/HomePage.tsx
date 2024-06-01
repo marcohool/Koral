@@ -25,31 +25,40 @@ const HomePage: React.FC<Props> = () => {
     return (input - scaleStart) / (scaleEnd - scaleStart);
   }
 
-  const handleScroll = () => {
-    if (parallax.current) {
-      const scrollY = parallax.current.current;
-
-      const widthValue = Math.max(
-        100 - transformNumber(scrollY, 400, 1000) * 40,
-        80,
-      );
-      setWidth({ width: `${widthValue}%` });
-
-      if (scrollY == 0) {
-        setIsScrolled(false);
-      } else {
-        setIsScrolled(true);
-      }
-
-      const opacity = 1 - transformNumber(scrollY, 1000, 2000);
-      const element = document.querySelector(
-        ".product__overview",
-      ) as HTMLElement;
-      element!.style.opacity = opacity.toString();
-    }
-  };
-
   useEffect(() => {
+    const handleScroll = () => {
+      if (parallax.current) {
+        const scrollY = parallax.current.current;
+        const parallaxPageHeight = parallax.current.space;
+
+        const widthValue = Math.max(
+          100 -
+            transformNumber(
+              scrollY,
+              parallaxPageHeight / 4,
+              parallaxPageHeight,
+            ) *
+              40,
+          80,
+        );
+        setWidth({ width: `${widthValue}%` });
+
+        if (scrollY == 0) {
+          setIsScrolled(false);
+        } else {
+          setIsScrolled(true);
+        }
+
+        const opacity =
+          1 -
+          transformNumber(scrollY, parallaxPageHeight, parallaxPageHeight * 2);
+        const element = document.querySelector(
+          ".product__overview",
+        ) as HTMLElement;
+        element!.style.opacity = opacity.toString();
+      }
+    };
+
     if (parallax.current) {
       const container = parallax.current.container.current as HTMLElement;
       container.addEventListener("scroll", handleScroll);
@@ -57,7 +66,7 @@ const HomePage: React.FC<Props> = () => {
         container.removeEventListener("scroll", handleScroll);
       };
     }
-  }, [handleScroll]);
+  }, [setWidth]);
 
   return (
     <div>
