@@ -59,3 +59,8 @@
   font-weight: 500;
   margin: 0 4rem;
 }
+
+.product__overview {
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1);
+}
