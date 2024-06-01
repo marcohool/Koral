@@ -23,6 +23,10 @@ body {
   background-color: var(--background);
 }
 
+p {
+  margin: 1rem 0;
+}
+
 button {
   display: flex;
   align-items: center;
@@ -48,4 +52,14 @@ button {
   background-color: var(--primary);
   color: var(--white);
   border: 2px solid var(--primary);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--background);
+  color: var(--black);
 }
