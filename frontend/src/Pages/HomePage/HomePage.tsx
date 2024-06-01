@@ -22,7 +22,6 @@ const HomePage: React.FC<Props> = () => {
 
     if (input < scaleStart) return 0;
 
-    // return ((input - scaleStart) / (scaleEnd - scaleStart)) * scaleEnd;
     return (input - scaleStart) / (scaleEnd - scaleStart);
   }
 
@@ -58,7 +57,7 @@ const HomePage: React.FC<Props> = () => {
         container.removeEventListener("scroll", handleScroll);
       };
     }
-  }, []);
+  }, [handleScroll]);
 
   return (
     <div>
