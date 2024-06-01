@@ -12,13 +12,18 @@ const HomePage: React.FC<Props> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [{ width }, setWidth] = useSpring(() => ({ width: "100%" }));
 
-  function transformNumber(input: number, scaleStart: number) {
-    if (input < 0) input = 0;
-    if (input > 1000) input = 1000;
+  // Function to scale a number between two values to 0-1
+  function transformNumber(
+    input: number,
+    scaleStart: number,
+    scaleEnd: number,
+  ) {
+    if (input > scaleEnd) input = scaleEnd;
 
     if (input < scaleStart) return 0;
 
-    return ((input - scaleStart) / (1000 - scaleStart)) * 1000;
+    // return ((input - scaleStart) / (scaleEnd - scaleStart)) * scaleEnd;
+    return (input - scaleStart) / (scaleEnd - scaleStart);
   }
 
   const handleScroll = () => {
@@ -26,7 +31,7 @@ const HomePage: React.FC<Props> = () => {
       const scrollY = parallax.current.current;
 
       const widthValue = Math.max(
-        100 - transformNumber(scrollY, 400) * 0.05,
+        100 - transformNumber(scrollY, 400, 1000) * 40,
         80,
       );
       setWidth({ width: `${widthValue}%` });
@@ -37,14 +42,11 @@ const HomePage: React.FC<Props> = () => {
         setIsScrolled(true);
       }
 
-      if (scrollY >= 1000 && scrollY <= 2000) {
-        const opacity = 1 - (scrollY - 1000) / 1000;
-        console.log(opacity);
-        const element = document.querySelector(
-          ".product__overview",
-        ) as HTMLElement;
-        element!.style.opacity = opacity.toString();
-      }
+      const opacity = 1 - transformNumber(scrollY, 1000, 2000);
+      const element = document.querySelector(
+        ".product__overview",
+      ) as HTMLElement;
+      element!.style.opacity = opacity.toString();
     }
   };
 
@@ -97,7 +99,7 @@ const HomePage: React.FC<Props> = () => {
           {/*End of hero section*/}
 
           {/*Product Overview Section*/}
-          <ParallaxLayer offset={2} factor={1}>
+          <ParallaxLayer offset={2} factor={2}>
             <div className="product__overview"></div>
           </ParallaxLayer>
           {/*Product Overview Section*/}
