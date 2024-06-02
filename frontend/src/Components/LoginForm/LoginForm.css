@@ -1,0 +1,89 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6rem;
+  margin: 0 2rem;
+}
+
+.login-form__content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 25rem;
+}
+
+.login-form__titles {
+  text-align: center;
+}
+
+.login-form__input-title {
+  margin-bottom: 0.8rem;
+}
+
+.login-form__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.login-form__input-input {
+  width: 100%;
+}
+
+.login-form__helpers {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.login-form__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.login-form__checkbox,
+.login-form__checkbox * {
+  cursor: pointer;
+}
+
+.login-form__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.login-form__button {
+  width: 100%;
+  justify-content: center;
+}
+
+.divider-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 0.15rem;
+  width: 100%;
+}
+
+.divider-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--black);
+  margin: 0 10px;
+}
+
+.divider-text {
+  color: var(--black);
+  padding: 0 10px;
+}
+
+.google-icon {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}

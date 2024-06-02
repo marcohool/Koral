@@ -7,6 +7,7 @@
   --primary: #af8d80;
   --secondary: #dab8ab;
   --black: #1e1818;
+  --primary-font: "General Sans", sans-serif;
 }
 
 ul {
@@ -18,7 +19,7 @@ ul {
 body {
   margin: 0;
   padding: 0;
-  font-family: "General Sans", sans-serif;
+  font-family: var(--primary-font);
   font-weight: 500;
   background-color: var(--background);
 }
@@ -35,7 +36,7 @@ button {
   padding: 0.7rem 2.75rem;
   cursor: pointer;
   border: 0;
-  font-family: "General Sans", sans-serif;
+  font-family: var(--primary-font);
   font-weight: 500;
   transition:
     all 0.25s,
@@ -62,4 +63,36 @@ button {
 .btn-primary:hover {
   background-color: var(--background);
   color: var(--black);
+}
+
+h1 {
+  margin: 0;
+  font-size: 5rem;
+  font-weight: 400;
+  color: var(--black);
+}
+
+p {
+  margin: 0;
+  color: var(--black);
+}
+
+input {
+  font-family: var(--primary-font);
+  font-size: 1rem;
+  font-weight: 500;
+  border: 2px solid transparent;
+  padding: 1rem 1rem;
+  background-color: var(--background);
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--black);
+}
+
+input[type="checkbox"] {
+  transform: scale(1.25);
+  accent-color: var(--primary);
 }
