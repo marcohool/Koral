@@ -38,6 +38,7 @@
   color: var(--white);
   max-width: 55rem;
   text-align: center;
+  margin: 6rem 0;
 }
 
 .hero__button-arrow {
