@@ -18,7 +18,7 @@
 
 .scrolled {
   height: var(--navbar-height-scrolled);
-  background-color: var(--background-rgba);
+  background-color: var(--background);
   color: var(--black);
 }
 

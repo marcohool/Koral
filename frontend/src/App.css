@@ -1,13 +1,86 @@
 :root {
   --navbar-height: 8rem;
   --navbar-height-scrolled: 4rem;
-  --white: #ffffff;
-  --background: #faf1f1;
-  --background-rgba: rgba(250, 241, 241, 1);
-  --primary: #af8d80;
-  --secondary: #dab8ab;
-  --black: #1e1818;
   --primary-font: "General Sans", sans-serif;
+
+  --primary: var(--red-9);
+  --background: var(--red-2);
+  --black: var(--red-a12);
+  --white: var(--red-contrast);
+}
+
+:root,
+.light,
+.light-theme {
+  --red-1: #fefdfc;
+  --red-2: #fdf8f7;
+  --red-3: #f7eeea;
+  --red-4: #f1e3dd;
+  --red-5: #ecd9d0;
+  --red-6: #e6ccc1;
+  --red-7: #debbac;
+  --red-8: #d0a28e;
+  --red-9: #996e5b;
+  --red-10: #866455;
+  --red-11: #7f5e4f;
+  --red-12: #3b322e;
+
+  --red-a1: #aa550003;
+  --red-a2: #c0200008;
+  --red-a3: #9e310015;
+  --red-a4: #962d0022;
+  --red-a5: #9831002f;
+  --red-a6: #992e003e;
+  --red-a7: #9a2f0053;
+  --red-a8: #952e0071;
+  --red-a9: #611e00a4;
+  --red-a10: #4a1700aa;
+  --red-a11: #461600b0;
+  --red-a12: #100500d1;
+
+  --red-contrast: #fff;
+  --red-surface: #fdf6f5cc;
+  --red-indicator: #996e5b;
+  --red-track: #996e5b;
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    :root,
+    .light,
+    .light-theme {
+      --red-1: oklch(99.4% 0.001 44.82);
+      --red-2: oklch(98.3% 0.005 44.82);
+      --red-3: oklch(95.4% 0.011 44.82);
+      --red-4: oklch(92.7% 0.017 44.82);
+      --red-5: oklch(89.8% 0.024 44.82);
+      --red-6: oklch(86.4% 0.033 44.82);
+      --red-7: oklch(81.8% 0.045 44.82);
+      --red-8: oklch(75% 0.061 44.82);
+      --red-9: oklch(57.7% 0.062 44.82);
+      --red-10: oklch(53.3% 0.05 44.82);
+      --red-11: oklch(51.1% 0.05 44.82);
+      --red-12: oklch(32.6% 0.016 44.82);
+
+      --red-a1: color(display-p3 0.675 0.349 0.024 / 0.012);
+      --red-a2: color(display-p3 0.635 0.145 0.02 / 0.032);
+      --red-a3: color(display-p3 0.506 0.157 0.008 / 0.079);
+      --red-a4: color(display-p3 0.518 0.157 0.008 / 0.13);
+      --red-a5: color(display-p3 0.525 0.2 0.004 / 0.181);
+      --red-a6: color(display-p3 0.522 0.173 0.004 / 0.236);
+      --red-a7: color(display-p3 0.522 0.176 0.004 / 0.318);
+      --red-a8: color(display-p3 0.51 0.176 0.004 / 0.432);
+      --red-a9: color(display-p3 0.329 0.114 0 / 0.632);
+      --red-a10: color(display-p3 0.251 0.086 0 / 0.659);
+      --red-a11: color(display-p3 0.235 0.082 0 / 0.683);
+      --red-a12: color(display-p3 0.055 0.016 0 / 0.816);
+
+      --red-contrast: #fff;
+      --red-surface: color(display-p3 0.984 0.973 0.961 / 0.8);
+      --red-indicator: oklch(57.7% 0.062 44.82);
+      --red-track: oklch(57.7% 0.062 44.82);
+    }
+  }
 }
 
 ul {
@@ -19,7 +92,7 @@ ul {
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--primary-font);
+  font-family: var(--primary-font), serif;
   font-weight: 500;
   background-color: var(--background);
 }
@@ -36,7 +109,7 @@ button {
   padding: 0.7rem 2.75rem;
   cursor: pointer;
   border: 0;
-  font-family: var(--primary-font);
+  font-family: var(--primary-font), serif;
   font-weight: 500;
   transition:
     all 0.25s,
