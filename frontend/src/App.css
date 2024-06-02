@@ -4,6 +4,7 @@
   --primary-font: "General Sans", sans-serif;
 
   --primary: var(--red-9);
+  --primary-active: var(--red-11);
   --background: var(--red-2);
   --black: var(--red-a12);
   --white: var(--red-contrast);
@@ -128,6 +129,11 @@ button {
   border: 2px solid var(--primary);
 }
 
+.btn-primary-outline:active {
+  background-color: var(--primary-active);
+  border: 2px solid var(--primary-active);
+}
+
 .btn-primary {
   background-color: var(--primary);
   color: var(--white);
@@ -151,7 +157,7 @@ p {
 }
 
 input {
-  font-family: var(--primary-font);
+  font-family: var(--primary-font), serif;
   font-size: 1rem;
   font-weight: 500;
   border: 2px solid transparent;
