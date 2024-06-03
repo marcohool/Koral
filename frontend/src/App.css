@@ -163,6 +163,11 @@ p {
   margin: 1rem 0;
 }
 
+a {
+  text-decoration: none;
+  color: var(--black);
+}
+
 button {
   display: flex;
   align-items: center;
@@ -227,6 +232,7 @@ p {
 
 input {
   font-family: var(--primary-font), serif;
+  color: var(--black);
   font-size: 1rem;
   font-weight: 500;
   border: 2px solid var(--gray-6);

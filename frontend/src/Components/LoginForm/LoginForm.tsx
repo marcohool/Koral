@@ -1,6 +1,7 @@
 import React from "react";
 import "./LoginForm.css";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
 interface Props {}
 
@@ -67,7 +68,9 @@ const LoginForm: React.FC<Props> = () => {
       </div>
       <div className="login-form__redirect">
         Don't have an account?{" "}
-        <a className="login-form__signup-link">Sign Up</a>
+        <Link to="/signup">
+          <a className="login-form__signup-link">Sign Up</a>
+        </Link>
       </div>
     </div>
   );
