@@ -229,7 +229,7 @@ input {
   font-family: var(--primary-font), serif;
   font-size: 1rem;
   font-weight: 500;
-  border: 2px solid transparent;
+  border: 2px solid var(--gray-6);
   padding: 1rem 1rem;
   background-color: var(--background);
   box-sizing: border-box;
@@ -237,7 +237,7 @@ input {
 
 input:focus {
   outline: none;
-  border-color: var(--black);
+  border-color: var(--primary);
 }
 
 input[type="checkbox"] {

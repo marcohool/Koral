@@ -15,7 +15,7 @@ const LoginForm: React.FC<Props> = () => {
           </p>
         </div>
         <div className="login-form__container">
-          <div className="login-form__input">
+          <div className="login-form__input-group">
             <p className="login-form__input-title">Email</p>
             <input
               className="login-form__input-input"
@@ -36,32 +36,38 @@ const LoginForm: React.FC<Props> = () => {
             />
           </div>
           <div className="login-form__helpers">
-            <div className="login-form__checkbox">
+            <div className="login-form__checkbox-group">
               <input
                 type="checkbox"
                 id="login-form-remember-me"
                 name="remember-me"
               />
-              <label htmlFor="login-form-remember-me">Remember me</label>
+              <label
+                className="login-form__checkbox-label"
+                htmlFor="login-form-remember-me"
+              >
+                Remember me
+              </label>
             </div>
             <p className="login-form__forgot-password">Forgot Password?</p>
           </div>
         </div>
         <div className="login-form__buttons">
           <button className="btn btn-primary login-form__button">Log In</button>
-          <div className="divider-container">
+          <div className="login-form__divider">
             <div className="divider-line"></div>
             <div className="divider-text">OR</div>
             <div className="divider-line"></div>
           </div>
           <button className="btn btn-secondary login-form__button">
-            <FcGoogle className="google-icon" />
+            <FcGoogle className="login-form__google-icon" />
             Log In with Google
           </button>
         </div>
       </div>
       <div className="login-form__redirect">
-        Don't have an account? <a className="signup-redirect-toggle">Sign Up</a>
+        Don't have an account?{" "}
+        <a className="login-form__signup-link">Sign Up</a>
       </div>
     </div>
   );

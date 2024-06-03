@@ -10,7 +10,7 @@
 .login-form__content {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2.25rem;
   width: 25rem;
 }
 
@@ -25,7 +25,7 @@
 .login-form__container {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
 }
 
 .login-form__input-input {
@@ -40,14 +40,14 @@
   font-size: 0.9rem;
 }
 
-.login-form__checkbox {
+.login-form__checkbox-group {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-.login-form__checkbox,
-.login-form__checkbox * {
+.login-form__checkbox-group,
+.login-form__checkbox-group * {
   cursor: pointer;
 }
 
@@ -63,7 +63,7 @@
   justify-content: center;
 }
 
-.divider-container {
+.login-form__divider {
   display: flex;
   align-items: center;
   text-align: center;
@@ -83,7 +83,11 @@
   padding: 0 10px;
 }
 
-.google-icon {
+.login-form__google-icon {
   font-size: 1.5rem;
   margin-right: 0.5rem;
+}
+
+.login-form__signup-link {
+  font-weight: 600;
 }
