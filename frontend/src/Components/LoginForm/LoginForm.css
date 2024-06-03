@@ -4,14 +4,14 @@
   justify-content: space-between;
   align-items: center;
   gap: 6rem;
-  margin: 0 2rem;
+  margin: 2rem 1.5rem;
 }
 
 .login-form__content {
   display: flex;
   flex-direction: column;
   gap: 2.25rem;
-  width: 25rem;
+  max-width: 25rem;
 }
 
 .login-form__titles {
@@ -90,4 +90,10 @@
 
 .login-form__signup-link {
   font-weight: 615;
+}
+
+@media (max-width: 310px) {
+  .login-form__title {
+    font-size: 4rem;
+  }
 }
