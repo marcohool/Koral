@@ -54,7 +54,7 @@ const LoginForm: React.FC<Props> = () => {
             <div className="divider-text">OR</div>
             <div className="divider-line"></div>
           </div>
-          <button className="btn btn-secondary-curved login-form__button">
+          <button className="btn btn-secondary login-form__button">
             <FcGoogle className="google-icon" />
             Log In with Google
           </button>
