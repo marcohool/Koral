@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 interface Props {
   isScrolled: boolean;
@@ -57,10 +58,14 @@ const Navbar: React.FC<Props> = ({ isScrolled }) => {
       </a>
       <div className={`navbar__end ${navActive ? "active" : ""} `}>
         <ul>
-          <li>Log in</li>
+          <Link to="/login">
+            <li>Log in</li>
+          </Link>
         </ul>
         <ul>
-          <li>Sign Up</li>
+          <Link to="/signup">
+            <li>Sign Up</li>
+          </Link>
         </ul>
       </div>
     </nav>
