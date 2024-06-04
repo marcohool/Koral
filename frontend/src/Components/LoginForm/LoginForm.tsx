@@ -22,7 +22,7 @@ const LoginForm: React.FC<Props> = () => {
               className="login-form__input-input"
               type="text"
               name=""
-              id=""
+              id="login-form-email"
               placeholder="Enter your email"
             />
           </div>
@@ -32,7 +32,7 @@ const LoginForm: React.FC<Props> = () => {
               className="login-form__input-input"
               type="password"
               name=""
-              id=""
+              id="login-form-password"
               placeholder="Enter your password"
             />
           </div>
@@ -67,9 +67,9 @@ const LoginForm: React.FC<Props> = () => {
         </div>
       </div>
       <div className="login-form__redirect">
-        Don't have an account?{" "}
+        <p className="login-form__redirect-text">Don't have an account? </p>
         <Link to="/signup">
-          <a className="login-form__signup-link">Sign Up</a>
+          <p className="login-form__signup-link">Sign Up</p>
         </Link>
       </div>
     </div>
