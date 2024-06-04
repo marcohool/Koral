@@ -219,8 +219,15 @@ button:active {
 }
 
 h1 {
-  margin: 0;
+  margin: 0.5rem;
   font-size: 5rem;
+  font-weight: 400;
+  color: var(--black);
+}
+
+h2 {
+  margin: 0.5rem;
+  font-size: 3.5rem;
   font-weight: 400;
   color: var(--black);
 }

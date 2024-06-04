@@ -10,7 +10,7 @@ const LoginForm: React.FC<Props> = () => {
     <div className="login-form">
       <div className="login-form__content">
         <div className="login-form__titles">
-          <h1 className="login-form__title">Login</h1>
+          <h2 className="login-form__title">Login</h2>
           <p className="login-form__subtitle">
             Enter your email & password to login to your account
           </p>

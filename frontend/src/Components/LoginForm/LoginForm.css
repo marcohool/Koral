@@ -5,6 +5,7 @@
   align-items: center;
   gap: 6rem;
   margin: 2rem 1.5rem;
+  width: 25rem;
 }
 
 .login-form__content {
@@ -16,6 +17,10 @@
 
 .login-form__titles {
   text-align: center;
+}
+
+.login-form__subtitle {
+  font-size: 0.95rem;
 }
 
 .login-form__input-title {
