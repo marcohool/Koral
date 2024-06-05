@@ -1,18 +1,22 @@
 import React from "react";
 import "./InputGroup.css";
 
-interface Props {}
+interface Props {
+  title: string;
+  placeholder: string;
+  type: string;
+  id: string;
+}
 
-const InputGroup: React.FC<Props> = () => {
+const InputGroup: React.FC<Props> = ({ title, placeholder, type, id }) => {
   return (
     <div className="login-form__input">
-      <p className="login-form__input-title">Email</p>
+      <p className="login-form__input-title">{title}</p>
       <input
         className="login-form__input-input"
-        type="text"
-        name=""
-        id="login-form-email"
-        placeholder="Enter your email"
+        type={type}
+        id={id}
+        placeholder={placeholder}
       />
     </div>
   );

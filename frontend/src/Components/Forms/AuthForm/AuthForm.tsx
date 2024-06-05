@@ -15,8 +15,18 @@ const AuthForm: React.FC<Props> = () => {
       <div className="login-form__content">
         <FormTitle />
         <div className="login-form__input-group">
-          <InputGroup />
-          <InputGroup />
+          <InputGroup
+            title="Email"
+            placeholder="Enter your email"
+            type="text"
+            id="login-form-email"
+          />
+          <InputGroup
+            title="Password"
+            placeholder="Enter your password"
+            type="password"
+            id="login-form-password"
+          />
         </div>
         <div className="login-form__helpers">
           <CheckboxGroup />
