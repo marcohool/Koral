@@ -1,0 +1,8 @@
+.login-form__redirect {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.login-form__signup-link {
+  font-weight: 615;
+}
