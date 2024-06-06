@@ -3,20 +3,20 @@
   min-height: 100vh;
 }
 
-.page__layout-left,
-.page__layout-right {
+.page__layout-form,
+.page__layout-image {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.page__layout-right {
+.page__layout-image {
   background-size: cover;
   background-position: center 40%;
 }
 
-.page__layout-right-link {
+.page__layout-image-link {
   height: 100%;
   width: 100%;
 }
