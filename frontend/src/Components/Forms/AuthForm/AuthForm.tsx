@@ -35,7 +35,7 @@ const AuthForm: React.FC<Props> = () => {
           <CheckboxGroup />
           <FormHelper />
         </div>
-        <FormButtons />
+        <FormButtons action="Log In" />
       </div>
       <FormRedirect />
     </div>
