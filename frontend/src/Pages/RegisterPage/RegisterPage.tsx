@@ -27,11 +27,12 @@ const RegisterPage: React.FC<Props> = () => {
           },
           {
             title: "Confirm Password",
-            placeholder: "Enter your password again",
+            placeholder: "Confirm your password",
             type: "password",
             id: "form-password",
           },
         ]}
+        displayHelpers={false}
         redirectText="Already have an account?"
       />
     </AuthLayout>

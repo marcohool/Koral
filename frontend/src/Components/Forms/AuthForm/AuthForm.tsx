@@ -13,6 +13,7 @@ interface Props {
   title: string;
   subtitle: string;
   fields: Field[];
+  displayHelpers?: boolean;
   redirectText: string;
 }
 
@@ -21,6 +22,7 @@ const AuthForm: React.FC<Props> = ({
   title,
   subtitle,
   fields,
+  displayHelpers,
   redirectText,
 }) => {
   return (
@@ -32,10 +34,12 @@ const AuthForm: React.FC<Props> = ({
             <InputGroup field={field} />
           ))}
         </div>
-        <div className="form__helpers">
-          <CheckboxGroup />
-          <FormHelper />
-        </div>
+        {displayHelpers && (
+          <div className="form__helpers">
+            <CheckboxGroup />
+            <FormHelper />
+          </div>
+        )}
         <FormButtons action={action} />
       </div>
       <FormRedirect action={action} text={redirectText} />

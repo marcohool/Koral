@@ -27,6 +27,7 @@ const LoginPage: React.FC<Props> = () => {
             id: "form-password",
           },
         ]}
+        displayHelpers={true}
         redirectText="Don't have an account?"
       />
     </AuthLayout>
