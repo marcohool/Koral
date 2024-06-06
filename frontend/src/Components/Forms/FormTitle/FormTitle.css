@@ -1,0 +1,13 @@
+.form__titles {
+  text-align: center;
+}
+
+.form__subtitle {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 310px) {
+  .form__title {
+    font-size: 4rem;
+  }
+}

@@ -1,0 +1,30 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6rem;
+  margin: 2rem 1.5rem;
+  width: 25rem;
+}
+
+.form__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  max-width: 25rem;
+}
+
+.form__input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form__helpers {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
