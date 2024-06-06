@@ -1,7 +1,7 @@
 import React from "react";
 import AuthForm from "../../Components/Forms/AuthForm/AuthForm.tsx";
 import AuthLayout from "../../Components/AuthLayout/AuthLayout.tsx";
-import RegisterImage from "../../../public/resources/images/Signup-Image.jpg";
+import RegisterImage from "../../../public/resources/images/Signup-Image-Cropped.jpg";
 
 interface Props {}
 

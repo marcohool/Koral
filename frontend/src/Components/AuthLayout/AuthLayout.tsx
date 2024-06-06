@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import React from "react";
 import "./AuthLayout.css";
 
@@ -18,23 +17,23 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
       <div className="page__layout">
         {formPlacement === "left" ? (
           <>
-            <div className="page__layout-form">{children}</div>
-            <div
-              className="page__layout-image"
-              style={{ backgroundImage: `url(${image})` }}
-            >
-              <Link to="/" className="page__layout-image-link" />
+            <div className="page__layout-form page__layout-form-left">
+              {children}
             </div>
+            <div
+              className="page__layout-image page__layout-image-right"
+              style={{ backgroundImage: `url(${image})` }}
+            ></div>
           </>
         ) : (
           <>
             <div
-              className="page__layout-image"
+              className="page__layout-image page__layout-image-left"
               style={{ backgroundImage: `url(${image})` }}
-            >
-              <Link to="/" className="page__layout-image-link" />
+            ></div>
+            <div className="page__layout-form page__layout-form-right">
+              {children}
             </div>
-            <div className="page__layout-form">{children}</div>
           </>
         )}
       </div>

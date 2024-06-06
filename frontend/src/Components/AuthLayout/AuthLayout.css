@@ -1,6 +1,8 @@
 .page__layout {
   display: flex;
   min-height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
 .page__layout-form,
@@ -12,8 +14,29 @@
 }
 
 .page__layout-image {
+  position: fixed;
+  top: 0;
   background-size: cover;
   background-position: center 40%;
+  height: 100vh;
+}
+
+.page__layout-image-left {
+  left: 0;
+  width: 50%;
+}
+
+.page__layout-image-right {
+  right: 0;
+  width: 50%;
+}
+
+.page__layout-form-left {
+  margin-right: 50%;
+}
+
+.page__layout-form-right {
+  margin-left: 50%;
 }
 
 .page__layout-image-link {
