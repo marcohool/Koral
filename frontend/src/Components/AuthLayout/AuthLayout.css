@@ -19,6 +19,7 @@
   background-size: cover;
   background-position: center 40%;
   height: 100vh;
+  min-height: 50rem;
 }
 
 .page__layout-image-left {
@@ -60,5 +61,12 @@
 
   .page__layout-image {
     display: none;
+  }
+}
+
+@media (max-height: 700px) {
+  .page__layout-image {
+    position: absolute;
+    height: 100%;
   }
 }
