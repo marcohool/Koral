@@ -13,7 +13,10 @@ const AuthForm: React.FC<Props> = () => {
   return (
     <div className="login-form">
       <div className="login-form__content">
-        <FormTitle />
+        <FormTitle
+          title="Login"
+          subtitle="Enter your email & password to login to your account"
+        />
         <div className="login-form__input-group">
           <InputGroup
             title="Email"
