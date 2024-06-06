@@ -10,7 +10,26 @@ const LoginPage: React.FC<Props> = () => {
     <div>
       <div className="page__layout">
         <div className="page__layout-left">
-          <AuthForm />
+          <AuthForm
+            action="Log In"
+            title="Login"
+            subtitle="Enter your email & password to login to your account"
+            fields={[
+              {
+                title: "Email",
+                placeholder: "Enter your email",
+                type: "text",
+                id: "form-email",
+              },
+              {
+                title: "Password",
+                placeholder: "Enter your password",
+                type: "password",
+                id: "form-password",
+              },
+            ]}
+            redirectText="Don't have an account?"
+          />
         </div>
         <div className="page__layout-right">
           <Link to="/" className="page__layout-right-link" />
