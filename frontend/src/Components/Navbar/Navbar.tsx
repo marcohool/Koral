@@ -47,7 +47,9 @@ const Navbar: React.FC<Props> = ({ isScrolled }) => {
     <nav
       className={`navbar ${navActive ? "active" : ""}  ${isScrolled ? "scrolled" : ""} ${forceScrolled ? "scrolled" : ""}`}
     >
-      <div className="navbar__start">Koral</div>
+      <Link to="/">
+        <div className="navbar__start">Koral</div>
+      </Link>
       <a
         className={`nav__hamburger ${navActive ? "active" : ""}`}
         onClick={toggleNav}
