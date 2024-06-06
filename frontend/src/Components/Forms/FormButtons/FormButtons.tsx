@@ -6,15 +6,15 @@ interface Props {}
 
 const FormButtons: React.FC<Props> = () => {
   return (
-    <div className="login-form__buttons">
-      <button className="btn btn-primary login-form__button">Log In</button>
-      <div className="login-form__divider">
+    <div className="form__buttons">
+      <button className="btn btn-primary form__button">Log In</button>
+      <div className="form__divider">
         <div className="divider-line"></div>
         <div className="divider-text">OR</div>
         <div className="divider-line"></div>
       </div>
-      <button className="btn btn-secondary login-form__button">
-        <FcGoogle className="login-form__google-icon" />
+      <button className="btn btn-secondary form__button">
+        <FcGoogle className="form__google-icon" />
         Log In with Google
       </button>
     </div>

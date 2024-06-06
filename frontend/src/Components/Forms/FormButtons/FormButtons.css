@@ -1,16 +1,16 @@
-.login-form__buttons {
+.form__buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
 }
 
-.login-form__button {
+.form__button {
   width: 100%;
   justify-content: center;
 }
 
-.login-form__divider {
+.form__divider {
   display: flex;
   align-items: center;
   text-align: center;
@@ -30,7 +30,7 @@
   padding: 0 10px;
 }
 
-.login-form__google-icon {
+.form__google-icon {
   font-size: 1.5rem;
   margin-right: 0.5rem;
 }

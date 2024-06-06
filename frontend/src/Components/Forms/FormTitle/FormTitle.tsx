@@ -8,9 +8,9 @@ interface Props {
 
 const FormTitle: React.FC<Props> = ({ title, subtitle }) => {
   return (
-    <div className="login-form__titles">
-      <h2 className="login-form__title">{title}</h2>
-      <p className="login-form__subtitle">{subtitle}</p>
+    <div className="form__titles">
+      <h2 className="form__title">{title}</h2>
+      <p className="form__subtitle">{subtitle}</p>
     </div>
   );
 };

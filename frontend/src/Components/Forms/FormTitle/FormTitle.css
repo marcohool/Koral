@@ -1,13 +1,13 @@
-.login-form__titles {
+.form__titles {
   text-align: center;
 }
 
-.login-form__subtitle {
+.form__subtitle {
   font-size: 0.95rem;
 }
 
 @media (max-width: 310px) {
-  .login-form__title {
+  .form__title {
     font-size: 4rem;
   }
 }

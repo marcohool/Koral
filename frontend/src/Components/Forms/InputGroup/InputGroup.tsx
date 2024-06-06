@@ -10,10 +10,10 @@ interface Props {
 
 const InputGroup: React.FC<Props> = ({ title, placeholder, type, id }) => {
   return (
-    <div className="login-form__input">
-      <p className="login-form__input-title">{title}</p>
+    <div className="form__input">
+      <p className="form__input-title">{title}</p>
       <input
-        className="login-form__input-input"
+        className="form__input-input"
         type={type}
         id={id}
         placeholder={placeholder}

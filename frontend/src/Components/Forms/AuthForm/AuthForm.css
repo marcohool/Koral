@@ -1,4 +1,4 @@
-.login-form {
+.form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -8,20 +8,20 @@
   width: 25rem;
 }
 
-.login-form__content {
+.form__content {
   display: flex;
   flex-direction: column;
   gap: 2.25rem;
   max-width: 25rem;
 }
 
-.login-form__input-group {
+.form__input-group {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.login-form__helpers {
+.form__helpers {
   display: flex;
   justify-content: space-between;
   gap: 1.25rem;

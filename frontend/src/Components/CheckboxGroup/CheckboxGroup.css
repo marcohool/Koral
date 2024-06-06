@@ -1,10 +1,10 @@
-.login-form__checkbox-group {
+.form__checkbox-group {
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
 
-.login-form__checkbox-group,
-.login-form__checkbox-group * {
+.form__checkbox-group,
+.form__checkbox-group * {
   cursor: pointer;
 }

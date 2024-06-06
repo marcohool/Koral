@@ -5,12 +5,9 @@ interface Props {}
 
 const CheckboxGroup: React.FC<Props> = () => {
   return (
-    <div className="login-form__checkbox-group">
-      <input type="checkbox" id="login-form-remember-me" name="remember-me" />
-      <label
-        className="login-form__checkbox-label"
-        htmlFor="login-form-remember-me"
-      >
+    <div className="form__checkbox-group">
+      <input type="checkbox" id="form-remember-me" name="remember-me" />
+      <label className="form__checkbox-label" htmlFor="form-remember-me">
         Remember me
       </label>
     </div>
