@@ -1,8 +1,7 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import "./FormButtons.css";
-
-type Action = "Log In" | "Sign Up";
+import { Action } from "../types.ts";
 
 interface Props {
   action: Action;

@@ -6,10 +6,13 @@ import FormHelper from "../FormHelper/FormHelper.tsx";
 import FormButtons from "../FormButtons/FormButtons.tsx";
 import "./AuthForm.css";
 import FormRedirect from "../FormRedirect/FormRedirect.tsx";
+import { Action } from "../types.ts";
 
 interface Props {}
 
 const AuthForm: React.FC<Props> = () => {
+  const action: Action = "Log In";
+
   return (
     <div className="form">
       <div className="form__content">
@@ -35,9 +38,9 @@ const AuthForm: React.FC<Props> = () => {
           <CheckboxGroup />
           <FormHelper />
         </div>
-        <FormButtons action="Log In" />
+        <FormButtons action={action} />
       </div>
-      <FormRedirect />
+      <FormRedirect action={action} text="Don't have an account?" />
     </div>
   );
 };
