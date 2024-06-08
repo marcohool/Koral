@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FormTitle from "../FormTitle/FormTitle.tsx";
 import InputGroup from "../InputGroup/InputGroup.tsx";
 import CheckboxGroup from "../../CheckboxGroup/CheckboxGroup.tsx";
@@ -26,12 +26,12 @@ const AuthForm: React.FC<Props> = ({
   redirectText,
 }) => {
   return (
-    <div className="form">
+    <form className="form">
       <div className="form__content">
         <FormTitle title={title} subtitle={subtitle} />
         <div className="form__input-group">
-          {fields.map((field) => (
-            <InputGroup field={field} />
+          {fields.map((field, index) => (
+            <InputGroup key={index} field={field} />
           ))}
         </div>
         {displayHelpers && (
@@ -43,7 +43,7 @@ const AuthForm: React.FC<Props> = ({
         <FormButtons action={action} />
       </div>
       <FormRedirect action={action} text={redirectText} />
-    </div>
+    </form>
   );
 };
 
