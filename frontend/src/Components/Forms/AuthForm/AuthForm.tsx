@@ -25,14 +25,23 @@ const AuthForm: React.FC<Props> = ({
   displayHelpers,
   redirectText,
 }) => {
-  const [formData, setFormData] = useState<{ [key: string]: string }>(
-    fields.reduce((acc, field) => ({ ...acc, [field.id]: "" }), {}),
+  const [formData, setFormData] = useState<{ [key: string]: string | boolean }>(
+    fields.reduce((acc, field) => ({ ...acc, [field.id]: "" }), {
+      rememberMe: false,
+    }),
   );
 
   const handleFieldChange = (id: string, value: string) => {
     setFormData((prevData) => ({
       ...prevData,
       [id]: value,
+    }));
+  };
+
+  const handleRememberMeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      rememberMe: e.target.checked,
     }));
   };
 
@@ -56,7 +65,7 @@ const AuthForm: React.FC<Props> = ({
         </div>
         {displayHelpers && (
           <div className="form__helpers">
-            <CheckboxGroup />
+            <CheckboxGroup onCheckboxChange={handleRememberMeChange} />
             <FormHelper />
           </div>
         )}
