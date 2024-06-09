@@ -4,9 +4,14 @@ import { Field } from "../types";
 
 interface Props {
   field: Field;
+  onChange: (id: string, value: string) => void;
 }
 
-const InputGroup: React.FC<Props> = ({ field }) => {
+const InputGroup: React.FC<Props> = ({ field, onChange }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(field.id, e.target.value);
+  };
+
   return (
     <div className="form__input">
       <p className="form__input-title">{field.title}</p>
@@ -15,6 +20,7 @@ const InputGroup: React.FC<Props> = ({ field }) => {
         type={field.type}
         id={field.id}
         placeholder={field.placeholder}
+        onChange={handleChange}
       />
     </div>
   );

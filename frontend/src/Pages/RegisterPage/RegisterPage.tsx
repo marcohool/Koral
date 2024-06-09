@@ -29,7 +29,7 @@ const RegisterPage: React.FC<Props> = () => {
             title: "Confirm Password",
             placeholder: "Confirm your password",
             type: "password",
-            id: "form-password",
+            id: "form-password-confirm",
           },
         ]}
         displayHelpers={false}

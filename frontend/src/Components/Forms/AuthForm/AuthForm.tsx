@@ -25,13 +25,28 @@ const AuthForm: React.FC<Props> = ({
   displayHelpers,
   redirectText,
 }) => {
+  const [formData, setFormData] = useState<{ [key: string]: string }>(
+    fields.reduce((acc, field) => ({ ...acc, [field.id]: "" }), {}),
+  );
+
+  const handleFieldChange = (id: string, value: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
   return (
     <form className="form">
       <div className="form__content">
         <FormTitle title={title} subtitle={subtitle} />
         <div className="form__input-group">
           {fields.map((field, index) => (
-            <InputGroup key={index} field={field} />
+            <InputGroup
+              key={index}
+              field={field}
+              onChange={handleFieldChange}
+            />
           ))}
         </div>
         {displayHelpers && (
