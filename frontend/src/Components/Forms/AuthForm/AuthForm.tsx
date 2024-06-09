@@ -36,8 +36,13 @@ const AuthForm: React.FC<Props> = ({
     }));
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
-    <form className="form">
+    <form className="form" onSubmit={handleSubmit}>
       <div className="form__content">
         <FormTitle title={title} subtitle={subtitle} />
         <div className="form__input-group">

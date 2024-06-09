@@ -10,7 +10,9 @@ interface Props {
 const FormButtons: React.FC<Props> = ({ action }) => {
   return (
     <div className="form__buttons">
-      <button className="btn btn-primary form__button">{action}</button>
+      <button className="btn btn-primary form__button" type="submit">
+        {action}
+      </button>
       <div className="form__divider">
         <div className="divider-line"></div>
         <div className="divider-text">OR</div>
