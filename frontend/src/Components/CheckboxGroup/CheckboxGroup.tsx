@@ -1,18 +1,18 @@
 import React from "react";
 import "./CheckboxGroup.css";
+import { useFormContext } from "react-hook-form";
 
-interface Props {
-  onCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+interface Props {}
 
-const CheckboxGroup: React.FC<Props> = ({ onCheckboxChange }) => {
+const CheckboxGroup: React.FC<Props> = () => {
+  const { register } = useFormContext();
+
   return (
     <div className="form__checkbox-group">
       <input
         type="checkbox"
         id="form-remember-me"
-        name="remember-me"
-        onChange={onCheckboxChange}
+        {...register("form-remember-me", {})}
       />
       <label className="form__checkbox-label" htmlFor="form-remember-me">
         Remember me

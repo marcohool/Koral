@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FormTitle from "../FormTitle/FormTitle.tsx";
 import InputGroup from "../InputGroup/InputGroup.tsx";
 import CheckboxGroup from "../../CheckboxGroup/CheckboxGroup.tsx";
@@ -7,6 +7,7 @@ import FormButtons from "../FormButtons/FormButtons.tsx";
 import "./AuthForm.css";
 import FormRedirect from "../FormRedirect/FormRedirect.tsx";
 import { Action, Field } from "../types.ts";
+import { FormProvider, useForm } from "react-hook-form";
 
 interface Props {
   action: Action;
@@ -25,54 +26,33 @@ const AuthForm: React.FC<Props> = ({
   displayHelpers,
   redirectText,
 }) => {
-  const [formData, setFormData] = useState<{ [key: string]: string | boolean }>(
-    fields.reduce((acc, field) => ({ ...acc, [field.id]: "" }), {
-      rememberMe: false,
-    }),
-  );
+  const methods = useForm();
 
-  const handleFieldChange = (id: string, value: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
-  };
-
-  const handleRememberMeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      rememberMe: e.target.checked,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(formData);
-  };
+  const onSubmit = methods.handleSubmit((data) => {
+    console.log(data);
+  });
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <div className="form__content">
-        <FormTitle title={title} subtitle={subtitle} />
-        <div className="form__input-group">
-          {fields.map((field, index) => (
-            <InputGroup
-              key={index}
-              field={field}
-              onChange={handleFieldChange}
-            />
-          ))}
-        </div>
-        {displayHelpers && (
-          <div className="form__helpers">
-            <CheckboxGroup onCheckboxChange={handleRememberMeChange} />
-            <FormHelper />
+    <FormProvider {...methods}>
+      <form className="form" onSubmit={onSubmit}>
+        <div className="form__content">
+          <FormTitle title={title} subtitle={subtitle} />
+          <div className="form__input-group">
+            {fields.map((field, index) => (
+              <InputGroup key={index} field={field} />
+            ))}
           </div>
-        )}
-        <FormButtons action={action} />
-      </div>
-      <FormRedirect action={action} text={redirectText} />
-    </form>
+          {displayHelpers && (
+            <div className="form__helpers">
+              <CheckboxGroup />
+              <FormHelper />
+            </div>
+          )}
+          <FormButtons action={action} />
+        </div>
+        <FormRedirect action={action} text={redirectText} />
+      </form>
+    </FormProvider>
   );
 };
 

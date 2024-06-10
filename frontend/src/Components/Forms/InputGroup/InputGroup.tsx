@@ -1,16 +1,14 @@
 import React from "react";
 import "./InputGroup.css";
 import { Field } from "../types";
+import { useFormContext } from "react-hook-form";
 
 interface Props {
   field: Field;
-  onChange: (id: string, value: string) => void;
 }
 
-const InputGroup: React.FC<Props> = ({ field, onChange }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(field.id, e.target.value);
-  };
+const InputGroup: React.FC<Props> = ({ field }) => {
+  const { register } = useFormContext();
 
   return (
     <div className="form__input">
@@ -20,7 +18,13 @@ const InputGroup: React.FC<Props> = ({ field, onChange }) => {
         type={field.type}
         id={field.id}
         placeholder={field.placeholder}
-        onChange={handleChange}
+        // onChange={handleChange}
+        {...register(field.id, {
+          required: {
+            value: true,
+            message: "required",
+          },
+        })}
       />
     </div>
   );
