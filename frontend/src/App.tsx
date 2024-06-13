@@ -1,10 +1,13 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
+import { UserProvider } from "./Context/useAuth.tsx";
 
 function App() {
   return (
     <div className="App">
-      <Outlet />
+      <UserProvider>
+        <Outlet />
+      </UserProvider>
     </div>
   );
 }
