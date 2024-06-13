@@ -6,3 +6,14 @@ export type Field = {
   type: string;
   id: string;
 };
+
+export interface LoginFormSchema {
+  "form-email": string;
+  "form-password-login": string;
+}
+
+export interface RegisterFormSchema {
+  "form-email": string;
+  "form-password-register": string;
+  "form-password-confirm": string;
+}

@@ -15,9 +15,6 @@ const InputGroup: React.FC<Props> = ({ field }) => {
 
   const errorMessage = errors[field.id]?.message as string | undefined;
 
-  console.log(errors);
-  console.log(field.id);
-
   return (
     <div className="form__input">
       <p className={`form__input-title ${errorMessage && "error-state"}`}>
