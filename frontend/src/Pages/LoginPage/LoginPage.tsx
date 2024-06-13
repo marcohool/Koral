@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./LoginPage.css";
 import AuthForm from "../../Components/Forms/AuthForm/AuthForm.tsx";
 import AuthLayout from "../../Components/AuthLayout/AuthLayout.tsx";
@@ -18,7 +18,11 @@ const LoginPage: React.FC<Props> = () => {
     "form-password-login": Yup.string().required("Password is required"),
   });
 
-  const { loginUser } = useAuth();
+  const { loginUser, logoutUser } = useAuth();
+
+  useEffect(() => {
+    logoutUser();
+  });
 
   const handleLoginSubmit = (data: FormSchema) => {
     const loginData = data as LoginFormSchema;
