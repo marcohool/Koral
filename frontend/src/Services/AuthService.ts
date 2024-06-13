@@ -1,27 +1,33 @@
 import axios from "axios";
+import { handleError } from "./ErrorHandler.ts";
 
-const API_URL = "https://localhost:5050/auth";
+const API_URL = "https://localhost:64553/api";
 
-export const register = (email: string, password: string) => {
-  return axios.post(`${API_URL}/register`, {
-    email,
-    password,
-  });
+export const login = async (username: string, password: string) => {
+  try {
+    return await axios.post(`${API_URL}/account/login`, {
+      username: username,
+      password: password,
+    });
+  } catch (error) {
+    handleError(error);
+  }
 };
 
-export const login = (email: string, password: string) => {
-  return axios
-    .post(`${API_URL}/login`, {
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
-
-      return response.data;
+export const register = async (
+  username: string,
+  email: string,
+  password: string,
+) => {
+  try {
+    return await axios.post(`${API_URL}/account/register`, {
+      username: username,
+      email: email,
+      password: password,
     });
+  } catch (error) {
+    handleError(error);
+  }
 };
 
 export const logout = () => {
