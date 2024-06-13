@@ -24,7 +24,7 @@ const LoginPage: React.FC<Props> = () => {
             title: "Password",
             placeholder: "Enter your password",
             type: "password",
-            id: "form-password",
+            id: "form-password-login",
           },
         ]}
         displayHelpers={true}

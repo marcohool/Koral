@@ -32,10 +32,11 @@ const AuthForm: React.FC<Props> = ({
     "form-email": Yup.string()
       .email("Email is not valid")
       .required("Email is required"),
-    "form-password": Yup.string()
+    "form-password-register": Yup.string()
       .min(6, "Password must be at least 6 characters")
       .matches(/\d/, "Password must contain at least one digit")
       .required("Password is required"),
+    "form-password-login": Yup.string().required("Password is required"),
     "form-password-confirm": Yup.string()
       .oneOf([Yup.ref("form-password")], "Passwords must match")
       .required("Confirming password is required"),
