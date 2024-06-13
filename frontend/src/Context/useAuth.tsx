@@ -49,7 +49,7 @@ export const UserProvider = ({ children }: Props) => {
           setToken(response?.data.token);
           setUser(user);
 
-          console.log("User registered successfully");
+          console.log("User registered successfully", token, user);
 
           navigate("/");
         }

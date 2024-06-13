@@ -6,6 +6,7 @@ import LoginImage from "../../../public/resources/images/Login-Image.jpg";
 import * as Yup from "yup";
 import { ObjectSchema } from "yup";
 import { FormSchema, LoginFormSchema } from "../../Components/Forms/types.ts";
+import { useAuth } from "../../Context/useAuth.tsx";
 
 interface Props {}
 
@@ -17,9 +18,13 @@ const LoginPage: React.FC<Props> = () => {
     "form-password-login": Yup.string().required("Password is required"),
   });
 
+  const { loginUser } = useAuth();
+
   const handleLoginSubmit = (data: FormSchema) => {
-    const loginSchema = data as LoginFormSchema;
-    console.log("Login form data submitted:", loginSchema);
+    const loginData = data as LoginFormSchema;
+    console.log("Login form data submitted:", loginData);
+
+    loginUser(loginData["form-email"], loginData["form-password-login"]);
   };
 
   return (

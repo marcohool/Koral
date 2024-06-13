@@ -1,7 +1,7 @@
 import axios from "axios";
 import { handleError } from "./ErrorHandler.ts";
 
-const API_URL = "https://localhost:64553/api";
+const API_URL = "https://localhost:5001/api";
 
 export const login = async (username: string, password: string) => {
   try {
