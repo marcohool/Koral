@@ -5,3 +5,18 @@
 .form__input-input {
   width: 100%;
 }
+
+.form__input {
+  display: flex;
+  flex-direction: column;
+}
+
+.error-message {
+  color: var(--error);
+  font-size: 0.85rem;
+  padding-top: 0.5rem;
+}
+
+.error-state {
+  color: var(--error);
+}

@@ -8,6 +8,8 @@ import "./AuthForm.css";
 import FormRedirect from "../FormRedirect/FormRedirect.tsx";
 import { Action, Field } from "../types.ts";
 import { FormProvider, useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface Props {
   action: Action;
@@ -26,7 +28,20 @@ const AuthForm: React.FC<Props> = ({
   displayHelpers,
   redirectText,
 }) => {
-  const methods = useForm();
+  const validationSchema = Yup.object().shape({
+    "form-email": Yup.string()
+      .email("Email is not valid")
+      .required("Email is required"),
+    "form-password": Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .matches(/\d/, "Password must contain at least one digit")
+      .required("Password is required"),
+    "form-password-confirm": Yup.string()
+      .oneOf([Yup.ref("form-password")], "Passwords must match")
+      .required("Confirming password is required"),
+  });
+
+  const methods = useForm({ resolver: yupResolver(validationSchema) });
 
   const onSubmit = methods.handleSubmit((data) => {
     console.log(data);

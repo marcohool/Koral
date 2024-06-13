@@ -8,24 +8,34 @@ interface Props {
 }
 
 const InputGroup: React.FC<Props> = ({ field }) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+
+  const errorMessage = errors[field.id]?.message as string | undefined;
+
+  console.log(errors);
+  console.log(field.id);
 
   return (
     <div className="form__input">
-      <p className="form__input-title">{field.title}</p>
+      <p className={`form__input-title ${errorMessage && "error-state"}`}>
+        {field.title}
+      </p>
       <input
-        className="form__input-input"
+        className={`form__input-input ${errorMessage && "form__input-error-state"}`}
         type={field.type}
         id={field.id}
         placeholder={field.placeholder}
-        // onChange={handleChange}
         {...register(field.id, {
           required: {
             value: true,
-            message: "required",
+            message: "This field is required",
           },
         })}
       />
+      {errorMessage && <span className="error-message">{errorMessage}</span>}
     </div>
   );
 };
