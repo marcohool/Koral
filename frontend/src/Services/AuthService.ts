@@ -1,12 +1,12 @@
 import axios from "axios";
 import { handleError } from "./ErrorHandler.ts";
 
-const API_URL = "https://localhost:5001/api";
+const API_URL = "https://localhost:5001";
 
 export const login = async (username: string, password: string) => {
   try {
     return await axios.post(`${API_URL}/account/login`, {
-      username: username,
+      email: username,
       password: password,
     });
   } catch (error) {

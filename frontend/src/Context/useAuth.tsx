@@ -37,19 +37,17 @@ export const UserProvider = ({ children }: Props) => {
     await register(email, password);
   };
 
-  const loginUser = async (username: string, password: string) => {
-    await login(username, password)
+  const loginUser = async (email: string, password: string) => {
+    await login(email, password)
       .then((response) => {
         if (response) {
-          const user = response.data.email;
-
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("token", response.data);
+          localStorage.setItem("user", email);
 
           setToken(response?.data.token);
-          setUser(user);
+          setUser(email);
 
-          console.log("User registered successfully", token, user);
+          console.log("User registered successfully", token, email);
 
           navigate("/");
         }
