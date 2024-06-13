@@ -18,6 +18,6 @@ public class RegisterRequest
     /// The user's password.
     /// </summary>
     [Required]
-    [MinLength(8)]
+    [MinLength(6)]
     public required string Password { get; init; }
 }
