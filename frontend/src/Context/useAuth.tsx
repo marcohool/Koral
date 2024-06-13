@@ -26,7 +26,7 @@ export const UserProvider = ({ children }: Props) => {
     const user = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     if (user && token) {
-      setUser(JSON.parse(user));
+      setUser(user);
       setToken(token);
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
