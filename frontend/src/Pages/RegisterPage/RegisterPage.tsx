@@ -3,7 +3,10 @@ import AuthForm from "../../Components/Forms/AuthForm/AuthForm.tsx";
 import AuthLayout from "../../Components/AuthLayout/AuthLayout.tsx";
 import RegisterImage from "../../../public/resources/images/Signup-Image-Cropped.jpg";
 import { ObjectSchema } from "yup";
-import { RegisterFormSchema } from "../../Components/Forms/types.ts";
+import {
+  FormSchema,
+  RegisterFormSchema,
+} from "../../Components/Forms/types.ts";
 import * as Yup from "yup";
 
 interface Props {}
@@ -23,6 +26,11 @@ const RegisterPage: React.FC<Props> = () => {
         .required("Confirming password is required"),
     },
   );
+
+  const handleRegisterSubmit = (data: FormSchema) => {
+    const loginSchema = data as RegisterFormSchema;
+    console.log("Register form data submitted:", loginSchema);
+  };
 
   return (
     <AuthLayout formPlacement="right" image={RegisterImage}>
@@ -53,6 +61,7 @@ const RegisterPage: React.FC<Props> = () => {
         displayHelpers={false}
         redirectText="Already have an account?"
         validation={validationSchema}
+        handleSubmit={handleRegisterSubmit}
       />
     </AuthLayout>
   );

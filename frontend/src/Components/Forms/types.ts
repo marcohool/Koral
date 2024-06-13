@@ -17,3 +17,5 @@ export interface RegisterFormSchema {
   "form-password-register": string;
   "form-password-confirm": string;
 }
+
+export type FormSchema = LoginFormSchema | RegisterFormSchema;

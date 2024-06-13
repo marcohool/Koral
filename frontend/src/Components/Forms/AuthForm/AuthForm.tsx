@@ -9,6 +9,7 @@ import FormRedirect from "../FormRedirect/FormRedirect.tsx";
 import {
   Action,
   Field,
+  FormSchema,
   LoginFormSchema,
   RegisterFormSchema,
 } from "../types.ts";
@@ -24,6 +25,7 @@ interface Props {
   displayHelpers?: boolean;
   redirectText: string;
   validation: ObjectSchema<LoginFormSchema | RegisterFormSchema>;
+  handleSubmit: (data: FormSchema) => void;
 }
 
 const AuthForm: React.FC<Props> = ({
@@ -34,11 +36,12 @@ const AuthForm: React.FC<Props> = ({
   displayHelpers,
   redirectText,
   validation,
+  handleSubmit,
 }) => {
   const methods = useForm({ resolver: yupResolver(validation) });
 
   const onSubmit = methods.handleSubmit((data) => {
-    console.log(data);
+    handleSubmit(data);
   });
 
   return (
