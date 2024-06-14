@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AuthForm from "../../Components/Forms/AuthForm/AuthForm.tsx";
 import AuthLayout from "../../Components/AuthLayout/AuthLayout.tsx";
-import RegisterImage from "../../../public/resources/images/Signup-Image-Cropped.jpg";
+import RegisterImage from "/resources/images/Signup-Image-Cropped.jpg";
 import { ObjectSchema } from "yup";
 import {
   FormSchema,
   RegisterFormSchema,
 } from "../../Components/Forms/types.ts";
 import * as Yup from "yup";
+import { useAuth } from "../../Context/useAuth.tsx";
 
 interface Props {}
 
@@ -27,9 +28,20 @@ const RegisterPage: React.FC<Props> = () => {
     },
   );
 
+  const { registerUser, logoutUser } = useAuth();
+
+  useEffect(() => {
+    logoutUser();
+  });
+
   const handleRegisterSubmit = (data: FormSchema) => {
     const loginSchema = data as RegisterFormSchema;
     console.log("Register form data submitted:", loginSchema);
+
+    registerUser(
+      loginSchema["form-email"],
+      loginSchema["form-password-register"],
+    );
   };
 
   return (

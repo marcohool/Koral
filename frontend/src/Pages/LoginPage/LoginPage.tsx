@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./LoginPage.css";
 import AuthForm from "../../Components/Forms/AuthForm/AuthForm.tsx";
 import AuthLayout from "../../Components/AuthLayout/AuthLayout.tsx";
-import LoginImage from "../../../public/resources/images/Login-Image.jpg";
+import LoginImage from "/resources/images/Login-Image.jpg";
 import * as Yup from "yup";
 import { ObjectSchema } from "yup";
 import { FormSchema, LoginFormSchema } from "../../Components/Forms/types.ts";
@@ -26,7 +26,6 @@ const LoginPage: React.FC<Props> = () => {
 
   const handleLoginSubmit = (data: FormSchema) => {
     const loginData = data as LoginFormSchema;
-    console.log("Login form data submitted:", loginData);
 
     loginUser(loginData["form-email"], loginData["form-password-login"]);
   };
