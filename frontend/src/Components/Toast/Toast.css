@@ -1,0 +1,26 @@
+:root {
+  --toastify-color-light: var(--background);
+  --toastify-font-family: var(--primary-font);
+  --toastify-toast-width: 400px;
+}
+
+.Toastify__toast--error {
+  background-color: var(--error-background);
+  color: var(--error-primary);
+  border: 2px solid var(--error-border);
+}
+
+.Toastify__toast-icon {
+  -webkit-margin-end: 20px;
+  margin-inline-end: 20px;
+}
+
+.Toastify__close-button {
+  align-self: center;
+  opacity: 0.775;
+}
+
+.Toastify__close-button > svg {
+  fill: var(--error-primary);
+  width: 2.5rem;
+}

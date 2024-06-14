@@ -31,7 +31,7 @@ const LoginPage: React.FC<Props> = () => {
     loginUser(loginData["form-email"], loginData["form-password-login"]);
   };
 
-  const notify = () => toast("Wow so easy!");
+  const notify = () => toast.error("Invalid username/password");
 
   return (
     <AuthLayout formPlacement="left" image={LoginImage}>

@@ -9,7 +9,7 @@
 }
 
 .slide-in-right {
-  animation: slide-in-right 0.225s ease-out both;
+  animation: slide-in-right 0.175s ease-out both;
 }
 
 @keyframes slide-out-right {
@@ -23,5 +23,5 @@
 }
 
 .slide-out-right {
-  animation: slide-out-right 0.4s ease-in both;
+  animation: slide-out-right 0.35s ease-in both;
 }
