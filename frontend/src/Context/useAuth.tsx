@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { login, register } from "../Services/AuthService.ts";
+import { login, logout, register } from "../Services/AuthService.ts";
 
 type UserContextType = {
   user: string | null;
@@ -34,7 +34,7 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   const registerUser = async (email: string, password: string) => {
-    await register(email, password);
+    await register(email, password).catch((error) => console.log(error));
   };
 
   const loginUser = async (email: string, password: string) => {
@@ -52,7 +52,7 @@ export const UserProvider = ({ children }: Props) => {
           navigate("/");
         }
       })
-      .catch((error) => console.log("Server error occurred " + error));
+      .catch((error) => console.log(error));
   };
 
   const isLoggedIn = () => {
@@ -60,8 +60,7 @@ export const UserProvider = ({ children }: Props) => {
   };
 
   const logoutUser = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    logout();
     setUser(null);
     setToken(null);
   };

@@ -1,32 +1,22 @@
-import axios from "axios";
-import { handleError } from "./ErrorHandler.ts";
-
-const API_URL = "https://localhost:5001";
+import { axiosInstance } from "./AxiosInstance.ts";
 
 export const login = async (username: string, password: string) => {
-  try {
-    return await axios.post(`${API_URL}/account/login`, {
-      email: username,
-      password: password,
-    });
-  } catch (error) {
-    handleError(error);
-  }
+  return await axiosInstance.post(`/account/login`, {
+    email: username,
+    password: password,
+  });
 };
 
 export const register = async (email: string, password: string) => {
-  try {
-    return await axios.post(`${API_URL}/account/register`, {
-      email: email,
-      password: password,
-    });
-  } catch (error) {
-    handleError(error);
-  }
+  return await axiosInstance.post(`/account/register`, {
+    email: email,
+    password: password,
+  });
 };
 
 export const logout = () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("token");
 };
 
 export const getCurrentUser = () => {
