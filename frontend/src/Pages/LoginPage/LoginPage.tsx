@@ -7,7 +7,6 @@ import * as Yup from "yup";
 import { ObjectSchema } from "yup";
 import { FormSchema, LoginFormSchema } from "../../Components/Forms/types.ts";
 import { useAuth } from "../../Context/useAuth.tsx";
-import { toast } from "react-toastify";
 
 interface Props {}
 
@@ -30,8 +29,6 @@ const LoginPage: React.FC<Props> = () => {
 
     loginUser(loginData["form-email"], loginData["form-password-login"]);
   };
-
-  const notify = () => toast.error("Invalid username/password");
 
   return (
     <AuthLayout formPlacement="left" image={LoginImage}>
@@ -58,7 +55,6 @@ const LoginPage: React.FC<Props> = () => {
         validation={validationSchema}
         handleSubmit={handleLoginSubmit}
       />
-      <button onClick={notify}>Notify!</button>
     </AuthLayout>
   );
 };
