@@ -7,7 +7,11 @@ import { handleError } from "../Services/ErrorHandler.ts";
 type UserContextType = {
   user: string | null;
   token: string | null;
-  registerUser: (email: string, password: string) => void;
+  registerUser: (
+    email: string,
+    password: string,
+    setFormDisplayErrorMessage: (errorMessage: string) => void,
+  ) => void;
   loginUser: (
     email: string,
     password: string,
@@ -38,8 +42,14 @@ export const UserProvider = ({ children }: Props) => {
     setIsReady(true);
   }, []);
 
-  const registerUser = async (email: string, password: string) => {
-    await register(email, password).catch((error) => console.log(error));
+  const registerUser = async (
+    email: string,
+    password: string,
+    setErrorMessage: (errorMessage: string) => void,
+  ) => {
+    await register(email, password).catch((error) =>
+      handleError(error, setErrorMessage),
+    );
   };
 
   const loginUser = async (

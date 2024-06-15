@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AuthForm from "../../Components/Forms/AuthForm/AuthForm.tsx";
 import AuthLayout from "../../Components/AuthLayout/AuthLayout.tsx";
 import RegisterImage from "/resources/images/Signup-Image-Cropped.jpg";
@@ -9,10 +9,12 @@ import {
 } from "../../Components/Forms/types.ts";
 import * as Yup from "yup";
 import { useAuth } from "../../Context/useAuth.tsx";
+import { toast } from "react-toastify";
 
 interface Props {}
 
 const RegisterPage: React.FC<Props> = () => {
+  const [errorMessage, setErrorMessage] = useState("");
   const validationSchema: ObjectSchema<RegisterFormSchema> = Yup.object().shape(
     {
       "form-email": Yup.string()
@@ -34,14 +36,31 @@ const RegisterPage: React.FC<Props> = () => {
     logoutUser();
   });
 
-  const handleRegisterSubmit = (data: FormSchema) => {
-    const loginSchema = data as RegisterFormSchema;
-    console.log("Register form data submitted:", loginSchema);
+  const handleFormDisplayError = (formDisplayError: string) => {
+    setErrorMessage(formDisplayError);
+  };
 
-    registerUser(
-      loginSchema["form-email"],
-      loginSchema["form-password-register"],
-    );
+  const handleRegisterSubmit = (data: FormSchema) => {
+    const registerSchema = data as RegisterFormSchema;
+    console.log("Register form data submitted:", registerSchema);
+
+    try {
+      registerUser(
+        registerSchema["form-email"],
+        registerSchema["form-password-register"],
+        handleFormDisplayError,
+      );
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      } else {
+        toast.error("Unexpected error occurred");
+      }
+    }
+  };
+
+  const clearErrorMessage = () => {
+    setErrorMessage("");
   };
 
   return (
@@ -74,6 +93,8 @@ const RegisterPage: React.FC<Props> = () => {
         redirectText="Already have an account?"
         validation={validationSchema}
         handleSubmitInForm={handleRegisterSubmit}
+        errorMessage={errorMessage}
+        clearErrorMessage={clearErrorMessage}
       />
     </AuthLayout>
   );
