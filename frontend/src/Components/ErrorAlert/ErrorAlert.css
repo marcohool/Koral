@@ -1,16 +1,17 @@
 .alert__container {
   display: flex;
-  height: 4.25rem;
+  height: 3rem;
   align-items: center;
   background-color: var(--error-background);
   border: 2px solid var(--error-border);
+  padding: 8px;
 }
 
 .alert__body {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 8px;
 }
 
 .alert__icon {
@@ -21,4 +22,17 @@
 
 .alert__text {
   color: var(--error-primary);
+}
+
+.alert__close {
+  width: 35px;
+  height: 17px;
+  opacity: 0.7;
+  fill: var(--error-primary);
+}
+
+.alert__close:hover,
+.alert__close:focus {
+  cursor: pointer;
+  opacity: 1;
 }

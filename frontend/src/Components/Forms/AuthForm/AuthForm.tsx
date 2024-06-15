@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FormTitle from "../FormTitle/FormTitle.tsx";
 import InputGroup from "../InputGroup/InputGroup.tsx";
 import CheckboxGroup from "../../CheckboxGroup/CheckboxGroup.tsx";
@@ -28,6 +28,7 @@ interface Props {
   validation: ObjectSchema<LoginFormSchema | RegisterFormSchema>;
   handleSubmitInForm: (data: FormSchema) => void;
   errorMessage?: string;
+  clearErrorMessage: () => void;
 }
 
 const AuthForm: React.FC<Props> = ({
@@ -40,9 +41,11 @@ const AuthForm: React.FC<Props> = ({
   validation,
   handleSubmitInForm,
   errorMessage,
+  clearErrorMessage,
 }) => {
   const methods = useForm({ resolver: yupResolver(validation) });
   const { formState, handleSubmit, reset } = methods;
+  const [isErrorVisible, setIsErrorVisible] = useState(false);
 
   const onSubmit = handleSubmit((data) => {
     handleSubmitInForm(data);
@@ -54,12 +57,29 @@ const AuthForm: React.FC<Props> = ({
     }
   }, [formState, reset]);
 
+  useEffect(() => {
+    if (errorMessage) {
+      setIsErrorVisible(true);
+    }
+  }, [errorMessage]);
+
+  const handleHideError = () => {
+    setIsErrorVisible(false);
+    clearErrorMessage();
+  };
+
   return (
     <FormProvider {...methods}>
       <form className="form" onSubmit={onSubmit}>
         <div className="form__content">
           <FormTitle title={title} subtitle={subtitle} />
-          {errorMessage && <ErrorMessage errorMessage={errorMessage} />}
+          {isErrorVisible && errorMessage && (
+            <ErrorMessage
+              errorMessage={errorMessage}
+              isVisible={isErrorVisible}
+              onClose={handleHideError}
+            />
+          )}
           <div className="form__input-group">
             {fields.map((field, index) => (
               <InputGroup key={index} field={field} />

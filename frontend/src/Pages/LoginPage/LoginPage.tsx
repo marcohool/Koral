@@ -47,6 +47,10 @@ const LoginPage: React.FC<Props> = () => {
     }
   };
 
+  const clearErrorMessage = () => {
+    setErrorMessage("");
+  };
+
   return (
     <AuthLayout formPlacement="left" image={LoginImage}>
       <AuthForm
@@ -72,6 +76,7 @@ const LoginPage: React.FC<Props> = () => {
         validation={validationSchema}
         handleSubmitInForm={handleLoginSubmit}
         errorMessage={errorMessage}
+        clearErrorMessage={clearErrorMessage}
       />
     </AuthLayout>
   );
