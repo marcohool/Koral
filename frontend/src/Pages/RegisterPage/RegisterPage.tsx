@@ -73,7 +73,7 @@ const RegisterPage: React.FC<Props> = () => {
         displayHelpers={false}
         redirectText="Already have an account?"
         validation={validationSchema}
-        handleSubmit={handleRegisterSubmit}
+        handleSubmitInForm={handleRegisterSubmit}
       />
     </AuthLayout>
   );

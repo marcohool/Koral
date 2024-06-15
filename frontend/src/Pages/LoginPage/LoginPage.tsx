@@ -49,7 +49,6 @@ const LoginPage: React.FC<Props> = () => {
 
   return (
     <AuthLayout formPlacement="left" image={LoginImage}>
-      {errorMessage && <p>{errorMessage}</p>}
       <AuthForm
         action="Log In"
         title="Login"
@@ -71,7 +70,8 @@ const LoginPage: React.FC<Props> = () => {
         displayHelpers={true}
         redirectText="Don't have an account?"
         validation={validationSchema}
-        handleSubmit={handleLoginSubmit}
+        handleSubmitInForm={handleLoginSubmit}
+        errorMessage={errorMessage}
       />
     </AuthLayout>
   );

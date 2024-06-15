@@ -1,0 +1,24 @@
+.alert__container {
+  display: flex;
+  height: 4.25rem;
+  align-items: center;
+  background-color: var(--error-background);
+  border: 2px solid var(--error-border);
+}
+
+.alert__body {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.alert__icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+.alert__text {
+  color: var(--error-primary);
+}
