@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { login, logout, register } from "../Services/AuthService.ts";
+import { errorHandler, handleError } from "../Services/ErrorHandler.ts";
 
 type UserContextType = {
   user: string | null;
@@ -34,7 +35,7 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   const registerUser = async (email: string, password: string) => {
-    await register(email, password).catch((error) => console.log(error));
+    await register(email, password).catch((error) => handleError(error));
   };
 
   const loginUser = async (email: string, password: string) => {
@@ -52,7 +53,7 @@ export const UserProvider = ({ children }: Props) => {
           navigate("/");
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => handleError(error));
   };
 
   const isLoggedIn = () => {

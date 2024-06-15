@@ -1,24 +1,19 @@
-import axios from "axios";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 export const handleError = (error: unknown) => {
-  if (axios.isAxiosError(error)) {
-    const err = error.response;
+  if (error instanceof AxiosError) {
+    const message = error.response?.data || "Server Unavailable";
+    const code = error.response?.status || 503;
 
-    if (Array.isArray(err?.data.errors)) {
-      for (const val of err.data.errors) {
-        console.log(val.description);
-      }
-    } else if (typeof err?.data.errors === "object") {
-      for (const e in err!.data.errors) {
-        console.log(err!.data.errors[e]);
-      }
-    } else if (err?.data) {
-      console.log(err.data);
-    } else if (err?.status === 401) {
-      console.log("Unauthorized");
+    if (code === 401) {
+      toast.error("Unauthorized");
       window.history.pushState({}, "LoginPage", "/login");
+    } else {
+      toast.error(message);
     }
   } else {
-    console.error("An unexpected error occurred", error);
+    toast.error("Unknown error has occurred");
+    console.log(error);
   }
 };

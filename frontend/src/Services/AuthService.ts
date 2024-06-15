@@ -1,14 +1,16 @@
-import { axiosInstance } from "./AxiosInstance.ts";
+import axios from "axios";
+
+const API_URL = "https://localhost:5001";
 
 export const login = async (username: string, password: string) => {
-  return await axiosInstance.post(`/account/login`, {
+  return await axios.post(`${API_URL}/account/login`, {
     email: username,
     password: password,
   });
 };
 
 export const register = async (email: string, password: string) => {
-  return await axiosInstance.post(`/account/register`, {
+  return await axios.post(`${API_URL}/account/register`, {
     email: email,
     password: password,
   });
