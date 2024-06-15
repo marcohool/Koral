@@ -12,11 +12,11 @@
 }
 
 .error-message {
-  color: var(--error);
+  color: var(--error-primary);
   font-size: 0.85rem;
   padding-top: 0.5rem;
 }
 
 .error-state {
-  color: var(--error);
+  color: var(--error-primary);
 }

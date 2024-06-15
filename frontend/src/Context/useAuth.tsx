@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { login, register } from "../Services/AuthService.ts";
+import { login, logout, register } from "../Services/AuthService.ts";
+import { handleError } from "../Services/ErrorHandler.ts";
 
 type UserContextType = {
   user: string | null;
   token: string | null;
   registerUser: (email: string, password: string) => void;
-  loginUser: (email: string, password: string) => void;
+  loginUser: (
+    email: string,
+    password: string,
+    setFormDisplayErrorMessage: (errorMessage: string) => void,
+  ) => void;
   logoutUser: () => void;
   isLoggedIn: () => boolean;
 };
@@ -34,10 +39,14 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   const registerUser = async (email: string, password: string) => {
-    await register(email, password);
+    await register(email, password).catch((error) => console.log(error));
   };
 
-  const loginUser = async (email: string, password: string) => {
+  const loginUser = async (
+    email: string,
+    password: string,
+    setErrorMessage: (errorMessage: string) => void,
+  ) => {
     await login(email, password)
       .then((response) => {
         if (response) {
@@ -52,7 +61,7 @@ export const UserProvider = ({ children }: Props) => {
           navigate("/");
         }
       })
-      .catch((error) => console.log("Server error occurred " + error));
+      .catch((error) => handleError(error, setErrorMessage));
   };
 
   const isLoggedIn = () => {
@@ -60,8 +69,7 @@ export const UserProvider = ({ children }: Props) => {
   };
 
   const logoutUser = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
+    logout();
     setUser(null);
     setToken(null);
   };

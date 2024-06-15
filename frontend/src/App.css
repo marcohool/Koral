@@ -7,7 +7,10 @@
   --background: var(--red-2);
   --black: var(--red-a12);
   --white: var(--red-contrast);
-  --error: red;
+
+  --error-primary: #e12a02;
+  --error-background: #fce9e5;
+  --error-border: #cb5c4c;
 }
 
 :root,
@@ -250,7 +253,7 @@ input {
 }
 
 input.form__input-error-state {
-  border: 2px solid var(--error) !important;
+  border: 2px solid var(--error-primary) !important;
 }
 
 input:focus {
