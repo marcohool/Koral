@@ -40,11 +40,23 @@ public class AccountService(
         );
 
         if (!registerResult.Succeeded)
+        {
+            if (
+                registerResult.Errors.Any(e => e.Code == "DuplicateUserName")
+                || registerResult.Errors.Any(e => e.Code == "DuplicateEmail")
+            )
+                return new RegisterResponse
+                {
+                    Succeeded = false,
+                    Errors = [$"Account already exists with email {registerRequest.Email}"]
+                };
+
             return new RegisterResponse
             {
                 Succeeded = false,
                 Errors = registerResult.Errors.Select(e => e.Description)
             };
+        }
 
         IdentityResult roleResult = await this.userManager.AddToRoleAsync(createdUser, "User");
 
