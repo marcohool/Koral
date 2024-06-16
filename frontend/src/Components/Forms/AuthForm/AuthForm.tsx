@@ -46,8 +46,11 @@ const AuthForm: React.FC<Props> = ({
   const methods = useForm({ resolver: yupResolver(validation) });
   const { formState, handleSubmit, reset } = methods;
   const [isErrorVisible, setIsErrorVisible] = useState(false);
+  const [isInternalSubmitSpinnerVisible, setIsInternalSubmitSpinnerVisible] =
+    useState(false);
 
   const onSubmit = handleSubmit((data) => {
+    setIsInternalSubmitSpinnerVisible(true);
     handleSubmitInForm(data);
   });
 
@@ -60,6 +63,7 @@ const AuthForm: React.FC<Props> = ({
   useEffect(() => {
     if (errorMessage) {
       setIsErrorVisible(true);
+      setIsInternalSubmitSpinnerVisible(false);
     }
   }, [errorMessage]);
 
@@ -91,7 +95,10 @@ const AuthForm: React.FC<Props> = ({
               <FormHelper />
             </div>
           )}
-          <FormButtons action={action} />
+          <FormButtons
+            action={action}
+            isInternalSubmitSpinnerVisible={isInternalSubmitSpinnerVisible}
+          />
         </div>
         <FormRedirect action={action} text={redirectText} />
       </form>

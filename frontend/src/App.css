@@ -185,6 +185,7 @@ button {
   transition:
     all 0.25s,
     color 0.25s;
+  height: 3.5rem;
 }
 
 button:active {
@@ -250,6 +251,7 @@ input {
   padding: 1rem 1rem;
   background-color: var(--background);
   box-sizing: border-box;
+  height: 3.5rem;
 }
 
 input.form__input-error-state {
