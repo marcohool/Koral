@@ -5,13 +5,17 @@ import { Action } from "../types.ts";
 
 interface Props {
   action: Action;
+  isInternalSubmitSpinnerVisible: boolean;
 }
 
-const FormButtons: React.FC<Props> = ({ action }) => {
+const FormButtons: React.FC<Props> = ({
+  action,
+  isInternalSubmitSpinnerVisible,
+}) => {
   return (
     <div className="form__buttons">
       <button className="btn btn-primary form__button" type="submit">
-        {action}
+        {isInternalSubmitSpinnerVisible ? "Loading..." : action}
       </button>
       <div className="form__divider">
         <div className="divider-line"></div>
