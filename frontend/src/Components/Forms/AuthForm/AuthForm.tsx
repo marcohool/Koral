@@ -57,13 +57,13 @@ const AuthForm: React.FC<Props> = ({
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset();
-      setIsInternalSubmitSpinnerVisible(false);
     }
   }, [formState, reset]);
 
   useEffect(() => {
     if (errorMessage) {
       setIsErrorVisible(true);
+      setIsInternalSubmitSpinnerVisible(false);
     }
   }, [errorMessage]);
 

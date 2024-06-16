@@ -2,6 +2,7 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import "./FormButtons.css";
 import { Action } from "../types.ts";
+import Spinner from "../../Spinner/Spinner.tsx";
 
 interface Props {
   action: Action;
@@ -15,7 +16,7 @@ const FormButtons: React.FC<Props> = ({
   return (
     <div className="form__buttons">
       <button className="btn btn-primary form__button" type="submit">
-        {isInternalSubmitSpinnerVisible ? "Loading..." : action}
+        {isInternalSubmitSpinnerVisible ? <Spinner /> : action}
       </button>
       <div className="form__divider">
         <div className="divider-line"></div>
