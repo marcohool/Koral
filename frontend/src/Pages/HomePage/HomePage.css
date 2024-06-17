@@ -1,0 +1,24 @@
+.home__layout {
+  width: 100%;
+}
+
+.home__content {
+  position: relative;
+  top: var(--navbar-height-scrolled);
+  width: max(500px, 85%);
+  margin: 0 auto;
+  padding: 20px 20px;
+}
+
+.home__header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home__titles-title {
+  font-size: 45px;
+  margin: 0.9rem 0;
+}
