@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "../../Components/Navbar/Navbar.tsx";
 import "./HomePage.css";
-import FormTypeSelect from "../../Components/RecentUploads/FormTypeSelect/FormTypeSelect.tsx";
+import ViewTypeSelect from "../../Components/RecentUploads/ViewTypeSelect/ViewTypeSelect.tsx";
+import { ViewType } from "../../Components/RecentUploads/types.ts";
 
 interface Props {}
 
 const HomePage: React.FC<Props> = () => {
-  const [activeView, setActiveView] = React.useState<"recent" | "saved">(
-    "recent",
-  );
+  const [activeView, setActiveView] = React.useState<ViewType>(ViewType.All);
 
-  const handleRecentPostsClick = () => setActiveView("recent");
-  const handleSavedPostsClick = () => setActiveView("saved");
+  const handleRecentPostsClick = () => setActiveView(ViewType.All);
+  const handleSavedPostsClick = () => setActiveView(ViewType.Saved);
 
   return (
     <div className="home__layout">
@@ -26,7 +25,7 @@ const HomePage: React.FC<Props> = () => {
           </div>
         </div>
         <div className="home__upload-type-select">
-          <FormTypeSelect
+          <ViewTypeSelect
             activeView={activeView}
             onRecentPostsClick={handleRecentPostsClick}
             onSavedPostsClick={handleSavedPostsClick}

@@ -1,13 +1,14 @@
 import React from "react";
-import "./FormTypeSelect.css";
+import "./ViewTypeSelect.css";
+import { ViewType } from "../types.ts";
 
 interface Props {
   onRecentPostsClick: () => void;
   onSavedPostsClick: () => void;
-  activeView: "recent" | "saved";
+  activeView: ViewType;
 }
 
-const FormTypeSelect: React.FC<Props> = ({
+const ViewTypeSelect: React.FC<Props> = ({
   onRecentPostsClick,
   onSavedPostsClick,
   activeView,
@@ -15,13 +16,13 @@ const FormTypeSelect: React.FC<Props> = ({
   return (
     <div className="form-type__select__container">
       <div
-        className={`form-type__select-recent form-type__select ${activeView === "recent" ? "active" : ""}`}
+        className={`form-type__select-recent form-type__select ${activeView === ViewType.All ? "active" : ""}`}
         onClick={onRecentPostsClick}
       >
         All Uploads
       </div>
       <div
-        className={`form-type__select-saved form-type__select ${activeView === "saved" ? "active" : ""}`}
+        className={`form-type__select-saved form-type__select ${activeView === ViewType.Saved ? "active" : ""}`}
         onClick={onSavedPostsClick}
       >
         Saved
@@ -30,7 +31,7 @@ const FormTypeSelect: React.FC<Props> = ({
         className="form-type__select__underline"
         style={{
           transform:
-            activeView === "recent"
+            activeView === ViewType.All
               ? "translateX(0)"
               : "translateX(var(--form-select-width))",
         }}
@@ -39,4 +40,4 @@ const FormTypeSelect: React.FC<Props> = ({
   );
 };
 
-export default FormTypeSelect;
+export default ViewTypeSelect;
