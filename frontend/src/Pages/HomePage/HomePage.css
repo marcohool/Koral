@@ -3,8 +3,11 @@
 }
 
 .home__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   position: relative;
-  top: var(--navbar-height-scrolled);
+  top: calc(var(--navbar-height-scrolled) + 5vh);
   width: max(500px, 85%);
   margin: 0 auto;
   padding: 20px 20px;
@@ -20,5 +23,5 @@
 
 .home__titles-title {
   font-size: 45px;
-  margin: 0.9rem 0;
+  margin: 0;
 }

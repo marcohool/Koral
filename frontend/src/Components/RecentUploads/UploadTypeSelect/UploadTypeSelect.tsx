@@ -1,14 +1,14 @@
 import React from "react";
-import "./ViewTypeSelect.css";
-import { ViewType } from "../types.ts";
+import "./UploadTypeSelect.css";
+import { UploadType } from "../types.ts";
 
 interface Props {
   onRecentPostsClick: () => void;
   onSavedPostsClick: () => void;
-  activeView: ViewType;
+  activeView: UploadType;
 }
 
-const ViewTypeSelect: React.FC<Props> = ({
+const UploadTypeSelect: React.FC<Props> = ({
   onRecentPostsClick,
   onSavedPostsClick,
   activeView,
@@ -16,13 +16,13 @@ const ViewTypeSelect: React.FC<Props> = ({
   return (
     <div className="form-type__select__container">
       <div
-        className={`form-type__select-recent form-type__select ${activeView === ViewType.All ? "active" : ""}`}
+        className={`form-type__select-recent form-type__select ${activeView === UploadType.All ? "active" : ""}`}
         onClick={onRecentPostsClick}
       >
         All Uploads
       </div>
       <div
-        className={`form-type__select-saved form-type__select ${activeView === ViewType.Saved ? "active" : ""}`}
+        className={`form-type__select-saved form-type__select ${activeView === UploadType.Saved ? "active" : ""}`}
         onClick={onSavedPostsClick}
       >
         Saved
@@ -31,7 +31,7 @@ const ViewTypeSelect: React.FC<Props> = ({
         className="form-type__select__underline"
         style={{
           transform:
-            activeView === ViewType.All
+            activeView === UploadType.All
               ? "translateX(0)"
               : "translateX(var(--form-select-width))",
         }}
@@ -40,4 +40,4 @@ const ViewTypeSelect: React.FC<Props> = ({
   );
 };
 
-export default ViewTypeSelect;
+export default UploadTypeSelect;
