@@ -4,9 +4,6 @@ export enum UploadType {
 }
 
 export type Upload = {
-  id: string;
-  title: string;
-  description: string;
-  saved: boolean;
-  date: string;
+  imageId: string;
+  imagePath: string;
 };

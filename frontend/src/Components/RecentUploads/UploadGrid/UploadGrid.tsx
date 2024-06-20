@@ -11,8 +11,8 @@ const UploadGrid: React.FC<Props> = ({ uploads }) => {
   return (
     <div className="upload__grid">
       {uploads.map((upload) => (
-        <div className="upload__grid-item">
-          <UploadCard key={upload.id} upload={upload} />
+        <div key={upload.imageId} className="upload__grid-item">
+          <UploadCard upload={upload} />
         </div>
       ))}
     </div>

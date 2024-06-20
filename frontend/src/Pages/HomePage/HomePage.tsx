@@ -1,54 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../Components/Navbar/Navbar.tsx";
 import "./HomePage.css";
 import UploadTypeSelect from "../../Components/RecentUploads/UploadTypeSelect/UploadTypeSelect.tsx";
 import { Upload, UploadType } from "../../Components/RecentUploads/types.ts";
 import UploadGrid from "../../Components/RecentUploads/UploadGrid/UploadGrid.tsx";
+import { uploadsGET } from "../../Services/UploadService.ts";
 
 interface Props {}
 
 const HomePage: React.FC<Props> = () => {
+  const [uploads, setUploads] = React.useState<Upload[]>([]);
   const [activeView, setActiveView] = React.useState<UploadType>(
     UploadType.All,
   );
 
-  const uploads: Upload[] = [
-    {
-      id: "1",
-      title: "Upload 1",
-      description: "Description 1",
-      saved: false,
-      date: "2021-06-01",
-    },
-    {
-      id: "2",
-      title: "Upload 2",
-      description: "Description 2",
-      saved: true,
-      date: "2021-06-02",
-    },
-    {
-      id: "3",
-      title: "Upload 3",
-      description: "Description 3",
-      saved: false,
-      date: "2021-06-03",
-    },
-    {
-      id: "4",
-      title: "Upload 4",
-      description: "Description 4",
-      saved: true,
-      date: "2021-06-04",
-    },
-    {
-      id: "5",
-      title: "Upload 5",
-      description: "Description 5",
-      saved: false,
-      date: "2021-06-05",
-    },
-  ];
+  useEffect(() => {
+    getUploads();
+  }, []);
+
+  const getUploads = () => {
+    uploadsGET().then((res) => {
+      res?.data && setUploads(res?.data);
+    });
+  };
 
   const handleRecentPostsClick = () => setActiveView(UploadType.All);
   const handleSavedPostsClick = () => setActiveView(UploadType.Saved);
