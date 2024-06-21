@@ -119,7 +119,7 @@ public class ImageUploadService(
             await imageFile.CopyToAsync(fileStream);
         }
 
-        return (fileName, filePath, fileSize);
+        return (fileName, Path.Combine("uploads", fileName), fileSize);
     }
 
     private async Task<AppUser?> GetCurrentUserAsync()

@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  max-width: calc((500px * 3) + 2rem);
 }
 
 @media (max-width: 1000px) {
