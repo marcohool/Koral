@@ -1,15 +1,18 @@
 import React from "react";
 import { TailSpin } from "react-loader-spinner";
 
-interface Props {}
+interface Props {
+  height: string;
+  colour?: string;
+}
 
-const Spinner: React.FC<Props> = () => {
+const Spinner: React.FC<Props> = ({ height, colour }) => {
   return (
     <TailSpin
       visible={true}
-      height="75%"
-      width="75%"
-      color="var(--background)"
+      height={height}
+      width={height}
+      color={colour ? colour : "var(--primary)"}
       ariaLabel="tail-spin-loading"
       radius="1"
       wrapperStyle={{

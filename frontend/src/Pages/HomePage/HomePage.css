@@ -25,3 +25,10 @@
   font-size: 45px;
   margin: 0;
 }
+
+.home__spinner {
+  display: flex;
+  position: relative;
+  top: 15vh;
+  justify-content: center;
+}

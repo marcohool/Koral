@@ -5,11 +5,12 @@ import UploadTypeSelect from "../../Components/RecentUploads/UploadTypeSelect/Up
 import { Upload, UploadType } from "../../Components/RecentUploads/types.ts";
 import UploadGrid from "../../Components/RecentUploads/UploadGrid/UploadGrid.tsx";
 import { uploadsGET } from "../../Services/UploadService.ts";
+import Spinner from "../../Components/Spinner/Spinner.tsx";
 
 interface Props {}
 
 const HomePage: React.FC<Props> = () => {
-  const [uploads, setUploads] = React.useState<Upload[]>([]);
+  const [uploads, setUploads] = React.useState<Upload[]>();
   const [activeView, setActiveView] = React.useState<UploadType>(
     UploadType.All,
   );
@@ -47,7 +48,13 @@ const HomePage: React.FC<Props> = () => {
           />
         </div>
         <div className="home__recent-uploads">
-          <UploadGrid uploads={uploads} />
+          {uploads ? (
+            <UploadGrid uploads={uploads} />
+          ) : (
+            <div className="home__spinner">
+              <Spinner height={"4.5rem"} />
+            </div>
+          )}
         </div>
       </div>
     </div>

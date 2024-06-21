@@ -16,7 +16,11 @@ const FormButtons: React.FC<Props> = ({
   return (
     <div className="form__buttons">
       <button className="btn btn-primary form__button" type="submit">
-        {isInternalSubmitSpinnerVisible ? <Spinner /> : action}
+        {isInternalSubmitSpinnerVisible ? (
+          <Spinner height={"75%"} colour={"var(--background)"} />
+        ) : (
+          action
+        )}
       </button>
       <div className="form__divider">
         <div className="divider-line"></div>
