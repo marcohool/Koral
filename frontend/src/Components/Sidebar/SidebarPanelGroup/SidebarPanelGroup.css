@@ -1,0 +1,10 @@
+.sidebar__panel__group__title {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.sidebar__panel__group__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
