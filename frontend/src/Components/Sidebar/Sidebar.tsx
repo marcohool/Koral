@@ -15,14 +15,30 @@ const Sidebar: FC<SidebarProps> = () => {
       <div className="sidebar__title">Koral</div>
       <div className="sidebar__content">
         <SidebarPanelGroup>
-          <SidebarPanelItem title="Home" icon={GoHome} />
-          <SidebarPanelItem title="Uploads" icon={GoFileMedia} />
-          <SidebarPanelItem title="Favourites" icon={GoStar} />
+          <SidebarPanelItem title="Home" icon={GoHome} linkTo={"/"} />
+          <SidebarPanelItem
+            title="Uploads"
+            icon={GoFileMedia}
+            linkTo={"/uploads"}
+          />
+          <SidebarPanelItem
+            title="Favourites"
+            icon={GoStar}
+            linkTo="/favourites"
+          />
         </SidebarPanelGroup>
         <SidebarPanelGroup title="Collections">
-          <SidebarPanelItem title="Saved" icon={GoHome} />
-          <SidebarPanelItem title="Uploads" icon={GoFileMedia} />
-          <SidebarPanelItem title="Collection" icon={GoFileMedia} />
+          <SidebarPanelItem title="Saved" icon={GoHome} linkTo={"/saved"} />
+          <SidebarPanelItem
+            title="Uploads"
+            icon={GoFileMedia}
+            linkTo={"/uploads"}
+          />
+          <SidebarPanelItem
+            title="Collection"
+            icon={GoFileMedia}
+            linkTo={"/collection"}
+          />
         </SidebarPanelGroup>
       </div>
       <footer className="sidebar__end">
