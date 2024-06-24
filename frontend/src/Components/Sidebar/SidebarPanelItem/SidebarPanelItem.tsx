@@ -19,15 +19,16 @@ const SidebarPanelItem: FC<SidebarPanelItemProps> = ({
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location.pathname, linkTo);
     if (location.pathname === linkTo) {
       setActive(true);
+    } else {
+      setActive(false);
     }
   }, [linkTo, location.pathname]);
 
   return (
     <Link to={linkTo}>
-      <div className={`sidebar__panel__item ${active && "active"}`}>
+      <div className={`sidebar__panel__item ${active ? "active" : ""}`}>
         <div className="sidebar__panel__item__icon">
           {Icon && <Icon size={20} />}
         </div>
