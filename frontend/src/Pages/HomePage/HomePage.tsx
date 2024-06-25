@@ -3,7 +3,7 @@ import Navbar from "../../Components/Navbar/Navbar.tsx";
 import "./HomePage.css";
 import UploadTypeSelect from "../../Components/RecentUploads/UploadTypeSelect/UploadTypeSelect.tsx";
 import { Upload, UploadType } from "../../Components/RecentUploads/types.ts";
-import UploadGrid from "../../Components/RecentUploads/UploadGrid/UploadGrid.tsx";
+import UploadGrid from "../../Components/UploadsDashboard/UploadGrid/UploadGrid.tsx";
 import { uploadsGET } from "../../Services/UploadService.ts";
 import Spinner from "../../Components/Spinner/Spinner.tsx";
 

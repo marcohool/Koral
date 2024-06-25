@@ -1,7 +1,7 @@
 import React from "react";
-import { Upload } from "../types.ts";
-import UploadCard from "../../UploadCard/UploadCard.tsx";
+import UploadCard from "../../Uploads/UploadCard/UploadCard.tsx";
 import "./UploadGrid.css";
+import { Upload } from "../../Uploads/UploadsType.ts";
 
 interface Props {
   uploads: Upload[];
