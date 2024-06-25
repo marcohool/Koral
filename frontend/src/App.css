@@ -259,7 +259,6 @@ input {
   padding: 1rem 1rem;
   background-color: var(--background);
   box-sizing: border-box;
-  height: 3.5rem;
 }
 
 input.form__input-error-state {
