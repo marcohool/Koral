@@ -1,6 +1,6 @@
 import React from "react";
-import { Upload } from "../RecentUploads/types.ts";
 import "./UploadCard.css";
+import { Upload } from "../UploadsType.ts";
 
 const API_URL = "https://localhost:5001/";
 

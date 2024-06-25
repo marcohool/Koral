@@ -1,6 +1,6 @@
 import { handleError } from "./ErrorHandler.ts";
 import axios from "axios";
-import { Upload } from "../Components/RecentUploads/types.ts";
+import { Upload } from "../Components/Uploads/UploadsType.ts";
 
 const API_URL = "https://localhost:5001";
 

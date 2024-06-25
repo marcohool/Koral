@@ -1,8 +1,8 @@
 .upload__card {
   display: flex;
   flex-direction: column;
-  max-width: 500px;
-  height: 500px;
+  aspect-ratio: 6 / 5;
+  height: 100%;
   background-color: var(--white);
   border-radius: 0.6rem;
   overflow: hidden;
