@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Core.API.Models.Enums;
 
 namespace Core.API.Dto.ImageUpload;
 
@@ -20,4 +20,29 @@ public class ImageUploadResponse(Models.ImageUpload imageUpload)
     /// Gets or sets the image path.
     /// </summary>
     public string ImagePath { get; set; } = imageUpload.ImagePath;
+
+    /// <summary>
+    /// Gets or sets the date the image was uploaded.
+    /// </summary>
+    public DateTime CreatedAt { get; set; } = imageUpload.CreatedAt;
+
+    /// <summary>
+    /// The image upload status
+    /// </summary>
+    public ImageUploadStatus Status { get; set; } = imageUpload.Status;
+
+    /// <summary>
+    /// Whether the image upload is favourited
+    /// </summary>
+    public bool IsFavourited { get; set; } = imageUpload.IsFavourited;
+
+    /// <summary>
+    /// Whether the image upload is pinned
+    /// </summary>
+    public bool IsPinned { get; set; } = imageUpload.IsPinned;
+
+    /// <summary>
+    /// Gets or sets the number of clohting items matched for the upload.
+    /// </summary>
+    public int ClothingItemsMatched { get; set; } = imageUpload.ClothingItemsMatched;
 }

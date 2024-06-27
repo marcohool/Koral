@@ -2,6 +2,7 @@
 using Core.API.Configuration;
 using Core.API.Dto.ImageUpload;
 using Core.API.Models;
+using Core.API.Models.Enums;
 using Core.API.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -54,7 +55,6 @@ public class ImageUploadService(
 
         (string fileName, string filePath, long fileSize) = await this.CreateImage(imageFile);
 
-#pragma warning disable S2737 // "catch" clauses should do more than rethrow
         try
         {
             ImageUpload upload = await this.imageUploadRepository.CreateImageUpload(
@@ -65,8 +65,6 @@ public class ImageUploadService(
                     ImagePath = filePath,
                     ImageSize = fileSize,
                     ContentType = imageFile.ContentType,
-                    UploadedAt = DateTime.UtcNow,
-                    Status = "Uploaded",
                     AppUser = user
                 }
             );
@@ -78,7 +76,6 @@ public class ImageUploadService(
             // To-do: Delete the uploaded image file if the database operation
             throw;
         }
-#pragma warning restore S2737 // "catch" clauses should do more than rethrow
     }
 
     private (bool isValid, string? errorMessage) ValidateImageFile(IFormFile imageFile)

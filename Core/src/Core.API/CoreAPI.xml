@@ -374,6 +374,31 @@
             Gets or sets the image path.
             </summary>
         </member>
+        <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.CreatedAt">
+            <summary>
+            Gets or sets the date the image was uploaded.
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.Status">
+            <summary>
+            The image upload status
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.IsFavourited">
+            <summary>
+            Whether the image upload is favourited
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.IsPinned">
+            <summary>
+            Whether the image upload is pinned
+            </summary>
+        </member>
+        <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.ClothingItemsMatched">
+            <summary>
+            Gets or sets the number of clohting items matched for the upload.
+            </summary>
+        </member>
         <member name="T:Core.API.Migrations.Init">
             <inheritdoc />
         </member>
@@ -420,6 +445,18 @@
             <inheritdoc />
         </member>
         <member name="M:Core.API.Migrations.CreateImageUpload.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Core.API.Migrations.ExpandImageUpload">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.ExpandImageUpload.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.ExpandImageUpload.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.ExpandImageUpload.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:Core.API.Models.ApplicationDBContext">
@@ -521,6 +558,26 @@
             The date the clothing item was last crawled.
             </summary>
         </member>
+        <member name="T:Core.API.Models.Enums.ImageUploadStatus">
+            <summary>
+            The <see cref="T:Core.API.Models.Enums.ImageUploadStatus"/> enum.
+            </summary>
+        </member>
+        <member name="F:Core.API.Models.Enums.ImageUploadStatus.Processing">
+            <summary>
+            Image upload status: Processing
+            </summary>
+        </member>
+        <member name="F:Core.API.Models.Enums.ImageUploadStatus.Procesed">
+            <summary>
+            Image upload status: Processed
+            </summary>
+        </member>
+        <member name="F:Core.API.Models.Enums.ImageUploadStatus.Failed">
+            <summary>
+             Image upload status: Failed
+             </summary>
+        </member>
         <member name="T:Core.API.Models.ImageUpload">
             <summary>
             The <see cref="T:Core.API.Models.ImageUpload"/> class.
@@ -528,47 +585,67 @@
         </member>
         <member name="P:Core.API.Models.ImageUpload.ImageUploadId">
             <summary>
-            Image upload id
+            THe image upload id
             </summary>
         </member>
         <member name="P:Core.API.Models.ImageUpload.AppUserId">
             <summary>
-            App user id
+            The app user id
             </summary>
         </member>
         <member name="P:Core.API.Models.ImageUpload.ImageName">
             <summary>
-            Image file name
+            The mage file name
             </summary>
         </member>
         <member name="P:Core.API.Models.ImageUpload.ImagePath">
             <summary>
-            Image file path
+            The image file path
             </summary>
         </member>
         <member name="P:Core.API.Models.ImageUpload.ImageSize">
             <summary>
-            Image file size
+            The image file size
             </summary>
         </member>
         <member name="P:Core.API.Models.ImageUpload.ContentType">
             <summary>
-            Image file content type
+            The image file content type
             </summary>
         </member>
-        <member name="P:Core.API.Models.ImageUpload.UploadedAt">
+        <member name="P:Core.API.Models.ImageUpload.CreatedAt">
             <summary>
-            Time image was uploaded
+            THe time the image was uploaded
             </summary>
         </member>
         <member name="P:Core.API.Models.ImageUpload.Status">
             <summary>
-            Image upload status
+            The image upload status
             </summary>
         </member>
         <member name="P:Core.API.Models.ImageUpload.AppUser">
             <summary>
             The app user associated with the image upload
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.IsFavourited">
+            <summary>
+            Whether the image upload is favourited
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.IsPinned">
+            <summary>
+            Whether the image upload is pinned
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.ClothingItemsMatched">
+            <summary>
+            The number of clothing items matched for the upload
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.IsDeleted">
+            <summary>
+            Whether the image upload is deleted
             </summary>
         </member>
         <member name="T:Core.API.Repository.ClothingItemRepository">

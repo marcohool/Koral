@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Core.API.Models.Enums;
 
 namespace Core.API.Models;
 
@@ -8,48 +9,68 @@ namespace Core.API.Models;
 public class ImageUpload
 {
     /// <summary>
-    /// Image upload id
+    /// THe image upload id
     /// </summary>
     public int ImageUploadId { get; set; }
 
     /// <summary>
-    /// App user id
+    /// The app user id
     /// </summary>
     [ForeignKey("AppUser")]
     public required string AppUserId { get; set; }
 
     /// <summary>
-    /// Image file name
+    /// The mage file name
     /// </summary>
     public required string ImageName { get; set; }
 
     /// <summary>
-    /// Image file path
+    /// The image file path
     /// </summary>
     public required string ImagePath { get; set; }
 
     /// <summary>
-    /// Image file size
+    /// The image file size
     /// </summary>
     public required long ImageSize { get; set; }
 
     /// <summary>
-    /// Image file content type
+    /// The image file content type
     /// </summary>
     public required string ContentType { get; set; }
 
     /// <summary>
-    /// Time image was uploaded
+    /// THe time the image was uploaded
     /// </summary>
-    public required DateTime UploadedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     /// <summary>
-    /// Image upload status
+    /// The image upload status
     /// </summary>
-    public required string Status { get; set; }
+    public ImageUploadStatus Status { get; set; } = ImageUploadStatus.Processing;
 
     /// <summary>
     /// The app user associated with the image upload
     /// </summary>
     public required AppUser AppUser { get; set; }
+
+    /// <summary>
+    /// Whether the image upload is favourited
+    /// </summary>
+    public bool IsFavourited { get; set; } = false;
+
+    /// <summary>
+    /// Whether the image upload is pinned
+    /// </summary>
+    public bool IsPinned { get; set; } = false;
+
+    /// <summary>
+    /// The number of clothing items matched for the upload
+    /// </summary>
+    public int ClothingItemsMatched { get; set; } = 0;
+
+    /// <summary>
+    /// Whether the image upload is deleted
+    /// </summary>
+    public bool IsDeleted { get; set; } = false;
 }
