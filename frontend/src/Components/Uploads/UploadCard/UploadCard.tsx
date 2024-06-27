@@ -16,6 +16,11 @@ const UploadCard: React.FC<Props> = ({ upload }) => {
       </div>
       <div className="upload__card-titles">
         <h3>Placeholder Image Title Value</h3>
+        {upload.createdAt}
+        {upload.status}
+        {upload.isFavourited}
+        {upload.isPinned}
+        {upload.clothingItemsMatched}
       </div>
     </div>
   );
