@@ -1,4 +1,5 @@
 ﻿using Core.API.Models;
+using Core.API.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -133,8 +134,7 @@ public class ApplicationDBContextHelper
                 ImageName = "1.jpg",
                 ImageSize = 1024,
                 ContentType = "image/jpeg",
-                UploadedAt = DateTime.Now,
-                Status = "Uploaded",
+                Status = ImageUploadStatus.Processing,
                 AppUserId = "1",
                 AppUser = user1,
             },
@@ -144,8 +144,7 @@ public class ApplicationDBContextHelper
                 ImageName = "2.jpg",
                 ImageSize = 1024,
                 ContentType = "image/jpeg",
-                UploadedAt = DateTime.Now,
-                Status = "Uploaded",
+                Status = ImageUploadStatus.Processing,
                 AppUserId = "2",
                 AppUser = user2,
             },
