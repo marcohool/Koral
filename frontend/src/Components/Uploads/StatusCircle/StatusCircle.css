@@ -1,0 +1,18 @@
+.status-circle {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.status-circle.processing {
+  background-color: #ffcc00; /* Yellow for Processing */
+}
+
+.status-circle.processed {
+  background-color: #4caf50; /* Green for Processed */
+}
+
+.status-circle.failed {
+  background-color: #f44336; /* Red for Failed */
+}

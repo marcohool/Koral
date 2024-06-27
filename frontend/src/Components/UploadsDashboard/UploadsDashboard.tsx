@@ -11,7 +11,7 @@ const UploadsDashboard: FC<UploadsDashboardProps> = ({ uploads }) => {
   return (
     <div className="uploads-dashboard">
       <div className="uploads-dashboard__titles">
-        <h3 className="uploads-dashboard__titles-title">Uploads</h3>
+        <h3 className="uploads-dashboard__titles-title">All Uploads</h3>
       </div>
       <div className="uploads-dashboard__grid">
         {uploads?.map((upload) => (
