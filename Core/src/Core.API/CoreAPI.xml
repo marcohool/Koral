@@ -399,6 +399,11 @@
             Whether the image upload is pinned
             </summary>
         </member>
+        <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.AccuracyRating">
+            <summary>
+            Gets or sets the accuracy rating for the upload.
+            </summary>
+        </member>
         <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.ClothingItemsMatched">
             <summary>
             Gets or sets the number of clohting items matched for the upload.
@@ -474,6 +479,18 @@
             <inheritdoc />
         </member>
         <member name="M:Core.API.Migrations.AddImageTitle.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Core.API.Migrations.AddImageUploadAccuracyRating">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.AddImageUploadAccuracyRating.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.AddImageUploadAccuracyRating.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.AddImageUploadAccuracyRating.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:Core.API.Models.ApplicationDBContext">
@@ -658,6 +675,11 @@
         <member name="P:Core.API.Models.ImageUpload.IsPinned">
             <summary>
             Whether the image upload is pinned
+            </summary>
+        </member>
+        <member name="P:Core.API.Models.ImageUpload.AccuracyRating">
+            <summary>
+            The matching accuracy rating of the image upload
             </summary>
         </member>
         <member name="P:Core.API.Models.ImageUpload.ClothingItemsMatched">

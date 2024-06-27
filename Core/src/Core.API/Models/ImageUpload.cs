@@ -70,6 +70,11 @@ public class ImageUpload
     public bool IsPinned { get; set; } = false;
 
     /// <summary>
+    /// The matching accuracy rating of the image upload
+    /// </summary>
+    public int? AccuracyRating { get; set; }
+
+    /// <summary>
     /// The number of clothing items matched for the upload
     /// </summary>
     public int ClothingItemsMatched { get; set; } = 0;

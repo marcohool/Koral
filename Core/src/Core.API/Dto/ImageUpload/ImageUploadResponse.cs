@@ -47,6 +47,11 @@ public class ImageUploadResponse(Models.ImageUpload imageUpload)
     public bool IsPinned { get; set; } = imageUpload.IsPinned;
 
     /// <summary>
+    /// Gets or sets the accuracy rating for the upload.
+    /// </summary>
+    public int? AccuracyRating { get; set; } = imageUpload.AccuracyRating;
+
+    /// <summary>
     /// Gets or sets the number of clohting items matched for the upload.
     /// </summary>
     public int ClothingItemsMatched { get; set; } = imageUpload.ClothingItemsMatched;
