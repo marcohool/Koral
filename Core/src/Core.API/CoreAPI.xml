@@ -369,6 +369,11 @@
             Gets or sets the image ID.
             </summary>
         </member>
+        <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.ImageTitle">
+            <summary>
+            Gets or sets the image title.
+            </summary>
+        </member>
         <member name="P:Core.API.Dto.ImageUpload.ImageUploadResponse.ImagePath">
             <summary>
             Gets or sets the image path.
@@ -457,6 +462,18 @@
             <inheritdoc />
         </member>
         <member name="M:Core.API.Migrations.ExpandImageUpload.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Core.API.Migrations.AddImageTitle">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.AddImageTitle.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.AddImageTitle.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Core.API.Migrations.AddImageTitle.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:Core.API.Models.ApplicationDBContext">
@@ -593,9 +610,14 @@
             The app user id
             </summary>
         </member>
+        <member name="P:Core.API.Models.ImageUpload.ImageTitle">
+            <summary>
+            The image title
+            </summary>
+        </member>
         <member name="P:Core.API.Models.ImageUpload.ImageName">
             <summary>
-            The mage file name
+            The image file name
             </summary>
         </member>
         <member name="P:Core.API.Models.ImageUpload.ImagePath">

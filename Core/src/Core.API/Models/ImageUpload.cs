@@ -20,7 +20,12 @@ public class ImageUpload
     public required string AppUserId { get; set; }
 
     /// <summary>
-    /// The mage file name
+    /// The image title
+    /// </summary>
+    public string ImageTitle { get; set; } = string.Empty;
+
+    /// <summary>
+    /// The image file name
     /// </summary>
     public required string ImageName { get; set; }
 

@@ -17,6 +17,11 @@ public class ImageUploadResponse(Models.ImageUpload imageUpload)
     public int ImageId { get; set; } = imageUpload.ImageUploadId;
 
     /// <summary>
+    /// Gets or sets the image title.
+    /// </summary>
+    public string ImageTitle { get; set; } = imageUpload.ImageTitle;
+
+    /// <summary>
     /// Gets or sets the image path.
     /// </summary>
     public string ImagePath { get; set; } = imageUpload.ImagePath;
