@@ -1,0 +1,17 @@
+.high {
+  color: var(--success-primary);
+}
+
+.medium {
+  color: var(--processing-primary);
+}
+
+.low {
+  color: var(--error-primary);
+}
+
+.upload-rating {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}

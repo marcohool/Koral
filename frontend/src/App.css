@@ -11,6 +11,9 @@
   --error-primary: #e12a02;
   --error-background: #fce9e5;
   --error-border: #cb5c4c;
+
+  --processing-primary: #dfac39;
+  --success-primary: #2e7d32;
 }
 
 :root,
@@ -244,7 +247,6 @@ h3 {
 
 p {
   margin: 0;
-  color: var(--black);
 }
 
 input {
