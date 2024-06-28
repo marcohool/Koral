@@ -4,9 +4,11 @@
 }
 
 .uploads-dashboard__titles-title {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 400;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.3rem;
+  border-bottom: #8b8d98 1px solid;
 }
 
 .uploads-dashboard__grid {

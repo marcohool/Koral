@@ -80,6 +80,26 @@ public class ImageUploadService(
         }
     }
 
+    /// <inheritdoc/>
+
+    public async Task FavouriteImageUploadAsync(int id)
+    {
+        AppUser user =
+            await this.GetCurrentUserAsync()
+            ?? throw new UnauthorizedAccessException("Current user not found.");
+
+        ImageUpload? imageUpload =
+            await this.imageUploadRepository.GetImageUpload(id, user.Id)
+            ?? throw new KeyNotFoundException("Image not found.");
+
+        if (imageUpload.AppUserId != user.Id)
+            throw new UnauthorizedAccessException("User not authorized to favourite this image.");
+
+        imageUpload.IsFavourited = !imageUpload.IsFavourited;
+
+        await this.imageUploadRepository.UpdateImageUpload(imageUpload);
+    }
+
     private (bool isValid, string? errorMessage) ValidateImageFile(IFormFile imageFile)
     {
         if (imageFile is null || imageFile.Length == 0)

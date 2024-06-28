@@ -143,6 +143,13 @@
             <param name="imageUpload"></param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
         </member>
+        <member name="M:Core.API.Controllers.ImageUploadController.FavouriteImageUpload(System.Int32)">
+            <summary>
+            Favourites an image upload.
+            </summary>
+            <param name="id">The id of the image to favourite</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
+        </member>
         <member name="T:Core.API.Dto.Account.AuthResponse">
             <summary>
             The <see cref="T:Core.API.Dto.Account.AuthResponse"/> class.
@@ -772,14 +779,29 @@
             Gets a list of all of a user's image uploads.
             </summary>
             <param name="userId">Id of the logged in user.</param>
-            <returns></returns>
+            <returns>A list of <see cref="T:Core.API.Models.ImageUpload"/>.</returns>
+        </member>
+        <member name="M:Core.API.Repository.IImageUploadRepository.GetImageUpload(System.Int32,System.String)">
+            <summary>
+            Gets a single image upload.
+            </summary>
+            <param name="id">The id of the image upload.</param>
+            <param name="appUserId">The if of the app user.</param>
+            <returns>Instance of <see cref="T:Core.API.Models.ImageUpload"/>.</returns>
         </member>
         <member name="M:Core.API.Repository.IImageUploadRepository.CreateImageUpload(Core.API.Models.ImageUpload)">
             <summary>
             Creates a new image upload.
             </summary>
             <param name="imageUpload">Instance of <see cref="T:Core.API.Models.ImageUpload"/>.</param>
-            <returns></returns>
+            <returns>Instance of <see cref="T:Core.API.Models.ImageUpload"/>.</returns>
+        </member>
+        <member name="M:Core.API.Repository.IImageUploadRepository.UpdateImageUpload(Core.API.Models.ImageUpload)">
+            <summary>
+            Updates an image upload.
+            </summary>
+            <param name="imageUpload"></param>
+            <returns>Instance of <see cref="T:Core.API.Models.ImageUpload"/>.</returns>
         </member>
         <member name="T:Core.API.Repository.ImageUploadRepository">
             <inheritdoc/>
@@ -790,7 +812,13 @@
         <member name="M:Core.API.Repository.ImageUploadRepository.GetImageUploads(System.String)">
             <inheritdoc/>
         </member>
+        <member name="M:Core.API.Repository.ImageUploadRepository.GetImageUpload(System.Int32,System.String)">
+            <inheritdoc/>
+        </member>
         <member name="M:Core.API.Repository.ImageUploadRepository.CreateImageUpload(Core.API.Models.ImageUpload)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Core.API.Repository.ImageUploadRepository.UpdateImageUpload(Core.API.Models.ImageUpload)">
             <inheritdoc/>
         </member>
         <member name="T:Core.API.Services.AccountService">
@@ -928,6 +956,13 @@
             <param name="imageUpload">Instance of <see cref="T:Core.API.Dto.ImageUpload.ImageUploadRequest"/>.</param>
             <returns>Instance of <see cref="T:Core.API.Dto.ImageUpload.ImageUploadResponse"/>.</returns>
         </member>
+        <member name="M:Core.API.Services.IImageUploadService.FavouriteImageUploadAsync(System.Int32)">
+            <summary>
+            Favourites an image upload.
+            </summary>
+            <param name="id">The id of the image upload</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
         <member name="T:Core.API.Services.ImageUploadService">
             <inheritdoc/>
         </member>
@@ -938,6 +973,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Core.API.Services.ImageUploadService.UploadImageAsync(Core.API.Dto.ImageUpload.ImageUploadRequest)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Core.API.Services.ImageUploadService.FavouriteImageUploadAsync(System.Int32)">
             <inheritdoc/>
         </member>
         <member name="T:Program">
