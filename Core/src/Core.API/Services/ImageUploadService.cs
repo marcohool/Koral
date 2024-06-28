@@ -37,7 +37,9 @@ public class ImageUploadService(
 
         List<ImageUpload> imageUploads = await this.imageUploadRepository.GetImageUploads(user.Id);
 
-        return imageUploads.Select(upload => new ImageUploadResponse(upload)).ToList();
+        return imageUploads
+            .Select(upload => new ImageUploadResponse(upload))
+            .OrderByDescending(x => x.CreatedAt);
     }
 
     /// <inheritdoc/>
