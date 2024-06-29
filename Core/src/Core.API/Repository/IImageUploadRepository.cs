@@ -11,13 +11,27 @@ public interface IImageUploadRepository
     /// Gets a list of all of a user's image uploads.
     /// </summary>
     /// <param name="userId">Id of the logged in user.</param>
-    /// <returns></returns>
+    /// <returns>A list of <see cref="ImageUpload"/>.</returns>
     Task<List<ImageUpload>> GetImageUploads(string userId);
+
+    /// <summary>
+    /// Gets a single image upload.
+    /// </summary>
+    /// <param name="id">The id of the image upload.</param>
+    /// <returns>Instance of <see cref="ImageUpload"/>.</returns>
+    Task<ImageUpload?> GetImageUpload(int id);
 
     /// <summary>
     /// Creates a new image upload.
     /// </summary>
     /// <param name="imageUpload">Instance of <see cref="ImageUpload"/>.</param>
-    /// <returns></returns>
+    /// <returns>Instance of <see cref="ImageUpload"/>.</returns>
     Task<ImageUpload> CreateImageUpload(ImageUpload imageUpload);
+
+    /// <summary>
+    /// Updates an image upload.
+    /// </summary>
+    /// <param name="imageUpload"></param>
+    /// <returns>Instance of <see cref="ImageUpload"/>.</returns>
+    Task<ImageUpload> UpdateImageUpload(ImageUpload imageUpload);
 }

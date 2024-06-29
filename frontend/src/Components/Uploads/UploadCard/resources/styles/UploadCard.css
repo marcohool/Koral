@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  aspect-ratio: 10 / 9;
+  aspect-ratio: 1 / 1;
   height: 100%;
   overflow: hidden;
   cursor: pointer;

@@ -10,6 +10,7 @@ namespace Core.API.Controllers;
 /// </summary>
 /// <param name="imageUploadService"></param>
 [Route("[controller]")]
+[Authorize]
 [ApiController]
 public class ImageUploadController(IImageUploadService imageUploadService) : ControllerBase
 {
@@ -20,7 +21,6 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
     /// </summary>
     /// <returns>A list of <see cref="ImageUploadResponse"/> objects.</returns>
     [HttpGet]
-    [Authorize]
     public async Task<ActionResult<IEnumerable<ImageUploadResponse>>> GetImageUploads()
     {
         return this.Ok(await this.imageUploadService.GetImageUploadsAsync());
@@ -32,7 +32,6 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
     /// <param name="imageUpload"></param>
     /// <returns>A <see cref="Task"/> representing the operation.</returns>
     [HttpPost]
-    [Authorize]
     public async Task<IActionResult> UploadImage([FromForm] ImageUploadRequest imageUpload)
     {
         try
@@ -57,6 +56,31 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
     [Route("{id:int}")]
     public async Task<IActionResult> GetImageUpload(int id)
     {
+        return this.Ok();
+    }
+
+    /// <summary>
+    /// Favourites an image upload.
+    /// </summary>
+    /// <param name="id">The id of the image to favourite</param>
+    /// <returns>A <see cref="Task"/> representing the operation.</returns>
+    [HttpPut]
+    [Route("favourite/{id:int}")]
+    public async Task<IActionResult> FavouriteImageUpload(int id)
+    {
+        try
+        {
+            await this.imageUploadService.FavouriteImageUploadAsync(id);
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return this.NotFound(ex.Message);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return this.Unauthorized(ex.Message);
+        }
+
         return this.Ok();
     }
 }

@@ -19,4 +19,11 @@ public interface IImageUploadService
     /// <param name="imageUpload">Instance of <see cref="ImageUploadRequest"/>.</param>
     /// <returns>Instance of <see cref="ImageUploadResponse"/>.</returns>
     Task<ImageUploadResponse> UploadImageAsync(ImageUploadRequest imageUpload);
+
+    /// <summary>
+    /// Favourites an image upload.
+    /// </summary>
+    /// <param name="id">The id of the image upload</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    Task FavouriteImageUploadAsync(int id);
 }
