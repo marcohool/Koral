@@ -18,9 +18,8 @@ public interface IImageUploadRepository
     /// Gets a single image upload.
     /// </summary>
     /// <param name="id">The id of the image upload.</param>
-    /// <param name="appUserId">The if of the app user.</param>
     /// <returns>Instance of <see cref="ImageUpload"/>.</returns>
-    Task<ImageUpload?> GetImageUpload(int id, string appUserId);
+    Task<ImageUpload?> GetImageUpload(int id);
 
     /// <summary>
     /// Creates a new image upload.

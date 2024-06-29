@@ -76,6 +76,10 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
         {
             return this.NotFound(ex.Message);
         }
+        catch (UnauthorizedAccessException ex)
+        {
+            return this.Unauthorized(ex.Message);
+        }
 
         return this.Ok();
     }

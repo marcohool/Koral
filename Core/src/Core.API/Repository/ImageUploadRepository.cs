@@ -15,11 +15,9 @@ public class ImageUploadRepository(ApplicationDBContext context) : IImageUploadR
     }
 
     /// <inheritdoc/>
-    public async Task<ImageUpload?> GetImageUpload(int id, string appUserId)
+    public async Task<ImageUpload?> GetImageUpload(int id)
     {
-        return await this.context.ImageUploads.FirstOrDefaultAsync(i =>
-            i.ImageUploadId == id && i.AppUserId == appUserId
-        );
+        return await this.context.ImageUploads.FirstOrDefaultAsync(i => i.ImageUploadId == id);
     }
 
     /// <inheritdoc/>

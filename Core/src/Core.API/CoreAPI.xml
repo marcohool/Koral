@@ -781,12 +781,11 @@
             <param name="userId">Id of the logged in user.</param>
             <returns>A list of <see cref="T:Core.API.Models.ImageUpload"/>.</returns>
         </member>
-        <member name="M:Core.API.Repository.IImageUploadRepository.GetImageUpload(System.Int32,System.String)">
+        <member name="M:Core.API.Repository.IImageUploadRepository.GetImageUpload(System.Int32)">
             <summary>
             Gets a single image upload.
             </summary>
             <param name="id">The id of the image upload.</param>
-            <param name="appUserId">The if of the app user.</param>
             <returns>Instance of <see cref="T:Core.API.Models.ImageUpload"/>.</returns>
         </member>
         <member name="M:Core.API.Repository.IImageUploadRepository.CreateImageUpload(Core.API.Models.ImageUpload)">
@@ -812,7 +811,7 @@
         <member name="M:Core.API.Repository.ImageUploadRepository.GetImageUploads(System.String)">
             <inheritdoc/>
         </member>
-        <member name="M:Core.API.Repository.ImageUploadRepository.GetImageUpload(System.Int32,System.String)">
+        <member name="M:Core.API.Repository.ImageUploadRepository.GetImageUpload(System.Int32)">
             <inheritdoc/>
         </member>
         <member name="M:Core.API.Repository.ImageUploadRepository.CreateImageUpload(Core.API.Models.ImageUpload)">

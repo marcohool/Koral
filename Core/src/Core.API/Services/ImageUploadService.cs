@@ -89,7 +89,7 @@ public class ImageUploadService(
             ?? throw new UnauthorizedAccessException("Current user not found.");
 
         ImageUpload? imageUpload =
-            await this.imageUploadRepository.GetImageUpload(id, user.Id)
+            await this.imageUploadRepository.GetImageUpload(id)
             ?? throw new KeyNotFoundException("Image not found.");
 
         if (imageUpload.AppUserId != user.Id)

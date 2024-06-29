@@ -42,6 +42,6 @@ public class ImageUploadController(IntegrationTestWebApplicationFactory factory)
         HttpResponseMessage response = await client.PutAsync("/imageupload/favourite/2", null);
 
         // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 }
