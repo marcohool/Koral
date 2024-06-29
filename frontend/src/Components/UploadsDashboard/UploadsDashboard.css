@@ -16,3 +16,10 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
+
+.uploads-dashboard__spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20vh;
+}
