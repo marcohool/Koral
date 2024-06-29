@@ -64,7 +64,7 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
     /// </summary>
     /// <param name="id">The id of the image to favourite</param>
     /// <returns>A <see cref="Task"/> representing the operation.</returns>
-    [HttpPost]
+    [HttpPut]
     [Route("favourite/{id:int}")]
     public async Task<IActionResult> FavouriteImageUpload(int id)
     {

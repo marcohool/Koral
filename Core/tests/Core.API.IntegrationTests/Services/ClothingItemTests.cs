@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using Core.API.Models;
 using FluentAssertions;
 using Newtonsoft.Json;
 
-namespace Core.API.IntegrationTests.Controllers;
+namespace Core.API.IntegrationTests.Services;
 
 public class ClothingItemTests(IntegrationTestWebApplicationFactory factory)
     : BaseIntegrationTest(factory)

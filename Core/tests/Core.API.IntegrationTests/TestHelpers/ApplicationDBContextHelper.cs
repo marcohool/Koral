@@ -10,10 +10,10 @@ public class ApplicationDBContextHelper
 {
     public void InitialiseDbForTests(ApplicationDBContext context)
     {
-        InsertWithIdentity(context, CreateClothingItems(), "ClothingItems");
         Insert(context, CreateAppUsers());
         Insert(context, CreateRoles());
-        Insert(context, CreateImageUploads(context));
+        InsertWithIdentity(context, CreateClothingItems(), "ClothingItems");
+        InsertWithIdentity(context, CreateImageUploads(context), "ImageUploads");
     }
 
     private static void InsertWithIdentity<T>(
@@ -130,6 +130,7 @@ public class ApplicationDBContextHelper
         [
             new ImageUpload
             {
+                ImageUploadId = 1,
                 ImagePath = "/app/wwwroot/uploads/1.jpg",
                 ImageName = "1.jpg",
                 ImageSize = 1024,
@@ -140,6 +141,7 @@ public class ApplicationDBContextHelper
             },
             new ImageUpload
             {
+                ImageUploadId = 2,
                 ImagePath = "/app/wwwroot/uploads/2.jpg",
                 ImageName = "2.jpg",
                 ImageSize = 1024,
