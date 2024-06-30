@@ -150,6 +150,12 @@
             <param name="id">The id of the image to favourite</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the operation.</returns>
         </member>
+        <member name="M:Core.API.Controllers.ImageUploadController.GetFavouriteImageUploads">
+            <summary>
+            Gets a list of all favourite image uploads.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Core.API.Dto.Account.AuthResponse">
             <summary>
             The <see cref="T:Core.API.Dto.Account.AuthResponse"/> class.
@@ -962,6 +968,12 @@
             <param name="id">The id of the image upload</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
         </member>
+        <member name="M:Core.API.Services.IImageUploadService.GetFavouriteImageUploads">
+            <summary>
+            Gets all favourited image uploads.
+            </summary>
+            <returns>A list of <see cref="T:Core.API.Dto.ImageUpload.ImageUploadResponse"/> objects.</returns>
+        </member>
         <member name="T:Core.API.Services.ImageUploadService">
             <inheritdoc/>
         </member>
@@ -975,6 +987,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Core.API.Services.ImageUploadService.FavouriteImageUploadAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Core.API.Services.ImageUploadService.GetFavouriteImageUploads">
             <inheritdoc/>
         </member>
         <member name="T:Program">

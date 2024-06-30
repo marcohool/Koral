@@ -100,6 +100,21 @@ public class ImageUploadService(
         await this.imageUploadRepository.UpdateImageUpload(imageUpload);
     }
 
+    /// <inheritdoc/>
+    public async Task<IEnumerable<ImageUploadResponse>> GetFavouriteImageUploads()
+    {
+        AppUser user =
+            await this.GetCurrentUserAsync()
+            ?? throw new UnauthorizedAccessException("Current user not found.");
+
+        List<ImageUpload> imageUploads = await this.imageUploadRepository.GetImageUploads(user.Id);
+
+        return imageUploads
+            .Select(upload => new ImageUploadResponse(upload))
+            .Where(x => x.IsFavourited)
+            .OrderByDescending(x => x.CreatedAt);
+    }
+
     private (bool isValid, string? errorMessage) ValidateImageFile(IFormFile imageFile)
     {
         if (imageFile is null || imageFile.Length == 0)

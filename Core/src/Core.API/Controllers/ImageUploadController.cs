@@ -83,4 +83,15 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
 
         return this.Ok();
     }
+
+    /// <summary>
+    /// Gets a list of all favourite image uploads.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    [Route("favourites")]
+    public async Task<ActionResult<IEnumerable<ImageUploadResponse>>> GetFavouriteImageUploads()
+    {
+        return this.Ok(await this.imageUploadService.GetFavouriteImageUploads());
+    }
 }

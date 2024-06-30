@@ -26,4 +26,10 @@ public interface IImageUploadService
     /// <param name="id">The id of the image upload</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     Task FavouriteImageUploadAsync(int id);
+
+    /// <summary>
+    /// Gets all favourited image uploads.
+    /// </summary>
+    /// <returns>A list of <see cref="ImageUploadResponse"/> objects.</returns>
+    Task<IEnumerable<ImageUploadResponse>> GetFavouriteImageUploads();
 }
