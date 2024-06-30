@@ -37,36 +37,19 @@ const Sidebar: FC<SidebarProps> = () => {
 
   return isMobileDisplay ? (
     <div className="sidebar__mobile">
-      <SidebarPanelItem
-        icon={GoHome}
-        linkTo={"/"}
-        displayText={false}
-        iconSize={25}
-      />
-      <SidebarPanelItem
-        icon={GoFileMedia}
-        linkTo={"/uploads"}
-        displayText={false}
-        iconSize={25}
-      />
+      <SidebarPanelItem icon={GoHome} linkTo={"/"} iconSize={25} />
+      <SidebarPanelItem icon={GoFileMedia} linkTo={"/uploads"} iconSize={25} />
       <SidebarPanelItem
         icon={GoPlusCircle}
         linkTo={"/uploads/new"}
-        displayText={false}
         iconSize={25}
       />
       <SidebarPanelItem
         icon={GoStar}
         linkTo={"/uploads/favourites"}
-        displayText={false}
         iconSize={25}
       />
-      <SidebarPanelItem
-        icon={GoPerson}
-        linkTo={"/account"}
-        displayText={false}
-        iconSize={25}
-      />
+      <SidebarPanelItem icon={GoPerson} linkTo={"/account"} iconSize={25} />
     </div>
   ) : (
     <div className="sidebar">
@@ -83,6 +66,11 @@ const Sidebar: FC<SidebarProps> = () => {
             title="Favourites"
             icon={GoStar}
             linkTo="/uploads/favourites"
+          />
+          <SidebarPanelItem
+            title="New Upload"
+            icon={GoPlusCircle}
+            linkTo={"/uploads/new"}
           />
         </SidebarPanelGroup>
         <SidebarPanelGroup title="Collections">

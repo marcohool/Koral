@@ -8,7 +8,6 @@ interface SidebarPanelItemProps {
   icon?: IconType;
   title?: string;
   linkTo: string;
-  displayText?: boolean;
   iconSize?: number;
 }
 
@@ -16,7 +15,6 @@ const SidebarPanelItem: FC<SidebarPanelItemProps> = ({
   icon: Icon,
   title,
   linkTo,
-  displayText = true,
   iconSize = 20,
 }) => {
   const [active, setActive] = useState<boolean>(false);
@@ -36,9 +34,7 @@ const SidebarPanelItem: FC<SidebarPanelItemProps> = ({
         <div className="sidebar__panel__item__icon">
           {Icon && <Icon size={iconSize} />}
         </div>
-        {displayText && (
-          <div className="sidebar__panel__item___title">{title}</div>
-        )}
+        {title && <div className="sidebar__panel__item___title">{title}</div>}
       </div>
     </Link>
   );
