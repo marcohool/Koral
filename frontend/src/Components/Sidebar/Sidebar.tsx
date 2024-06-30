@@ -17,7 +17,7 @@ const Sidebar: FC<SidebarProps> = () => {
         <SidebarPanelGroup>
           <SidebarPanelItem title="Home" icon={GoHome} linkTo={"/"} />
           <SidebarPanelItem
-            title="AllUploads"
+            title="All Uploads"
             icon={GoFileMedia}
             linkTo={"/uploads"}
           />

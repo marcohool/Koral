@@ -20,7 +20,7 @@ const FavouriteUploads: FC<FavouriteUploadsProps> = () => {
 
   return (
     <div className="uploads-page__dashboard">
-      <Dashboard uploads={uploads} title="Favourite Uploads" />
+      <Dashboard uploads={uploads} title="Favourites" />
     </div>
   );
 };
