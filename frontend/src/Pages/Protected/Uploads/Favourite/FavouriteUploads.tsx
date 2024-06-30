@@ -1,0 +1,28 @@
+import React, { FC, useEffect } from "react";
+import { Upload } from "../../../../Components/Uploads/UploadsType.ts";
+import { getFavouriteUploadsAPI } from "../../../../Services/UploadService.ts";
+import Dashboard from "../../../../Components/Uploads/Dashboard/Dashboard.tsx";
+
+interface FavouriteUploadsProps {}
+
+const FavouriteUploads: FC<FavouriteUploadsProps> = () => {
+  const [uploads, setUploads] = React.useState<Upload[]>();
+
+  const getUploads = () => {
+    getFavouriteUploadsAPI().then((res) => {
+      res?.data && setUploads(res?.data);
+    });
+  };
+
+  useEffect(() => {
+    getUploads();
+  }, []);
+
+  return (
+    <div className="uploads-page__dashboard">
+      <Dashboard uploads={uploads} title="Favourite Uploads" />
+    </div>
+  );
+};
+
+export default FavouriteUploads;

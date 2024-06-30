@@ -24,7 +24,7 @@ const Sidebar: FC<SidebarProps> = () => {
           <SidebarPanelItem
             title="Favourites"
             icon={GoStar}
-            linkTo="/favourites"
+            linkTo="/uploads/favourites"
           />
         </SidebarPanelGroup>
         <SidebarPanelGroup title="Collections">
