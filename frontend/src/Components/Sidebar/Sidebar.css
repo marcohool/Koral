@@ -9,6 +9,7 @@
   overflow-x: hidden;
   border-right: 1px solid var(--gray-6);
   padding: 0 1rem;
+  background-color: var(--background);
 }
 
 .sidebar__title {
@@ -30,4 +31,18 @@
 .sidebar__end {
   margin-top: auto;
   padding: 1.5rem 1rem;
+}
+
+.sidebar__mobile {
+  position: fixed;
+  gap: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: space-between;
+  background-color: var(--background);
+  z-index: 10;
+  height: 3.25rem;
+  width: 100%;
+  border-top: 1px solid var(--gray-6);
 }

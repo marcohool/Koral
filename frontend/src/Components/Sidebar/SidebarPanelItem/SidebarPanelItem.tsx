@@ -6,14 +6,18 @@ import { useLocation } from "react-router-dom";
 
 interface SidebarPanelItemProps {
   icon?: IconType;
-  title: string;
+  title?: string;
   linkTo: string;
+  displayText?: boolean;
+  iconSize?: number;
 }
 
 const SidebarPanelItem: FC<SidebarPanelItemProps> = ({
   icon: Icon,
   title,
   linkTo,
+  displayText = true,
+  iconSize = 20,
 }) => {
   const [active, setActive] = useState<boolean>(false);
   const location = useLocation();
@@ -30,9 +34,11 @@ const SidebarPanelItem: FC<SidebarPanelItemProps> = ({
     <Link to={linkTo}>
       <div className={`sidebar__panel__item ${active ? "active" : ""}`}>
         <div className="sidebar__panel__item__icon">
-          {Icon && <Icon size={20} />}
+          {Icon && <Icon size={iconSize} />}
         </div>
-        <div className="sidebar__panel__item___title">{title}</div>
+        {displayText && (
+          <div className="sidebar__panel__item___title">{title}</div>
+        )}
       </div>
     </Link>
   );

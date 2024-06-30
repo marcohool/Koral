@@ -1,16 +1,74 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import "./Sidebar.css";
 import SidebarPanelGroup from "./SidebarPanelGroup/SidebarPanelGroup.tsx";
 import SidebarPanelItem from "./SidebarPanelItem/SidebarPanelItem.tsx";
-import { GoFileMedia, GoHome, GoStar } from "react-icons/go";
+import {
+  GoFileMedia,
+  GoHome,
+  GoPerson,
+  GoPlusCircle,
+  GoStar,
+} from "react-icons/go";
 import { useAuth } from "../../Context/useAuth.tsx";
 
 interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = () => {
   const { user } = useAuth();
+  const [isMobileDisplay, setMobileDisplay] = useState<boolean>(false);
 
-  return (
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 850) {
+        setMobileDisplay(true);
+      } else {
+        setMobileDisplay(false);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return isMobileDisplay ? (
+    <div className="sidebar__mobile">
+      <SidebarPanelItem
+        icon={GoHome}
+        linkTo={"/"}
+        displayText={false}
+        iconSize={25}
+      />
+      <SidebarPanelItem
+        icon={GoFileMedia}
+        linkTo={"/uploads"}
+        displayText={false}
+        iconSize={25}
+      />
+      <SidebarPanelItem
+        icon={GoPlusCircle}
+        linkTo={"/uploads/new"}
+        displayText={false}
+        iconSize={25}
+      />
+      <SidebarPanelItem
+        icon={GoStar}
+        linkTo={"/uploads/favourites"}
+        displayText={false}
+        iconSize={25}
+      />
+      <SidebarPanelItem
+        icon={GoPerson}
+        linkTo={"/account"}
+        displayText={false}
+        iconSize={25}
+      />
+    </div>
+  ) : (
     <div className="sidebar">
       <div className="sidebar__title">Koral</div>
       <div className="sidebar__content">
@@ -30,7 +88,7 @@ const Sidebar: FC<SidebarProps> = () => {
         <SidebarPanelGroup title="Collections">
           <SidebarPanelItem title="Saved" icon={GoHome} linkTo={"/saved"} />
           <SidebarPanelItem
-            title="AllUploads"
+            title="All Uploads"
             icon={GoFileMedia}
             linkTo={"/uploads"}
           />

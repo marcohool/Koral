@@ -2,3 +2,10 @@
   margin-left: 263px;
   padding: 0 1rem;
 }
+
+@media (max-width: 850px) {
+  .root__content {
+    padding: 0;
+    margin-left: 0;
+  }
+}

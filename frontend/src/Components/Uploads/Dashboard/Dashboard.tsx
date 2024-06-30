@@ -27,7 +27,6 @@ const Dashboard: FC<UploadsDashboardProps> = ({ uploads, title }) => {
             onClick={newUploadOnClick}
             type={ButtonType.tertiary}
             styleOverride={{
-              fontSize: "1.15rem",
               gap: "10px",
             }}
           >

@@ -52,7 +52,7 @@
 }
 
 .btn-tertiary {
-  background-color: var(--background);
+  background-color: transparent;
   color: var(--black);
   padding: 0;
 }
