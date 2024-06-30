@@ -1,7 +1,7 @@
 import { FC } from "react";
-import "./UploadsDashboard.css";
+import "./Dashboard.css";
 import { Upload } from "../UploadsType.ts";
-import UploadCard from "../UploadCard/UploadCard.tsx";
+import Card from "../UploadCard/Card.tsx";
 import Spinner from "../../Spinner/Spinner.tsx";
 
 interface UploadsDashboardProps {
@@ -9,7 +9,7 @@ interface UploadsDashboardProps {
   uploads?: Upload[];
 }
 
-const UploadsDashboard: FC<UploadsDashboardProps> = ({ uploads, title }) => {
+const Dashboard: FC<UploadsDashboardProps> = ({ uploads, title }) => {
   return (
     <div className="uploads-dashboard">
       <div className="uploads-dashboard__titles">
@@ -18,7 +18,7 @@ const UploadsDashboard: FC<UploadsDashboardProps> = ({ uploads, title }) => {
       {uploads ? (
         <div className="uploads-dashboard__grid">
           {uploads.map((upload) => (
-            <UploadCard key={upload.imageId} upload={upload} />
+            <Card key={upload.imageId} upload={upload} />
           ))}
         </div>
       ) : (
@@ -30,4 +30,4 @@ const UploadsDashboard: FC<UploadsDashboardProps> = ({ uploads, title }) => {
   );
 };
 
-export default UploadsDashboard;
+export default Dashboard;

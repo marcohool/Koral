@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import UploadsDashboard from "../../Components/Uploads/UploadsDashboard/UploadsDashboard.tsx";
+import Dashboard from "../../Components/Uploads/Dashboard/Dashboard.tsx";
 import "./UploadsPage.css";
 import { uploadsGET } from "../../Services/UploadService.ts";
 import { Upload } from "../../Components/Uploads/UploadsType.ts";
@@ -21,7 +21,7 @@ const UploadsPage: FC<UploadsPageProps> = () => {
 
   return (
     <div className="uploads-page__dashboard">
-      <UploadsDashboard uploads={uploads} title="All Uploads" />
+      <Dashboard uploads={uploads} title="All Uploads" />
     </div>
   );
 };

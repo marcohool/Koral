@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./resources/styles/UploadCard.css";
+import "./resources/styles/Card.css";
 import { StatusType, Upload } from "../UploadsType.ts";
 import { ParseDate } from "../helpers.ts";
 import FavouriteButton from "./FavouriteButton.tsx";
@@ -10,7 +10,7 @@ interface Props {
   upload: Upload;
 }
 
-const UploadCard: React.FC<Props> = ({ upload }) => {
+const Card: React.FC<Props> = ({ upload }) => {
   const [isFavourited, setFavourite] = useState<boolean>(upload.isFavourited);
   const error = upload.status === StatusType.Failed ? "error" : "";
 
@@ -42,4 +42,4 @@ const UploadCard: React.FC<Props> = ({ upload }) => {
   );
 };
 
-export default UploadCard;
+export default Card;
