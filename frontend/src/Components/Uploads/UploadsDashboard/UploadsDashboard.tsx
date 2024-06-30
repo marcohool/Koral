@@ -1,8 +1,8 @@
 import { FC } from "react";
 import "./UploadsDashboard.css";
-import { Upload } from "../Uploads/UploadsType";
-import UploadCard from "../Uploads/UploadCard/UploadCard.tsx";
-import Spinner from "../Spinner/Spinner.tsx";
+import { Upload } from "../UploadsType.ts";
+import UploadCard from "../UploadCard/UploadCard.tsx";
+import Spinner from "../../Spinner/Spinner.tsx";
 
 interface UploadsDashboardProps {
   uploads?: Upload[];

@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import UploadsDashboard from "../../Components/UploadsDashboard/UploadsDashboard.tsx";
+import UploadsDashboard from "../../Components/Uploads/UploadsDashboard/UploadsDashboard.tsx";
 import "./UploadsPage.css";
 import { uploadsGET } from "../../Services/UploadService.ts";
 import { Upload } from "../../Components/Uploads/UploadsType.ts";

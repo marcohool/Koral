@@ -47,10 +47,6 @@ const UploadCard: React.FC<Props> = ({ upload }) => {
           </p>
         </div>
       </div>
-      {/*{upload.createdAt}*/}
-      {/*{upload.isFavourited}*/}
-      {/*{upload.isPinned}*/}
-      {/*{upload.clothingItemsMatched}*/}
     </div>
   );
 };
