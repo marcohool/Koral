@@ -13,12 +13,6 @@ const UploadsPage: FC<UploadsPageProps> = () => {
     uploadsGET().then((res) => {
       res?.data && setUploads(res?.data);
     });
-    // setUploads([
-    //   { imageUrl: "test", imageId: "1" },
-    //   { imageUrl: "test", imageId: "1" },
-    //   { imageUrl: "test", imageId: "1" },
-    //   { imageUrl: "test", imageId: "1" },
-    // ]);
   };
 
   useEffect(() => {
@@ -27,7 +21,7 @@ const UploadsPage: FC<UploadsPageProps> = () => {
 
   return (
     <div className="uploads-page__dashboard">
-      <UploadsDashboard uploads={uploads} />
+      <UploadsDashboard uploads={uploads} title="All Uploads" />
     </div>
   );
 };

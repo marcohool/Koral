@@ -5,14 +5,15 @@ import UploadCard from "../UploadCard/UploadCard.tsx";
 import Spinner from "../../Spinner/Spinner.tsx";
 
 interface UploadsDashboardProps {
+  title: string;
   uploads?: Upload[];
 }
 
-const UploadsDashboard: FC<UploadsDashboardProps> = ({ uploads }) => {
+const UploadsDashboard: FC<UploadsDashboardProps> = ({ uploads, title }) => {
   return (
     <div className="uploads-dashboard">
       <div className="uploads-dashboard__titles">
-        <h3 className="uploads-dashboard__titles-title">All Uploads</h3>
+        <h3 className="uploads-dashboard__titles-title">{title}</h3>
       </div>
       {uploads ? (
         <div className="uploads-dashboard__grid">
