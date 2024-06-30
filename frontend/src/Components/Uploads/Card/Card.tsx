@@ -3,6 +3,8 @@ import "./resources/styles/Card.css";
 import { StatusType, Upload } from "../UploadsType.ts";
 import { ParseDate } from "../helpers.ts";
 import FavouriteButton from "./FavouriteButton.tsx";
+import { toast } from "react-toastify";
+import { favouriteUploadAPI } from "../../../Services/UploadService.ts";
 
 const API_URL = "https://localhost:5001/";
 
@@ -15,7 +17,17 @@ const Card: React.FC<Props> = ({ upload }) => {
   const error = upload.status === StatusType.Failed ? "error" : "";
 
   const handleFavourite = () => {
-    setFavourite(!isFavourited);
+    const preRequestValue = isFavourited;
+
+    setFavourite(!preRequestValue);
+
+    try {
+      favouriteUploadAPI(upload.imageId).then(() => {});
+    } catch (error) {
+      setFavourite(preRequestValue);
+      console.log(error);
+      toast.error("Unexpected error occurred");
+    }
   };
 
   return (

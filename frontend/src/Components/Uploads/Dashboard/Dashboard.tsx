@@ -1,7 +1,7 @@
 import { FC } from "react";
 import "./Dashboard.css";
 import { Upload } from "../UploadsType.ts";
-import Card from "../UploadCard/Card.tsx";
+import Card from "../Card/Card.tsx";
 import Spinner from "../../Spinner/Spinner.tsx";
 
 interface UploadsDashboardProps {

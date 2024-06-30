@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import Dashboard from "../../Components/Uploads/Dashboard/Dashboard.tsx";
 import "./UploadsPage.css";
-import { uploadsGET } from "../../Services/UploadService.ts";
+import { getUploadsAPI } from "../../Services/UploadService.ts";
 import { Upload } from "../../Components/Uploads/UploadsType.ts";
 
 interface UploadsPageProps {}
@@ -10,7 +10,7 @@ const UploadsPage: FC<UploadsPageProps> = () => {
   const [uploads, setUploads] = React.useState<Upload[]>();
 
   const getUploads = () => {
-    uploadsGET().then((res) => {
+    getUploadsAPI().then((res) => {
       res?.data && setUploads(res?.data);
     });
   };
