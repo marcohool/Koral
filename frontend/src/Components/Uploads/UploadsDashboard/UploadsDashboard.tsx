@@ -17,9 +17,7 @@ const UploadsDashboard: FC<UploadsDashboardProps> = ({ uploads }) => {
       {uploads ? (
         <div className="uploads-dashboard__grid">
           {uploads.map((upload) => (
-            <div key={upload.imageId}>
-              <UploadCard upload={upload} />
-            </div>
+            <UploadCard key={upload.imageId} upload={upload} />
           ))}
         </div>
       ) : (

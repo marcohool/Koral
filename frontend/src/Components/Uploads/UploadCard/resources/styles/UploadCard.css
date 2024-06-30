@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 7 / 8;
   height: 100%;
   overflow: hidden;
   cursor: pointer;
@@ -16,7 +16,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.675);
+  background: rgba(0, 0, 0, 0.75);
   opacity: 0;
   transition: opacity 0.16s ease;
   z-index: 1;
@@ -26,11 +26,14 @@
   opacity: 1;
 }
 
+.upload__card:hover .upload__card-favourite-button {
+  opacity: 1;
+}
+
 .upload__card-image {
   flex-grow: 1;
   height: 80%;
   overflow: hidden;
-  z-index: 0;
 }
 
 .upload__card-image > img {
@@ -39,10 +42,13 @@
   object-fit: cover;
 }
 
+.upload__card__content {
+  margin: 0.6rem 0;
+}
+
 .upload__card-titles {
   display: flex;
   flex-direction: column;
-  margin: 0.6rem 0;
 }
 
 .upload__card-titles-title {
