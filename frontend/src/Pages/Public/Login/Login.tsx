@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
-import "./LoginPage.css";
-import AuthForm from "../../Components/Forms/AuthForm/AuthForm.tsx";
-import AuthLayout from "../../Components/AuthLayout/AuthLayout.tsx";
+import "./Login.css";
+import AuthForm from "../../../Components/Forms/AuthForm/AuthForm.tsx";
+import AuthLayout from "../../../Components/AuthLayout/AuthLayout.tsx";
 import LoginImage from "/resources/images/Login-Image.jpg";
 import * as Yup from "yup";
 import { ObjectSchema } from "yup";
-import { FormSchema, LoginFormSchema } from "../../Components/Forms/types.ts";
-import { useAuth } from "../../Context/useAuth.tsx";
+import {
+  FormSchema,
+  LoginFormSchema,
+} from "../../../Components/Forms/types.ts";
+import { useAuth } from "../../../Context/useAuth.tsx";
 import { toast } from "react-toastify";
 
 interface Props {}
 
-const LoginPage: React.FC<Props> = () => {
+const Login: React.FC<Props> = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const validationSchema: ObjectSchema<LoginFormSchema> = Yup.object().shape({
     "form-email": Yup.string()
@@ -82,4 +85,4 @@ const LoginPage: React.FC<Props> = () => {
   );
 };
 
-export default LoginPage;
+export default Login;

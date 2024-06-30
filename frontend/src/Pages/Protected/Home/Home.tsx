@@ -1,10 +1,10 @@
 import { FC } from "react";
-import "./HomePage.css";
+import "./Home.css";
 
 interface NewHomePageProps {}
 
-const HomePage: FC<NewHomePageProps> = () => {
+const Home: FC<NewHomePageProps> = () => {
   return <div>NewHomePage </div>;
 };
 
-export default HomePage;
+export default Home;

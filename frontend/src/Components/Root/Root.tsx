@@ -1,5 +1,5 @@
 import { useAuth } from "../../Context/useAuth.tsx";
-import LandingPage from "../../Pages/LandingPage/LandingPage.tsx";
+import LandingPage from "../../Pages/Public/LandingPage/LandingPage.tsx";
 import Sidebar from "../Sidebar/Sidebar.tsx";
 import { Outlet } from "react-router-dom";
 import "./Root.css";

@@ -17,7 +17,7 @@ const Sidebar: FC<SidebarProps> = () => {
         <SidebarPanelGroup>
           <SidebarPanelItem title="Home" icon={GoHome} linkTo={"/"} />
           <SidebarPanelItem
-            title="Uploads"
+            title="AllUploads"
             icon={GoFileMedia}
             linkTo={"/uploads"}
           />
@@ -30,7 +30,7 @@ const Sidebar: FC<SidebarProps> = () => {
         <SidebarPanelGroup title="Collections">
           <SidebarPanelItem title="Saved" icon={GoHome} linkTo={"/saved"} />
           <SidebarPanelItem
-            title="Uploads"
+            title="AllUploads"
             icon={GoFileMedia}
             linkTo={"/uploads"}
           />

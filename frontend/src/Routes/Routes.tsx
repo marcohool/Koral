@@ -1,12 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App.tsx";
-import ErrorPage from "../Pages/ErrorPage/ErrorPage.tsx";
-import RegisterPage from "../Pages/RegisterPage/RegisterPage.tsx";
-import LoginPage from "../Pages/LoginPage/LoginPage.tsx";
+import ErrorPage from "../Pages/Public/Error/ErrorPage.tsx";
+import Register from "../Pages/Public/Register/Register.tsx";
+import Login from "../Pages/Public/Login/Login.tsx";
 import Root from "../Components/Root/Root.tsx";
 import ProtectedRoute from "./ProtectedRoute.tsx";
-import UploadsPage from "../Pages/UploadsPage/UploadsPage.tsx";
-import HomePage from "../Pages/HomePage/HomePage.tsx";
+import AllUploads from "../Pages/Protected/AllUploads/AllUploads.tsx";
+import Home from "../Pages/Protected/Home/Home.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
             path: "",
             element: (
               <ProtectedRoute>
-                <HomePage />
+                <Home />
               </ProtectedRoute>
             ),
           },
@@ -29,14 +29,14 @@ export const router = createBrowserRouter([
             path: "uploads",
             element: (
               <ProtectedRoute>
-                <UploadsPage />
+                <AllUploads />
               </ProtectedRoute>
             ),
           },
         ],
       },
-      { path: "login", element: <LoginPage /> },
-      { path: "signup", element: <RegisterPage /> },
+      { path: "login", element: <Login /> },
+      { path: "signup", element: <Register /> },
     ],
     errorElement: <ErrorPage />,
   },

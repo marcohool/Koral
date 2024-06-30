@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../../Components/Navbar/Navbar.tsx";
-import ErrorDisplay from "../../Components/ErrorDisplay/ErrorDisplay.tsx";
+import Navbar from "../../../Components/Navbar/Navbar.tsx";
+import ErrorDisplay from "../../../Components/ErrorDisplay/ErrorDisplay.tsx";
 import "./ErrorPage.css";
 
 interface Props {}

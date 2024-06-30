@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./LandingPage.css";
-import Navbar from "../../Components/Navbar/Navbar.tsx";
+import Navbar from "../../../Components/Navbar/Navbar.tsx";
 import { IParallax, Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { animated, useSpring } from "@react-spring/web";
 import { FaArrowDown } from "react-icons/fa";

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import AuthForm from "../../Components/Forms/AuthForm/AuthForm.tsx";
-import AuthLayout from "../../Components/AuthLayout/AuthLayout.tsx";
+import AuthForm from "../../../Components/Forms/AuthForm/AuthForm.tsx";
+import AuthLayout from "../../../Components/AuthLayout/AuthLayout.tsx";
 import RegisterImage from "/resources/images/Signup-Image-Cropped.jpg";
 import { ObjectSchema } from "yup";
 import {
   FormSchema,
   RegisterFormSchema,
-} from "../../Components/Forms/types.ts";
+} from "../../../Components/Forms/types.ts";
 import * as Yup from "yup";
-import { useAuth } from "../../Context/useAuth.tsx";
+import { useAuth } from "../../../Context/useAuth.tsx";
 import { toast } from "react-toastify";
 
 interface Props {}
 
-const RegisterPage: React.FC<Props> = () => {
+const Register: React.FC<Props> = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const validationSchema: ObjectSchema<RegisterFormSchema> = Yup.object().shape(
     {
@@ -100,4 +100,4 @@ const RegisterPage: React.FC<Props> = () => {
   );
 };
 
-export default RegisterPage;
+export default Register;
