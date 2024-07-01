@@ -8,6 +8,7 @@ interface ButtonProps {
   type: ButtonType;
   children?: React.ReactNode;
   styleOverride?: React.CSSProperties;
+  className?: string;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -16,13 +17,14 @@ const Button: FC<ButtonProps> = ({
   type,
   children,
   styleOverride,
+  className = "",
 }) => {
   const [content] = useState(value);
 
   return (
     <>
       <button
-        className={`button btn-${type}`}
+        className={`button btn-${type} ${className}`}
         onClick={onClick}
         style={styleOverride}
       >

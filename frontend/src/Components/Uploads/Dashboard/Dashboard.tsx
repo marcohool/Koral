@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import "./Dashboard.css";
 import { Upload } from "../UploadsType.ts";
 import Card from "../Card/Card.tsx";
@@ -6,6 +6,7 @@ import Spinner from "../../Spinner/Spinner.tsx";
 import Button from "../../Button/Button.tsx";
 import { ButtonType } from "../../Button/types.ts";
 import { GoPlus } from "react-icons/go";
+import UploadModal from "../UploadModal/UploadModal.tsx";
 
 interface UploadsDashboardProps {
   title: string;
@@ -13,12 +14,21 @@ interface UploadsDashboardProps {
 }
 
 const Dashboard: FC<UploadsDashboardProps> = ({ uploads, title }) => {
+  const [displayUploadModal, setDisplayUploadModal] = useState<boolean>(false);
+
   const newUploadOnClick = () => {
-    console.log("new upload");
+    setDisplayUploadModal(true);
   };
 
   return (
     <div className="uploads-dashboard">
+      {displayUploadModal && (
+        <UploadModal
+          onClose={() => {
+            setDisplayUploadModal(false);
+          }}
+        />
+      )}
       <div className="uploads-dashboard__titles">
         <h3 className="uploads-dashboard__titles-title">{title}</h3>
         <h3 className="uploads-dashboard__titles-upload-button">

@@ -273,3 +273,7 @@ input[type="checkbox"] {
   transform: scale(1.25);
   accent-color: var(--primary);
 }
+
+input[type="file"] {
+  display: none;
+}
