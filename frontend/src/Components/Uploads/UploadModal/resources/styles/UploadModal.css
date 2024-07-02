@@ -40,10 +40,6 @@
   margin: 0;
 }
 
-.modal-close {
-  cursor: pointer;
-}
-
 .modal__upload-card {
   display: grid;
   height: 100%;
@@ -114,5 +110,5 @@
 .modal__uploaded-image-title {
   font-size: 1.5rem;
   font-weight: 500;
-  margin: 0;
+  margin-bottom: 0.9rem;
 }

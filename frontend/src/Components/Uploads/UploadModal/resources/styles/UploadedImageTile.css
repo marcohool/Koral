@@ -1,0 +1,43 @@
+.uploaded-image__tile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem;
+  border: 2px var(--gray-7) solid;
+}
+
+.uploaded-image__tile:hover {
+  border: 2px var(--primary) solid;
+  background-color: var(--red-3);
+  cursor: pointer;
+}
+
+.uploaded-image__start {
+  display: flex;
+  align-items: center;
+}
+
+.uploaded-image__end {
+  margin: 0 1rem;
+}
+
+.uploaded-image__end:hover {
+  cursor: pointer;
+}
+
+.uploaded-image__tile__icon-image > svg {
+  font-size: 3rem;
+  padding: 0.75rem;
+  color: var(--primary);
+}
+
+.uploaded-image__name {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+}
+
+.uploaded-image__size {
+  font-size: 0.85rem;
+  color: var(--gray-9);
+}

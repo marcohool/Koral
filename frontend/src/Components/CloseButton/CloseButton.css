@@ -1,0 +1,8 @@
+.close-button__button {
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.close-button__button:hover {
+  color: var(--error-primary);
+}
