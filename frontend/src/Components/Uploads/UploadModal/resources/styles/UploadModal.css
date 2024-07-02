@@ -107,14 +107,14 @@
 }
 
 .modal__upload-card__helper-text {
-  padding: 0.75rem 0;
+  padding-top: 0.75rem;
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--gray-11);
 }
 
 .modal__uploaded-image-preview {
-  margin-top: 2rem;
+  margin: 3.5rem 0 2rem 0;
 }
 
 .modal__uploaded-image-title {
@@ -125,7 +125,6 @@
 
 .modal__upload-image__buttons {
   display: flex;
-  margin-top: 3rem;
   justify-content: center;
   gap: 2rem;
 }
