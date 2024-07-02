@@ -4,6 +4,8 @@ import Navbar from "../../../Components/Navbar/Navbar.tsx";
 import { IParallax, Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { animated, useSpring } from "@react-spring/web";
 import { FaArrowDown } from "react-icons/fa";
+import Button from "../../../Components/Button/Button.tsx";
+import { ButtonType } from "../../../Components/Button/types.ts";
 
 interface Props {}
 
@@ -89,10 +91,10 @@ const LandingPage: React.FC<Props> = () => {
           <ParallaxLayer offset={0} factor={1} sticky={{ start: 0, end: 0.4 }}>
             <div className="hero__content">
               <h1 className="hero__title">Find your dream closet using AI</h1>
-              <button className="hero__button btn-primary-outline">
+              <Button type={ButtonType.secondaryOutline}>
                 Get Started
                 <FaArrowDown className="hero__button-arrow" />
-              </button>
+              </Button>
             </div>
           </ParallaxLayer>
           <ParallaxLayer offset={1.6} factor={0.4}>

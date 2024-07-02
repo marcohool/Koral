@@ -51,6 +51,17 @@
   background-color: var(--red-3);
 }
 
+.btn-secondary-outline {
+  background-color: transparent;
+  border: 2px solid var(--white);
+  color: var(--white);
+}
+
+.btn-secondary-outline:hover {
+  background-color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
 .btn-tertiary {
   background-color: transparent;
   color: var(--black);
