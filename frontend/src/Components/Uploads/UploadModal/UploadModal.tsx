@@ -13,12 +13,9 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
   const [file, setFile] = useState<File | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
   const allowedFileTypes = ["image/jpeg", "image/png"]; // .jpg and .png
-
-  const handleContentClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
 
   const handleUpload = (file: File) => {
     setFile(file);
@@ -62,6 +59,12 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
   };
 
   const handleDelete = () => {
@@ -70,7 +73,7 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal" onClick={handleContentClick}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-titles">
           <div className="modal-titles-start">
             <h2 className="modal-title">Upload an Image</h2>
@@ -83,16 +86,18 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
           </div>
         </div>
         <div
-          className="modal__upload-card"
+          className={`modal__upload-card ${isDragOver ? "drag-over" : ""}`}
           id="drop-zone"
           onDrop={handleDrop}
           onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
           onClick={clickUpload}
         >
           <input
             className="modal__upload-card-input"
             type="file"
             id="fileInput"
+            accept="image/png, image/jpeg"
             onChange={handleFileChange}
           />
           <div className="modal__upload-card__input__content">
@@ -131,7 +136,7 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
               />
               <Button
                 type={ButtonType.primary}
-                value="Upload"
+                value="Continue"
                 onClick={() => console.log("Upload")}
                 styleOverride={{ width: "100%" }}
                 isDisabled={!!errorMessage}

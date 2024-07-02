@@ -58,7 +58,8 @@
   transition: border 0.2s ease;
 }
 
-.modal__upload-card:hover {
+.modal__upload-card:hover,
+.modal__upload-card.drag-over {
   border: 2px dashed var(--primary);
   background-color: var(--red-3);
   cursor: pointer;
