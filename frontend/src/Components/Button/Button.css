@@ -43,12 +43,12 @@
 
 .btn-secondary {
   background-color: var(--background);
-  border: 1px solid var(--red-9);
-  color: var(--black);
+  border: 2px solid var(--red-9);
+  color: var(--red-11);
 }
 
 .btn-secondary:hover {
-  background-color: var(--red-3);
+  background-color: var(--red-4);
 }
 
 .btn-secondary-outline {

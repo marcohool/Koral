@@ -28,6 +28,7 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
     const uploadedFile = event.target.files ? event.target.files[0] : null;
     if (uploadedFile) {
       setFile(uploadedFile);
+      event.target.value = "";
     }
   };
 
@@ -90,10 +91,26 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
           Only .jpg and .png files. Maximum file size of 10MB.
         </p>
         {file && (
-          <div className="modal__uploaded-image-preview">
-            <h3 className="modal__uploaded-image-title">Uploaded Image</h3>
-            <UploadedImageTile file={file} onDelete={handleDelete} />
-          </div>
+          <>
+            <div className="modal__uploaded-image-preview">
+              <h3 className="modal__uploaded-image-title">Uploaded Image</h3>
+              <UploadedImageTile file={file} onDelete={handleDelete} />
+            </div>
+            <div className="modal__upload-image__buttons">
+              <Button
+                type={ButtonType.secondary}
+                value="Cancel"
+                onClick={onClose}
+                styleOverride={{ width: "100%" }}
+              />
+              <Button
+                type={ButtonType.primary}
+                value="Upload"
+                onClick={() => console.log("Upload")}
+                styleOverride={{ width: "100%" }}
+              />
+            </div>
+          </>
         )}
       </div>
     </div>
