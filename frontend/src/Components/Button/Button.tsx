@@ -9,6 +9,7 @@ interface ButtonProps {
   children?: React.ReactNode;
   styleOverride?: React.CSSProperties;
   className?: string;
+  isDisabled?: boolean;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -18,9 +19,11 @@ const Button: FC<ButtonProps> = ({
   children,
   styleOverride,
   className = "",
+  isDisabled = false,
 }) => {
   const [content, setContent] = useState(value);
   const [customClassName, setCustomClassName] = useState(className);
+  const [isDisabledState, setIsDisabledState] = useState(isDisabled);
 
   useEffect(() => {
     setContent(value);
@@ -30,12 +33,19 @@ const Button: FC<ButtonProps> = ({
     setCustomClassName(className);
   }, [className]);
 
+  useEffect(() => {
+    setIsDisabledState(isDisabled);
+  }, [isDisabled]);
+
+  console.log(isDisabledState);
+
   return (
     <>
       <button
         className={`button btn-${type} ${customClassName}`}
         onClick={onClick}
         style={styleOverride}
+        disabled={isDisabledState}
       >
         {content} {children}
       </button>

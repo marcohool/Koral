@@ -134,6 +134,7 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
                 value="Upload"
                 onClick={() => console.log("Upload")}
                 styleOverride={{ width: "100%" }}
+                isDisabled={!!errorMessage}
               />
             </div>
           </>
