@@ -103,7 +103,7 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
               <Button
                 type={ButtonType.primary}
                 value="Choose File"
-                className={`modal__upload-card__input__button ${uploadSuccess ? "success" : ""}`}
+                className={`modal__upload-card__input__button`}
               />
             </div>
           </div>

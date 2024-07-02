@@ -19,9 +19,11 @@ const UploadedImageTile: FC<UploadedImageTileProps> = ({
 }) => {
   const [isSuccessState, setIsSuccessState] = useState(isSuccess);
   const [error, setError] = useState(errorMessage);
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
     setIsSuccessState(isSuccess);
+    setSuccess(isSuccess ? "Upload successful" : "");
   }, [isSuccess]);
 
   useEffect(() => {
@@ -50,7 +52,12 @@ const UploadedImageTile: FC<UploadedImageTileProps> = ({
           <CloseButton onClick={onDelete} />
         </div>
       </div>
-      {error && <p className="uploaded-image__error">{error}</p>}
+      <div
+        className={`upload-image__helper-text ${isSuccessState ? "success" : ""} ${error ? "error" : ""}`}
+      >
+        {error && <p>{error}</p>}
+        {success && <p>{success}</p>}
+      </div>
     </>
   );
 };

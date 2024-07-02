@@ -55,8 +55,15 @@
   background-color: var(--error-primary-background) !important;
 }
 
-.uploaded-image__error {
+.upload-image__helper-text {
   margin-top: 0.5rem;
   font-size: 0.9rem;
+}
+
+.success {
+  color: var(--success-primary);
+}
+
+.error {
   color: var(--error-primary);
 }
