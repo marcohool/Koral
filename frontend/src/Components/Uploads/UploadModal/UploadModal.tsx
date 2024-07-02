@@ -1,6 +1,5 @@
 import React, { FC, useState } from "react";
 import "./resources/styles/UploadModal.css";
-import { GoX } from "react-icons/go";
 import Button from "../../Button/Button.tsx";
 import { ButtonType } from "../../Button/types.ts";
 import UploadedImageTile from "./UploadedImageTile.tsx";
@@ -76,7 +75,7 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
           />
           <div className="modal__upload-card__input__content">
             <h2 className="modal__upload-card__input__title">
-              Drag & drop your file here or{" "}
+              Drag & drop your file here, or
             </h2>
             <div className="modal__upload-card__input__button_wrapper">
               <Button
