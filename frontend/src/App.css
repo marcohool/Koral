@@ -9,7 +9,7 @@
   --white: var(--red-contrast);
 
   --error-primary: #e12a02;
-  --error-background: #fce9e5;
+  --error-primary-background: #fce9e5;
   --error-border: #cb5c4c;
 
   --processing-primary: #dfac39;

@@ -5,7 +5,7 @@
 }
 
 .Toastify__toast--error {
-  background-color: var(--error-background);
+  background-color: var(--error-primary-background);
   color: var(--error-primary);
   border: 2px solid var(--error-border);
 }

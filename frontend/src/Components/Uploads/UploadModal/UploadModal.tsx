@@ -12,6 +12,9 @@ interface UploadModalProps {
 const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
   const [file, setFile] = useState<File | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
+  const allowedFileTypes = ["image/jpeg", "image/png"]; // .jpg and .png
 
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -19,7 +22,19 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
 
   const handleUpload = (file: File) => {
     setFile(file);
+
+    if (!allowedFileTypes.includes(file.type)) {
+      setErrorMessage("Invalid file type. Please upload a .jpg or .png file.");
+      return;
+    }
+
+    if (file.size > maxFileSize) {
+      setErrorMessage("File size exceeds 10MB. Please upload a smaller file.");
+      return;
+    }
+
     setUploadSuccess(true);
+    setErrorMessage("");
 
     setTimeout(() => {
       setUploadSuccess(false);
@@ -104,6 +119,7 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
                 file={file}
                 onDelete={handleDelete}
                 isSuccess={uploadSuccess}
+                errorMessage={errorMessage}
               />
             </div>
             <div className="modal__upload-image__buttons">

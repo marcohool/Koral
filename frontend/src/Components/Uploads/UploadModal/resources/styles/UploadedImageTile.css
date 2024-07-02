@@ -49,3 +49,14 @@
   border: 2px solid var(--success-primary);
   background-color: var(--success-primary-background) !important;
 }
+
+.tile-error {
+  border: 2px solid var(--error-primary) !important;
+  background-color: var(--error-primary-background) !important;
+}
+
+.uploaded-image__error {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--error-primary);
+}
