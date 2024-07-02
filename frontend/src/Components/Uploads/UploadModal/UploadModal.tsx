@@ -11,6 +11,7 @@ interface UploadModalProps {
 
 const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
   const [file, setFile] = useState<File | null>(null);
+  const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
 
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -18,6 +19,11 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
 
   const handleUpload = (file: File) => {
     setFile(file);
+    setUploadSuccess(true);
+
+    setTimeout(() => {
+      setUploadSuccess(false);
+    }, 3500);
   };
 
   const clickUpload = () => {
@@ -27,7 +33,7 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const uploadedFile = event.target.files ? event.target.files[0] : null;
     if (uploadedFile) {
-      setFile(uploadedFile);
+      handleUpload(uploadedFile);
       event.target.value = "";
     }
   };
@@ -82,7 +88,7 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
               <Button
                 type={ButtonType.primary}
                 value="Choose File"
-                className="modal__upload-card__input__button"
+                className={`modal__upload-card__input__button ${uploadSuccess ? "success" : ""}`}
               />
             </div>
           </div>
@@ -94,7 +100,11 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
           <>
             <div className="modal__uploaded-image-preview">
               <h3 className="modal__uploaded-image-title">Uploaded Image</h3>
-              <UploadedImageTile file={file} onDelete={handleDelete} />
+              <UploadedImageTile
+                file={file}
+                onDelete={handleDelete}
+                isSuccess={uploadSuccess}
+              />
             </div>
             <div className="modal__upload-image__buttons">
               <Button

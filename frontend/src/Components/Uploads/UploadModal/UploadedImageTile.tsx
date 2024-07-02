@@ -1,14 +1,25 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import "./resources/styles/UploadedImageTile.css";
 import { TbPhotoFilled } from "react-icons/tb";
 import CloseButton from "../../CloseButton/CloseButton.tsx";
 
 interface UploadedImageTileProps {
   file: File;
+  isSuccess?: boolean;
   onDelete: () => void;
 }
 
-const UploadedImageTile: FC<UploadedImageTileProps> = ({ file, onDelete }) => {
+const UploadedImageTile: FC<UploadedImageTileProps> = ({
+  file,
+  onDelete,
+  isSuccess = false,
+}) => {
+  const [isSuccessState, setIsSuccessState] = useState(isSuccess);
+
+  useEffect(() => {
+    setIsSuccessState(isSuccess);
+  }, [isSuccess]);
+
   const bytesToMB = (bytes: number, decimals: number = 2) => {
     if (bytes === 0) return "0 MB";
     const k = 1024;
@@ -16,7 +27,9 @@ const UploadedImageTile: FC<UploadedImageTileProps> = ({ file, onDelete }) => {
   };
 
   return (
-    <div className="uploaded-image__tile">
+    <div
+      className={`uploaded-image__tile ${isSuccessState ? "tile-success" : ""}`}
+    >
       <div className="uploaded-image__start">
         <div className="uploaded-image__tile__icon-image">
           <TbPhotoFilled />

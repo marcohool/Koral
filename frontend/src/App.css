@@ -14,6 +14,7 @@
 
   --processing-primary: #dfac39;
   --success-primary: #2e7d32;
+  --success-primary-background: rgba(72, 175, 72, 0.05);
 }
 
 :root,

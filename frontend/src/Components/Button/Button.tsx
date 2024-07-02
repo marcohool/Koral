@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "./Button.css";
 import { ButtonType } from "./types.ts";
 
@@ -19,12 +19,21 @@ const Button: FC<ButtonProps> = ({
   styleOverride,
   className = "",
 }) => {
-  const [content] = useState(value);
+  const [content, setContent] = useState(value);
+  const [customClassName, setCustomClassName] = useState(className);
+
+  useEffect(() => {
+    setContent(value);
+  }, [value]);
+
+  useEffect(() => {
+    setCustomClassName(className);
+  }, [className]);
 
   return (
     <>
       <button
-        className={`button btn-${type} ${className}`}
+        className={`button btn-${type} ${customClassName}`}
         onClick={onClick}
         style={styleOverride}
       >

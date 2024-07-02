@@ -103,7 +103,6 @@
 }
 
 .modal__upload-card__input__button {
-  max-width: 150px;
   height: 50px;
 }
 
@@ -115,7 +114,7 @@
 }
 
 .modal__uploaded-image-preview {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .modal__uploaded-image-title {
@@ -126,7 +125,7 @@
 
 .modal__upload-image__buttons {
   display: flex;
-  margin-top: 2rem;
+  margin-top: 3rem;
   justify-content: center;
   gap: 2rem;
 }
