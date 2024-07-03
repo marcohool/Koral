@@ -14,7 +14,7 @@ interface ButtonProps {
 
 const Button: FC<ButtonProps> = ({
   value,
-  onClick,
+  onClick = () => {},
   type,
   children,
   styleOverride,

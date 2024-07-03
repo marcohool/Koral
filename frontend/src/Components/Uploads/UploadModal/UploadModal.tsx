@@ -4,6 +4,9 @@ import Button from "../../Button/Button.tsx";
 import { ButtonType } from "../../Button/types.ts";
 import UploadedImageTile from "./UploadedImageTile.tsx";
 import CloseButton from "../../CloseButton/CloseButton.tsx";
+import { uploadImageAPI } from "../../../Services/UploadService.ts";
+import { toast } from "react-toastify";
+import Spinner from "../../Spinner/Spinner.tsx";
 
 interface UploadModalProps {
   onClose: () => void;
@@ -11,11 +14,27 @@ interface UploadModalProps {
 
 const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
   const [file, setFile] = useState<File | null>(null);
+  const [uploadProcessing, setUploadProcessing] = useState<boolean>(false);
   const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
   const maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
   const allowedFileTypes = ["image/jpeg", "image/png"]; // .jpg and .png
+
+  const uploadImage = (file: File) => {
+    try {
+      setUploadProcessing(true);
+      const formData = new FormData();
+      formData.append("ImageFile", file);
+
+      uploadImageAPI(formData).then(() => {
+        setUploadProcessing(false);
+      });
+    } catch (error) {
+      console.log(error);
+      setUploadProcessing(false);
+    }
+  };
 
   const handleUpload = (file: File) => {
     setFile(file);
@@ -136,11 +155,15 @@ const UploadModal: FC<UploadModalProps> = ({ onClose }) => {
               />
               <Button
                 type={ButtonType.primary}
-                value="Continue"
-                onClick={() => console.log("Upload")}
+                value={`${uploadProcessing ? "" : "Upload"}`}
+                onClick={() => uploadImage(file)}
                 styleOverride={{ width: "100%" }}
                 isDisabled={!!errorMessage}
-              />
+              >
+                {uploadProcessing && (
+                  <Spinner height="30" colour={"var(--white)"} />
+                )}
+              </Button>
             </div>
           </>
         )}

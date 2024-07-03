@@ -42,3 +42,14 @@ export const favouriteUploadAPI = async (imageId: string) => {
     toast.error(handleErrorV2(error));
   }
 };
+
+export const uploadImageAPI = async (formData: FormData) => {
+  try {
+    return await authenticatedAxios(localStorage.getItem("token")!).post(
+      `${API_URL}/imageupload`,
+      formData,
+    );
+  } catch (error) {
+    toast.error(handleErrorV2(error));
+  }
+};
