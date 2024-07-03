@@ -11,12 +11,17 @@ import "./resources/styles/NewUploadDisplay.css";
 interface NewUploadDisplayProps {
   onClose: () => void;
   isModal: boolean;
+  className?: string;
 }
 
 const allowedFileTypes = ["image/jpeg", "image/png"]; // .jpg and .png
 const maxFileSize = 10 * 1024 * 1024; // 10MB in bytes
 
-const NewUploadDisplay: FC<NewUploadDisplayProps> = ({ onClose, isModal }) => {
+const NewUploadDisplay: FC<NewUploadDisplayProps> = ({
+  onClose,
+  isModal,
+  className,
+}) => {
   const [currentFile, setCurrentFile] = useState<File>();
   const [helperText, setHelperText] = useState<HelperText>();
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
@@ -80,7 +85,7 @@ const NewUploadDisplay: FC<NewUploadDisplayProps> = ({ onClose, isModal }) => {
   };
 
   return (
-    <div className="modal" onClick={(e) => e.stopPropagation()}>
+    <div className={`modal ${className}`} onClick={(e) => e.stopPropagation()}>
       <div className="modal-titles">
         <div className="modal-titles-start">
           <h2 className="modal-title">Upload an Image</h2>
