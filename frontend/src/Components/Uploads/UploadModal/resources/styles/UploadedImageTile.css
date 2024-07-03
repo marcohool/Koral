@@ -18,10 +18,13 @@
 .uploaded-image__start {
   display: flex;
   align-items: center;
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .uploaded-image__end {
-  margin: 0 1rem;
+  padding: 0 1rem;
 }
 
 .uploaded-image__end:hover {
@@ -38,11 +41,16 @@
   font-size: 1rem;
   font-weight: 500;
   margin-bottom: 0.1rem;
+  text-overflow: ellipsis;
+  flex-grow: 1; /* Allow it to grow */
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .uploaded-image__size {
   font-size: 0.85rem;
   color: var(--gray-9);
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .tile-success {
@@ -53,6 +61,14 @@
 .tile-error {
   border: 2px solid var(--error-primary) !important;
   background-color: var(--error-primary-background) !important;
+}
+
+.uploaded-image__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Prevent overflow issues */
+  overflow: hidden;
+  flex-grow: 1; /* Allow the text container to grow and shrink */
 }
 
 .upload-image__helper-text {
