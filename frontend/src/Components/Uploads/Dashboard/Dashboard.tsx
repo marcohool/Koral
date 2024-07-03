@@ -5,20 +5,38 @@ import Card from "../Card/Card.tsx";
 import Spinner from "../../Spinner/Spinner.tsx";
 import Button from "../../Button/Button.tsx";
 import { ButtonType } from "../../Button/types.ts";
-import { GoPlus } from "react-icons/go";
+import { GoChevronLeft, GoPlus } from "react-icons/go";
 import UploadModal from "../UploadModal/UploadModal.tsx";
+import { GoChevronRight } from "react-icons/go";
 
 interface UploadsDashboardProps {
   title: string;
   uploads?: Upload[];
+  pageNumber: number;
+  totalPages: number;
 }
 
-const Dashboard: FC<UploadsDashboardProps> = ({ uploads, title }) => {
+const Dashboard: FC<UploadsDashboardProps> = ({
+  uploads,
+  title,
+  pageNumber,
+  totalPages,
+}) => {
   const [displayUploadModal, setDisplayUploadModal] = useState<boolean>(false);
 
   const newUploadOnClick = () => {
     setDisplayUploadModal(true);
   };
+
+  const onPageRight = () => {
+    console.log("onPageRight");
+  };
+
+  const onPageLeft = () => {
+    console.log("onPageLeft");
+  };
+
+  console.log(totalPages);
 
   return (
     <div className="uploads-dashboard">
@@ -45,11 +63,28 @@ const Dashboard: FC<UploadsDashboardProps> = ({ uploads, title }) => {
         </h3>
       </div>
       {uploads ? (
-        <div className="uploads-dashboard__grid">
-          {uploads.map((upload) => (
-            <Card key={upload.imageId} upload={upload} />
-          ))}
-        </div>
+        <>
+          {" "}
+          <div className="uploads-dashboard__grid">
+            {uploads.map((upload) => (
+              <Card key={upload.imageId} upload={upload} />
+            ))}
+          </div>
+          <div className="uploads-dashboard__paginiation">
+            {pageNumber > 1 && (
+              <Button type={ButtonType.tertiary} onClick={onPageLeft}>
+                <GoChevronLeft size={30} />
+              </Button>
+            )}
+            {pageNumber} of {totalPages} pages
+            {pageNumber < totalPages && (
+              <Button type={ButtonType.tertiary} onClick={onPageRight}>
+                {" "}
+                <GoChevronRight size={30} />
+              </Button>
+            )}
+          </div>
+        </>
       ) : (
         <div className="uploads-dashboard__spinner">
           <Spinner height="60px" />

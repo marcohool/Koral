@@ -13,13 +13,23 @@ const authenticatedAxios = (token: string) => {
   });
 };
 
-export const getUploadsAPI = async () => {
+export const getUploadsAPI = async (pageNumber: number) => {
   try {
     return await authenticatedAxios(localStorage.getItem("token")!).get<
       Upload[]
-    >(`${API_URL}/imageupload`);
+    >(`${API_URL}/imageupload?pageNumber=${pageNumber}`);
   } catch (error) {
     handleError(error);
+  }
+};
+
+export const getUploadCountAPI = async () => {
+  try {
+    return await authenticatedAxios(localStorage.getItem("token")!).get<number>(
+      `${API_URL}/imageupload/totalcount`,
+    );
+  } catch (error) {
+    toast.error(handleErrorV2(error));
   }
 };
 

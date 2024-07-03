@@ -13,7 +13,7 @@ public interface IImageUploadRepository
     /// <param name="userId">Id of the logged in user.</param>
     /// <param name="pageNumber">The page number to retrieve.</param>
     /// <returns>A list of <see cref="ImageUpload"/>.</returns>
-    Task<List<ImageUpload>> GetImageUploads(string userId, int pageNumber);
+    Task<List<ImageUpload>> GetImageUploads(string userId, int? pageNumber);
 
     /// <summary>
     /// Gets a single image upload.

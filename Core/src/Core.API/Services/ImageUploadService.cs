@@ -43,6 +43,19 @@ public class ImageUploadService(
     }
 
     /// <inheritdoc/>
+    public async Task<int> GetImageUploadCount()
+    {
+        AppUser? user =
+            await this.GetCurrentUserAsync() ?? throw new KeyNotFoundException("User not found.");
+
+        List<ImageUpload> imageUploads = await this.imageUploadRepository.GetImageUploads(user.Id, null);
+
+        return imageUploads.Count;
+
+    }
+
+
+    /// <inheritdoc/>
     public async Task<ImageUploadResponse> UploadImageAsync(ImageUploadRequest imageUpload)
     {
         IFormFile imageFile = imageUpload.ImageFile;
@@ -79,6 +92,8 @@ public class ImageUploadService(
             throw;
         }
     }
+
+
 
     /// <inheritdoc/>
 
@@ -156,4 +171,5 @@ public class ImageUploadService(
         ClaimsPrincipal? user = this.httpContextAccessor.HttpContext?.User;
         return user != null ? await this.userManager.GetUserAsync(user) : null;
     }
+
 }

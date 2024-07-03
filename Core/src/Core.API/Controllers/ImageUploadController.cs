@@ -27,6 +27,16 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
     }
 
     /// <summary>
+    /// Gets the count of all image uploads.
+    /// </summary>
+    /// <returns>The count of all image uploads</returns>
+    [HttpGet("totalcount")]
+    public async Task<IActionResult> GetImageUploadCount()
+    {
+        return this.Ok(await this.imageUploadService.GetImageUploadCount());
+    }
+
+    /// <summary>
     /// Uploads an image.
     /// </summary>
     /// <param name="imageUpload"></param>

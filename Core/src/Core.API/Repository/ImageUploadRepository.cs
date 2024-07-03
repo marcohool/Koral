@@ -10,9 +10,18 @@ public class ImageUploadRepository(ApplicationDBContext context) : IImageUploadR
     private readonly int pageSize = 12;
 
     /// <inheritdoc/>
-    public async Task<List<ImageUpload>> GetImageUploads(string userId, int pageNumber)
+    public async Task<List<ImageUpload>> GetImageUploads(string userId, int? pageNumber)
     {
-        return await this.context.ImageUploads.Where(i => i.AppUserId == userId).Skip((pageNumber - 1) * pageNumber).Take(this.pageSize).ToListAsync();
+        if (pageNumber == null)
+        {
+            return await this.context.ImageUploads.Where(i => i.AppUserId == userId).ToListAsync();
+        }
+
+        return await this.context.ImageUploads
+            .Where(i => i.AppUserId == userId)
+            .Skip((pageNumber.Value - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
     }
 
     /// <inheritdoc/>

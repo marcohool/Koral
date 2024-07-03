@@ -15,6 +15,12 @@ public interface IImageUploadService
     Task<IEnumerable<ImageUploadResponse>> GetImageUploadsAsync(int pageNumber);
 
     /// <summary>
+    /// Gets the total number of image uploads.
+    /// </summary>
+    /// <returns>The total number of image uploads.</returns>
+    Task<int> GetImageUploadCount();
+
+    /// <summary>
     /// Handles image uploading processes.
     /// </summary>
     /// <param name="imageUpload">Instance of <see cref="ImageUploadRequest"/>.</param>
