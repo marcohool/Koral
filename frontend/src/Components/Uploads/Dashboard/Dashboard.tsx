@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import "./Dashboard.css";
-import { Upload } from "../UploadsType.ts";
+import { Upload } from "../types.ts";
 import Card from "../Card/Card.tsx";
 import Spinner from "../../Spinner/Spinner.tsx";
 import Button from "../../Button/Button.tsx";

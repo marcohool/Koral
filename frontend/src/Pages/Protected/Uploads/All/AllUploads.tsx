@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import Dashboard from "../../../../Components/Uploads/Dashboard/Dashboard.tsx";
 import "./AllUploads.css";
 import { getUploadsAPI } from "../../../../Services/UploadService.ts";
-import { Upload } from "../../../../Components/Uploads/UploadsType.ts";
+import { Upload } from "../../../../Components/Uploads/types.ts";
 
 interface UploadsPageProps {}
 

@@ -1,6 +1,6 @@
 import { handleError, handleErrorV2 } from "./ErrorHandler.ts";
 import axios from "axios";
-import { Upload } from "../Components/Uploads/UploadsType.ts";
+import { Upload } from "../Components/Uploads/types.ts";
 import { toast } from "react-toastify";
 
 const API_URL = "https://localhost:5001";

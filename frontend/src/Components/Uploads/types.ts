@@ -15,3 +15,13 @@ export enum StatusType {
   Processed = 1,
   Failed = 2,
 }
+
+export enum NewUploadFileState {
+  Valid = 0,
+  Invalid = 1,
+}
+
+export interface HelperText {
+  message: string;
+  type?: NewUploadFileState;
+}

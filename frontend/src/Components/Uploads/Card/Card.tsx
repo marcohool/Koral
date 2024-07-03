@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./resources/styles/Card.css";
-import { StatusType, Upload } from "../UploadsType.ts";
+import { StatusType, Upload } from "../types.ts";
 import { ParseDate } from "../helpers.ts";
 import FavouriteButton from "./FavouriteButton.tsx";
 import { toast } from "react-toastify";

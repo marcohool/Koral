@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { Upload } from "../../../../Components/Uploads/UploadsType.ts";
+import { Upload } from "../../../../Components/Uploads/types.ts";
 import { getFavouriteUploadsAPI } from "../../../../Services/UploadService.ts";
 import Dashboard from "../../../../Components/Uploads/Dashboard/Dashboard.tsx";
 

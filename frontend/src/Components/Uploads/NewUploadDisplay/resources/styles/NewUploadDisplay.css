@@ -151,9 +151,3 @@
     font-size: 0.95rem;
   }
 }
-
-@media (max-height: 700px) {
-  .modal {
-    position:;
-  }
-}

@@ -3,7 +3,7 @@ import { TbX } from "react-icons/tb";
 import "./CloseButton.css";
 
 interface CloseButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   size?: number;
 }
 

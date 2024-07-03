@@ -9,6 +9,7 @@ import AllUploads from "../Pages/Protected/Uploads/All/AllUploads.tsx";
 import Home from "../Pages/Protected/Home/Home.tsx";
 import FavouriteUploads from "../Pages/Protected/Uploads/Favourite/FavouriteUploads.tsx";
 import Uploads from "../Pages/Protected/Uploads/Uploads.tsx";
+import NewUploadPage from "../Pages/Protected/Uploads/NewUpload/NewUploadPage.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,14 @@ export const router = createBrowserRouter([
                 element: (
                   <ProtectedRoute>
                     <FavouriteUploads />
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: "new",
+                element: (
+                  <ProtectedRoute>
+                    <NewUploadPage />
                   </ProtectedRoute>
                 ),
               },
