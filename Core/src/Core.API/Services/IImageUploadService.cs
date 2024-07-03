@@ -10,8 +10,9 @@ public interface IImageUploadService
     /// <summary>
     /// Gets a list of all image uploads.
     /// </summary>
+    /// <param name="pageNumber">The page number to retrieve.</param>
     /// <returns>A list of <see cref="ImageUploadResponse"/> objects.</returns>
-    Task<IEnumerable<ImageUploadResponse>> GetImageUploadsAsync();
+    Task<IEnumerable<ImageUploadResponse>> GetImageUploadsAsync(int pageNumber);
 
     /// <summary>
     /// Handles image uploading processes.
@@ -30,6 +31,7 @@ public interface IImageUploadService
     /// <summary>
     /// Gets all favourited image uploads.
     /// </summary>
+    /// <param name="pageNumber">The page number to retrieve.</param>
     /// <returns>A list of <see cref="ImageUploadResponse"/> objects.</returns>
-    Task<IEnumerable<ImageUploadResponse>> GetFavouriteImageUploads();
+    Task<IEnumerable<ImageUploadResponse>> GetFavouriteImageUploads(int pageNumber);
 }

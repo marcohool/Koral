@@ -29,13 +29,13 @@ public class ImageUploadService(
         .AllowedFileExtensions;
 
     /// <inheritdoc/>
-    public async Task<IEnumerable<ImageUploadResponse>> GetImageUploadsAsync()
+    public async Task<IEnumerable<ImageUploadResponse>> GetImageUploadsAsync(int pageNumber)
     {
         AppUser user =
             await this.GetCurrentUserAsync()
             ?? throw new UnauthorizedAccessException("Current user not found.");
 
-        List<ImageUpload> imageUploads = await this.imageUploadRepository.GetImageUploads(user.Id);
+        List<ImageUpload> imageUploads = await this.imageUploadRepository.GetImageUploads(user.Id, pageNumber);
 
         return imageUploads
             .Select(upload => new ImageUploadResponse(upload))
@@ -89,25 +89,20 @@ public class ImageUploadService(
             ?? throw new UnauthorizedAccessException("Current user not found.");
 
         ImageUpload? imageUpload =
-            await this.imageUploadRepository.GetImageUpload(id)
-            ?? throw new KeyNotFoundException("Image not found.");
-
-        if (imageUpload.AppUserId != user.Id)
-            throw new UnauthorizedAccessException("User not authorized to favourite this image.");
-
+            await this.imageUploadRepository.GetImageUpload(user.Id, id) ?? throw new KeyNotFoundException("Image upload not found.");
+        
         imageUpload.IsFavourited = !imageUpload.IsFavourited;
-
         await this.imageUploadRepository.UpdateImageUpload(imageUpload);
     }
 
     /// <inheritdoc/>
-    public async Task<IEnumerable<ImageUploadResponse>> GetFavouriteImageUploads()
+    public async Task<IEnumerable<ImageUploadResponse>> GetFavouriteImageUploads(int pageNumber)
     {
         AppUser user =
             await this.GetCurrentUserAsync()
             ?? throw new UnauthorizedAccessException("Current user not found.");
 
-        List<ImageUpload> imageUploads = await this.imageUploadRepository.GetImageUploads(user.Id);
+        List<ImageUpload> imageUploads = await this.imageUploadRepository.GetImageUploads(user.Id, pageNumber);
 
         return imageUploads
             .Select(upload => new ImageUploadResponse(upload))

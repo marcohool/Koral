@@ -7,17 +7,18 @@ namespace Core.API.Repository;
 public class ImageUploadRepository(ApplicationDBContext context) : IImageUploadRepository
 {
     private readonly ApplicationDBContext context = context;
+    private readonly int pageSize = 12;
 
     /// <inheritdoc/>
-    public async Task<List<ImageUpload>> GetImageUploads(string userId)
+    public async Task<List<ImageUpload>> GetImageUploads(string userId, int pageNumber)
     {
-        return await this.context.ImageUploads.Where(i => i.AppUserId == userId).ToListAsync();
+        return await this.context.ImageUploads.Where(i => i.AppUserId == userId).Skip((pageNumber - 1) * pageNumber).Take(this.pageSize).ToListAsync();
     }
 
     /// <inheritdoc/>
-    public async Task<ImageUpload?> GetImageUpload(int id)
+    public async Task<ImageUpload?> GetImageUpload(string userId, int uploadId)
     {
-        return await this.context.ImageUploads.FirstOrDefaultAsync(i => i.ImageUploadId == id);
+        return await this.context.ImageUploads.FirstOrDefaultAsync(i => i.ImageUploadId == uploadId && i.AppUserId == userId);
     }
 
     /// <inheritdoc/>

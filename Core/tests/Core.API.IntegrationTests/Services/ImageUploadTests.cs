@@ -16,7 +16,7 @@ public class ImageUploadTests(IntegrationTestWebApplicationFactory factory)
         HttpClient client = this.HttpClient;
 
         // Act
-        HttpResponseMessage response = await client.GetAsync("/imageupload");
+        HttpResponseMessage response = await client.GetAsync("/imageupload?pageNumber=0");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
