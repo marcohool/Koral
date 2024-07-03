@@ -16,7 +16,8 @@ const AllUploads: FC<UploadsPageProps> = () => {
   const [pageNumber, setPageNumber] = React.useState<number>(1);
   const [totalPages, setTotalPages] = React.useState<number>(1);
 
-  const getUploads = () => {
+  const getUploads = (pageNumber: number) => {
+    setUploads([]);
     getUploadsAPI(pageNumber).then((res) => {
       if (res?.data) {
         setUploads(res?.data);
@@ -32,10 +33,17 @@ const AllUploads: FC<UploadsPageProps> = () => {
     });
   };
 
+  const handleNewPage = (pageNumber: number) => {
+    setPageNumber(pageNumber);
+  };
+
   useEffect(() => {
-    getUploads();
     getUploadCount();
   }, []);
+
+  useEffect(() => {
+    getUploads(pageNumber);
+  }, [pageNumber]);
 
   return (
     <div className="uploads-page__dashboard">
@@ -44,6 +52,7 @@ const AllUploads: FC<UploadsPageProps> = () => {
         title="All Uploads"
         pageNumber={pageNumber}
         totalPages={totalPages}
+        onNewPage={handleNewPage}
       />
     </div>
   );

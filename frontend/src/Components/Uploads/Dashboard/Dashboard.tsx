@@ -14,6 +14,7 @@ interface UploadsDashboardProps {
   uploads?: Upload[];
   pageNumber: number;
   totalPages: number;
+  onNewPage: (pageNumber: number) => void;
 }
 
 const Dashboard: FC<UploadsDashboardProps> = ({
@@ -21,19 +22,12 @@ const Dashboard: FC<UploadsDashboardProps> = ({
   title,
   pageNumber,
   totalPages,
+  onNewPage,
 }) => {
   const [displayUploadModal, setDisplayUploadModal] = useState<boolean>(false);
 
   const newUploadOnClick = () => {
     setDisplayUploadModal(true);
-  };
-
-  const onPageRight = () => {
-    console.log("onPageRight");
-  };
-
-  const onPageLeft = () => {
-    console.log("onPageLeft");
   };
 
   console.log(totalPages);
@@ -72,13 +66,19 @@ const Dashboard: FC<UploadsDashboardProps> = ({
           </div>
           <div className="uploads-dashboard__paginiation">
             {pageNumber > 1 && (
-              <Button type={ButtonType.tertiary} onClick={onPageLeft}>
+              <Button
+                type={ButtonType.tertiary}
+                onClick={() => onNewPage(pageNumber - 1)}
+              >
                 <GoChevronLeft size={30} />
               </Button>
             )}
             {pageNumber} of {totalPages} pages
             {pageNumber < totalPages && (
-              <Button type={ButtonType.tertiary} onClick={onPageRight}>
+              <Button
+                type={ButtonType.tertiary}
+                onClick={() => onNewPage(pageNumber + 1)}
+              >
                 {" "}
                 <GoChevronRight size={30} />
               </Button>
