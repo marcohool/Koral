@@ -21,9 +21,21 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
     /// </summary>
     /// <returns>A list of <see cref="ImageUploadResponse"/> objects.</returns>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ImageUploadResponse>>> GetImageUploads([FromQuery] int pageNumber)
+    public async Task<ActionResult<IEnumerable<ImageUploadResponse>>> GetImageUploads(
+        [FromQuery] int pageNumber
+    )
     {
-        return this.Ok(await this.imageUploadService.GetImageUploadsAsync(pageNumber));
+        try
+        {
+            IEnumerable<ImageUploadResponse> imageUploads =
+                await this.imageUploadService.GetImageUploadsAsync(pageNumber);
+
+            return this.Ok(await this.imageUploadService.GetImageUploadsAsync(pageNumber));
+        }
+        catch (InvalidOperationException ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
     }
 
     /// <summary>
@@ -100,7 +112,9 @@ public class ImageUploadController(IImageUploadService imageUploadService) : Con
     /// <returns></returns>
     [HttpGet]
     [Route("favourites")]
-    public async Task<ActionResult<IEnumerable<ImageUploadResponse>>> GetFavouriteImageUploads([FromQuery] int pageNumber)
+    public async Task<ActionResult<IEnumerable<ImageUploadResponse>>> GetFavouriteImageUploads(
+        [FromQuery] int pageNumber
+    )
     {
         return this.Ok(await this.imageUploadService.GetFavouriteImageUploads(pageNumber));
     }

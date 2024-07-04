@@ -31,6 +31,9 @@ public class ImageUploadService(
     /// <inheritdoc/>
     public async Task<IEnumerable<ImageUploadResponse>> GetImageUploadsAsync(int pageNumber)
     {
+        if (pageNumber < 1)
+            throw new InvalidOperationException("Invalid page number.");
+
         AppUser user =
             await this.GetCurrentUserAsync()
             ?? throw new UnauthorizedAccessException("Current user not found.");

@@ -16,7 +16,7 @@ public class ImageUploadTests(IntegrationTestWebApplicationFactory factory)
         HttpClient client = this.HttpClient;
 
         // Act
-        HttpResponseMessage response = await client.GetAsync("/imageupload?pageNumber=0");
+        HttpResponseMessage response = await client.GetAsync("/imageupload?pageNumber=1");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -27,6 +27,19 @@ public class ImageUploadTests(IntegrationTestWebApplicationFactory factory)
 
         imageUploads.Should().BeOfType<List<ImageUpload>>();
         imageUploads.Should().HaveCount(1);
+    }
+
+    [Fact]
+    public async Task GetImageUploads_InvalidPageNumber_ReturnsBadRequest()
+    {
+        // Arrange
+        HttpClient client = this.HttpClient;
+
+        // Act
+        HttpResponseMessage response = await client.GetAsync("/imageupload?pageNumber=0");
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
 
     [Fact]
