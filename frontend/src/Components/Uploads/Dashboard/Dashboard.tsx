@@ -1,13 +1,13 @@
 import { FC, useState } from "react";
-import "./Dashboard.css";
+import "./resources/styles/Dashboard.css";
 import { Upload } from "../types.ts";
 import Card from "../Card/Card.tsx";
 import Spinner from "../../Spinner/Spinner.tsx";
 import Button from "../../Button/Button.tsx";
 import { ButtonType } from "../../Button/types.ts";
-import { GoChevronLeft, GoPlus } from "react-icons/go";
+import { GoPlus } from "react-icons/go";
 import UploadModal from "../UploadModal/UploadModal.tsx";
-import { GoChevronRight } from "react-icons/go";
+import Pagination from "./Pagination.tsx";
 
 interface UploadsDashboardProps {
   title: string;
@@ -58,32 +58,16 @@ const Dashboard: FC<UploadsDashboardProps> = ({
       </div>
       {uploads ? (
         <>
-          {" "}
           <div className="uploads-dashboard__grid">
             {uploads.map((upload) => (
               <Card key={upload.imageId} upload={upload} />
             ))}
           </div>
-          <div className="uploads-dashboard__paginiation">
-            {pageNumber > 1 && (
-              <Button
-                type={ButtonType.tertiary}
-                onClick={() => onNewPage(pageNumber - 1)}
-              >
-                <GoChevronLeft size={30} />
-              </Button>
-            )}
-            {pageNumber} of {totalPages} pages
-            {pageNumber < totalPages && (
-              <Button
-                type={ButtonType.tertiary}
-                onClick={() => onNewPage(pageNumber + 1)}
-              >
-                {" "}
-                <GoChevronRight size={30} />
-              </Button>
-            )}
-          </div>
+          <Pagination
+            currentPage={pageNumber}
+            totalPages={totalPages}
+            onNewPage={onNewPage}
+          />
         </>
       ) : (
         <div className="uploads-dashboard__spinner">

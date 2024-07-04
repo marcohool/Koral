@@ -17,7 +17,7 @@ const AllUploads: FC<UploadsPageProps> = () => {
   const [totalPages, setTotalPages] = React.useState<number>(1);
 
   const getUploads = (pageNumber: number) => {
-    setUploads([]);
+    setUploads(undefined);
     getUploadsAPI(pageNumber).then((res) => {
       if (res?.data) {
         setUploads(res?.data);
