@@ -2,6 +2,7 @@ import { handleError, handleErrorV2 } from "./ErrorHandler.ts";
 import axios from "axios";
 import { Upload } from "../Components/Uploads/types.ts";
 import { toast } from "react-toastify";
+import { UploadType } from "../Pages/Protected/Uploads/GetUploads/types.ts";
 
 const API_URL = "https://localhost:5001";
 
@@ -23,21 +24,21 @@ export const getUploadsAPI = async (pageNumber: number) => {
   }
 };
 
-export const getUploadCountAPI = async () => {
+export const getUploadsCountAPI = async (uploadType: UploadType) => {
   try {
     return await authenticatedAxios(localStorage.getItem("token")!).get<number>(
-      `${API_URL}/imageupload/totalcount`,
+      `${API_URL}/imageupload/totalcount?uploadType=${uploadType}`,
     );
   } catch (error) {
     toast.error(handleErrorV2(error));
   }
 };
 
-export const getFavouriteUploadsAPI = async () => {
+export const getFavouriteUploadsAPI = async (pageNumber: number) => {
   try {
     return await authenticatedAxios(localStorage.getItem("token")!).get<
       Upload[]
-    >(`${API_URL}/imageupload/favourites`);
+    >(`${API_URL}/imageupload/favourites?pageNumber=${pageNumber}`);
   } catch (error) {
     toast.error(handleErrorV2(error));
   }

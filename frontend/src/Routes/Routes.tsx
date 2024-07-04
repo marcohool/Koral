@@ -5,11 +5,11 @@ import Register from "../Pages/Public/Register/Register.tsx";
 import Login from "../Pages/Public/Login/Login.tsx";
 import Root from "../Components/Root/Root.tsx";
 import ProtectedRoute from "./ProtectedRoute.tsx";
-import AllUploads from "../Pages/Protected/Uploads/All/AllUploads.tsx";
 import Home from "../Pages/Protected/Home/Home.tsx";
-import FavouriteUploads from "../Pages/Protected/Uploads/Favourite/FavouriteUploads.tsx";
 import Uploads from "../Pages/Protected/Uploads/Uploads.tsx";
 import NewUploadPage from "../Pages/Protected/Uploads/NewUpload/NewUploadPage.tsx";
+import GetUploads from "../Pages/Protected/Uploads/GetUploads/GetUploads.tsx";
+import { UploadType } from "../Pages/Protected/Uploads/GetUploads/types.ts";
 
 export const router = createBrowserRouter([
   {
@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
                 index: true,
                 element: (
                   <ProtectedRoute>
-                    <AllUploads />
+                    <GetUploads type={UploadType.All} />
                   </ProtectedRoute>
                 ),
               },
@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
                 path: "favourites",
                 element: (
                   <ProtectedRoute>
-                    <FavouriteUploads />
+                    <GetUploads type={UploadType.Favourites} />
                   </ProtectedRoute>
                 ),
               },
