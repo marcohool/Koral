@@ -20,6 +20,8 @@ const GetUploads: FC<GetUploadsProps> = ({ type }) => {
   const [pageNumber, setPageNumber] = React.useState<number>(1);
   const [totalPages, setTotalPages] = React.useState<number>(1);
 
+  console.log(pageNumber);
+
   useEffect(() => {
     const getTotalUploadsCount = () => {
       getUploadsCountAPI(type).then((res) => {

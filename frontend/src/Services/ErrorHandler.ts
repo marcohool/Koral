@@ -27,7 +27,7 @@ export const handleError = (
     }
   } else {
     toast.error("Unknown error has occurred");
-    console.log(error);
+    console.error(error);
   }
 };
 

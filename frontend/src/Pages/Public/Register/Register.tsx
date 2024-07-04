@@ -42,7 +42,6 @@ const Register: React.FC<Props> = () => {
 
   const handleRegisterSubmit = (data: FormSchema) => {
     const registerSchema = data as RegisterFormSchema;
-    console.log("Register form data submitted:", registerSchema);
 
     try {
       registerUser(

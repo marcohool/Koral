@@ -30,8 +30,6 @@ const Dashboard: FC<UploadsDashboardProps> = ({
     setDisplayUploadModal(true);
   };
 
-  console.log(totalPages);
-
   return (
     <div className="uploads-dashboard">
       {displayUploadModal && (

@@ -66,8 +66,6 @@ export const UserProvider = ({ children }: Props) => {
           setToken(response?.data.token);
           setUser(email);
 
-          console.log("User registered successfully", token, email);
-
           navigate("/");
         }
       })

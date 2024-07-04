@@ -37,8 +37,6 @@ const Button: FC<ButtonProps> = ({
     setIsDisabledState(isDisabled);
   }, [isDisabled]);
 
-  console.log(isDisabledState);
-
   return (
     <>
       <button

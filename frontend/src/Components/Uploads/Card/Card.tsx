@@ -25,7 +25,6 @@ const Card: React.FC<Props> = ({ upload }) => {
       favouriteUploadAPI(upload.imageId).then(() => {});
     } catch (error) {
       setFavourite(preRequestValue);
-      console.log(error);
       toast.error("Unexpected error occurred");
     }
   };

@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
                 index: true,
                 element: (
                   <ProtectedRoute>
-                    <GetUploads type={UploadType.All} />
+                    <GetUploads key="all" type={UploadType.All} />
                   </ProtectedRoute>
                 ),
               },
@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
                 path: "favourites",
                 element: (
                   <ProtectedRoute>
-                    <GetUploads type={UploadType.Favourites} />
+                    <GetUploads key="favourites" type={UploadType.Favourites} />
                   </ProtectedRoute>
                 ),
               },
