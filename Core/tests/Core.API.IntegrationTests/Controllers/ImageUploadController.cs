@@ -20,7 +20,7 @@ public class ImageUploadController(IntegrationTestWebApplicationFactory factory)
     }
 
     [Fact]
-    public async Task FavouriteImageUpload_FavouritesNonExistingUpload_ReturnsSuccessStatusCode()
+    public async Task FavouriteImageUpload_FavouritesNonExistingUpload_ReturnsNotFoundStatusCode()
     {
         // Arrange
         HttpClient client = this.HttpClient;
@@ -33,7 +33,7 @@ public class ImageUploadController(IntegrationTestWebApplicationFactory factory)
     }
 
     [Fact]
-    public async Task FavouriteImageUpload_FavouritesAnotherUserUpload_ReturnsSuccessStatusCode()
+    public async Task FavouriteImageUpload_FavouritesAnotherUserUpload_ReturnsNotFoundStatusCode()
     {
         // Arrange
         HttpClient client = this.HttpClient;
@@ -42,6 +42,6 @@ public class ImageUploadController(IntegrationTestWebApplicationFactory factory)
         HttpResponseMessage response = await client.PutAsync("/imageupload/favourite/2", null);
 
         // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 }
