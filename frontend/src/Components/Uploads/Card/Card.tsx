@@ -5,6 +5,7 @@ import { ParseDate } from "../helpers.ts";
 import FavouriteButton from "./FavouriteButton.tsx";
 import { toast } from "react-toastify";
 import { favouriteUploadAPI } from "../../../Services/UploadService.ts";
+import { Link } from "react-router-dom";
 
 const API_URL = "https://localhost:5001/";
 
@@ -30,26 +31,28 @@ const Card: React.FC<Props> = ({ upload }) => {
   };
 
   return (
-    <div className={`upload__card ${error} `}>
-      <div className="upload__card-image">
-        <img src={API_URL + upload.imagePath} alt={upload.imageId} />
-        <FavouriteButton
-          isFavourited={isFavourited}
-          setFavourite={handleFavourite}
-        />
-      </div>
-      <div className="upload__card__content">
-        <div className="upload__card-titles">
-          <h3 className="upload__card-titles-title">
-            Placeholder Image Title Value
-          </h3>
-          <h3 className="upload__card-titles-subtitle">
-            {ParseDate(upload.createdAt)}
-          </h3>
+    <Link to={`${upload.imageId}`}>
+      <div className={`upload__card ${error}`}>
+        <div className="upload__card-image">
+          <img src={API_URL + upload.imagePath} alt={upload.imageId} />
+          <FavouriteButton
+            isFavourited={isFavourited}
+            setFavourite={handleFavourite}
+          />
         </div>
-        <div className="upload__card-details"></div>
+        <div className="upload__card__content">
+          <div className="upload__card-titles">
+            <h3 className="upload__card-titles-title">
+              Placeholder Image Title Value
+            </h3>
+            <h3 className="upload__card-titles-subtitle">
+              {ParseDate(upload.createdAt)}
+            </h3>
+          </div>
+          <div className="upload__card-details"></div>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

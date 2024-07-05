@@ -10,6 +10,7 @@ import Uploads from "../Pages/Protected/Uploads/Uploads.tsx";
 import NewUploadPage from "../Pages/Protected/Uploads/NewUpload/NewUploadPage.tsx";
 import GetUploads from "../Pages/Protected/Uploads/GetUploads/GetUploads.tsx";
 import { UploadType } from "../Pages/Protected/Uploads/GetUploads/types.ts";
+import UploadPage from "../Pages/Protected/Uploads/Upload/UploadPage.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,14 @@ export const router = createBrowserRouter([
                 element: (
                   <ProtectedRoute>
                     <NewUploadPage />
+                  </ProtectedRoute>
+                ),
+              },
+              {
+                path: ":id",
+                element: (
+                  <ProtectedRoute>
+                    <UploadPage />
                   </ProtectedRoute>
                 ),
               },
