@@ -3,8 +3,8 @@ import { Outlet } from "react-router-dom";
 
 interface UploadsProps {}
 
-const Uploads: FC<UploadsProps> = () => {
+const UploadsRoot: FC<UploadsProps> = () => {
   return <Outlet />;
 };
 
-export default Uploads;
+export default UploadsRoot;

@@ -54,6 +54,16 @@ export const favouriteUploadAPI = async (imageId: string) => {
   }
 };
 
+export const getUploadAPI = async (uploadId: number) => {
+  try {
+    return await authenticatedAxios(localStorage.getItem("token")!).get<Upload>(
+      `${API_URL}/imageupload/${uploadId}`,
+    );
+  } catch (error) {
+    handleErrorV2(error);
+  }
+};
+
 export const uploadImageAPI = async (formData: FormData) => {
   try {
     return await authenticatedAxios(localStorage.getItem("token")!).post(

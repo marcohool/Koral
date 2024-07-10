@@ -26,7 +26,7 @@ const AllUploads: FC<UploadPageProps> = ({
   }, [currentPageNumber]);
 
   return (
-    <div className="uploads-page__dashboard">
+    <div className="default-content">
       <Dashboard
         uploads={uploads}
         title="All Uploads"

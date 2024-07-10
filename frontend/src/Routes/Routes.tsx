@@ -6,7 +6,7 @@ import Login from "../Pages/Public/Login/Login.tsx";
 import Root from "../Components/Root/Root.tsx";
 import ProtectedRoute from "./ProtectedRoute.tsx";
 import Home from "../Pages/Protected/Home/Home.tsx";
-import Uploads from "../Pages/Protected/Uploads/Uploads.tsx";
+import UploadsRoot from "../Pages/Protected/Uploads/UploadsRoot.tsx";
 import NewUploadPage from "../Pages/Protected/Uploads/NewUpload/NewUploadPage.tsx";
 import GetUploads from "../Pages/Protected/Uploads/GetUploads/GetUploads.tsx";
 import { UploadType } from "../Pages/Protected/Uploads/GetUploads/types.ts";
@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
             path: "uploads",
             element: (
               <ProtectedRoute>
-                <Uploads />
+                <UploadsRoot />
               </ProtectedRoute>
             ),
             children: [

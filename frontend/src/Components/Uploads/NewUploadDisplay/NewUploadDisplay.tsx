@@ -139,7 +139,7 @@ const NewUploadDisplay: FC<NewUploadDisplayProps> = ({
       {currentFile && (
         <>
           <div className="modal__uploaded-image-preview">
-            <h3 className="modal__uploaded-image-title">Uploaded Image</h3>
+            <h3 className="modal__uploaded-image-title">Selected Image</h3>
             <UploadedImageTile
               file={currentFile}
               fileState={helperText?.type}
