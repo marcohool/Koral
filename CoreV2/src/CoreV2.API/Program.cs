@@ -1,6 +1,13 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using Core.Application;
+using Core.DataAccess;
+using Core.Domain;
 
-app.MapGet("/", () => "Hello World!");
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+WebApplication app = builder.Build();
+
+builder.Services
+    .AddDomainServices()
+    .AddApplicationServices()
+    .AddDataAccessServices();
 
 app.Run();
