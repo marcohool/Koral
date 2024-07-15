@@ -1,5 +1,5 @@
-using Core.DataAccess.Configurations;
 using Core.DataAccess.Persistence;
+using Core.DataAccess.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

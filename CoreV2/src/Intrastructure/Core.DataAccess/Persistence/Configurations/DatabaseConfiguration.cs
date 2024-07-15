@@ -1,4 +1,4 @@
-namespace Core.DataAccess.Configurations;
+namespace Core.DataAccess.Persistence.Configurations;
 
 public class DatabaseConfiguration
 {
