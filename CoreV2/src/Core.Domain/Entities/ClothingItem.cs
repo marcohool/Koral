@@ -6,6 +6,8 @@ public class ClothingItem : BaseEntity, IAuditedEntity
 {
     public required string Name { get; set; }
 
+    public string? Description { get; set; }
+
     public string? Brand { get; set; }
 
     public string? Category { get; set; }
@@ -21,4 +23,6 @@ public class ClothingItem : BaseEntity, IAuditedEntity
     public DateTime CreatedOn { get; set; }
 
     public DateTime? LastUpdatedOn { get; set; }
+
+    public ICollection<Upload> Uploads { get; set; } = [];
 }

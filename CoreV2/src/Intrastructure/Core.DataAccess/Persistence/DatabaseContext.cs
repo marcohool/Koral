@@ -1,3 +1,4 @@
+using System.Reflection;
 using Core.Domain.Common;
 using Core.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -11,6 +12,13 @@ public class DatabaseContext : IdentityDbContext<AppUser>
     public DbSet<ClothingItem> ClothingItems { get; set; }
 
     public DbSet<Upload> Uploads { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        base.OnModelCreating(builder);
+    }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
