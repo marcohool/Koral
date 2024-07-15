@@ -1,3 +1,4 @@
+using Core.DataAccess.Identity;
 using Core.Domain.Entities;
 using Core.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -32,8 +33,8 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
         builder.Property(u => u.AppUserId).IsRequired().HasMaxLength(50);
 
         builder
-            .HasOne(u => u.AppUser)
-            .WithMany(au => au.Uploads)
+            .HasOne<AppUser>()
+            .WithMany()
             .HasForeignKey(a => a.AppUserId)
             .OnDelete(DeleteBehavior.Cascade);
 

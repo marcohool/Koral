@@ -1,4 +1,5 @@
 using System.Reflection;
+using Core.DataAccess.Identity;
 using Core.Domain.Common;
 using Core.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

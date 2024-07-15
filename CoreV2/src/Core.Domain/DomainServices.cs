@@ -1,3 +1,4 @@
+using Core.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Core.Domain;

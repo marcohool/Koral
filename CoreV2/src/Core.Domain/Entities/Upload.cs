@@ -25,8 +25,6 @@ public class Upload : BaseEntity, IAuditedEntity
 
     public required string AppUserId { get; set; }
 
-    public required AppUser AppUser { get; set; }
-
     public DateTime CreatedOn { get; set; }
 
     public DateTime? LastUpdatedOn { get; set; }
