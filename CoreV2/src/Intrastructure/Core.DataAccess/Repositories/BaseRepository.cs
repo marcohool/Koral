@@ -1,9 +1,9 @@
+using System.Linq.Expressions;
 using Core.DataAccess.Persistence;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Common;
 using Core.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace Core.DataAccess.Repositories;
 
@@ -21,7 +21,8 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
     {
         TEntity? entity = await this.dbSet.Where(predicate).FirstOrDefaultAsync();
 
-        if (entity == null) throw new ResourceNotFoundException(typeof(TEntity));
+        if (entity == null)
+            throw new ResourceNotFoundException(typeof(TEntity));
 
         return await this.dbSet.Where(predicate).FirstOrDefaultAsync();
     }

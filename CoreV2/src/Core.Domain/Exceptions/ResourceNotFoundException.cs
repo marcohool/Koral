@@ -5,5 +5,6 @@ public class ResourceNotFoundException : Exception
 {
     public ResourceNotFoundException() { }
 
-    public ResourceNotFoundException(Type type) : base($"{type} is missing") { }
+    public ResourceNotFoundException(Type type)
+        : base($"{type} is missing") { }
 }
