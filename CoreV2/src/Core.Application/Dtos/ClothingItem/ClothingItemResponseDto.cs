@@ -1,8 +1,8 @@
-using Core.Domain.Common;
+using Microsoft.AspNetCore.Http;
 
-namespace Core.Domain.Entities;
+namespace Core.Application.Dtos.ClothingItem;
 
-public class ClothingItem : BaseEntity, IAuditedEntity
+public class ClothingItemResponseDto : BaseResponseDto
 {
     public required string Name { get; set; }
 
@@ -16,13 +16,7 @@ public class ClothingItem : BaseEntity, IAuditedEntity
 
     public decimal? Price { get; set; }
 
-    public string? ImagePath { get; set; }
+    public required IFormFile Image { get; set; }
 
     public required string SourceUrl { get; set; }
-
-    public DateTime CreatedOn { get; set; }
-
-    public DateTime? LastUpdatedOn { get; set; }
-
-    public ICollection<Upload> Uploads { get; set; } = [];
 }
