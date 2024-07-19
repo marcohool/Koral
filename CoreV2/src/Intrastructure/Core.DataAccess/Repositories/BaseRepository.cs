@@ -12,8 +12,13 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
 {
     private readonly DbSet<TEntity> dbSet = context.Set<TEntity>();
 
-    public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+    public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null)
     {
+        if (predicate == null)
+        {
+            return await this.dbSet.ToListAsync();
+        }
+
         return await this.dbSet.Where(predicate).ToListAsync();
     }
 
@@ -43,11 +48,11 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
         return entity;
     }
 
-    public async Task<TEntity> DeleteAsync(TEntity entity)
+    public async Task<Guid> DeleteAsync(TEntity entity)
     {
         TEntity removedEntity = this.dbSet.Remove(entity).Entity;
         await context.SaveChangesAsync();
 
-        return removedEntity;
+        return removedEntity.Id;
     }
 }

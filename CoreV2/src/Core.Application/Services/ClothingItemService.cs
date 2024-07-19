@@ -1,28 +1,46 @@
+using AutoMapper;
 using Core.Application.Dtos.ClothingItem;
+using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
+using Core.DataAccess.Repositories.Interfaces;
+using Core.Domain.Entities;
 
 namespace Core.Application.Services;
 
-public class ClothingItemService : IClothingItemService
+public class ClothingItemService(IMapper mapper, IClothingItemRepository clothingItemRepository)
+    : IClothingItemService
 {
-    public Task<ClothingItemResponseDto> CreateAsync(
-        CreateClothingItemDto createClothingItemRequestModel,
+    public async Task<ClothingItemResponseDto> CreateAsync(
+        CreateClothingItemDto createClothingItemModel,
         CancellationToken cancellationToken = default
     )
     {
-        throw new NotImplementedException();
+        ClothingItem clothingItem = mapper.Map<ClothingItem>(createClothingItemModel);
+
+        ClothingItem createdClothingItem = await clothingItemRepository.AddAsync(clothingItem);
+
+        return mapper.Map<ClothingItemResponseDto>(createdClothingItem);
     }
 
-    public Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        ClothingItem? clothingItem = await clothingItemRepository.GetFirstAsync(ci => ci.Id == id);
+
+        if (clothingItem is null)
+        {
+            throw new NotFoundException($"Clothing item with id {id} not found");
+        }
+
+        return clothingItemRepository.DeleteAsync(clothingItem).Result;
     }
 
-    public Task<IEnumerable<ClothingItemResponseDto>> GetAllAsync(
+    public async Task<IEnumerable<ClothingItemResponseDto>> GetAllAsync(
         CancellationToken cancellationToken = default
     )
     {
-        throw new NotImplementedException();
+        List<ClothingItem> clothingItems = await clothingItemRepository.GetAllAsync();
+
+        return mapper.Map<IEnumerable<ClothingItemResponseDto>>(clothingItems);
     }
 
     public Task<ClothingItemResponseDto> GetByIdAsync(
@@ -30,6 +48,10 @@ public class ClothingItemService : IClothingItemService
         CancellationToken cancellationToken = default
     )
     {
-        throw new NotImplementedException();
+        return Task.FromResult(
+            mapper.Map<ClothingItemResponseDto>(
+                clothingItemRepository.GetFirstAsync(ci => ci.Id == id).Result
+            )
+        );
     }
 }

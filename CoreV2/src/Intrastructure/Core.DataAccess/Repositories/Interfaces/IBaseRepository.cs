@@ -6,7 +6,7 @@ namespace Core.DataAccess.Repositories.Interfaces;
 public interface IBaseRepository<TEntity>
     where TEntity : BaseEntity
 {
-    Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate);
+    Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null);
 
     Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> predicate);
 
@@ -14,5 +14,5 @@ public interface IBaseRepository<TEntity>
 
     Task<TEntity> UpdateAsync(TEntity entity);
 
-    Task<TEntity> DeleteAsync(TEntity entity);
+    Task<Guid> DeleteAsync(TEntity entity);
 }
