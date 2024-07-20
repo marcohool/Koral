@@ -17,6 +17,8 @@ public class ClothingItemService(IMapper mapper, IClothingItemRepository clothin
     {
         ClothingItem clothingItem = mapper.Map<ClothingItem>(createClothingItemModel);
 
+        // Todo: Implement image upload
+
         ClothingItem createdClothingItem = await clothingItemRepository.AddAsync(clothingItem);
 
         return mapper.Map<ClothingItemResponseDto>(createdClothingItem);
