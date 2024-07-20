@@ -23,14 +23,16 @@ public static class ApiServices
 
         services
             .AddOptions<CloudinaryConfiguration>()
-            .BindConfiguration("CloudinaryConfiguration")
+            .BindConfiguration("Cloudinary")
             .ValidateDataAnnotations()
             .ValidateOnStart();
     }
 
     private static void AddJwt(this IServiceCollection services, IConfiguration configuration)
     {
-        string? securityKey = configuration.GetRequiredSection("JWT").GetValue<string>("SecretKey");
+        string? securityKey = configuration
+            .GetRequiredSection("JWT")
+            .GetValue<string>("SigningKey");
 
         if (string.IsNullOrEmpty(securityKey))
         {

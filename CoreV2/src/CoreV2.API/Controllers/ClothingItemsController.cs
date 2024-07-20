@@ -1,4 +1,5 @@
 using Core.Application.Dtos.ClothingItem;
+using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,13 @@ public class ClothingItemsController(IClothingItemService clothingItemService) :
     [HttpPost]
     public async Task<IActionResult> CreateAsync(CreateClothingItemDto createClothingItemDto)
     {
-        return this.Ok(await clothingItemService.CreateAsync(createClothingItemDto));
+        try
+        {
+            return this.Ok(await clothingItemService.CreateAsync(createClothingItemDto));
+        }
+        catch (ValidationException validationEx)
+        {
+            return this.BadRequest(validationEx.Message);
+        }
     }
 }

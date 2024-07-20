@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Core.DataAccess.Persistence;
 
-public class DatabaseContext : IdentityDbContext<AppUser>
+public class DatabaseContext(DbContextOptions options) : IdentityDbContext<AppUser>(options)
 {
     public DbSet<ClothingItem> ClothingItems { get; set; }
 
