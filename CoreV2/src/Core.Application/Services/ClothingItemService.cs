@@ -7,8 +7,11 @@ using Core.Domain.Entities;
 
 namespace Core.Application.Services;
 
-public class ClothingItemService(IMapper mapper, IClothingItemRepository clothingItemRepository)
-    : IClothingItemService
+public class ClothingItemService(
+    IMapper mapper,
+    IClothingItemRepository clothingItemRepository,
+    IImageStorageService imageStorageService
+) : IClothingItemService
 {
     public async Task<ClothingItemResponseDto> CreateAsync(
         CreateClothingItemDto createClothingItemModel,
@@ -17,7 +20,10 @@ public class ClothingItemService(IMapper mapper, IClothingItemRepository clothin
     {
         ClothingItem clothingItem = mapper.Map<ClothingItem>(createClothingItemModel);
 
-        // Todo: Implement image upload
+        clothingItem.ImageUrl = await imageStorageService.UploadImageAsync(
+            createClothingItemModel.Image,
+            cancellationToken
+        );
 
         ClothingItem createdClothingItem = await clothingItemRepository.AddAsync(clothingItem);
 

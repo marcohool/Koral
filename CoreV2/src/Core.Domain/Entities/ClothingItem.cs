@@ -16,7 +16,7 @@ public class ClothingItem : BaseEntity, IAuditedEntity
 
     public decimal? Price { get; set; }
 
-    public string? ImagePath { get; set; }
+    public string? ImageUrl { get; set; }
 
     public required string SourceUrl { get; set; }
 
