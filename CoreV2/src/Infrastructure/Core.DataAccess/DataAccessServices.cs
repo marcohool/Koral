@@ -35,7 +35,9 @@ public static class DataAccessServices
             .Get<DatabaseConfiguration>();
 
         if (databaseConfig == null)
+        {
             throw new InvalidOperationException("Database configuration is missing or invalid.");
+        }
 
         services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(databaseConfig.ConnectionString)

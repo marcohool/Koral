@@ -16,7 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Core.Application\Core.Application.csproj" />
     <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
-    <ProjectReference Include="..\Intrastructure\Core.DataAccess\Core.DataAccess.csproj" />
+    <ProjectReference Include="..\Infrastructure\Core.DataAccess\Core.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
