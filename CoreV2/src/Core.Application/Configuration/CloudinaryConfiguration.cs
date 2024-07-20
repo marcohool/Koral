@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.API.Configuration;
+namespace Core.Application.Configuration;
 
 public class CloudinaryConfiguration
 {

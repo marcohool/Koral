@@ -1,13 +1,34 @@
 using System.Text;
+using Core.Application;
+using Core.Application.Configuration;
+using Core.DataAccess;
+using Core.Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
-namespace Core.API.Configuration;
+namespace Core.API;
 
 public static class ApiServices
 {
-    public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+    public static void ConfigureServices(
+        this IServiceCollection services,
+        IConfiguration configuration
+    )
+    {
+        services.AddSwagger();
+        services.AddJwt(configuration);
+
+        services.AddDomainServices().AddApplicationServices().AddDataAccessServices(configuration);
+
+        services
+            .AddOptions<CloudinaryConfiguration>()
+            .BindConfiguration("CloudinaryConfiguration")
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+    }
+
+    private static void AddJwt(this IServiceCollection services, IConfiguration configuration)
     {
         string? securityKey = configuration.GetRequiredSection("JWT").GetValue<string>("SecretKey");
 
@@ -42,7 +63,7 @@ public static class ApiServices
             });
     }
 
-    public static void AddSwagger(this IServiceCollection services)
+    private static void AddSwagger(this IServiceCollection services)
     {
         services.AddSwaggerGen(s =>
         {

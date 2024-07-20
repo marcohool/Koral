@@ -1,4 +1,4 @@
-using Core.API.Configuration;
+using Core.API;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
