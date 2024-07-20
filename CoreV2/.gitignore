@@ -406,3 +406,6 @@ FodyWeavers.xsd
 # Environment specific config files
 **/appsettings.Development.json
 **/appsettings.Production.json
+
+# Database files
+**/data-mssql/*
