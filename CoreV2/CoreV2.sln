@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0ACE00A-2EB0-4052-B9AA-7EDB26543A0E}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Unit.Test", "tests\Core.Unit.Test\Core.Unit.Test.csproj", "{8895E3FF-0C30-4BE1-A436-4772A4ABC266}"

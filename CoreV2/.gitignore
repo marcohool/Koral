@@ -402,3 +402,7 @@ FodyWeavers.xsd
 
 # wwwroot Files
 **/wwwroot/uploads/*
+
+# Environment specific config files
+**/appsettings.Development.json
+**/appsettings.Production.json
