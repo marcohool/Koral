@@ -25,15 +25,8 @@ public class ClothingItemConfiguration : IEntityTypeConfiguration<ClothingItem>
 
         builder.Property(ci => ci.Price).HasColumnType("decimal(18,2)");
 
-        builder
-            .Property(ci => ci.ImageUrl)
-            .HasMaxLength(200)
-            .HasAnnotation("Url", new UrlAttribute());
+        builder.Property(ci => ci.ImageUrl).HasMaxLength(200);
 
-        builder
-            .Property(ci => ci.SourceUrl)
-            .HasMaxLength(200)
-            .HasAnnotation("Url", new UrlAttribute())
-            .IsRequired();
+        builder.Property(ci => ci.SourceUrl).HasMaxLength(200).IsRequired();
     }
 }

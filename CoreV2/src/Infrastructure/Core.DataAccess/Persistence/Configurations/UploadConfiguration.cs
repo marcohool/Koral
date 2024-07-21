@@ -22,7 +22,7 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
 
         builder.Property(u => u.ContentType).IsRequired().HasMaxLength(255);
 
-        builder.Property(u => u.Status).HasDefaultValue(UploadStatus.Processing).IsRequired();
+        builder.Property(u => u.Status).HasDefaultValue(UploadStatus.Pending).IsRequired();
 
         builder.Property(u => u.IsFavourited).IsRequired();
 
@@ -30,13 +30,17 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
 
         builder.Property(u => u.IsDeleted).IsRequired();
 
-        builder.Property(u => u.AppUserId).IsRequired().HasMaxLength(50);
+        builder
+            .HasMany(u => u.ClothingItems)
+            .WithMany(ci => ci.Uploads)
+            .UsingEntity(j => j.ToTable("UploadClothingItems"));
 
         builder
             .HasOne<AppUser>()
-            .WithMany()
-            .HasForeignKey(a => a.AppUserId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .WithMany(u => u.Uploads)
+            .HasForeignKey(u => u.AppUserId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .IsRequired();
 
         builder.HasIndex(u => u.Path).IsUnique();
     }

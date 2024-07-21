@@ -23,11 +23,11 @@ public class Upload : BaseEntity, IAuditedEntity
 
     public bool IsDeleted { get; set; }
 
-    public required string AppUserId { get; set; }
-
     public DateTime CreatedOn { get; set; }
 
     public DateTime? LastUpdatedOn { get; set; }
+
+    public required string AppUserId { get; set; }
 
     public ICollection<ClothingItem> ClothingItems { get; set; } = [];
 }
