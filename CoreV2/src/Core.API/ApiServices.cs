@@ -26,6 +26,12 @@ public static class ApiServices
             .BindConfiguration("Cloudinary")
             .ValidateDataAnnotations()
             .ValidateOnStart();
+
+        services
+            .AddOptions<ImageOptions>()
+            .BindConfiguration("Image")
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
     }
 
     private static void AddJwt(this IServiceCollection services, IConfiguration configuration)

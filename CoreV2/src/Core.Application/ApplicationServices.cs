@@ -1,4 +1,5 @@
 using AutoMapper;
+using Core.Application.MappingProfiles;
 using Core.Application.Services;
 using Core.Application.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,6 @@ public static class ApplicationServices
         services.AddScoped<IImageStorageService, ImageStorageService>();
         services.AddScoped<IClothingItemService, ClothingItemService>();
 
-        services.AddAutoMapper(typeof(Profile));
+        services.AddAutoMapper(typeof(ClothingItemProfile));
     }
 }

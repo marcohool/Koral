@@ -5,7 +5,7 @@ namespace Core.Application.Configuration;
 public class ImageOptions
 {
     [Required]
-    public required int MaxSize { get; set; }
+    public required long MaxSize { get; set; }
 
     [Required]
     public required string[] AllowedExtensions { get; set; }

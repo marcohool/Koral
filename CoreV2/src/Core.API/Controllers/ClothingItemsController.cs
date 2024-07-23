@@ -20,7 +20,9 @@ public class ClothingItemsController(IClothingItemService clothingItemService) :
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateClothingItemDto createClothingItemDto)
+    public async Task<IActionResult> CreateAsync(
+        [FromForm] CreateClothingItemDto createClothingItemDto
+    )
     {
         try
         {
