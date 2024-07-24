@@ -1,4 +1,5 @@
 using Core.Domain.Common;
+using Core.Domain.Enums;
 
 namespace Core.Domain.Entities;
 
@@ -16,9 +17,15 @@ public class ClothingItem : BaseEntity, IAuditedEntity
 
     public decimal? Price { get; set; }
 
+    public required string CurrencyCode { get; set; }
+
+    public required Gender Gender { get; set; }
+
     public string? ImageUrl { get; set; }
 
     public required string SourceUrl { get; set; }
+
+    public required SourceRegion SourceRegion { get; set; }
 
     public DateTime CreatedOn { get; set; }
 

@@ -1,3 +1,5 @@
+version: '3.4'
+
 services:
   core.api:
     image: core.api

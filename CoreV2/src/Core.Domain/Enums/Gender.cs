@@ -1,6 +1,9 @@
 namespace Core.Domain.Enums;
 
-public class Gender
+public enum Gender
 {
-    
+    Male,
+    Female,
+    Unisex,
+    Unknown,
 }
