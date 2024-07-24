@@ -1,3 +1,5 @@
+using Core.Domain.Enums;
+
 namespace Core.Application.Dtos.ClothingItem;
 
 public class BaseClothingItemDto
@@ -14,5 +16,11 @@ public class BaseClothingItemDto
 
     public decimal? Price { get; set; }
 
+    public required string CurrencyCode { get; set; }
+
+    public Gender Gender { get; set; }
+
     public required string SourceUrl { get; set; }
+
+    public SourceRegion SourceRegion { get; set; }
 }
