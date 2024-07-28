@@ -3,7 +3,7 @@ using Core.Domain.Enums;
 
 namespace Core.Domain.Entities;
 
-public class Upload : BaseEntity, IAuditedEntity
+public record Upload : BaseEntity, IAuditedEntity
 {
     public string? Title { get; set; }
 

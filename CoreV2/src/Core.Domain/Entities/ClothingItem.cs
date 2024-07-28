@@ -3,7 +3,7 @@ using Core.Domain.Enums;
 
 namespace Core.Domain.Entities;
 
-public class ClothingItem : BaseEntity, IAuditedEntity
+public record ClothingItem : BaseEntity, IAuditedEntity
 {
     public required string Name { get; set; }
 

@@ -2,7 +2,7 @@ using Core.Domain.Enums;
 
 namespace Core.Application.Dtos.ClothingItem;
 
-public class BaseClothingItemDto
+public record BaseClothingItemDto
 {
     public required string Name { get; set; }
 

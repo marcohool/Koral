@@ -1,6 +1,6 @@
 namespace Core.Domain.Common;
 
-public abstract class BaseEntity
+public record BaseEntity
 {
     public Guid Id { get; set; }
 }
