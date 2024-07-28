@@ -17,7 +17,7 @@ public record ClothingItem : BaseEntity, IAuditedEntity
 
     public decimal? Price { get; set; }
 
-    public required string CurrencyCode { get; set; }
+    public string? CurrencyCode { get; set; }
 
     public required Gender Gender { get; set; }
 

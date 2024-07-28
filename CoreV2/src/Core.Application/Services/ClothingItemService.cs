@@ -4,6 +4,7 @@ using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
+using Core.Domain.Exceptions;
 
 namespace Core.Application.Services;
 
@@ -51,15 +52,22 @@ public class ClothingItemService(
         return mapper.Map<IEnumerable<ClothingItemResponseDto>>(clothingItems);
     }
 
-    public Task<ClothingItemResponseDto> GetByIdAsync(
+    public async Task<ClothingItemResponseDto> GetByIdAsync(
         Guid id,
         CancellationToken cancellationToken = default
     )
     {
-        return Task.FromResult(
-            mapper.Map<ClothingItemResponseDto>(
-                clothingItemRepository.GetFirstAsync(ci => ci.Id == id).Result
-            )
-        );
+        try
+        {
+            ClothingItem? clothingItem = await clothingItemRepository.GetFirstAsync(ci =>
+                ci.Id == id
+            );
+
+            return mapper.Map<ClothingItemResponseDto>(clothingItem);
+        }
+        catch (ResourceNotFoundException)
+        {
+            throw new NotFoundException($"Clothing item with id {id} not found");
+        }
     }
 }
