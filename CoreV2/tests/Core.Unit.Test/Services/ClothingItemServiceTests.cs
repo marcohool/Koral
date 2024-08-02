@@ -9,13 +9,12 @@ using Core.Domain.Entities;
 using Core.Domain.Enums;
 using Core.Domain.Exceptions;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http;
 using Moq;
 using ValidationException = System.ComponentModel.DataAnnotations.ValidationException;
 
 namespace Core.UnitTest.Services;
 
-public class ClothingItemServiceTests
+public class ClothingItemServiceTests : BaseServiceTests
 {
     private readonly Mock<IClothingItemRepository> clothingItemRepositoryMock;
     private readonly Mock<IImageStorageService> imageStorageServiceMock;
@@ -269,17 +268,5 @@ public class ClothingItemServiceTests
         );
 
         this.clothingItemRepositoryMock.VerifyAll();
-    }
-
-    private static FormFile CreateMockFormFile(int fileSize, string fileName, string contentType)
-    {
-        byte[] fileContext = new byte[fileSize * 1024 * 1024];
-        MemoryStream memoryStream = new(fileContext);
-
-        return new FormFile(memoryStream, 0, fileSize, "file", fileName)
-        {
-            Headers = new HeaderDictionary(),
-            ContentType = contentType
-        };
     }
 }
