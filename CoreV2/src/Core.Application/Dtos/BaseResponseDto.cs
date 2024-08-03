@@ -1,6 +1,6 @@
 ﻿namespace Core.Application.Dtos;
 
-public class BaseResponseDto
+public record BaseResponseDto
 {
     public Guid Id { get; set; }
 }
