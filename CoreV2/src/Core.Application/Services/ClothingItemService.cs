@@ -1,3 +1,4 @@
+using System.Data;
 using AutoMapper;
 using Core.Application.Dtos.ClothingItem;
 using Core.Application.Exceptions;
@@ -5,6 +6,7 @@ using Core.Application.Services.Interfaces;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
 using Core.Domain.Exceptions;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Core.Application.Services;
 
@@ -40,7 +42,22 @@ public class ClothingItemService(
             throw new NotFoundException($"Clothing item with id {id} not found");
         }
 
-        return clothingItemRepository.DeleteAsync(clothingItem).Result;
+        IDbContextTransaction transaction = await clothingItemRepository.BeginTransactionAsync();
+
+        Guid deletedId = clothingItemRepository.DeleteAsync(clothingItem).Result;
+
+        if (clothingItem.ImageUrl is not null)
+        {
+            await imageStorageService.DeleteImageAsync(clothingItem.ImageUrl, cancellationToken);
+        }
+        else
+        {
+            // To-do: Else log that image url is missing
+        }
+
+        await transaction.CommitAsync(cancellationToken);
+
+        return deletedId;
     }
 
     public async Task<IEnumerable<ClothingItemResponseDto>> GetAllAsync(

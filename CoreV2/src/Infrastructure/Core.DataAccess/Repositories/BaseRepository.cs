@@ -4,6 +4,7 @@ using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Common;
 using Core.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Core.DataAccess.Repositories;
 
@@ -54,5 +55,10 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
         await context.SaveChangesAsync();
 
         return removedEntity.Id;
+    }
+
+    public async Task<IDbContextTransaction> BeginTransactionAsync()
+    {
+        return await context.Database.BeginTransactionAsync();
     }
 }
