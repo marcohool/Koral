@@ -5,5 +5,5 @@ namespace Core.Application.Dtos.Upload;
 
 public class CreateUploadDto
 {
-    public IFormFile File { get; set; }
+    public required IFormFile File { get; set; }
 }

@@ -19,6 +19,7 @@ public static class ApplicationServices
     {
         services.AddScoped<IImageStorageService, ImageStorageService>();
         services.AddScoped<IClothingItemService, ClothingItemService>();
+        services.AddScoped<ICloudinaryService, CloudinaryService>();
 
         services.AddAutoMapper(typeof(ClothingItemProfile));
     }

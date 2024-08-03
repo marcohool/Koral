@@ -1,5 +1,5 @@
+using System.ComponentModel.DataAnnotations;
 using Core.Application.Dtos.ClothingItem;
-using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
