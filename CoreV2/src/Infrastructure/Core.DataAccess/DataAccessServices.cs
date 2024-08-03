@@ -47,7 +47,9 @@ public static class DataAccessServices
     private static void AddIdentity(this IServiceCollection services)
     {
         services
-            .AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddDefaultIdentity<ApplicationUser>(options =>
+                options.SignIn.RequireConfirmedAccount = true
+            )
             .AddEntityFrameworkStores<DatabaseContext>();
 
         services.Configure<IdentityOptions>(options =>

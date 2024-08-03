@@ -11,6 +11,7 @@ public static class ApplicationServices
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddServices();
+        services.RegisterAutoMappers();
 
         return services;
     }
@@ -20,7 +21,12 @@ public static class ApplicationServices
         services.AddScoped<IImageStorageService, ImageStorageService>();
         services.AddScoped<IClothingItemService, ClothingItemService>();
         services.AddScoped<ICloudinaryService, CloudinaryService>();
+        services.AddScoped<IUserService, UserService>();
+    }
 
+    private static void RegisterAutoMappers(this IServiceCollection services)
+    {
         services.AddAutoMapper(typeof(ClothingItemProfile));
+        services.AddAutoMapper(typeof(UserProfile));
     }
 }

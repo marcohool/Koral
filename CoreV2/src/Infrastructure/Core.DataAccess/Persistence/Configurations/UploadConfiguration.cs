@@ -36,7 +36,7 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
             .UsingEntity(j => j.ToTable("UploadClothingItems"));
 
         builder
-            .HasOne<AppUser>()
+            .HasOne<ApplicationUser>()
             .WithMany(u => u.Uploads)
             .HasForeignKey(u => u.AppUserId)
             .OnDelete(DeleteBehavior.Cascade)

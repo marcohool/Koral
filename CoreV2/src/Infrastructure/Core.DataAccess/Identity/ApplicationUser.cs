@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Core.DataAccess.Identity;
 
-public class AppUser : IdentityUser
+public class ApplicationUser : IdentityUser
 {
     public IEnumerable<Upload> Uploads { get; } = [];
 }
