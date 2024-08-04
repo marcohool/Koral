@@ -10,18 +10,31 @@ public class UsersController(IUserService userService) : ApiController
 {
     private readonly IUserService userService = userService;
 
-    [HttpPost]
+    [HttpPost("register")]
     [AllowAnonymous]
     public async Task<IActionResult> RegisterAsync(CreateUserDto createUserDto)
     {
         try
         {
-            UserResponseDto user = await userService.CreateAsync(createUserDto);
-            return Ok(user);
+            return Ok(await userService.CreateAsync(createUserDto));
         }
         catch (BadRequestException ex)
         {
             return BadRequest(ex.ErrorMessages);
+        }
+    }
+
+    [HttpPost("login")]
+    [AllowAnonymous]
+    public async Task<IActionResult> LoginAsync(LoginUserDto loginUserDto)
+    {
+        try
+        {
+            return Ok(await userService.LoginAsync(loginUserDto));
+        }
+        catch (BadRequestException ex)
+        {
+            return BadRequest(ex.Message);
         }
     }
 }

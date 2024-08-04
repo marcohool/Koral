@@ -9,6 +9,6 @@ public class UserProfile : Profile
     public UserProfile()
     {
         CreateMap<CreateUserDto, ApplicationUser>()
-            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+            .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => Guid.NewGuid()));
     }
 }

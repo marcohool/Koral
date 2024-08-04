@@ -2,7 +2,7 @@
 
 public class BadRequestException : Exception
 {
-    public IEnumerable<string> ErrorMessages { get; } = [];
+    public IEnumerable<string>? ErrorMessages { get; }
 
     public BadRequestException(string message)
         : base(message) { }

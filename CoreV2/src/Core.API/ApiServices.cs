@@ -4,6 +4,7 @@ using Core.Application.Configuration;
 using Core.DataAccess;
 using Core.Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -17,7 +18,6 @@ public static class ApiServices
     )
     {
         services.AddSwagger();
-        services.AddJwt(configuration);
 
         services.AddDomainServices().AddApplicationServices().AddDataAccessServices(configuration);
 
@@ -32,23 +32,21 @@ public static class ApiServices
             .BindConfiguration("Image")
             .ValidateDataAnnotations()
             .ValidateOnStart();
+
+        services
+            .AddOptions<JwtOptions>()
+            .BindConfiguration("JWT")
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+
+        services.AddJwt(
+            services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>().Value
+        );
     }
 
-    private static void AddJwt(this IServiceCollection services, IConfiguration configuration)
+    private static void AddJwt(this IServiceCollection services, JwtOptions jwtOptions)
     {
-        string? securityKey = configuration
-            .GetRequiredSection("JWT")
-            .GetValue<string>("SigningKey");
-
-        if (string.IsNullOrEmpty(securityKey))
-        {
-            throw new ArgumentException(
-                "JWT SecretKey cannot be null or empty",
-                nameof(configuration)
-            );
-        }
-
-        byte[] key = Encoding.ASCII.GetBytes(securityKey);
+        byte[] key = Encoding.ASCII.GetBytes(jwtOptions.SigningKey);
 
         // TODO: Configure secure JWT options
         services

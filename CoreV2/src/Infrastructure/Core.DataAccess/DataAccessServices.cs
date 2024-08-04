@@ -54,7 +54,6 @@ public static class DataAccessServices
 
         services.Configure<IdentityOptions>(options =>
         {
-            options.Password.RequireDigit = true;
             options.Password.RequireLowercase = false;
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequireUppercase = false;
@@ -66,6 +65,8 @@ public static class DataAccessServices
             options.Lockout.AllowedForNewUsers = true;
 
             options.User.RequireUniqueEmail = true;
+
+            options.SignIn.RequireConfirmedEmail = false;
         });
     }
 }
