@@ -5,7 +5,6 @@ using Core.Application.Exceptions;
 using Core.Application.Helpers;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Identity;
-using Core.Domain.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
