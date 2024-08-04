@@ -22,6 +22,8 @@ public static class ApplicationServices
         services.AddScoped<IClothingItemService, ClothingItemService>();
         services.AddScoped<ICloudinaryService, CloudinaryService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IClaimService, ClaimService>();
+        services.AddScoped<IUploadService, UploadService>();
     }
 
     private static void RegisterAutoMappers(this IServiceCollection services)

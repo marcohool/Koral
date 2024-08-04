@@ -4,6 +4,7 @@ using Core.Application.Configuration;
 using Core.DataAccess;
 using Core.Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -52,8 +53,13 @@ public static class ApiServices
         services
             .AddAuthentication(x =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultAuthenticateScheme =
+                    x.DefaultChallengeScheme =
+                    x.DefaultForbidScheme =
+                    x.DefaultScheme =
+                    x.DefaultSignInScheme =
+                    x.DefaultSignOutScheme =
+                        JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(x =>
             {
@@ -63,8 +69,6 @@ public static class ApiServices
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
                 };
             });
     }

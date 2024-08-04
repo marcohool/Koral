@@ -16,8 +16,6 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
 
         builder.Property(u => u.Title).HasMaxLength(255);
 
-        builder.Property(u => u.Path).HasMaxLength(1024);
-
         builder.Property(u => u.Size).IsRequired();
 
         builder.Property(u => u.ContentType).IsRequired().HasMaxLength(255);
@@ -41,7 +39,5 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
             .HasForeignKey(u => u.AppUserId)
             .OnDelete(DeleteBehavior.Cascade)
             .IsRequired();
-
-        builder.HasIndex(u => u.Path).IsUnique();
     }
 }

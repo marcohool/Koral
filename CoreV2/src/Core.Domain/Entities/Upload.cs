@@ -7,8 +7,6 @@ public record Upload : BaseEntity, IAuditedEntity
 {
     public string? Title { get; set; }
 
-    public required string Path { get; set; }
-
     public required long Size { get; set; }
 
     public required string ContentType { get; set; }
@@ -22,6 +20,8 @@ public record Upload : BaseEntity, IAuditedEntity
     public int? AccuracyRating { get; set; }
 
     public bool IsDeleted { get; set; }
+
+    public required string ImageUrl { get; set; }
 
     public DateTime CreatedOn { get; set; }
 
