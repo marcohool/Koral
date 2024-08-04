@@ -31,8 +31,6 @@ public class MockHelpers
         userManager.Object.UserValidators.Add(new UserValidator<TUser>());
         userManager.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
 
-        userManager.Setup(x => x.Users).Returns(userList.AsQueryable());
-
         return userManager;
     }
 
