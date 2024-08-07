@@ -13,6 +13,9 @@ public class ImageStorageService(
     IOptionsMonitor<ImageOptions> imageOptions
 ) : IImageStorageService
 {
+    private readonly ICloudinaryService cloudinaryService = cloudinaryService;
+    private readonly IOptionsMonitor<ImageOptions> imageOptions = imageOptions;
+
     private const string ImageFolder = "images";
 
     public async Task<string> UploadImageAsync(
@@ -20,19 +23,21 @@ public class ImageStorageService(
         CancellationToken cancellationToken = default
     )
     {
-        if (image.Length > imageOptions.CurrentValue.MaxSize)
+        if (image.Length > this.imageOptions.CurrentValue.MaxSize)
         {
             throw new ValidationException("Image size is too large.");
         }
 
         if (
-            !imageOptions.CurrentValue.AllowedExtensions.Contains(Path.GetExtension(image.FileName))
+            !this.imageOptions.CurrentValue.AllowedExtensions.Contains(
+                Path.GetExtension(image.FileName)
+            )
         )
         {
             throw new ValidationException("Invalid file extension.");
         }
 
-        ImageUploadResult result = await cloudinaryService.UploadAsync(
+        ImageUploadResult result = await this.cloudinaryService.UploadAsync(
             new ImageUploadParams
             {
                 File = new FileDescription(image.FileName, image.OpenReadStream()),

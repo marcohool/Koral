@@ -1,4 +1,3 @@
-using System.Data;
 using AutoMapper;
 using Core.Application.Dtos.ClothingItem;
 using Core.Application.Exceptions;
@@ -16,39 +15,49 @@ public class ClothingItemService(
     IImageStorageService imageStorageService
 ) : IClothingItemService
 {
+    private readonly IMapper mapper = mapper;
+    private readonly IClothingItemRepository clothingItemRepository = clothingItemRepository;
+    private readonly IImageStorageService imageStorageService = imageStorageService;
+
     public async Task<ClothingItemResponseDto> CreateAsync(
         CreateClothingItemDto createClothingItemModel,
         CancellationToken cancellationToken = default
     )
     {
-        ClothingItem clothingItem = mapper.Map<ClothingItem>(createClothingItemModel);
+        ClothingItem clothingItem = this.mapper.Map<ClothingItem>(createClothingItemModel);
 
-        clothingItem.ImageUrl = await imageStorageService.UploadImageAsync(
+        clothingItem.ImageUrl = await this.imageStorageService.UploadImageAsync(
             createClothingItemModel.Image,
             cancellationToken
         );
 
-        ClothingItem createdClothingItem = await clothingItemRepository.AddAsync(clothingItem);
+        ClothingItem createdClothingItem = await this.clothingItemRepository.AddAsync(clothingItem);
 
-        return mapper.Map<ClothingItemResponseDto>(createdClothingItem);
+        return this.mapper.Map<ClothingItemResponseDto>(createdClothingItem);
     }
 
     public async Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        ClothingItem? clothingItem = await clothingItemRepository.GetFirstAsync(ci => ci.Id == id);
+        ClothingItem? clothingItem = await this.clothingItemRepository.GetFirstAsync(ci =>
+            ci.Id == id
+        );
 
         if (clothingItem is null)
         {
             throw new NotFoundException($"Clothing item with id {id} not found");
         }
 
-        IDbContextTransaction transaction = await clothingItemRepository.BeginTransactionAsync();
+        IDbContextTransaction transaction =
+            await this.clothingItemRepository.BeginTransactionAsync();
 
-        Guid deletedId = clothingItemRepository.DeleteAsync(clothingItem).Result;
+        Guid deletedId = this.clothingItemRepository.DeleteAsync(clothingItem).Result;
 
         if (clothingItem.ImageUrl is not null)
         {
-            await imageStorageService.DeleteImageAsync(clothingItem.ImageUrl, cancellationToken);
+            await this.imageStorageService.DeleteImageAsync(
+                clothingItem.ImageUrl,
+                cancellationToken
+            );
         }
         else
         {
@@ -64,9 +73,9 @@ public class ClothingItemService(
         CancellationToken cancellationToken = default
     )
     {
-        List<ClothingItem> clothingItems = await clothingItemRepository.GetAllAsync();
+        List<ClothingItem> clothingItems = await this.clothingItemRepository.GetAllAsync();
 
-        return mapper.Map<IEnumerable<ClothingItemResponseDto>>(clothingItems);
+        return this.mapper.Map<IEnumerable<ClothingItemResponseDto>>(clothingItems);
     }
 
     public async Task<ClothingItemResponseDto> GetByIdAsync(
@@ -76,11 +85,11 @@ public class ClothingItemService(
     {
         try
         {
-            ClothingItem? clothingItem = await clothingItemRepository.GetFirstAsync(ci =>
+            ClothingItem? clothingItem = await this.clothingItemRepository.GetFirstAsync(ci =>
                 ci.Id == id
             );
 
-            return mapper.Map<ClothingItemResponseDto>(clothingItem);
+            return this.mapper.Map<ClothingItemResponseDto>(clothingItem);
         }
         catch (ResourceNotFoundException)
         {

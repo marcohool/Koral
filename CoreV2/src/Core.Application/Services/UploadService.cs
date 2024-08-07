@@ -15,20 +15,25 @@ public class UploadService(
     IClaimService claimService
 ) : IUploadService
 {
+    private readonly IMapper mapper = mapper;
+    private readonly IImageStorageService imageStorageService = imageStorageService;
+    private readonly IUploadRepository uploadRepository = uploadRepository;
+    private readonly IClaimService claimService = claimService;
+
     public async Task<UploadResponseDto> CreateAsync(
         CreateUploadDto createUploadDto,
         CancellationToken cancellationToken = default
     )
     {
         IFormFile image = createUploadDto.Image;
-        ApplicationUser? user = claimService.GetCurrentUserAsync().Result;
+        ApplicationUser? user = this.claimService.GetCurrentUserAsync().Result;
 
         if (user is null)
         {
             throw new InvalidOperationException("User not found");
         }
 
-        string imageUrl = await imageStorageService.UploadImageAsync(image, cancellationToken);
+        string imageUrl = await this.imageStorageService.UploadImageAsync(image, cancellationToken);
 
         Upload upload =
             new()
@@ -39,9 +44,9 @@ public class UploadService(
                 ImageUrl = imageUrl,
             };
 
-        Upload createdUpload = await uploadRepository.AddAsync(upload);
+        Upload createdUpload = await this.uploadRepository.AddAsync(upload);
 
-        return mapper.Map<UploadResponseDto>(createdUpload);
+        return this.mapper.Map<UploadResponseDto>(createdUpload);
     }
 
     public Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)

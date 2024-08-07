@@ -11,6 +11,9 @@ public class ClaimService(
     UserManager<ApplicationUser> userManager
 ) : IClaimService
 {
+    private readonly IHttpContextAccessor httpContextAccessor = httpContextAccessor;
+    private readonly UserManager<ApplicationUser> userManager = userManager;
+
     public Task<string> GetClaim(string key)
     {
         throw new NotImplementedException();
@@ -18,8 +21,8 @@ public class ClaimService(
 
     public async Task<ApplicationUser?> GetCurrentUserAsync()
     {
-        ClaimsPrincipal? user = httpContextAccessor.HttpContext?.User;
+        ClaimsPrincipal? user = this.httpContextAccessor.HttpContext?.User;
 
-        return user is null ? null : await userManager.GetUserAsync(user);
+        return user is null ? null : await this.userManager.GetUserAsync(user);
     }
 }

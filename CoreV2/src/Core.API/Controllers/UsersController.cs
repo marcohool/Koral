@@ -16,11 +16,11 @@ public class UsersController(IUserService userService) : ApiController
     {
         try
         {
-            return Ok(await userService.CreateAsync(createUserDto));
+            return this.Ok(await this.userService.CreateAsync(createUserDto));
         }
         catch (BadRequestException ex)
         {
-            return BadRequest(ex.ErrorMessages);
+            return this.BadRequest(ex.ErrorMessages);
         }
     }
 
@@ -30,11 +30,11 @@ public class UsersController(IUserService userService) : ApiController
     {
         try
         {
-            return Ok(await userService.LoginAsync(loginUserDto));
+            return this.Ok(await this.userService.LoginAsync(loginUserDto));
         }
         catch (BadRequestException ex)
         {
-            return BadRequest(ex.Message);
+            return this.BadRequest(ex.Message);
         }
     }
 }
