@@ -30,5 +30,6 @@ public static class ApplicationServices
     {
         services.AddAutoMapper(typeof(ClothingItemProfile));
         services.AddAutoMapper(typeof(UserProfile));
+        services.AddAutoMapper(typeof(UploadProfile));
     }
 }

@@ -33,6 +33,8 @@ public class JwtHelper
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = credentials,
+                Issuer = jwtOptions.Issuer,
+                Audience =jwtOptions.Audience,
             };
 
         JwtSecurityTokenHandler tokenHandler = new();

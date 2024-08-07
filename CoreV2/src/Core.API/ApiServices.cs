@@ -67,10 +67,26 @@ public static class ApiServices
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtOptions.Issuer,
+                    ValidateAudience = true,
+                    ValidAudience = jwtOptions.Audience,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateLifetime = true,
                 };
             });
+
+        services.AddAuthorization(options =>
+        {
+            AuthorizationPolicy defaultPolicy = new AuthorizationPolicyBuilder(
+                JwtBearerDefaults.AuthenticationScheme
+            )
+                .RequireAuthenticatedUser()
+                .Build();
+
+            options.DefaultPolicy = defaultPolicy;
+        });
     }
 
     private static void AddSwagger(this IServiceCollection services)
@@ -85,8 +101,9 @@ public static class ApiServices
                         "JWT Authorization header using the Bearer scheme (Example: 'Bearer YOUR_TOKEN')",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
                 }
             );
             s.AddSecurityRequirement(

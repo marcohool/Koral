@@ -35,9 +35,9 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
 
     public async Task<TEntity> AddAsync(TEntity entity)
     {
+        context.ChangeTracker.Clear();
         TEntity addedEntity = (await this.dbSet.AddAsync(entity)).Entity;
         await context.SaveChangesAsync();
-
         return addedEntity;
     }
 

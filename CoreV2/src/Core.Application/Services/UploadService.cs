@@ -36,7 +36,7 @@ public class UploadService(
                 AppUserId = user.Id,
                 ContentType = image.ContentType,
                 Size = image.Length,
-                ImageUrl = imageUrl
+                ImageUrl = imageUrl,
             };
 
         Upload createdUpload = await uploadRepository.AddAsync(upload);
