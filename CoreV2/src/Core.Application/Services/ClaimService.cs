@@ -1,18 +1,17 @@
 ﻿using System.Security.Claims;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Identity;
+using Core.DataAccess.Persistence;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Application.Services;
 
-public class ClaimService(
-    IHttpContextAccessor httpContextAccessor,
-    UserManager<ApplicationUser> userManager
-) : IClaimService
+public class ClaimService(IHttpContextAccessor httpContextAccessor, DatabaseContext context)
+    : IClaimService
 {
     private readonly IHttpContextAccessor httpContextAccessor = httpContextAccessor;
-    private readonly UserManager<ApplicationUser> userManager = userManager;
+    private readonly DatabaseContext context = context;
 
     public Task<string> GetClaim(string key)
     {
@@ -21,8 +20,12 @@ public class ClaimService(
 
     public async Task<ApplicationUser?> GetCurrentUserAsync()
     {
-        ClaimsPrincipal? user = this.httpContextAccessor.HttpContext?.User;
+        string? loggedInUserId = this.httpContextAccessor.HttpContext?.User.FindFirstValue(
+            ClaimTypes.NameIdentifier
+        );
 
-        return user is null ? null : await this.userManager.GetUserAsync(user);
+        return await this
+            .context.Users.AsNoTracking()
+            .FirstOrDefaultAsync(au => au.Id == loggedInUserId);
     }
 }

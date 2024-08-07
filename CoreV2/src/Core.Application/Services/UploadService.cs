@@ -26,7 +26,8 @@ public class UploadService(
     )
     {
         IFormFile image = createUploadDto.Image;
-        ApplicationUser? user = this.claimService.GetCurrentUserAsync().Result;
+
+        ApplicationUser? user = await this.claimService.GetCurrentUserAsync();
 
         if (user is null)
         {

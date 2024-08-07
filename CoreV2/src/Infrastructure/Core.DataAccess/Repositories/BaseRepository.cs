@@ -11,6 +11,7 @@ namespace Core.DataAccess.Repositories;
 public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<TEntity>
     where TEntity : BaseEntity
 {
+    private readonly DatabaseContext context = context;
     private readonly DbSet<TEntity> dbSet = context.Set<TEntity>();
 
     public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null)
@@ -35,16 +36,15 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
 
     public async Task<TEntity> AddAsync(TEntity entity)
     {
-        context.ChangeTracker.Clear();
-        TEntity addedEntity = (await this.dbSet.AddAsync(entity)).Entity;
-        await context.SaveChangesAsync();
+        TEntity addedEntity = this.dbSet.Add(entity).Entity;
+        await this.context.SaveChangesAsync();
         return addedEntity;
     }
 
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
         this.dbSet.Update(entity);
-        await context.SaveChangesAsync();
+        await this.context.SaveChangesAsync();
 
         return entity;
     }
@@ -52,13 +52,13 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
     public async Task<Guid> DeleteAsync(TEntity entity)
     {
         TEntity removedEntity = this.dbSet.Remove(entity).Entity;
-        await context.SaveChangesAsync();
+        await this.context.SaveChangesAsync();
 
         return removedEntity.Id;
     }
 
     public async Task<IDbContextTransaction> BeginTransactionAsync()
     {
-        return await context.Database.BeginTransactionAsync();
+        return await this.context.Database.BeginTransactionAsync();
     }
 }
