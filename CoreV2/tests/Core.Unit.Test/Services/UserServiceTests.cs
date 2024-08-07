@@ -2,17 +2,13 @@
 using Core.Application.Configuration;
 using Core.Application.Dtos.User;
 using Core.Application.Exceptions;
-using Core.Application.MappingProfiles;
 using Core.Application.Services;
 using Core.DataAccess.Identity;
 using Core.UnitTest.Shared;
 using FluentAssertions;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Moq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Core.UnitTest.Services;
 
@@ -36,6 +32,8 @@ public class UserServiceTests
             .Returns(
                 new JwtOptions
                 {
+                    Issuer = "https://localhost:5001",
+                    Audience = "https://localhost:5001",
                     SigningKey =
                         "17hVodg+uiaWSF+qRo1xv8sdrKrSRK+uR9KyvUNCOm1XGVjUBP+kPyn9OsKRJauU\r\nkKDJqJT3F/pDt5fGG9Auoa8qVYUSDNr4V/emlVIO9FKmjjALQ/XwYPj0h2ENliYa\r\nS4sK9vullVs99XNtauDQFtQq8Q7XNcmPL4RSrsrKOM0="
                 }

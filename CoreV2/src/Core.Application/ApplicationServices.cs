@@ -1,4 +1,3 @@
-using AutoMapper;
 using Core.Application.MappingProfiles;
 using Core.Application.Services;
 using Core.Application.Services.Interfaces;
