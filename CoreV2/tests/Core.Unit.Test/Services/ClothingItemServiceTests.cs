@@ -9,6 +9,7 @@ using Core.Domain.Entities;
 using Core.Domain.Enums;
 using Core.Domain.Exceptions;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore.Storage;
 using Moq;
 using ValidationException = System.ComponentModel.DataAnnotations.ValidationException;
 
@@ -128,6 +129,10 @@ public class ClothingItemServiceTests : BaseServiceTests
     public async Task DeleteAsync_ValidId_ReturnsDeletedClothingItemId()
     {
         Guid clothingItemId = Guid.NewGuid();
+        Mock<IDbContextTransaction> mockTransaction = new();
+
+        this.clothingItemRepositoryMock.Setup(c => c.BeginTransactionAsync())
+            .ReturnsAsync(mockTransaction.Object);
 
         this.clothingItemRepositoryMock.Setup(c => c.GetFirstAsync(ci => ci.Id == clothingItemId))
             .ReturnsAsync(
