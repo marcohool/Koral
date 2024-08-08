@@ -14,14 +14,26 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
     private readonly DatabaseContext context = context;
     private readonly DbSet<TEntity> dbSet = context.Set<TEntity>();
 
-    public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null)
+    public async Task<List<TEntity>> GetAllAsync(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        int? pageNumber = null,
+        int? pageSize = null
+    )
     {
-        if (predicate == null)
+        IQueryable<TEntity> query = this.dbSet;
+
+        if (predicate != null)
         {
-            return await this.dbSet.ToListAsync();
+            query = query.Where(predicate);
         }
 
-        return await this.dbSet.Where(predicate).ToListAsync();
+        if (pageNumber.HasValue && pageSize.HasValue && pageNumber > 0 && pageSize > 0)
+        {
+            int skip = (pageNumber.Value - 1) * pageSize.Value;
+            query = query.Skip(skip).Take(pageSize.Value);
+        }
+
+        return await query.ToListAsync();
     }
 
     public async Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> predicate)

@@ -7,7 +7,11 @@ namespace Core.DataAccess.Repositories.Interfaces;
 public interface IBaseRepository<TEntity>
     where TEntity : BaseEntity
 {
-    Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null);
+    Task<List<TEntity>> GetAllAsync(
+        Expression<Func<TEntity, bool>>? predicate = null,
+        int? pageNumber = null,
+        int? pageSize = null
+    );
 
     Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> predicate);
 

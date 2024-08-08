@@ -18,14 +18,21 @@ public class ClaimService(IHttpContextAccessor httpContextAccessor, DatabaseCont
         throw new NotImplementedException();
     }
 
-    public async Task<ApplicationUser?> GetCurrentUserAsync()
+    public async Task<ApplicationUser> GetCurrentUserAsync()
     {
         string? loggedInUserId = this.httpContextAccessor.HttpContext?.User.FindFirstValue(
             ClaimTypes.NameIdentifier
         );
 
-        return await this
+        ApplicationUser? user = await this
             .context.Users.AsNoTracking()
             .FirstOrDefaultAsync(au => au.Id == loggedInUserId);
+
+        if (user is null)
+        {
+            throw new InvalidOperationException("User not found");
+        }
+
+        return user;
     }
 }

@@ -27,12 +27,7 @@ public class UploadService(
     {
         IFormFile image = createUploadDto.Image;
 
-        ApplicationUser? user = await this.claimService.GetCurrentUserAsync();
-
-        if (user is null)
-        {
-            throw new InvalidOperationException("User not found");
-        }
+        ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
         string imageUrl = await this.imageStorageService.UploadImageAsync(image, cancellationToken);
 
@@ -55,11 +50,21 @@ public class UploadService(
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<UploadResponseDto>> GetAllAsync(
+    public async Task<IEnumerable<UploadResponseDto>> GetAllAsync(
+        int pageNumber,
+        int pageSize,
         CancellationToken cancellationToken = default
     )
     {
-        throw new NotImplementedException();
+        ApplicationUser user = await this.claimService.GetCurrentUserAsync();
+
+        List<Upload> uploads = await this.uploadRepository.GetAllAsync(
+            u => u.AppUserId == user.Id,
+            pageNumber,
+            pageSize
+        );
+
+        return this.mapper.Map<IEnumerable<UploadResponseDto>>(uploads);
     }
 
     public Task<UploadResponseDto> GetByIdAsync(

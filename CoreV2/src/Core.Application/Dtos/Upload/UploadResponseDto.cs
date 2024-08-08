@@ -4,6 +4,8 @@ namespace Core.Application.Dtos.Upload;
 
 public class UploadResponseDto
 {
+    public Guid Id { get; set; }
+
     public string? Title { get; set; }
 
     public UploadStatus Status { get; set; }

@@ -11,7 +11,11 @@ public interface IUploadService
 
     Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<UploadResponseDto>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<UploadResponseDto>> GetAllAsync(
+        int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken = default
+    );
 
     Task<UploadResponseDto> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 }
