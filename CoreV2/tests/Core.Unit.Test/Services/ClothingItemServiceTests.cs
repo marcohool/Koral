@@ -8,6 +8,7 @@ using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
 using Core.Domain.Enums;
 using Core.Domain.Exceptions;
+using Core.UnitTest.Shared;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore.Storage;
 using Moq;
@@ -27,6 +28,7 @@ public class ClothingItemServiceTests : BaseServiceTests
     {
         this.imageStorageServiceMock = new Mock<IImageStorageService>(MockBehavior.Strict);
         this.clothingItemRepositoryMock = new Mock<IClothingItemRepository>(MockBehavior.Strict);
+
         this.mapper = new MapperConfiguration(cfg =>
             cfg.AddMaps(typeof(ClothingItemProfile))
         ).CreateMapper();
@@ -65,7 +67,9 @@ public class ClothingItemServiceTests : BaseServiceTests
             )
             .ReturnsAsync("https://example-image-hosting.com/white-tshirt.jpg");
 
-        this.clothingItemRepositoryMock.Setup(c => c.AddAsync(It.IsAny<ClothingItem>()));
+        this.clothingItemRepositoryMock.Setup(c =>
+            c.AddAsync(It.Is<ClothingItem>(ci => ci.IsEquivalentJson(clothingItem)))
+        );
 
         ClothingItemResponseDto result = await this.clothingItemService.CreateAsync(
             createClothingItemDto
@@ -118,9 +122,10 @@ public class ClothingItemServiceTests : BaseServiceTests
             )
             .ThrowsAsync(new ValidationException());
 
-        await Assert.ThrowsAsync<ValidationException>(
-            async () => await this.clothingItemService.CreateAsync(createClothingItemDto)
-        );
+        await this
+            .clothingItemService.Invoking(x => x.CreateAsync(createClothingItemDto))
+            .Should()
+            .ThrowAsync<ValidationException>();
 
         this.imageStorageServiceMock.VerifyAll();
     }
@@ -168,9 +173,10 @@ public class ClothingItemServiceTests : BaseServiceTests
                 new NotFoundException($"Clothing item with id {clothingItemId} not found")
             );
 
-        await Assert.ThrowsAsync<NotFoundException>(
-            async () => await this.clothingItemService.DeleteAsync(clothingItemId)
-        );
+        await this
+            .clothingItemService.Invoking(x => x.DeleteAsync(clothingItemId))
+            .Should()
+            .ThrowAsync<NotFoundException>();
 
         this.clothingItemRepositoryMock.VerifyAll();
     }
@@ -267,9 +273,10 @@ public class ClothingItemServiceTests : BaseServiceTests
         this.clothingItemRepositoryMock.Setup(c => c.GetFirstAsync(ci => ci.Id == clothingItemId))
             .ThrowsAsync(new ResourceNotFoundException());
 
-        await Assert.ThrowsAsync<NotFoundException>(
-            async () => await this.clothingItemService.GetByIdAsync(clothingItemId)
-        );
+        await this
+            .clothingItemService.Invoking(x => x.GetByIdAsync(clothingItemId))
+            .Should()
+            .ThrowAsync<NotFoundException>();
 
         this.clothingItemRepositoryMock.VerifyAll();
     }
