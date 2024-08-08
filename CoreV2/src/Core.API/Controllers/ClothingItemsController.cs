@@ -8,19 +8,19 @@ namespace Core.API.Controllers;
 public class ClothingItemsController(IClothingItemService clothingItemService) : ApiController
 {
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<ActionResult<IEnumerable<ClothingItemResponseDto>>> GetAllAsync()
     {
         return this.Ok(await clothingItemService.GetAllAsync());
     }
 
     [HttpGet("{id:Guid}")]
-    public async Task<IActionResult> GetAsync(Guid id)
+    public async Task<ActionResult<ClothingItemResponseDto>> GetAsync(Guid id)
     {
         return this.Ok(await clothingItemService.GetByIdAsync(id));
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(
+    public async Task<ActionResult<ClothingItemResponseDto>> CreateAsync(
         [FromForm] CreateClothingItemDto createClothingItemDto
     )
     {

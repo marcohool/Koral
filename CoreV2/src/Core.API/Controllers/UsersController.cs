@@ -12,7 +12,9 @@ public class UsersController(IUserService userService) : ApiController
 
     [HttpPost("register")]
     [AllowAnonymous]
-    public async Task<IActionResult> RegisterAsync(CreateUserDto createUserDto)
+    public async Task<ActionResult<CreateUserResponseDto>> RegisterAsync(
+        CreateUserDto createUserDto
+    )
     {
         try
         {
@@ -26,7 +28,7 @@ public class UsersController(IUserService userService) : ApiController
 
     [HttpPost("login")]
     [AllowAnonymous]
-    public async Task<IActionResult> LoginAsync(LoginUserDto loginUserDto)
+    public async Task<ActionResult<LoginUserResponseDto>> LoginAsync(LoginUserDto loginUserDto)
     {
         try
         {
