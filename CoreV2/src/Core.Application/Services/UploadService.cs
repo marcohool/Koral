@@ -45,9 +45,9 @@ public class UploadService(
                 ImageUrl = imageUrl,
             };
 
-        Upload createdUpload = await this.uploadRepository.AddAsync(upload);
+        this.uploadRepository.AddAsync(upload);
 
-        return this.mapper.Map<UploadResponseDto>(createdUpload);
+        return this.mapper.Map<UploadResponseDto>(upload);
     }
 
     public Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)

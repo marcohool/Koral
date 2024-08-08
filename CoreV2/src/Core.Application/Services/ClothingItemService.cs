@@ -31,9 +31,9 @@ public class ClothingItemService(
             cancellationToken
         );
 
-        ClothingItem createdClothingItem = await this.clothingItemRepository.AddAsync(clothingItem);
+        this.clothingItemRepository.AddAsync(clothingItem);
 
-        return this.mapper.Map<ClothingItemResponseDto>(createdClothingItem);
+        return this.mapper.Map<ClothingItemResponseDto>(clothingItem);
     }
 
     public async Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)

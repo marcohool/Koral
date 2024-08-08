@@ -64,8 +64,7 @@ public class ClothingItemServiceTests : BaseServiceTests
             )
             .ReturnsAsync("https://example-image-hosting.com/white-tshirt.jpg");
 
-        this.clothingItemRepositoryMock.Setup(c => c.AddAsync(It.IsAny<ClothingItem>()))
-            .ReturnsAsync(clothingItem);
+        this.clothingItemRepositoryMock.Setup(c => c.AddAsync(It.IsAny<ClothingItem>()));
 
         ClothingItemResponseDto result = await this.clothingItemService.CreateAsync(
             createClothingItemDto

@@ -1,4 +1,3 @@
-using System.Data;
 using System.Linq.Expressions;
 using Core.Domain.Common;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -12,7 +11,7 @@ public interface IBaseRepository<TEntity>
 
     Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> predicate);
 
-    Task<TEntity> AddAsync(TEntity entity);
+    void AddAsync(TEntity entity);
 
     Task<TEntity> UpdateAsync(TEntity entity);
 
