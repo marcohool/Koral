@@ -3,6 +3,7 @@ using CloudinaryDotNet.Actions;
 using Core.Application.Configuration;
 using Core.Application.Services;
 using Core.Application.Services.Interfaces;
+using Core.Test.Shared.Helpers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -38,7 +39,7 @@ public class ImageStorageServiceTests : BaseServiceTests
     )
     {
         string expectedUploadUrl = "https://example-image-hosting.com/image.jpg";
-        FormFile validImage = CreateMockFormFile(10, fileName, contentType);
+        FormFile validImage = FileHelpers.CreateMockFormFile(10, fileName, contentType);
 
         this.mockImageOptions.SetupGet(i => i.CurrentValue)
             .Returns(
@@ -63,7 +64,7 @@ public class ImageStorageServiceTests : BaseServiceTests
     [Fact]
     public async Task UploadImageAsync_InvalidImage_ExceedsMaxSize_ThrowsValidationError()
     {
-        FormFile validImage = CreateMockFormFile(11, "image.jpg", "image/jpeg");
+        FormFile validImage = FileHelpers.CreateMockFormFile(11, "image.jpg", "image/jpeg");
 
         this.mockImageOptions.SetupGet(i => i.CurrentValue)
             .Returns(
@@ -90,7 +91,7 @@ public class ImageStorageServiceTests : BaseServiceTests
         string contentType
     )
     {
-        FormFile validImage = CreateMockFormFile(11, fileName, contentType);
+        FormFile validImage = FileHelpers.CreateMockFormFile(11, fileName, contentType);
 
         this.mockImageOptions.SetupGet(i => i.CurrentValue)
             .Returns(

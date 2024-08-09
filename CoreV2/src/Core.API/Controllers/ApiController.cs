@@ -3,5 +3,5 @@ using Microsoft.AspNetCore.Mvc;
 namespace Core.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class ApiController : ControllerBase { }

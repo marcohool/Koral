@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
 using AutoMapper;
 using Core.Application.Dtos.Upload;
 using Core.Application.MappingProfiles;
 using Core.Application.Services;
 using Core.Application.Services.Interfaces;
-using Core.DataAccess.Identity;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
+using Core.Test.Shared.Helpers;
 using Core.UnitTest.Shared;
 using FluentAssertions;
 using Moq;
@@ -44,10 +45,10 @@ public class UploadServiceTests : BaseServiceTests
     public async Task CreateAsync_UserNotFound_ThrowsInvalidOperationException()
     {
         CreateUploadDto createUploadDto =
-            new() { Image = CreateMockFormFile(10, "image-upload.jpg", "image/jpg") };
+            new() { Image = FileHelpers.CreateMockFormFile(10, "image-upload.jpg", "image/jpg") };
 
         this.claimServiceMock.Setup(x => x.GetCurrentUserAsync())
-            .ReturnsAsync((ApplicationUser?)null);
+            .ThrowsAsync(new InvalidOperationException("User not found"));
 
         await this
             .uploadService.Invoking(x => x.CreateAsync(createUploadDto))
@@ -59,11 +60,9 @@ public class UploadServiceTests : BaseServiceTests
     public async Task CreateAsync_InvalidImage_ThrowsValidationException()
     {
         CreateUploadDto createUploadDto =
-            new() { Image = CreateMockFormFile(10, "invalid-upload.bmp", "image/bmp") };
+            new() { Image = FileHelpers.CreateMockFormFile(10, "invalid-upload.bmp", "image/bmp") };
 
-        ApplicationUser user = new() { Id = Guid.NewGuid().ToString(), };
-
-        this.claimServiceMock.Setup(x => x.GetCurrentUserAsync()).ReturnsAsync(user);
+        this.claimServiceMock.Setup(x => x.GetCurrentUserAsync()).ReturnsAsync(this.user);
 
         this.imageStorageServiceMock.Setup(x => x.UploadImageAsync(createUploadDto.Image, default))
             .ThrowsAsync(new ValidationException("Invalid image format"));
@@ -80,20 +79,18 @@ public class UploadServiceTests : BaseServiceTests
         string uploadUrl = "https://www.example.com/image.jpg";
 
         CreateUploadDto createUploadDto =
-            new() { Image = CreateMockFormFile(10, "image-upload.jpg", "image/jpg") };
-
-        ApplicationUser user = new() { Id = Guid.NewGuid().ToString(), };
+            new() { Image = FileHelpers.CreateMockFormFile(10, "image-upload.jpg", "image/jpg") };
 
         Upload upload =
             new()
             {
-                AppUserId = user.Id,
+                AppUserId = this.user.Id,
                 ContentType = createUploadDto.Image.ContentType,
                 Size = createUploadDto.Image.Length,
                 ImageUrl = uploadUrl
             };
 
-        this.claimServiceMock.Setup(x => x.GetCurrentUserAsync()).ReturnsAsync(user);
+        this.claimServiceMock.Setup(x => x.GetCurrentUserAsync()).ReturnsAsync(this.user);
 
         this.imageStorageServiceMock.Setup(x => x.UploadImageAsync(createUploadDto.Image, default))
             .ReturnsAsync(uploadUrl);
@@ -116,6 +113,60 @@ public class UploadServiceTests : BaseServiceTests
 
         this.claimServiceMock.VerifyAll();
         this.imageStorageServiceMock.VerifyAll();
+        this.uploadRepositoryMock.VerifyAll();
+    }
+
+    [Fact]
+    public async Task GetAllAsync_WithValidData_ReturnsUploadResponseDtos()
+    {
+        this.claimServiceMock.Setup(x => x.GetCurrentUserAsync()).ReturnsAsync(this.user);
+
+        List<Upload> uploads =
+        [
+            new Upload()
+            {
+                AppUserId = this.user.Id,
+                ContentType = "image/jpg",
+                Size = 10,
+                ImageUrl = "https://www.example.com/image.jpg"
+            },
+            new Upload()
+            {
+                AppUserId = this.user.Id,
+                ContentType = "image/png",
+                Size = 20,
+                ImageUrl = "https://www.example.com/image.png"
+            }
+        ];
+
+        this.uploadRepositoryMock.Setup(x =>
+                x.GetAllAsync(It.IsAny<Expression<Func<Upload, bool>>>(), 1, 5)
+            )
+            .ReturnsAsync(uploads);
+
+        IEnumerable<UploadResponseDto> result = await this.uploadService.GetAllAsync(1, 5);
+
+        result.ShouldBeEquivalentTo(
+            new List<UploadResponseDto>()
+            {
+                new()
+                {
+                    Status = Domain.Enums.UploadStatus.Pending,
+                    ImageUrl = "https://www.example.com/image.jpg",
+                    CreatedOn = DateTime.MinValue,
+                    LastUpdatedOn = null
+                },
+                new()
+                {
+                    Status = Domain.Enums.UploadStatus.Pending,
+                    ImageUrl = "https://www.example.com/image.png",
+                    CreatedOn = DateTime.MinValue,
+                    LastUpdatedOn = null
+                }
+            }
+        );
+
+        this.claimServiceMock.VerifyAll();
         this.uploadRepositoryMock.VerifyAll();
     }
 }

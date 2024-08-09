@@ -16,7 +16,7 @@ public record BaseClothingItemDto
 
     public decimal? Price { get; set; }
 
-    public required string CurrencyCode { get; set; }
+    public string? CurrencyCode { get; set; }
 
     public Gender Gender { get; set; }
 

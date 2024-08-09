@@ -8,6 +8,7 @@ using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
 using Core.Domain.Enums;
 using Core.Domain.Exceptions;
+using Core.Test.Shared.Helpers;
 using Core.UnitTest.Shared;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -56,7 +57,7 @@ public class ClothingItemServiceTests : BaseServiceTests
                 Gender = Gender.Male,
                 SourceUrl = "https://example.com/white-t-shirt",
                 SourceRegion = SourceRegion.UK,
-                Image = CreateMockFormFile(10, "white-tshirt.jpg", "image/jpeg"),
+                Image = FileHelpers.CreateMockFormFile(10, "white-tshirt.jpg", "image/jpeg"),
             };
 
         ClothingItem clothingItem = this.mapper.Map<ClothingItem>(createClothingItemDto);
@@ -114,7 +115,7 @@ public class ClothingItemServiceTests : BaseServiceTests
                 Gender = Gender.Male,
                 SourceUrl = "https://example.com/white-t-shirt",
                 SourceRegion = SourceRegion.UK,
-                Image = CreateMockFormFile(11, "white-tshirt.jpg", "image/jpeg"),
+                Image = FileHelpers.CreateMockFormFile(11, "white-tshirt.jpg", "image/jpeg"),
             };
 
         this.imageStorageServiceMock.Setup(i =>
@@ -212,7 +213,7 @@ public class ClothingItemServiceTests : BaseServiceTests
             }
         ];
 
-        this.clothingItemRepositoryMock.Setup(c => c.GetAllAsync(default))
+        this.clothingItemRepositoryMock.Setup(c => c.GetAllAsync(null, null, default))
             .ReturnsAsync(clothingItems);
 
         IEnumerable<ClothingItemResponseDto> result = await this.clothingItemService.GetAllAsync();
@@ -229,7 +230,8 @@ public class ClothingItemServiceTests : BaseServiceTests
     [Fact]
     public async Task GetAllAsync_NoItems_ReturnsEmptyEnumerable()
     {
-        this.clothingItemRepositoryMock.Setup(c => c.GetAllAsync(default)).ReturnsAsync([]);
+        this.clothingItemRepositoryMock.Setup(c => c.GetAllAsync(null, null, default))
+            .ReturnsAsync([]);
 
         IEnumerable<ClothingItemResponseDto> result = await this.clothingItemService.GetAllAsync();
 
