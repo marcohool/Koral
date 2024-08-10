@@ -1,6 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using Core.Application.Dtos.Upload;
+using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
+using Core.Domain.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,5 +35,18 @@ public class UploadsController(IUploadService uploadService) : ApiController
     )
     {
         return this.Ok(await this.uploadService.GetAllAsync(pageNumber, pageSize));
+    }
+
+    [HttpGet("{id:Guid}")]
+    public async Task<ActionResult<UploadResponseDto>> GetAsync(Guid id)
+    {
+        try
+        {
+            return this.Ok(await this.uploadService.GetByIdAsync(id));
+        }
+        catch (NotFoundException ex)
+        {
+            return this.NotFound(ex.Message);
+        }
     }
 }

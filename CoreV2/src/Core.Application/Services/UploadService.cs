@@ -1,9 +1,11 @@
 using AutoMapper;
 using Core.Application.Dtos.Upload;
+using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Identity;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
+using Core.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 
 namespace Core.Application.Services;
@@ -67,11 +69,24 @@ public class UploadService(
         return this.mapper.Map<IEnumerable<UploadResponseDto>>(uploads);
     }
 
-    public Task<UploadResponseDto> GetByIdAsync(
+    public async Task<UploadResponseDto> GetByIdAsync(
         Guid id,
         CancellationToken cancellationToken = default
     )
     {
-        throw new NotImplementedException();
+        ApplicationUser user = await this.claimService.GetCurrentUserAsync();
+
+        try
+        {
+            Upload? upload = await this.uploadRepository.GetFirstAsync(u =>
+                u.Id == id && u.AppUserId == user.Id
+            );
+
+            return this.mapper.Map<UploadResponseDto>(upload);
+        }
+        catch (ResourceNotFoundException)
+        {
+            throw new NotFoundException($"Upload with id {id} not found");
+        }
     }
 }
