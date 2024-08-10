@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Core.Application.Dtos.ClothingItem;
+using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,14 @@ public class ClothingItemsController(IClothingItemService clothingItemService) :
     [HttpGet("{id:Guid}")]
     public async Task<ActionResult<ClothingItemResponseDto>> GetAsync(Guid id)
     {
-        return this.Ok(await clothingItemService.GetByIdAsync(id));
+        try
+        {
+            return this.Ok(await clothingItemService.GetByIdAsync(id));
+        }
+        catch (NotFoundException ex)
+        {
+            return this.NotFound(ex.Message);
+        }
     }
 
     [HttpPost]

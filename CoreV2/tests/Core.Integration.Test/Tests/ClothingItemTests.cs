@@ -47,15 +47,9 @@ public class ClothingItemTests(CustomWebApplicationFactory factory) : BaseIntegr
     {
         HttpClient client = this.HttpClient;
 
-        HttpResponseMessage response = await client.GetAsync($"/clothingitems/1000");
+        HttpResponseMessage response = await client.GetAsync($"/clothingitems/{Guid.NewGuid()}");
 
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
-
-        ClothingItem? clothingItemResponse = JsonConvert.DeserializeObject<ClothingItem>(
-            await response.Content.ReadAsStringAsync()
-        );
-
-        clothingItemResponse.Should().BeNull();
     }
 
     [Fact]
