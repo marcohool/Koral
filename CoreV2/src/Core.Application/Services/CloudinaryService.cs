@@ -28,4 +28,9 @@ public class CloudinaryService : ICloudinaryService
     {
         return this.cloudinary.UploadAsync(uploadParams);
     }
+
+    public Task<DeletionResult> DeleteAsync(DeletionParams deletionParams)
+    {
+        return this.cloudinary.DestroyAsync(deletionParams);
+    }
 }

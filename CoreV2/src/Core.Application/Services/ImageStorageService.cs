@@ -53,8 +53,26 @@ public class ImageStorageService(
         throw new NotImplementedException();
     }
 
-    public Task DeleteImageAsync(string imageUrl, CancellationToken cancellationToken = default)
+    public async Task DeleteImageAsync(
+        string imageUrl,
+        CancellationToken cancellationToken = default
+    )
     {
-        throw new NotImplementedException();
+        DeletionResult deletionResult = await this.cloudinaryService.DeleteAsync(
+            new DeletionParams(GetImageIdentifierFromCloudinaryUrl(imageUrl))
+        );
+
+        if (!deletionResult.Result.Equals("ok"))
+        {
+            throw new Exception(
+                $"Failed to delete image. Result: {deletionResult.Result}. Error: {deletionResult.Error}"
+            );
+        }
+    }
+
+    private static string GetImageIdentifierFromCloudinaryUrl(string url)
+    {
+        string filename = new Uri(url).AbsolutePath.Split('/').Last();
+        return Path.GetFileNameWithoutExtension(filename);
     }
 }

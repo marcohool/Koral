@@ -7,6 +7,7 @@ using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
 using Core.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Core.Application.Services;
 
@@ -47,9 +48,28 @@ public class UploadService(
         return this.mapper.Map<UploadResponseDto>(upload);
     }
 
-    public Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        ApplicationUser user = await this.claimService.GetCurrentUserAsync();
+
+        Upload? upload = await this.uploadRepository.GetFirstAsync(u =>
+            u.Id == id && u.AppUserId == user.Id
+        );
+
+        if (upload is null)
+        {
+            throw new NotFoundException($"Upload with id {id} not found");
+        }
+
+        IDbContextTransaction transaction = await this.uploadRepository.BeginTransactionAsync();
+
+        Guid uploadGuid = await this.uploadRepository.DeleteAsync(upload);
+
+        await this.imageStorageService.DeleteImageAsync(upload.ImageUrl, cancellationToken);
+
+        await transaction.CommitAsync(cancellationToken);
+
+        return uploadGuid;
     }
 
     public async Task<IEnumerable<UploadResponseDto>> GetAllAsync(

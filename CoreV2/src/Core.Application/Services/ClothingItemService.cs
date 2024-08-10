@@ -50,7 +50,7 @@ public class ClothingItemService(
         IDbContextTransaction transaction =
             await this.clothingItemRepository.BeginTransactionAsync();
 
-        Guid deletedId = this.clothingItemRepository.DeleteAsync(clothingItem).Result;
+        Guid deletedId = await this.clothingItemRepository.DeleteAsync(clothingItem);
 
         if (clothingItem.ImageUrl is not null)
         {

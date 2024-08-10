@@ -27,6 +27,20 @@ public class UploadsController(IUploadService uploadService) : ApiController
         }
     }
 
+    [HttpDelete("{id:Guid}")]
+    public async Task<IActionResult> DeleteAsync(Guid id)
+    {
+        try
+        {
+            await this.uploadService.DeleteAsync(id);
+            return this.NoContent();
+        }
+        catch (NotFoundException ex)
+        {
+            return this.NotFound(ex.Message);
+        }
+    }
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UploadResponseDto>>> GetAllAsync(
         [FromQuery] int pageNumber = 1,
