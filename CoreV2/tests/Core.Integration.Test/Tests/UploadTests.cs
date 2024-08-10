@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
 using CloudinaryDotNet.Actions;
-using Core.Application.Dtos.ClothingItem;
 using Core.Application.Dtos.Upload;
 using Core.Integration.Test.Helpers;
 using Core.Test.Shared.Helpers;

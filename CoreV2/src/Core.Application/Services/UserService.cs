@@ -23,9 +23,9 @@ public class UserService(
 
     public async Task<CreateUserResponseDto> CreateAsync(CreateUserDto createUserDto)
     {
-        ApplicationUser user = mapper.Map<ApplicationUser>(createUserDto);
+        ApplicationUser user = this.mapper.Map<ApplicationUser>(createUserDto);
 
-        IdentityResult result = await userManager.CreateAsync(user, createUserDto.Password);
+        IdentityResult result = await this.userManager.CreateAsync(user, createUserDto.Password);
 
         if (!result.Succeeded)
         {
@@ -41,14 +41,14 @@ public class UserService(
     {
         const string errorMessage = "Invalid email or password.";
 
-        ApplicationUser? user = await userManager.FindByEmailAsync(loginUserDto.Email);
+        ApplicationUser? user = await this.userManager.FindByEmailAsync(loginUserDto.Email);
 
         if (user is null)
         {
             throw new BadRequestException(errorMessage);
         }
 
-        SignInResult signInResult = await signInManager.CheckPasswordSignInAsync(
+        SignInResult signInResult = await this.signInManager.CheckPasswordSignInAsync(
             user,
             loginUserDto.Password,
             false
