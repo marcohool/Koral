@@ -7,12 +7,12 @@ namespace Core.Integration.Test.Helpers;
 
 public class DatabaseContextHelper
 {
-    private static readonly Guid user1Id = Guid.NewGuid();
+    private static readonly Guid authenticatedUserId = Guid.NewGuid();
 
-    private static readonly List<ApplicationUser> Users =
-    [
-        new ApplicationUser { Id = user1Id.ToString(), Email = "testuser@testemail.com" }
-    ];
+    public static readonly ApplicationUser authenticatedUser =
+        new() { Id = authenticatedUserId.ToString(), Email = "testuser@testemail.com" };
+
+    private static readonly List<ApplicationUser> Users = [authenticatedUser];
 
     private static readonly List<ClothingItem> ClothingItems =
     [
@@ -50,7 +50,7 @@ public class DatabaseContextHelper
             AccuracyRating = 8,
             IsDeleted = false,
             ImageUrl = "https://example-image-hosting.com/old-money-summer-look.jpg",
-            AppUserId = user1Id.ToString(),
+            AppUserId = authenticatedUserId.ToString(),
             CreatedOn = DateTime.UtcNow,
             ClothingItems = []
         }
