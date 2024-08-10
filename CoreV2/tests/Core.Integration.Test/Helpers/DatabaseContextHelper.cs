@@ -121,6 +121,86 @@ public class DatabaseContextHelper
             AppUserId = user2.Id,
             CreatedOn = DateTime.UtcNow.AddDays(-4),
             ClothingItems = []
+        },
+        new Upload
+        {
+            Id = Guid.NewGuid(),
+            Title = "Retro 90s Streetwear",
+            Size = 1024,
+            ContentType = "image/jpeg",
+            Status = UploadStatus.Processed,
+            IsFavourited = false,
+            IsPinned = true,
+            AccuracyRating = 6,
+            IsDeleted = false,
+            ImageUrl = "https://example-image-hosting.com/retro-90s-streetwear.jpg",
+            AppUserId = user2.Id,
+            CreatedOn = DateTime.UtcNow.AddDays(-5),
+            ClothingItems = []
+        },
+        new Upload
+        {
+            Id = Guid.NewGuid(),
+            Title = "Formal Evening Wear",
+            Size = 1024,
+            ContentType = "image/jpeg",
+            Status = UploadStatus.Processed,
+            IsFavourited = true,
+            IsPinned = false,
+            AccuracyRating = 9,
+            IsDeleted = false,
+            ImageUrl = "https://example-image-hosting.com/formal-evening-wear.jpg",
+            AppUserId = authenticatedUser.Id,
+            CreatedOn = DateTime.UtcNow.AddDays(-6),
+            ClothingItems = []
+        },
+        new Upload
+        {
+            Id = Guid.NewGuid(),
+            Title = "Casual Spring Collection",
+            Size = 1024,
+            ContentType = "image/jpeg",
+            Status = UploadStatus.Pending,
+            IsFavourited = false,
+            IsPinned = false,
+            AccuracyRating = 7,
+            IsDeleted = true,
+            ImageUrl = "https://example-image-hosting.com/casual-spring-collection.jpg",
+            AppUserId = authenticatedUser.Id,
+            CreatedOn = DateTime.UtcNow.AddDays(-7),
+            ClothingItems = []
+        },
+        new Upload
+        {
+            Id = Guid.NewGuid(),
+            Title = "Sports Fitness Gear",
+            Size = 1024,
+            ContentType = "image/jpeg",
+            Status = UploadStatus.Failed,
+            IsFavourited = true,
+            IsPinned = true,
+            AccuracyRating = 5,
+            IsDeleted = false,
+            ImageUrl = "https://example-image-hosting.com/sports-fitness-gear.jpg",
+            AppUserId = authenticatedUser.Id,
+            CreatedOn = DateTime.UtcNow.AddDays(-8),
+            ClothingItems = []
+        },
+        new Upload
+        {
+            Id = Guid.NewGuid(),
+            Title = "Winter Accessories Collection",
+            Size = 1024,
+            ContentType = "image/png",
+            Status = UploadStatus.Processed,
+            IsFavourited = false,
+            IsPinned = false,
+            AccuracyRating = 8,
+            IsDeleted = false,
+            ImageUrl = "https://example-image-hosting.com/winter-accessories-collection.png",
+            AppUserId = authenticatedUser.Id,
+            CreatedOn = DateTime.UtcNow.AddDays(-9),
+            ClothingItems = []
         }
     ];
 
