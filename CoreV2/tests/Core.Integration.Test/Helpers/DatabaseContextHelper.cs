@@ -40,7 +40,7 @@ public class DatabaseContextHelper
         }
     ];
 
-    private static readonly List<Upload> Uploads =
+    public static readonly List<Upload> Uploads =
     [
         new Upload
         {

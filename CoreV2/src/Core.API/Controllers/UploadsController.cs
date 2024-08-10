@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using Core.Application.Dtos.Upload;
 using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
-using Core.Domain.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -2,9 +2,12 @@
 using System.Net.Http.Headers;
 using CloudinaryDotNet.Actions;
 using Core.Application.Dtos.Upload;
+using Core.Domain.Entities;
 using Core.Integration.Test.Helpers;
 using Core.Test.Shared.Helpers;
+using Core.UnitTest.Shared;
 using FluentAssertions;
+using LinqToDB.Tools;
 using Microsoft.AspNetCore.Http;
 using Moq;
 using Newtonsoft.Json;
@@ -50,6 +53,47 @@ public class UploadTests(CustomWebApplicationFactory factory) : BaseIntegrationT
         );
 
         uploads.Should().HaveCount(3);
+    }
+
+    [Fact]
+    public async Task GetAsync_UploadFound_ReturnsUploadResponse()
+    {
+        HttpClient client = this.HttpClient;
+        Upload upload = DatabaseContextHelper.Uploads[0];
+
+        HttpResponseMessage response = await client.GetAsync($"/uploads/{upload.Id}");
+
+        response.EnsureSuccessStatusCode();
+
+        UploadResponseDto? uploadResponse = JsonConvert.DeserializeObject<UploadResponseDto>(
+            await response.Content.ReadAsStringAsync()
+        );
+
+        uploadResponse.Should().NotBeNull();
+        uploadResponse?.Id.Should().Be(upload.Id);
+    }
+
+    [Fact]
+    public async Task GetAsync_UploadNotFound_Returns404NotFound()
+    {
+        HttpClient client = this.HttpClient;
+
+        HttpResponseMessage response = await client.GetAsync($"/uploads/{Guid.NewGuid}");
+
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task GetAsync_UploadFromAnotherUser_Returns404NotFound()
+    {
+        HttpClient client = this.HttpClient;
+        Upload upload = DatabaseContextHelper.Uploads.First(u =>
+            u.AppUserId != DatabaseContextHelper.authenticatedUser.Id
+        );
+
+        HttpResponseMessage response = await client.GetAsync($"/uploads/{upload.Id}");
+
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
     [Fact]
