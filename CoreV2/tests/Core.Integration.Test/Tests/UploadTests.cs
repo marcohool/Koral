@@ -29,4 +29,20 @@ public class UploadTests(CustomWebApplicationFactory factory) : BaseIntegrationT
                     .Count()
             );
     }
+
+    [Fact]
+    public async Task GetAllAsync_WithPagination_ReturnsPagedUserUploads()
+    {
+        HttpClient client = this.HttpClient;
+
+        HttpResponseMessage response = await client.GetAsync("/uploads?pageNumber=1&pageSize=3");
+
+        response.EnsureSuccessStatusCode();
+
+        List<UploadResponseDto>? uploads = JsonConvert.DeserializeObject<List<UploadResponseDto>>(
+            await response.Content.ReadAsStringAsync()
+        );
+
+        uploads.Should().HaveCount(3);
+    }
 }
