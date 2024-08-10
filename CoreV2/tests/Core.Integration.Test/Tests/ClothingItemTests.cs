@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
+using CloudinaryDotNet.Actions;
 using Core.Application.Dtos.ClothingItem;
 using Core.Domain.Entities;
 using Core.Domain.Enums;
@@ -80,13 +81,17 @@ public class ClothingItemTests(CustomWebApplicationFactory factory) : BaseIntegr
         imageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
         multipartContent.Add(imageContent, nameof(CreateClothingItemDto.Image), image.FileName);
 
-        this.MockImageStorageService.Setup(x =>
-                x.UploadImageAsync(
-                    It.Is<FormFile>(f => f.FileName.Equals("image-upload.jpg")),
-                    default
+        this.MockCloudinaryService.Setup(x =>
+                x.UploadAsync(
+                    It.Is<ImageUploadParams>(up => up.File.FileName.Equals(image.FileName))
                 )
             )
-            .ReturnsAsync("https://www.example.com/image.jpg");
+            .ReturnsAsync(
+                new ImageUploadResult()
+                {
+                    SecureUrl = new Uri("https://www.example.com/image.jpg"),
+                }
+            );
 
         // Act
         HttpResponseMessage response = await client.PostAsync("/clothingitems", multipartContent);
@@ -101,6 +106,36 @@ public class ClothingItemTests(CustomWebApplicationFactory factory) : BaseIntegr
         clothingItemResponse.Should().NotBeNull();
         clothingItemResponse?.ImageUrl.Should().BeEquivalentTo("https://www.example.com/image.jpg");
 
-        this.MockImageStorageService.VerifyAll();
+        this.MockCloudinaryService.VerifyAll();
+    }
+
+    [Fact]
+    public async Task CreateAsync_InvalidImage_Returns400BadRequest()
+    {
+        // Arrange
+        HttpClient client = this.HttpClient;
+
+        FormFile image = FileHelpers.CreateMockFormFile(11, "image-upload.jpg", "image/jpg");
+
+        MultipartFormDataContent multipartContent =
+            new()
+            {
+                { new StringContent("White T-Shirt"), nameof(CreateClothingItemDto.Name) },
+                { new StringContent(Gender.Male.ToString()), nameof(CreateClothingItemDto.Gender) },
+                {
+                    new StringContent("https://example.com/white-t-shirt"),
+                    nameof(CreateClothingItemDto.SourceUrl)
+                }
+            };
+
+        StreamContent imageContent = new(image.OpenReadStream());
+        imageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
+        multipartContent.Add(imageContent, nameof(CreateClothingItemDto.Image), image.FileName);
+
+        // Act
+        HttpResponseMessage response = await client.PostAsync("/clothingitems", multipartContent);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
 }

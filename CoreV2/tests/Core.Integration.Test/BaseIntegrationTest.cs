@@ -13,7 +13,7 @@ public class BaseIntegrationTest : IClassFixture<CustomWebApplicationFactory>
         this.HttpClient = factory
             .WithWebHostBuilder(builder =>
                 builder.ConfigureServices(services =>
-                    services.AddSingleton(this.MockImageStorageService.Object)
+                    services.AddSingleton(this.MockCloudinaryService.Object)
                 )
             )
             .CreateClient();
@@ -33,6 +33,5 @@ public class BaseIntegrationTest : IClassFixture<CustomWebApplicationFactory>
 
     protected DatabaseContext DbContext { get; }
 
-    protected Mock<IImageStorageService> MockImageStorageService { get; } =
-        new(MockBehavior.Strict);
+    protected Mock<ICloudinaryService> MockCloudinaryService { get; } = new(MockBehavior.Strict);
 }
