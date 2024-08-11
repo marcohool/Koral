@@ -7,7 +7,6 @@ using Core.Application.Services.Interfaces;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
 using Core.Domain.Enums;
-using Core.Domain.Exceptions;
 using Core.Test.Shared.Helpers;
 using Core.UnitTest.Shared;
 using FluentAssertions;
@@ -69,8 +68,9 @@ public class ClothingItemServiceTests : BaseServiceTests
             .ReturnsAsync("https://example-image-hosting.com/white-tshirt.jpg");
 
         this.clothingItemRepositoryMock.Setup(c =>
-            c.AddAsync(It.Is<ClothingItem>(ci => ci.IsEquivalentJson(clothingItem)))
-        );
+                c.AddAsync(It.Is<ClothingItem>(ci => ci.IsEquivalentJson(clothingItem)))
+            )
+            .Returns(Task.CompletedTask);
 
         ClothingItemResponseDto result = await this.clothingItemService.CreateAsync(
             createClothingItemDto

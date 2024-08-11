@@ -96,8 +96,9 @@ public class UploadServiceTests : BaseServiceTests
             .ReturnsAsync(uploadUrl);
 
         this.uploadRepositoryMock.Setup(x =>
-            x.AddAsync(It.Is<Upload>(u => u.IsEquivalentJson(upload)))
-        );
+                x.AddAsync(It.Is<Upload>(u => u.IsEquivalentJson(upload)))
+            )
+            .Returns(Task.CompletedTask);
 
         UploadResponseDto result = await this.uploadService.CreateAsync(createUploadDto);
 

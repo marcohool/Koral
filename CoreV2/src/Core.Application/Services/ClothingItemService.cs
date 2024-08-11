@@ -30,7 +30,7 @@ public class ClothingItemService(
             cancellationToken
         );
 
-        this.clothingItemRepository.AddAsync(clothingItem);
+        await this.clothingItemRepository.AddAsync(clothingItem);
 
         return this.mapper.Map<ClothingItemResponseDto>(clothingItem);
     }

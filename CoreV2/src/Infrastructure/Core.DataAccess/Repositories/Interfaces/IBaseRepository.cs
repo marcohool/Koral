@@ -15,7 +15,7 @@ public interface IBaseRepository<TEntity>
 
     Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> predicate);
 
-    void AddAsync(TEntity entity);
+    Task AddAsync(TEntity entity);
 
     Task<TEntity> UpdateAsync(TEntity entity);
 

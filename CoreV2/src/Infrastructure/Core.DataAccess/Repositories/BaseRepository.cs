@@ -40,7 +40,7 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
         return await this.dbSet.Where(predicate).FirstOrDefaultAsync();
     }
 
-    public async void AddAsync(TEntity entity)
+    public async Task AddAsync(TEntity entity)
     {
         this.dbSet.Add(entity);
         await this.context.SaveChangesAsync();
