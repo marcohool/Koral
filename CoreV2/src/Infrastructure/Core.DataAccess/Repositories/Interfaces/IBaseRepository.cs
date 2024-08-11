@@ -15,6 +15,8 @@ public interface IBaseRepository<TEntity>
 
     Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> predicate);
 
+    Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null);
+
     Task AddAsync(TEntity entity);
 
     Task<TEntity> UpdateAsync(TEntity entity);

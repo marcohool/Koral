@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing.Printing;
 using System.Linq.Expressions;
 using AutoMapper;
+using Core.Application.Dtos;
 using Core.Application.Dtos.Upload;
 using Core.Application.MappingProfiles;
 using Core.Application.Services;
@@ -141,30 +143,40 @@ public class UploadServiceTests : BaseServiceTests
         ];
 
         this.uploadRepositoryMock.Setup(x =>
+                x.CountAsync(It.IsAny<Expression<Func<Upload, bool>>>())
+            )
+            .ReturnsAsync(uploads.Count);
+
+        this.uploadRepositoryMock.Setup(x =>
                 x.GetAllAsync(It.IsAny<Expression<Func<Upload, bool>>>(), 1, 5)
             )
             .ReturnsAsync(uploads);
 
-        IEnumerable<UploadResponseDto> result = await this.uploadService.GetAllAsync(1, 5);
+        PaginatedResponse<UploadResponseDto> result = await this.uploadService.GetAllAsync(1, 5);
 
         result.ShouldBeEquivalentTo(
-            new List<UploadResponseDto>()
-            {
-                new()
-                {
-                    Status = Domain.Enums.UploadStatus.Pending,
-                    ImageUrl = "https://www.example.com/image.jpg",
-                    CreatedOn = DateTime.MinValue,
-                    LastUpdatedOn = null
-                },
-                new()
-                {
-                    Status = Domain.Enums.UploadStatus.Pending,
-                    ImageUrl = "https://www.example.com/image.png",
-                    CreatedOn = DateTime.MinValue,
-                    LastUpdatedOn = null
-                }
-            }
+            new PaginatedResponse<UploadResponseDto>(
+                data:
+                [
+                    new()
+                    {
+                        Status = Domain.Enums.UploadStatus.Pending,
+                        ImageUrl = "https://www.example.com/image.jpg",
+                        CreatedOn = DateTime.MinValue,
+                        LastUpdatedOn = null
+                    },
+                    new()
+                    {
+                        Status = Domain.Enums.UploadStatus.Pending,
+                        ImageUrl = "https://www.example.com/image.png",
+                        CreatedOn = DateTime.MinValue,
+                        LastUpdatedOn = null
+                    }
+                ],
+                currentPage: 1,
+                pageSize: 5,
+                totalRecords: 2
+            )
         );
 
         this.claimServiceMock.VerifyAll();

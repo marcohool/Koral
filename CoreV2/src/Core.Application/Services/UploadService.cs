@@ -1,4 +1,5 @@
 using AutoMapper;
+using Core.Application.Dtos;
 using Core.Application.Dtos.Upload;
 using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
@@ -42,7 +43,7 @@ public class UploadService(
                 ImageUrl = imageUrl,
             };
 
-        this.uploadRepository.AddAsync(upload);
+        await this.uploadRepository.AddAsync(upload);
 
         return this.mapper.Map<UploadResponseDto>(upload);
     }
@@ -71,7 +72,7 @@ public class UploadService(
         return uploadGuid;
     }
 
-    public async Task<IEnumerable<UploadResponseDto>> GetAllAsync(
+    public async Task<PaginatedResponse<UploadResponseDto>> GetAllAsync(
         int pageNumber,
         int pageSize,
         CancellationToken cancellationToken = default
@@ -79,13 +80,20 @@ public class UploadService(
     {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
+        int totalUploads = await this.uploadRepository.CountAsync(u => u.AppUserId == user.Id);
+
         List<Upload> uploads = await this.uploadRepository.GetAllAsync(
             u => u.AppUserId == user.Id,
             pageNumber,
             pageSize
         );
 
-        return this.mapper.Map<IEnumerable<UploadResponseDto>>(uploads);
+        return new PaginatedResponse<UploadResponseDto>(
+            this.mapper.Map<IEnumerable<UploadResponseDto>>(uploads),
+            pageNumber,
+            pageSize,
+            totalUploads
+        );
     }
 
     public async Task<UploadResponseDto> GetByIdAsync(

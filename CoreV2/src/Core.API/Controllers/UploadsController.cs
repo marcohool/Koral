@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Core.Application.Dtos;
 using Core.Application.Dtos.Upload;
 using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
@@ -42,7 +43,7 @@ public class UploadsController(IUploadService uploadService) : ApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<UploadResponseDto>>> GetAllAsync(
+    public async Task<ActionResult<PaginatedResponse<UploadResponseDto>>> GetAllAsync(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10
     )

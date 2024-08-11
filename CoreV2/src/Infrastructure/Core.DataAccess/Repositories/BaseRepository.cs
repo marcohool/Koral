@@ -40,6 +40,18 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
         return await this.dbSet.Where(predicate).FirstOrDefaultAsync();
     }
 
+    public async Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null)
+    {
+        IQueryable<TEntity> query = this.dbSet;
+
+        if (predicate != null)
+        {
+            query = query.Where(predicate);
+        }
+
+        return await query.CountAsync();
+    }
+
     public async Task AddAsync(TEntity entity)
     {
         this.dbSet.Add(entity);

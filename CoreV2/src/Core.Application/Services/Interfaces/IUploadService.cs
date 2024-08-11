@@ -1,3 +1,4 @@
+using Core.Application.Dtos;
 using Core.Application.Dtos.Upload;
 
 namespace Core.Application.Services.Interfaces;
@@ -11,7 +12,7 @@ public interface IUploadService
 
     Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<UploadResponseDto>> GetAllAsync(
+    Task<PaginatedResponse<UploadResponseDto>> GetAllAsync(
         int pageNumber,
         int pageSize,
         CancellationToken cancellationToken = default
