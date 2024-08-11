@@ -48,11 +48,6 @@ public class ImageStorageService(
         return result.SecureUrl.AbsoluteUri;
     }
 
-    public Task<string> GetImageUrlAsync(Guid id, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task DeleteImageAsync(
         string imageUrl,
         CancellationToken cancellationToken = default

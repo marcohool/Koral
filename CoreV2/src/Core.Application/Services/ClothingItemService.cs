@@ -4,7 +4,6 @@ using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
-using Core.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Core.Application.Services;
@@ -83,17 +82,15 @@ public class ClothingItemService(
         CancellationToken cancellationToken = default
     )
     {
-        try
-        {
-            ClothingItem? clothingItem = await this.clothingItemRepository.GetFirstAsync(ci =>
-                ci.Id == id
-            );
+        ClothingItem? clothingItem = await this.clothingItemRepository.GetFirstAsync(ci =>
+            ci.Id == id
+        );
 
-            return this.mapper.Map<ClothingItemResponseDto>(clothingItem);
-        }
-        catch (ResourceNotFoundException)
+        if (clothingItem is null)
         {
             throw new NotFoundException($"Clothing item with id {id} not found");
         }
+
+        return this.mapper.Map<ClothingItemResponseDto>(clothingItem);
     }
 }

@@ -273,7 +273,7 @@ public class ClothingItemServiceTests : BaseServiceTests
         Guid clothingItemId = Guid.NewGuid();
 
         this.clothingItemRepositoryMock.Setup(c => c.GetFirstAsync(ci => ci.Id == clothingItemId))
-            .ThrowsAsync(new ResourceNotFoundException());
+            .ReturnsAsync((ClothingItem?)null);
 
         await this
             .clothingItemService.Invoking(x => x.GetByIdAsync(clothingItemId))

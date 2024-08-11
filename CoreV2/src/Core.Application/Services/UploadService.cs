@@ -5,7 +5,6 @@ using Core.Application.Services.Interfaces;
 using Core.DataAccess.Identity;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
-using Core.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -96,17 +95,15 @@ public class UploadService(
     {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
-        try
-        {
-            Upload? upload = await this.uploadRepository.GetFirstAsync(u =>
-                u.Id == id && u.AppUserId == user.Id
-            );
+        Upload? upload = await this.uploadRepository.GetFirstAsync(u =>
+            u.Id == id && u.AppUserId == user.Id
+        );
 
-            return this.mapper.Map<UploadResponseDto>(upload);
-        }
-        catch (ResourceNotFoundException)
+        if (upload is null)
         {
             throw new NotFoundException($"Upload with id {id} not found");
         }
+
+        return this.mapper.Map<UploadResponseDto>(upload);
     }
 }

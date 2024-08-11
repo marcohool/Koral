@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using Core.DataAccess.Persistence;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Common;
-using Core.Domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -38,11 +37,6 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
 
     public async Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> predicate)
     {
-        TEntity? entity = await this.dbSet.Where(predicate).FirstOrDefaultAsync();
-
-        if (entity == null)
-            throw new ResourceNotFoundException(typeof(TEntity));
-
         return await this.dbSet.Where(predicate).FirstOrDefaultAsync();
     }
 

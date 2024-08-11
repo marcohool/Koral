@@ -6,6 +6,7 @@ using Moq;
 
 namespace Core.Integration.Test;
 
+[Collection("IntegrationTests")]
 public class BaseIntegrationTest : IClassFixture<CustomWebApplicationFactory>
 {
     protected BaseIntegrationTest(CustomWebApplicationFactory factory)

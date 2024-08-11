@@ -5,6 +5,7 @@ using Core.Application.Dtos.Upload;
 using Core.Domain.Entities;
 using Core.Integration.Test.Helpers;
 using Core.Test.Shared.Helpers;
+using Core.UnitTest.Shared;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Moq;
@@ -147,5 +148,50 @@ public class UploadTests(CustomWebApplicationFactory factory) : BaseIntegrationT
         HttpResponseMessage response = await client.PostAsync("/uploads", content);
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_UploadFound_Returns204NoContent()
+    {
+        HttpClient client = this.HttpClient;
+        Upload upload = DatabaseContextHelper.Uploads[0];
+
+        this.MockCloudinaryService.Setup(x =>
+                x.DeleteAsync(
+                    It.Is<DeletionParams>(dp =>
+                        dp.IsEquivalentJson(new DeletionParams("old-money-summer-look"))
+                    )
+                )
+            )
+            .ReturnsAsync(new DeletionResult() { Result = "ok" });
+
+        HttpResponseMessage response = await client.DeleteAsync($"/uploads/{upload.Id}");
+
+        response.StatusCode.Should().Be(HttpStatusCode.NoContent);
+
+        this.MockCloudinaryService.VerifyAll();
+    }
+
+    [Fact]
+    public async Task DeleteAsync_UploadNotFound_Returns404NotFound()
+    {
+        HttpClient client = this.HttpClient;
+
+        HttpResponseMessage response = await client.DeleteAsync($"/uploads/{Guid.NewGuid()}");
+
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_UploadFromAnotherUser_Returns404NotFound()
+    {
+        HttpClient client = this.HttpClient;
+        Upload upload = DatabaseContextHelper.Uploads.First(u =>
+            u.AppUserId != DatabaseContextHelper.authenticatedUser.Id
+        );
+
+        HttpResponseMessage response = await client.DeleteAsync($"/uploads/{upload.Id}");
+
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 }
