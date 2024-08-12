@@ -12,6 +12,8 @@ public class UploadResponseDto
 
     public required string ImageUrl { get; set; }
 
+    public bool IsFavourited { get; set; }
+
     public DateTime CreatedOn { get; set; }
 
     public DateTime? LastUpdatedOn { get; set; }

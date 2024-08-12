@@ -19,4 +19,6 @@ public interface IUploadService
     );
 
     Task<UploadResponseDto> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+
+    Task<UploadResponseDto> FavouriteUpload(Guid id);
 }

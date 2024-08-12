@@ -63,4 +63,10 @@ public class UploadsController(IUploadService uploadService) : ApiController
             return this.NotFound(ex.Message);
         }
     }
+
+    [HttpPost("favourite")]
+    public async Task<ActionResult<UploadResponseDto>> FavouriteUpload(Guid id)
+    {
+        return this.Ok(await this.uploadService.FavouriteUpload(id));
+    }
 }

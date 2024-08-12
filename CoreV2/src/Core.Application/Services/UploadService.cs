@@ -101,6 +101,22 @@ public class UploadService(
         CancellationToken cancellationToken = default
     )
     {
+        Upload upload = await this.GetUserUpload(id);
+
+        return this.mapper.Map<UploadResponseDto>(upload);
+    }
+
+    public async Task<UploadResponseDto> FavouriteUpload(Guid id)
+    {
+        Upload upload = await this.GetUserUpload(id);
+
+        upload.IsFavourited = !upload.IsFavourited;
+
+        return this.mapper.Map<UploadResponseDto>(await this.uploadRepository.UpdateAsync(upload));
+    }
+
+    private async Task<Upload> GetUserUpload(Guid id)
+    {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
         Upload? upload = await this.uploadRepository.GetFirstAsync(u =>
@@ -112,6 +128,6 @@ public class UploadService(
             throw new NotFoundException($"Upload with id {id} not found");
         }
 
-        return this.mapper.Map<UploadResponseDto>(upload);
+        return upload;
     }
 }
