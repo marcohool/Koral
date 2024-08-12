@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
 using CloudinaryDotNet.Actions;
+using Core.Application.Dtos;
 using Core.Application.Dtos.Upload;
 using Core.Domain.Entities;
 using Core.Integration.Test.Helpers;
@@ -24,12 +25,13 @@ public class UploadTests(CustomWebApplicationFactory factory) : BaseIntegrationT
 
         response.EnsureSuccessStatusCode();
 
-        List<UploadResponseDto>? uploads = JsonConvert.DeserializeObject<List<UploadResponseDto>>(
-            await response.Content.ReadAsStringAsync()
-        );
+        PaginatedResponse<UploadResponseDto>? uploads = JsonConvert.DeserializeObject<
+            PaginatedResponse<UploadResponseDto>
+        >(await response.Content.ReadAsStringAsync());
 
+        uploads.Should().NotBeNull();
         uploads
-            .Should()
+            ?.Data.Should()
             .HaveCount(
                 this.DbContext.Uploads.Where(u =>
                         u.AppUserId == DatabaseContextHelper.authenticatedUser.Id
@@ -47,11 +49,16 @@ public class UploadTests(CustomWebApplicationFactory factory) : BaseIntegrationT
 
         response.EnsureSuccessStatusCode();
 
-        List<UploadResponseDto>? uploads = JsonConvert.DeserializeObject<List<UploadResponseDto>>(
-            await response.Content.ReadAsStringAsync()
-        );
+        PaginatedResponse<UploadResponseDto>? uploads = JsonConvert.DeserializeObject<
+            PaginatedResponse<UploadResponseDto>
+        >(await response.Content.ReadAsStringAsync());
 
-        uploads.Should().HaveCount(3);
+        uploads.Should().NotBeNull();
+        uploads?.Data.Should().HaveCount(3);
+        uploads?.CurrentPage.Should().Be(1);
+        uploads?.PageSize.Should().Be(3);
+        uploads?.TotalPages.Should().Be(3);
+        uploads?.TotalRecords.Should().Be(8);
     }
 
     [Fact]
