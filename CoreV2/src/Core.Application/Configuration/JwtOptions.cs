@@ -11,5 +11,6 @@ public class JwtOptions
     public required string Audience { get; set; }
 
     [Required]
+    [MinLength(128)]
     public required string SigningKey { get; set; }
 }
