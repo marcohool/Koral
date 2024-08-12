@@ -194,4 +194,60 @@ public class UploadTests(CustomWebApplicationFactory factory) : BaseIntegrationT
 
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
+
+    [Fact]
+    public async Task FavouriteUpload_ValidUpload_FavouritesUpload_ReturnsUploadResponse()
+    {
+        HttpClient client = this.HttpClient;
+        Upload upload = DatabaseContextHelper.Uploads.First(u =>
+            u.AppUserId == DatabaseContextHelper.authenticatedUser.Id && !u.IsFavourited
+        );
+
+        HttpResponseMessage response = await client.PostAsync(
+            $"/uploads/favourite/{upload.Id}",
+            null
+        );
+
+        response.EnsureSuccessStatusCode();
+
+        UploadResponseDto? uploadResponse = JsonConvert.DeserializeObject<UploadResponseDto>(
+            await response.Content.ReadAsStringAsync()
+        );
+
+        uploadResponse.Should().NotBeNull();
+        uploadResponse?.IsFavourited.Should().BeTrue();
+    }
+
+    [Fact]
+    public async Task FavouriteUpload_ValidUpload_UnFavouritesUpload_ReturnsUploadResponse()
+    {
+        HttpClient client = this.HttpClient;
+        Upload upload = DatabaseContextHelper.Uploads.First(u =>
+            u.AppUserId == DatabaseContextHelper.authenticatedUser.Id && u.IsFavourited
+        );
+
+        HttpResponseMessage response = await client.PostAsync(
+            $"/uploads/favourite/{upload.Id}",
+            null
+        );
+
+        response.EnsureSuccessStatusCode();
+
+        UploadResponseDto? uploadResponse = JsonConvert.DeserializeObject<UploadResponseDto>(
+            await response.Content.ReadAsStringAsync()
+        );
+
+        uploadResponse.Should().NotBeNull();
+        uploadResponse?.IsFavourited.Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task FavouriteUpload_InvalidUpload_UploadNotFound_Returns404NotFound()
+    {
+        HttpClient client = this.HttpClient;
+
+        HttpResponseMessage response = await client.PostAsync($"/uploads/favourite/100", null);
+
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
 }

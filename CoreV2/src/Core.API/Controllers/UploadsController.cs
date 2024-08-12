@@ -64,9 +64,16 @@ public class UploadsController(IUploadService uploadService) : ApiController
         }
     }
 
-    [HttpPost("favourite")]
+    [HttpPost("favourite/{id:Guid}")]
     public async Task<ActionResult<UploadResponseDto>> FavouriteUpload(Guid id)
     {
-        return this.Ok(await this.uploadService.FavouriteUpload(id));
+        try
+        {
+            return this.Ok(await this.uploadService.FavouriteUpload(id));
+        }
+        catch (NotFoundException ex)
+        {
+            return this.NotFound(ex.Message);
+        }
     }
 }
