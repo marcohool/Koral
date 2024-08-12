@@ -1,8 +1,9 @@
 import React, { FC, useEffect } from "react";
-import { getUploadsCountAPI } from "../../../../Services/UploadService.ts";
 import AllUploads from "./All/AllUploads.tsx";
 import FavouriteUploads from "./Favourite/FavouriteUploads.tsx";
 import { UploadType } from "./types.ts";
+import { getUploadsAPI } from "../../../../Services/UploadService.ts";
+import { Upload } from "../../../../Components/Uploads/types.ts";
 
 interface GetUploadsProps {
   type: UploadType;
@@ -17,22 +18,22 @@ export interface UploadPageProps {
 const maxUploadsPerPage = 12;
 
 const GetUploads: FC<GetUploadsProps> = ({ type }) => {
+  const [uploads, setUploads] = React.useState<Upload[]>();
   const [pageNumber, setPageNumber] = React.useState<number>(1);
   const [totalPages, setTotalPages] = React.useState<number>(1);
 
-  console.log(pageNumber);
+  const getPageUploads = (pageNumber: number) => {
+    setUploads(undefined);
+    getUploadsAPI(pageNumber).then((res) => {
+      if (res?.data) {
+        setUploads(res?.data);
+      }
+    });
+  };
 
   useEffect(() => {
-    const getTotalUploadsCount = () => {
-      getUploadsCountAPI(type).then((res) => {
-        if (res?.data) {
-          setTotalPages(Math.ceil(res?.data / maxUploadsPerPage));
-        }
-      });
-    };
-
-    getTotalUploadsCount();
-  }, [type]);
+    getPageUploads(pageNumber);
+  }, [pageNumber]);
 
   const handleNewPage = (pageNumber: number) => {
     setPageNumber(pageNumber);

@@ -2,14 +2,13 @@ import { handleError, handleErrorV2 } from "./ErrorHandler.ts";
 import axios from "axios";
 import { Upload } from "../Components/Uploads/types.ts";
 import { toast } from "react-toastify";
-import { UploadType } from "../Pages/Protected/Uploads/GetUploads/types.ts";
 
 const API_URL = "https://localhost:5001";
 
 const authenticatedAxios = (token: string) => {
   return axios.create({
     headers: {
-      Authorization: `Bearer ${token}`, // Set the Authorization header
+      Authorization: `Bearer ${token}`,
     },
   });
 };
@@ -18,19 +17,9 @@ export const getUploadsAPI = async (pageNumber: number) => {
   try {
     return await authenticatedAxios(localStorage.getItem("token")!).get<
       Upload[]
-    >(`${API_URL}/imageupload?pageNumber=${pageNumber}`);
+    >(`${API_URL}/uploads?pageNumber=${pageNumber}`);
   } catch (error) {
     handleError(error);
-  }
-};
-
-export const getUploadsCountAPI = async (uploadType: UploadType) => {
-  try {
-    return await authenticatedAxios(localStorage.getItem("token")!).get<number>(
-      `${API_URL}/imageupload/totalcount?uploadType=${uploadType}`,
-    );
-  } catch (error) {
-    toast.error(handleErrorV2(error));
   }
 };
 
@@ -38,7 +27,7 @@ export const getFavouriteUploadsAPI = async (pageNumber: number) => {
   try {
     return await authenticatedAxios(localStorage.getItem("token")!).get<
       Upload[]
-    >(`${API_URL}/imageupload/favourites?pageNumber=${pageNumber}`);
+    >(`${API_URL}/uploads/favourites?pageNumber=${pageNumber}`);
   } catch (error) {
     toast.error(handleErrorV2(error));
   }
@@ -47,7 +36,7 @@ export const getFavouriteUploadsAPI = async (pageNumber: number) => {
 export const favouriteUploadAPI = async (imageId: string) => {
   try {
     return await authenticatedAxios(localStorage.getItem("token")!).put(
-      `${API_URL}/imageupload/favourite/${imageId}`,
+      `${API_URL}/uploads/favourite/${imageId}`,
     );
   } catch (error) {
     toast.error(handleErrorV2(error));
@@ -57,7 +46,7 @@ export const favouriteUploadAPI = async (imageId: string) => {
 export const getUploadAPI = async (uploadId: number) => {
   try {
     return await authenticatedAxios(localStorage.getItem("token")!).get<Upload>(
-      `${API_URL}/imageupload/${uploadId}`,
+      `${API_URL}/uploads/${uploadId}`,
     );
   } catch (error) {
     handleErrorV2(error);
@@ -67,7 +56,7 @@ export const getUploadAPI = async (uploadId: number) => {
 export const uploadImageAPI = async (formData: FormData) => {
   try {
     return await authenticatedAxios(localStorage.getItem("token")!).post(
-      `${API_URL}/imageupload`,
+      `${API_URL}/uploads`,
       formData,
     );
   } catch (error) {
