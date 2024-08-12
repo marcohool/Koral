@@ -11,7 +11,7 @@ import NewUploadPage from "../Pages/Protected/Uploads/NewUpload/NewUploadPage.ts
 import GetUploads from "../Pages/Protected/Uploads/GetUploads/GetUploads.tsx";
 import { UploadType } from "../Pages/Protected/Uploads/GetUploads/types.ts";
 import UploadPage from "../Pages/Protected/Uploads/Upload/UploadPage.tsx";
-import UploadsGrid from "../features/uploads/UploadsGrid.tsx";
+import Uploads from "../features/uploads/Uploads.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
                 index: true,
                 element: (
                   <ProtectedRoute>
-                    <UploadsGrid />
+                    <Uploads />
                   </ProtectedRoute>
                 ),
               },
