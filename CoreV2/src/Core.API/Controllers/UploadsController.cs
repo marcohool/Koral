@@ -64,6 +64,15 @@ public class UploadsController(IUploadService uploadService) : ApiController
         }
     }
 
+    [HttpGet("favourites")]
+    public async Task<ActionResult<PaginatedResponse<UploadResponseDto>>> GetFavouritesAsync(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10
+    )
+    {
+        return this.Ok(await this.uploadService.GetFavouritesAsync(pageNumber, pageSize));
+    }
+
     [HttpPost("favourite/{id:Guid}")]
     public async Task<ActionResult<UploadResponseDto>> FavouriteUpload(Guid id)
     {

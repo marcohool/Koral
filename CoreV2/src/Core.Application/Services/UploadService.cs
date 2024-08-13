@@ -96,6 +96,32 @@ public class UploadService(
         );
     }
 
+    public async Task<PaginatedResponse<UploadResponseDto>> GetFavouritesAsync(
+        int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken = default
+    )
+    {
+        ApplicationUser user = await this.claimService.GetCurrentUserAsync();
+
+        int totalUploads = await this.uploadRepository.CountAsync(u =>
+            u.AppUserId == user.Id && u.IsFavourited
+        );
+
+        List<Upload> uploads = await this.uploadRepository.GetAllAsync(
+            u => u.AppUserId == user.Id && u.IsFavourited,
+            pageNumber,
+            pageSize
+        );
+
+        return new PaginatedResponse<UploadResponseDto>(
+            this.mapper.Map<IEnumerable<UploadResponseDto>>(uploads),
+            pageNumber,
+            pageSize,
+            totalUploads
+        );
+    }
+
     public async Task<UploadResponseDto> GetByIdAsync(
         Guid id,
         CancellationToken cancellationToken = default

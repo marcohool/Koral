@@ -18,6 +18,12 @@ public interface IUploadService
         CancellationToken cancellationToken = default
     );
 
+    Task<PaginatedResponse<UploadResponseDto>> GetFavouritesAsync(
+        int pageNumber,
+        int pageSize,
+        CancellationToken cancellationToken = default
+    );
+
     Task<UploadResponseDto> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     Task<UploadResponseDto> FavouriteUpload(Guid id);
