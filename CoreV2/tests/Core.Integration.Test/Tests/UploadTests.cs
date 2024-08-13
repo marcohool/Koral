@@ -57,8 +57,8 @@ public class UploadTests(CustomWebApplicationFactory factory) : BaseIntegrationT
         uploads?.Data.Should().HaveCount(3);
         uploads?.CurrentPage.Should().Be(1);
         uploads?.PageSize.Should().Be(3);
-        uploads?.TotalPages.Should().Be(3);
-        uploads?.TotalRecords.Should().Be(8);
+        uploads?.TotalPages.Should().Be(4);
+        uploads?.TotalRecords.Should().Be(10);
     }
 
     [Fact]
@@ -200,6 +200,53 @@ public class UploadTests(CustomWebApplicationFactory factory) : BaseIntegrationT
         HttpResponseMessage response = await client.DeleteAsync($"/uploads/{upload.Id}");
 
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task GetFavouritesAsync_ReturnsAllUserFavouriteUploads()
+    {
+        HttpClient client = this.HttpClient;
+
+        HttpResponseMessage response = await client.GetAsync("/uploads/favourites");
+
+        response.EnsureSuccessStatusCode();
+
+        PaginatedResponse<UploadResponseDto>? uploads = JsonConvert.DeserializeObject<
+            PaginatedResponse<UploadResponseDto>
+        >(await response.Content.ReadAsStringAsync());
+
+        uploads.Should().NotBeNull();
+        uploads
+            ?.Data.Should()
+            .HaveCount(
+                this.DbContext.Uploads.Where(u =>
+                        u.AppUserId == DatabaseContextHelper.authenticatedUser.Id && u.IsFavourited
+                    )
+                    .Count()
+            );
+    }
+
+    [Fact]
+    public async Task GetFavouritesAsync_WithPagination_ReturnsPagedUserFavouriteUploads()
+    {
+        HttpClient client = this.HttpClient;
+
+        HttpResponseMessage response = await client.GetAsync(
+            "/uploads/favourites?pageNumber=1&pageSize=3"
+        );
+
+        response.EnsureSuccessStatusCode();
+
+        PaginatedResponse<UploadResponseDto>? uploads = JsonConvert.DeserializeObject<
+            PaginatedResponse<UploadResponseDto>
+        >(await response.Content.ReadAsStringAsync());
+
+        uploads.Should().NotBeNull();
+        uploads?.Data.Should().HaveCount(3);
+        uploads?.CurrentPage.Should().Be(1);
+        uploads?.PageSize.Should().Be(3);
+        uploads?.TotalPages.Should().Be(2);
+        uploads?.TotalRecords.Should().Be(5);
     }
 
     [Fact]

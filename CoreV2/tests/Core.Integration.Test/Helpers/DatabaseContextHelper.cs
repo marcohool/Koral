@@ -193,7 +193,7 @@ public class DatabaseContextHelper
             Size = 1024,
             ContentType = "image/png",
             Status = UploadStatus.Processed,
-            IsFavourited = false,
+            IsFavourited = true,
             IsPinned = false,
             AccuracyRating = 8,
             IsDeleted = false,
@@ -201,7 +201,39 @@ public class DatabaseContextHelper
             AppUserId = authenticatedUser.Id,
             CreatedOn = DateTime.UtcNow.AddDays(-9),
             ClothingItems = []
-        }
+        },
+        new Upload
+        {
+            Id = Guid.NewGuid(),
+            Title = "Summer Beachwear",
+            Size = 1024,
+            ContentType = "image/jpeg",
+            Status = UploadStatus.Processed,
+            IsFavourited = true,
+            IsPinned = false,
+            AccuracyRating = 7,
+            IsDeleted = false,
+            ImageUrl = "https://example-image-hosting.com/summer-beachwear.jpg",
+            AppUserId = authenticatedUser.Id,
+            CreatedOn = DateTime.UtcNow.AddDays(-10),
+            ClothingItems = []
+        },
+        new Upload
+        {
+            Id = Guid.NewGuid(),
+            Title = "Autumn Street Style",
+            Size = 1024,
+            ContentType = "image/jpeg",
+            Status = UploadStatus.Processed,
+            IsFavourited = true,
+            IsPinned = true,
+            AccuracyRating = 6,
+            IsDeleted = false,
+            ImageUrl = "https://example-image-hosting.com/autumn-street-style.jpg",
+            AppUserId = authenticatedUser.Id,
+            CreatedOn = DateTime.UtcNow.AddDays(-11),
+            ClothingItems = []
+        },
     ];
 
     public DatabaseContextHelper(DatabaseContext context)
