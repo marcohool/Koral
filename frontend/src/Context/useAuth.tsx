@@ -60,7 +60,7 @@ export const UserProvider = ({ children }: Props) => {
     await login(email, password)
       .then((response) => {
         if (response) {
-          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("token", response.data);
           localStorage.setItem("user", email);
 
           setToken(response?.data.token);
