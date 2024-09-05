@@ -398,7 +398,14 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-.idea/
+*.idea/
 
 # wwwroot Files
 **/wwwroot/uploads/*
+
+# Environment specific config files
+**/appsettings.Development.json
+**/appsettings.Production.json
+
+# Database files
+**/data-mssql/*
