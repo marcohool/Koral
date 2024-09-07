@@ -11,13 +11,13 @@ public record ClothingItem : BaseEntity, IAuditedEntity
 
     public string? Brand { get; set; }
 
-    public string? Category { get; set; }
+    public required Category Category { get; set; }
 
-    public string? Colour { get; set; }
+    public required List<string>? Colours { get; set; }
 
     public decimal? Price { get; set; }
 
-    public string? CurrencyCode { get; set; }
+    public CurrencyCode? CurrencyCode { get; set; }
 
     public required Gender Gender { get; set; }
 
