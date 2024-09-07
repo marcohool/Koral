@@ -1,4 +1,3 @@
-using Core.Application.Dtos;
 using Core.Application.Dtos.ClothingItem;
 
 namespace Core.Application.Services.Interfaces;

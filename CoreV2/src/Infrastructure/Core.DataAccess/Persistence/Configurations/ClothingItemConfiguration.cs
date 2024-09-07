@@ -20,8 +20,6 @@ public class ClothingItemConfiguration : IEntityTypeConfiguration<ClothingItem>
 
         builder.Property(ci => ci.Category).HasMaxLength(255);
 
-        builder.Property(ci => ci.Colour).HasMaxLength(50);
-
         builder.Property(ci => ci.Price).HasColumnType("decimal(18,2)");
 
         builder.Property(ci => ci.CurrencyCode).HasMaxLength(3);

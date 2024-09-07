@@ -8,10 +8,12 @@ namespace Core.API.Controllers;
 
 public class ClothingItemsController(IClothingItemService clothingItemService) : ApiController
 {
+    private readonly IClothingItemService clothingItemService = clothingItemService;
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ClothingItemResponseDto>>> GetAllAsync()
     {
-        return this.Ok(await clothingItemService.GetAllAsync());
+        return this.Ok(await this.clothingItemService.GetAllAsync());
     }
 
     [HttpGet("{id:Guid}")]
@@ -19,7 +21,7 @@ public class ClothingItemsController(IClothingItemService clothingItemService) :
     {
         try
         {
-            return this.Ok(await clothingItemService.GetByIdAsync(id));
+            return this.Ok(await this.clothingItemService.GetByIdAsync(id));
         }
         catch (NotFoundException ex)
         {
@@ -34,7 +36,7 @@ public class ClothingItemsController(IClothingItemService clothingItemService) :
     {
         try
         {
-            return this.Ok(await clothingItemService.CreateAsync(createClothingItemDto));
+            return this.Ok(await this.clothingItemService.CreateAsync(createClothingItemDto));
         }
         catch (ValidationException validationEx)
         {
