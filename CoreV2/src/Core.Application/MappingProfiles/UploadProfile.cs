@@ -8,6 +8,6 @@ public class UploadProfile : Profile
 {
     public UploadProfile()
     {
-        this.CreateMap<Upload, UploadResponseDto>();
+        this.CreateMap<Upload, UploadDto>();
     }
 }

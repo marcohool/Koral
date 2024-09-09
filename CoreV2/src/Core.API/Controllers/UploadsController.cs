@@ -14,7 +14,7 @@ public class UploadsController(IUploadService uploadService) : ApiController
     private readonly IUploadService uploadService = uploadService;
 
     [HttpPost]
-    public async Task<ActionResult<UploadResponseDto>> CreateAsync(
+    public async Task<ActionResult<UploadDto>> CreateUploadAsync(
         [FromForm] CreateUploadDto createUploadDto
     )
     {
@@ -43,7 +43,7 @@ public class UploadsController(IUploadService uploadService) : ApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<PaginatedResponse<UploadResponseDto>>> GetAllAsync(
+    public async Task<ActionResult<PaginatedResponse<UploadDto>>> GetAllUploadsAsync(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10
     )
@@ -52,7 +52,7 @@ public class UploadsController(IUploadService uploadService) : ApiController
     }
 
     [HttpGet("{id:Guid}")]
-    public async Task<ActionResult<UploadResponseDto>> GetAsync(Guid id)
+    public async Task<ActionResult<UploadDto>> GetAsync(Guid id)
     {
         try
         {
@@ -64,8 +64,28 @@ public class UploadsController(IUploadService uploadService) : ApiController
         }
     }
 
+    [HttpPut("{id:Guid}/title")]
+    public async Task<ActionResult<UploadDto>> UpdateUploadTitleAsync(
+        [FromRoute] Guid id,
+        [FromBody] string updatedTitle
+    )
+    {
+        try
+        {
+            UploadDto upload = await this.uploadService.GetByIdAsync(id);
+
+            upload.Title = updatedTitle;
+
+            return this.Ok(await this.uploadService.UpdateAsync);
+        }
+        catch (NotFoundException ex)
+        {
+            return this.NotFound(ex.Message);
+        }
+    }
+
     [HttpGet("favourites")]
-    public async Task<ActionResult<PaginatedResponse<UploadResponseDto>>> GetFavouritesAsync(
+    public async Task<ActionResult<PaginatedResponse<UploadDto>>> GetFavouriteUploadsAsync(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10
     )
@@ -74,7 +94,7 @@ public class UploadsController(IUploadService uploadService) : ApiController
     }
 
     [HttpPost("favourite/{id:Guid}")]
-    public async Task<ActionResult<UploadResponseDto>> FavouriteUpload(Guid id)
+    public async Task<ActionResult<UploadDto>> FavouriteUpload(Guid id)
     {
         try
         {

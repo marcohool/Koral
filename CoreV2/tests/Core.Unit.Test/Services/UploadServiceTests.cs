@@ -102,10 +102,10 @@ public class UploadServiceTests : BaseServiceTests
             )
             .Returns(Task.CompletedTask);
 
-        UploadResponseDto result = await this.uploadService.CreateAsync(createUploadDto);
+        UploadDto result = await this.uploadService.CreateAsync(createUploadDto);
 
         result.ShouldBeEquivalentTo(
-            new UploadResponseDto()
+            new UploadDto()
             {
                 Status = Domain.Enums.UploadStatus.Pending,
                 ImageUrl = uploadUrl,
@@ -152,10 +152,10 @@ public class UploadServiceTests : BaseServiceTests
             )
             .ReturnsAsync(uploads);
 
-        PaginatedResponse<UploadResponseDto> result = await this.uploadService.GetAllAsync(1, 5);
+        PaginatedResponse<UploadDto> result = await this.uploadService.GetAllAsync(1, 5);
 
         result.ShouldBeEquivalentTo(
-            new PaginatedResponse<UploadResponseDto>(
+            new PaginatedResponse<UploadDto>(
                 data:
                 [
                     new()
