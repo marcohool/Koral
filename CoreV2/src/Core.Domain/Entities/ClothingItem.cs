@@ -27,6 +27,8 @@ public record ClothingItem : BaseEntity, IAuditedEntity
 
     public required SourceRegion SourceRegion { get; set; }
 
+    public required float[] EmbeddingVector { get; set; }
+
     public DateTime CreatedOn { get; set; }
 
     public DateTime? LastUpdatedOn { get; set; }
