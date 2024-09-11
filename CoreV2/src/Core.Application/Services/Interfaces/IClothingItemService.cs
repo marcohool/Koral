@@ -19,4 +19,9 @@ public interface IClothingItemService
         Guid id,
         CancellationToken cancellationToken = default
     );
+
+    Task UpsertCollectionAsync(
+        IEnumerable<ClothingItemImport> clothingItemImports,
+        CancellationToken cancellationToken = default
+    );
 }

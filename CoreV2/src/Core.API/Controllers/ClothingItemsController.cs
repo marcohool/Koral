@@ -55,9 +55,11 @@ public class ClothingItemsController(
     {
         try
         {
-            IEnumerable<BaseClothingItemDto> result = await this.clothingItemParser.Parse(
+            IEnumerable<ClothingItemImport> parseResult = await this.clothingItemParser.Parse(
                 request.File
             );
+
+            await this.clothingItemService.UpsertCollectionAsync(parseResult);
 
             return this.Ok("Successfully imported");
         }

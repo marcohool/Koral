@@ -93,4 +93,39 @@ public class ClothingItemService(
 
         return this.mapper.Map<ClothingItemResponseDto>(clothingItem);
     }
+
+    public async Task UpsertCollectionAsync(
+        IEnumerable<ClothingItemImport> clothingItemImports,
+        CancellationToken cancellationToken = default
+    )
+    {
+        foreach (ClothingItemImport clothingItemImport in clothingItemImports)
+        {
+            ClothingItem? existingClothingItem = await this.clothingItemRepository.GetFirstAsync(
+                ci =>
+                    ci.Name == clothingItemImport.Name
+                        && ci.Brand == clothingItemImport.Brand
+                        && ci.SourceRegion == clothingItemImport.SourceRegion
+                    || ci.SourceUrl.Equals(clothingItemImport.SourceUrl)
+            );
+
+            if (existingClothingItem is not null)
+            {
+                string existingImageUrl = existingClothingItem.ImageUrl;
+
+                existingClothingItem = this.mapper.Map<ClothingItem>(clothingItemImport);
+                existingClothingItem.ImageUrl = existingImageUrl;
+
+                await this.clothingItemRepository.UpdateAsync(existingClothingItem);
+
+                continue;
+            }
+
+            ClothingItem clothingItem = this.mapper.Map<ClothingItem>(clothingItemImport);
+
+            // Upload image url
+
+            await this.clothingItemRepository.AddAsync(clothingItem);
+        }
+    }
 }
