@@ -5,5 +5,5 @@ namespace Core.Application.Services.Interfaces;
 
 public interface IClothingItemParser
 {
-    Task<List<ClothingItem>> Parse(IFormFile file);
+    Task<IEnumerable<ClothingItem>> Parse(IFormFile file);
 }

@@ -1,14 +1,20 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 using Core.Application.Dtos.ClothingItem;
 using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
+using Core.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.API.Controllers;
 
-public class ClothingItemsController(IClothingItemService clothingItemService) : ApiController
+public class ClothingItemsController(
+    IClothingItemService clothingItemService,
+    IClothingItemParser clothingItemParser
+) : ApiController
 {
     private readonly IClothingItemService clothingItemService = clothingItemService;
+    private readonly IClothingItemParser clothingItemParser = clothingItemParser;
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ClothingItemResponseDto>>> GetAllAsync()
@@ -42,5 +48,26 @@ public class ClothingItemsController(IClothingItemService clothingItemService) :
         {
             return this.BadRequest(validationEx.Message);
         }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> PublishAsync(PublishClothingItemsRequest request)
+    {
+        try
+        {
+            IEnumerable<ClothingItem> result = await this.clothingItemParser.Parse(request.File);
+
+            // Potential check for if list is empty
+
+
+
+            return this.Ok();
+        }
+        catch (JsonException ex)
+        {
+            return this.BadRequest(ex.Message);
+        }
+
+        throw new NotImplementedException();
     }
 }
