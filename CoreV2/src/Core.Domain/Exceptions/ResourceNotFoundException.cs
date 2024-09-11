@@ -1,6 +1,5 @@
 namespace Core.Domain.Exceptions;
 
-[Serializable]
 public class ResourceNotFoundException : Exception
 {
     public ResourceNotFoundException() { }

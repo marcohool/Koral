@@ -2,7 +2,7 @@ using Core.Domain.Enums;
 
 namespace Core.Application.Dtos.Upload;
 
-public class UploadResponseDto
+public class UploadDto
 {
     public Guid Id { get; set; }
 

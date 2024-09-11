@@ -23,7 +23,7 @@ public class UploadService(
     private readonly IUploadRepository uploadRepository = uploadRepository;
     private readonly IClaimService claimService = claimService;
 
-    public async Task<UploadResponseDto> CreateAsync(
+    public async Task<UploadDto> CreateAsync(
         CreateUploadDto createUploadDto,
         CancellationToken cancellationToken = default
     )
@@ -45,8 +45,10 @@ public class UploadService(
 
         await this.uploadRepository.AddAsync(upload);
 
-        return this.mapper.Map<UploadResponseDto>(upload);
+        return this.mapper.Map<UploadDto>(upload);
     }
+
+    public async Task<UploadDto> UpdateAsync(UploadDto uploadDto) { }
 
     public async Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
@@ -72,7 +74,7 @@ public class UploadService(
         return uploadGuid;
     }
 
-    public async Task<PaginatedResponse<UploadResponseDto>> GetAllAsync(
+    public async Task<PaginatedResponse<UploadDto>> GetAllAsync(
         int pageNumber,
         int pageSize,
         CancellationToken cancellationToken = default
@@ -88,15 +90,15 @@ public class UploadService(
             pageSize
         );
 
-        return new PaginatedResponse<UploadResponseDto>(
-            this.mapper.Map<IEnumerable<UploadResponseDto>>(uploads),
+        return new PaginatedResponse<UploadDto>(
+            this.mapper.Map<IEnumerable<UploadDto>>(uploads),
             pageNumber,
             pageSize,
             totalUploads
         );
     }
 
-    public async Task<PaginatedResponse<UploadResponseDto>> GetFavouritesAsync(
+    public async Task<PaginatedResponse<UploadDto>> GetFavouritesAsync(
         int pageNumber,
         int pageSize,
         CancellationToken cancellationToken = default
@@ -114,31 +116,31 @@ public class UploadService(
             pageSize
         );
 
-        return new PaginatedResponse<UploadResponseDto>(
-            this.mapper.Map<IEnumerable<UploadResponseDto>>(uploads),
+        return new PaginatedResponse<UploadDto>(
+            this.mapper.Map<IEnumerable<UploadDto>>(uploads),
             pageNumber,
             pageSize,
             totalUploads
         );
     }
 
-    public async Task<UploadResponseDto> GetByIdAsync(
+    public async Task<UploadDto> GetByIdAsync(
         Guid id,
         CancellationToken cancellationToken = default
     )
     {
         Upload upload = await this.GetUserUpload(id);
 
-        return this.mapper.Map<UploadResponseDto>(upload);
+        return this.mapper.Map<UploadDto>(upload);
     }
 
-    public async Task<UploadResponseDto> FavouriteUpload(Guid id)
+    public async Task<UploadDto> FavouriteUpload(Guid id)
     {
         Upload upload = await this.GetUserUpload(id);
 
         upload.IsFavourited = !upload.IsFavourited;
 
-        return this.mapper.Map<UploadResponseDto>(await this.uploadRepository.UpdateAsync(upload));
+        return this.mapper.Map<UploadDto>(await this.uploadRepository.UpdateAsync(upload));
     }
 
     private async Task<Upload> GetUserUpload(Guid id)

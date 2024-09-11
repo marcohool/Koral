@@ -23,6 +23,7 @@ public static class ApplicationServices
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IClaimService, ClaimService>();
         services.AddScoped<IUploadService, UploadService>();
+        services.AddScoped<IClothingItemParser, JsonClothingItemParser>();
     }
 
     private static void RegisterAutoMappers(this IServiceCollection services)
