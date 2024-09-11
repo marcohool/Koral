@@ -1,6 +1,6 @@
 ﻿using System.Text;
+using Core.Application.Dtos.ClothingItem;
 using Core.Application.Services.Interfaces;
-using Core.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
@@ -18,19 +18,18 @@ public class JsonClothingItemParser : IClothingItemParser
             }
         };
 
-    public async Task<IEnumerable<ClothingItem>> Parse(IFormFile file)
+    public async Task<IEnumerable<ClothingItemImport>> Parse(IFormFile file)
     {
         using Stream stream = file.OpenReadStream();
         using StreamReader streamReader = new(stream, Encoding.UTF8);
 
-        IEnumerable<ClothingItem>? json = JsonConvert.DeserializeObject<IEnumerable<ClothingItem>>(
-            await streamReader.ReadToEndAsync(),
-            this.settings
-        );
+        IEnumerable<ClothingItemImport>? json = JsonConvert.DeserializeObject<
+            IEnumerable<ClothingItemImport>
+        >(await streamReader.ReadToEndAsync(), this.settings);
 
         if (json is null)
         {
-            throw new JsonException("Json file was not deserialized");
+            throw new JsonSerializationException("Deserialized json file was null");
         }
 
         return json;

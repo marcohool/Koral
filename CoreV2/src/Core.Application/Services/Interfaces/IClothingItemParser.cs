@@ -1,9 +1,9 @@
-﻿using Core.Domain.Entities;
+﻿using Core.Application.Dtos.ClothingItem;
 using Microsoft.AspNetCore.Http;
 
 namespace Core.Application.Services.Interfaces;
 
 public interface IClothingItemParser
 {
-    Task<IEnumerable<ClothingItem>> Parse(IFormFile file);
+    Task<IEnumerable<ClothingItemImport>> Parse(IFormFile file);
 }

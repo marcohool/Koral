@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json;
 using Core.Application.Dtos.ClothingItem;
 using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
 using Core.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Core.API.Controllers;
 
@@ -55,15 +55,13 @@ public class ClothingItemsController(
     {
         try
         {
-            IEnumerable<ClothingItem> result = await this.clothingItemParser.Parse(request.File);
+            IEnumerable<BaseClothingItemDto> result = await this.clothingItemParser.Parse(
+                request.File
+            );
 
-            // Potential check for if list is empty
-
-
-
-            return this.Ok();
+            return this.Ok("Successfully imported");
         }
-        catch (JsonException ex)
+        catch (JsonSerializationException ex)
         {
             return this.BadRequest(ex.Message);
         }

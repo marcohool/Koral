@@ -7,7 +7,7 @@ public record ClothingItem : BaseEntity, IAuditedEntity
 {
     public required string Name { get; set; }
 
-    public string? Description { get; set; }
+    public required string Description { get; set; }
 
     public string? Brand { get; set; }
 
@@ -15,13 +15,13 @@ public record ClothingItem : BaseEntity, IAuditedEntity
 
     public required List<string>? Colours { get; set; }
 
-    public decimal? Price { get; set; }
+    public required decimal Price { get; set; }
 
-    public CurrencyCode? CurrencyCode { get; set; }
+    public required CurrencyCode CurrencyCode { get; set; }
 
-    public required Gender Gender { get; set; }
+    public required Gender Gender { get; set; } = Gender.Unknown;
 
-    public string? ImageUrl { get; set; }
+    public required string ImageUrl { get; set; }
 
     public required string SourceUrl { get; set; }
 
