@@ -6,4 +6,3 @@ public class CreateUploadDto
 {
     public required IFormFile Image { get; set; }
 }
-"

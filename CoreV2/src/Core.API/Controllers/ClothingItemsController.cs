@@ -50,7 +50,7 @@ public class ClothingItemsController(
         }
     }
 
-    [HttpPost]
+    [HttpPost("publish")]
     public async Task<IActionResult> PublishAsync(PublishClothingItemsRequest request)
     {
         try

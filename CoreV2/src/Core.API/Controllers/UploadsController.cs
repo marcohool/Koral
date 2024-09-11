@@ -64,26 +64,6 @@ public class UploadsController(IUploadService uploadService) : ApiController
         }
     }
 
-    [HttpPut("{id:Guid}/title")]
-    public async Task<ActionResult<UploadDto>> UpdateUploadTitleAsync(
-        [FromRoute] Guid id,
-        [FromBody] string updatedTitle
-    )
-    {
-        try
-        {
-            UploadDto upload = await this.uploadService.GetByIdAsync(id);
-
-            upload.Title = updatedTitle;
-
-            return this.Ok(await this.uploadService.UpdateAsync);
-        }
-        catch (NotFoundException ex)
-        {
-            return this.NotFound(ex.Message);
-        }
-    }
-
     [HttpGet("favourites")]
     public async Task<ActionResult<PaginatedResponse<UploadDto>>> GetFavouriteUploadsAsync(
         [FromQuery] int pageNumber = 1,

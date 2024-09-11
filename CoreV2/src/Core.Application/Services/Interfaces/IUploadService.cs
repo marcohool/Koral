@@ -10,8 +10,6 @@ public interface IUploadService
         CancellationToken cancellationToken = default
     );
 
-    Task<UploadDto> UpdateAsync(UploadDto uploadDto, CancellationToken cancellationToken = default);
-
     Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 
     Task<PaginatedResponse<UploadDto>> GetAllAsync(

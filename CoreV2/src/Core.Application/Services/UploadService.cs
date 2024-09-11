@@ -48,8 +48,6 @@ public class UploadService(
         return this.mapper.Map<UploadDto>(upload);
     }
 
-    public async Task<UploadDto> UpdateAsync(UploadDto uploadDto) { }
-
     public async Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
