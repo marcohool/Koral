@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using Core.Application.Dtos.ClothingItem;
 using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
-using Core.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -55,11 +54,7 @@ public class ClothingItemsController(
     {
         try
         {
-            IEnumerable<ClothingItemImport> parseResult = await this.clothingItemParser.Parse(
-                request.File
-            );
-
-            await this.clothingItemService.UpsertCollectionAsync(parseResult);
+            await this.clothingItemService.ImportClothingItems(request.File);
 
             return this.Ok("Successfully imported");
         }
@@ -67,7 +62,5 @@ public class ClothingItemsController(
         {
             return this.BadRequest(ex.Message);
         }
-
-        throw new NotImplementedException();
     }
 }

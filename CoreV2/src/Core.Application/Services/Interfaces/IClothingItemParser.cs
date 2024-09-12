@@ -1,9 +1,10 @@
 ﻿using Core.Application.Dtos.ClothingItem;
+using Core.Application.Models.Parsing;
 using Microsoft.AspNetCore.Http;
 
 namespace Core.Application.Services.Interfaces;
 
 public interface IClothingItemParser
 {
-    Task<IEnumerable<ClothingItemImport>> Parse(IFormFile file);
+    Task<ParseResult<ClothingItemImport>> Parse(IFormFile file);
 }

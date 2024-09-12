@@ -1,22 +1,30 @@
 using AutoMapper;
 using Core.Application.Dtos.ClothingItem;
 using Core.Application.Exceptions;
+using Core.Application.Models.Parsing;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace Core.Application.Services;
 
 public class ClothingItemService(
     IMapper mapper,
     IClothingItemRepository clothingItemRepository,
-    IImageStorageService imageStorageService
+    IImageStorageService imageStorageService,
+    IClothingItemParser clothingItemParser,
+    IServiceProvider serviceProvider
 ) : IClothingItemService
 {
     private readonly IMapper mapper = mapper;
     private readonly IClothingItemRepository clothingItemRepository = clothingItemRepository;
     private readonly IImageStorageService imageStorageService = imageStorageService;
+    private readonly IClothingItemParser clothingItemParser = clothingItemParser;
+    private readonly IServiceProvider serviceProvider = serviceProvider;
 
     public async Task<ClothingItemResponseDto> CreateAsync(
         CreateClothingItemDto createClothingItemModel,
@@ -94,7 +102,39 @@ public class ClothingItemService(
         return this.mapper.Map<ClothingItemResponseDto>(clothingItem);
     }
 
-    public async Task UpsertCollectionAsync(
+    public async Task ImportClothingItems(IFormFile file)
+    {
+        ParseResult<ClothingItemImport> parseResult = await this.clothingItemParser.Parse(file);
+
+        if (parseResult.ErrorMessage is not null)
+        {
+            throw new JsonSerializationException(parseResult.ErrorMessage);
+        }
+
+        IDbContextTransaction transaction =
+            await this.clothingItemRepository.BeginTransactionAsync();
+
+        await Parallel.ForEachAsync(
+            parseResult.Successes,
+            async (clothingItemImport, CancellationToken) =>
+            {
+                // To-do: Potentially upload image url to image storage service
+                using IServiceScope scope = this.serviceProvider.CreateScope();
+
+                IClothingItemRepository scopedRepository =
+                    scope.ServiceProvider.GetRequiredService<IClothingItemRepository>();
+                IMapper scopedMapper = scope.ServiceProvider.GetRequiredService<IMapper>();
+
+                ClothingItem clothingItem = scopedMapper.Map<ClothingItem>(clothingItemImport);
+
+                await scopedRepository.AddAsync(clothingItem);
+            }
+        );
+
+        await this.clothingItemRepository.CommitTransactionAsync(transaction);
+    }
+
+    private async Task UpsertCollectionAsync(
         IEnumerable<ClothingItemImport> clothingItemImports,
         CancellationToken cancellationToken = default
     )

@@ -10,5 +10,6 @@ public class ClothingItemProfile : Profile
     {
         this.CreateMap<CreateClothingItemDto, ClothingItem>();
         this.CreateMap<ClothingItem, ClothingItemResponseDto>();
+        this.CreateMap<ClothingItemImport, ClothingItem>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Core.Application.Dtos.ClothingItem;
+using Core.Application.Models.Parsing;
 using Core.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -18,20 +19,41 @@ public class JsonClothingItemParser : IClothingItemParser
             }
         };
 
-    public async Task<IEnumerable<ClothingItemImport>> Parse(IFormFile file)
+    public async Task<ParseResult<ClothingItemImport>> Parse(IFormFile file)
     {
-        using Stream stream = file.OpenReadStream();
-        using StreamReader streamReader = new(stream, Encoding.UTF8);
+        ParseResult<ClothingItemImport> result = new();
 
-        IEnumerable<ClothingItemImport>? json = JsonConvert.DeserializeObject<
-            IEnumerable<ClothingItemImport>
-        >(await streamReader.ReadToEndAsync(), this.settings);
-
-        if (json is null)
+        if (file.Length == 0)
         {
-            throw new JsonSerializationException("Deserialized json file was null");
+            result.ErrorMessage = "The file is empty.";
+            return result;
         }
 
-        return json;
+        await using Stream stream = file.OpenReadStream();
+        using StreamReader streamReader = new(stream, Encoding.UTF8);
+
+        try
+        {
+            string content = await streamReader.ReadToEndAsync();
+
+            IEnumerable<ClothingItemImport>? items = JsonConvert.DeserializeObject<
+                IEnumerable<ClothingItemImport>
+            >(content, this.settings);
+
+            if (items == null)
+            {
+                result.ErrorMessage = "Deserialization returned null";
+                return result;
+            }
+
+            result.Successes = items;
+
+            return result;
+        }
+        catch (JsonSerializationException ex)
+        {
+            result.ErrorMessage = $"JSON deserialization failed: {ex.Message}";
+            return result;
+        }
     }
 }

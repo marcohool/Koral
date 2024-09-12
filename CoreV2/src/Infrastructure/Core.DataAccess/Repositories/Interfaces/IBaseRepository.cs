@@ -24,4 +24,6 @@ public interface IBaseRepository<TEntity>
     Task<Guid> DeleteAsync(TEntity entity);
 
     Task<IDbContextTransaction> BeginTransactionAsync();
+
+    Task CommitTransactionAsync(IDbContextTransaction transaction);
 }

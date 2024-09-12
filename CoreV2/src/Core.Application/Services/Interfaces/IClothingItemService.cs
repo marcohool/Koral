@@ -1,4 +1,5 @@
 using Core.Application.Dtos.ClothingItem;
+using Microsoft.AspNetCore.Http;
 
 namespace Core.Application.Services.Interfaces;
 
@@ -20,8 +21,5 @@ public interface IClothingItemService
         CancellationToken cancellationToken = default
     );
 
-    Task UpsertCollectionAsync(
-        IEnumerable<ClothingItemImport> clothingItemImports,
-        CancellationToken cancellationToken = default
-    );
+    Task ImportClothingItems(IFormFile file);
 }

@@ -78,4 +78,21 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
     {
         return await this.context.Database.BeginTransactionAsync();
     }
+
+    public async Task CommitTransactionAsync(IDbContextTransaction transaction)
+    {
+        try
+        {
+            await transaction.CommitAsync();
+        }
+        catch (Exception)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
+        finally
+        {
+            await transaction.DisposeAsync();
+        }
+    }
 }
