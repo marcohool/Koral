@@ -40,6 +40,12 @@ public static class ApiServices
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
+        services
+            .AddOptions<KoralMatchConfiguration>()
+            .BindConfiguration("KoralMatch")
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+
         services.AddJwt(
             services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>().Value
         );
