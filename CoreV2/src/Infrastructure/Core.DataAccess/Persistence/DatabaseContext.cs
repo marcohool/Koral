@@ -14,9 +14,27 @@ public class DatabaseContext(DbContextOptions options) : IdentityDbContext<Appli
 
     public DbSet<Upload> Uploads { get; set; }
 
+    public DbSet<UploadClothingItem> UploadClothingItems { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+        builder
+            .Entity<UploadClothingItem>()
+            .HasKey(uci => new { uci.UploadId, uci.ClothingItemId });
+
+        builder
+            .Entity<UploadClothingItem>()
+            .HasOne(uc => uc.Upload)
+            .WithMany(u => u.UploadClothingItems)
+            .HasForeignKey(uc => uc.UploadId);
+
+        builder
+            .Entity<UploadClothingItem>()
+            .HasOne(uc => uc.ClothingItem)
+            .WithMany(c => c.UploadClothingItems)
+            .HasForeignKey(uc => uc.ClothingItemId);
 
         base.OnModelCreating(builder);
     }

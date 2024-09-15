@@ -1,4 +1,6 @@
 using AutoMapper;
+using Core.Application.APIs.KoralMatch;
+using Core.Application.APIs.KoralMatch.Models;
 using Core.Application.Dtos;
 using Core.Application.Dtos.Upload;
 using Core.Application.Exceptions;
@@ -15,13 +17,15 @@ public class UploadService(
     IMapper mapper,
     IImageStorageService imageStorageService,
     IUploadRepository uploadRepository,
-    IClaimService claimService
+    IClaimService claimService,
+    IKoralMatchApi koralMatchApi
 ) : IUploadService
 {
     private readonly IMapper mapper = mapper;
     private readonly IImageStorageService imageStorageService = imageStorageService;
     private readonly IUploadRepository uploadRepository = uploadRepository;
     private readonly IClaimService claimService = claimService;
+    private readonly IKoralMatchApi koralMatchApi = koralMatchApi;
 
     public async Task<UploadDto> CreateAsync(
         CreateUploadDto createUploadDto,
@@ -34,9 +38,12 @@ public class UploadService(
 
         string imageUrl = await this.imageStorageService.UploadImageAsync(image, cancellationToken);
 
+        UploadEmbedding uploadEmbedding = await this.koralMatchApi.GetUploadEmbedding(image);
+
         Upload upload =
             new()
             {
+                Title = uploadEmbedding.Title,
                 AppUserId = user.Id,
                 ContentType = image.ContentType,
                 Size = image.Length,

@@ -33,5 +33,5 @@ public record ClothingItem : BaseEntity, IAuditedEntity
 
     public DateTime? LastUpdatedOn { get; set; }
 
-    public List<Upload> Uploads { get; set; } = [];
+    public ICollection<UploadClothingItem> UploadClothingItems { get; set; } = [];
 }

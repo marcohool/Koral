@@ -29,11 +29,6 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
         builder.Property(u => u.IsDeleted).IsRequired();
 
         builder
-            .HasMany(u => u.ClothingItems)
-            .WithMany(ci => ci.Uploads)
-            .UsingEntity(j => j.ToTable("UploadClothingItems"));
-
-        builder
             .HasOne<ApplicationUser>()
             .WithMany(u => u.Uploads)
             .HasForeignKey(u => u.AppUserId)

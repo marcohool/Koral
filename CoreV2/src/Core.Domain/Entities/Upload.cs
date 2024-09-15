@@ -5,7 +5,7 @@ namespace Core.Domain.Entities;
 
 public record Upload : BaseEntity, IAuditedEntity
 {
-    public string? Title { get; set; }
+    public required string Title { get; set; }
 
     public required long Size { get; set; }
 
@@ -29,5 +29,5 @@ public record Upload : BaseEntity, IAuditedEntity
 
     public required string AppUserId { get; set; }
 
-    public List<ClothingItem> ClothingItems { get; set; } = [];
+    public ICollection<UploadClothingItem> UploadClothingItems { get; set; } = [];
 }

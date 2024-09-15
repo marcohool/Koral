@@ -1,3 +1,4 @@
+using Core.Application.APIs.KoralMatch;
 using Core.Application.MappingProfiles;
 using Core.Application.Services;
 using Core.Application.Services.Interfaces;
@@ -24,6 +25,7 @@ public static class ApplicationServices
         services.AddScoped<IClaimService, ClaimService>();
         services.AddScoped<IUploadService, UploadService>();
         services.AddScoped<IClothingItemParser, JsonClothingItemParser>();
+        services.AddHttpClient<IKoralMatchApi, KoralMatchApi>();
     }
 
     private static void RegisterAutoMappers(this IServiceCollection services)
