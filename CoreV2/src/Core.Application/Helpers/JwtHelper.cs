@@ -34,7 +34,7 @@ public class JwtHelper
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = credentials,
                 Issuer = jwtOptions.Issuer,
-                Audience =jwtOptions.Audience,
+                Audience = jwtOptions.Audience,
             };
 
         JwtSecurityTokenHandler tokenHandler = new();
