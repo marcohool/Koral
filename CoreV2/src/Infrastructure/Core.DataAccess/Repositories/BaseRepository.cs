@@ -16,7 +16,8 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
     public async Task<List<TEntity>> GetAllAsync(
         Expression<Func<TEntity, bool>>? predicate = null,
         int? pageNumber = null,
-        int? pageSize = null
+        int? pageSize = null,
+        CancellationToken cancellationToken = default
     )
     {
         IQueryable<TEntity> query = this.dbSet;

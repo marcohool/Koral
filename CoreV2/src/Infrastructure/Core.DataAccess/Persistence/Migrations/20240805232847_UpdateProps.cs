@@ -10,28 +10,23 @@ namespace Core.DataAccess.Persistence.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "IX_Uploads_Path",
-                table: "Uploads");
+            migrationBuilder.DropIndex(name: "IX_Uploads_Path", table: "Uploads");
 
-            migrationBuilder.DropColumn(
-                name: "Path",
-                table: "Uploads");
+            migrationBuilder.DropColumn(name: "Path", table: "Uploads");
 
             migrationBuilder.AddColumn<string>(
                 name: "ImageUrl",
                 table: "Uploads",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ImageUrl",
-                table: "Uploads");
+            migrationBuilder.DropColumn(name: "ImageUrl", table: "Uploads");
 
             migrationBuilder.AddColumn<string>(
                 name: "Path",
@@ -39,13 +34,15 @@ namespace Core.DataAccess.Persistence.Migrations
                 type: "nvarchar(1024)",
                 maxLength: 1024,
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Uploads_Path",
                 table: "Uploads",
                 column: "Path",
-                unique: true);
+                unique: true
+            );
         }
     }
 }

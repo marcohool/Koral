@@ -16,10 +16,6 @@ public class UploadConfiguration : IEntityTypeConfiguration<Upload>
 
         builder.Property(u => u.Title).HasMaxLength(255);
 
-        builder.Property(u => u.Size).IsRequired();
-
-        builder.Property(u => u.ContentType).IsRequired().HasMaxLength(255);
-
         builder.Property(u => u.Status).HasDefaultValue(UploadStatus.Pending).IsRequired();
 
         builder.Property(u => u.IsFavourited).IsRequired();

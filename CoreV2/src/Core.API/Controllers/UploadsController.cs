@@ -3,6 +3,7 @@ using Core.Application.Dtos;
 using Core.Application.Dtos.Upload;
 using Core.Application.Exceptions;
 using Core.Application.Services.Interfaces;
+using Core.Domain.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,13 @@ public class UploadsController(IUploadService uploadService) : ApiController
         catch (ValidationException validationEx)
         {
             return this.BadRequest(validationEx.Message);
+        }
+        catch (EmbeddingGenerationException ex)
+        {
+            return this.StatusCode(
+                StatusCodes.Status500InternalServerError,
+                $"An error occurred while processing your request. Please try again later. Error: {ex.Message}"
+            );
         }
     }
 

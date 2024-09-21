@@ -7,10 +7,6 @@ public record Upload : BaseEntity, IAuditedEntity
 {
     public required string Title { get; set; }
 
-    public required long Size { get; set; }
-
-    public required string ContentType { get; set; }
-
     public UploadStatus Status { get; set; }
 
     public bool IsFavourited { get; set; }
@@ -29,5 +25,5 @@ public record Upload : BaseEntity, IAuditedEntity
 
     public required string AppUserId { get; set; }
 
-    public ICollection<UploadClothingItem> UploadClothingItems { get; set; } = [];
+    public ICollection<UploadMatch> UploadMatches { get; set; } = [];
 }

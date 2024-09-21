@@ -18,7 +18,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(3)",
-                oldMaxLength: 3);
+                oldMaxLength: 3
+            );
         }
 
         /// <inheritdoc />
@@ -34,7 +35,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(3)",
                 oldMaxLength: 3,
-                oldNullable: true);
+                oldNullable: true
+            );
         }
     }
 }

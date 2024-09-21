@@ -10,9 +10,7 @@ namespace Core.DataAccess.Persistence.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Colour",
-                table: "ClothingItems");
+            migrationBuilder.DropColumn(name: "Colour", table: "ClothingItems");
 
             migrationBuilder.AlterColumn<decimal>(
                 name: "Price",
@@ -22,7 +20,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 defaultValue: 0m,
                 oldClrType: typeof(decimal),
                 oldType: "decimal(18,2)",
-                oldNullable: true);
+                oldNullable: true
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "ImageUrl",
@@ -34,7 +33,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(200)",
                 oldMaxLength: 200,
-                oldNullable: true);
+                oldNullable: true
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Description",
@@ -46,7 +46,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(1024)",
                 oldMaxLength: 1024,
-                oldNullable: true);
+                oldNullable: true
+            );
 
             migrationBuilder.AlterColumn<int>(
                 name: "CurrencyCode",
@@ -58,7 +59,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(3)",
                 oldMaxLength: 3,
-                oldNullable: true);
+                oldNullable: true
+            );
 
             migrationBuilder.AlterColumn<int>(
                 name: "Category",
@@ -70,32 +72,31 @@ namespace Core.DataAccess.Persistence.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(255)",
                 oldMaxLength: 255,
-                oldNullable: true);
+                oldNullable: true
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "Colours",
                 table: "ClothingItems",
                 type: "nvarchar(max)",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "EmbeddingVector",
                 table: "ClothingItems",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "[]");
+                defaultValue: "[]"
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Colours",
-                table: "ClothingItems");
+            migrationBuilder.DropColumn(name: "Colours", table: "ClothingItems");
 
-            migrationBuilder.DropColumn(
-                name: "EmbeddingVector",
-                table: "ClothingItems");
+            migrationBuilder.DropColumn(name: "EmbeddingVector", table: "ClothingItems");
 
             migrationBuilder.AlterColumn<decimal>(
                 name: "Price",
@@ -103,7 +104,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 type: "decimal(18,2)",
                 nullable: true,
                 oldClrType: typeof(decimal),
-                oldType: "decimal(18,2)");
+                oldType: "decimal(18,2)"
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "ImageUrl",
@@ -113,7 +115,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(200)",
-                oldMaxLength: 200);
+                oldMaxLength: 200
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Description",
@@ -123,7 +126,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(1024)",
-                oldMaxLength: 1024);
+                oldMaxLength: 1024
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "CurrencyCode",
@@ -133,7 +137,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 nullable: true,
                 oldClrType: typeof(int),
                 oldType: "int",
-                oldMaxLength: 3);
+                oldMaxLength: 3
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Category",
@@ -143,14 +148,16 @@ namespace Core.DataAccess.Persistence.Migrations
                 nullable: true,
                 oldClrType: typeof(int),
                 oldType: "int",
-                oldMaxLength: 255);
+                oldMaxLength: 255
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "Colour",
                 table: "ClothingItems",
                 type: "nvarchar(50)",
                 maxLength: 50,
-                nullable: true);
+                nullable: true
+            );
         }
     }
 }

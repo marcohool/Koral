@@ -16,7 +16,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 type: "nvarchar(3)",
                 maxLength: 3,
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
 
             migrationBuilder.AddColumn<int>(
                 name: "Gender",
@@ -24,7 +25,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 type: "int",
                 maxLength: 10,
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0
+            );
 
             migrationBuilder.AddColumn<int>(
                 name: "SourceRegion",
@@ -32,23 +34,18 @@ namespace Core.DataAccess.Persistence.Migrations
                 type: "int",
                 maxLength: 3,
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "CurrencyCode",
-                table: "ClothingItems");
+            migrationBuilder.DropColumn(name: "CurrencyCode", table: "ClothingItems");
 
-            migrationBuilder.DropColumn(
-                name: "Gender",
-                table: "ClothingItems");
+            migrationBuilder.DropColumn(name: "Gender", table: "ClothingItems");
 
-            migrationBuilder.DropColumn(
-                name: "SourceRegion",
-                table: "ClothingItems");
+            migrationBuilder.DropColumn(name: "SourceRegion", table: "ClothingItems");
         }
     }
 }
