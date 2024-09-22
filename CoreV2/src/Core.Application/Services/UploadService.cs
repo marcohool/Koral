@@ -63,6 +63,8 @@ public class UploadService(
                 AppUserId = user.Id
             };
 
+        await this.uploadRepository.AddAsync(upload);
+
         foreach (ClothingItemEmbedding ciEmbedding in uploadEmbedding.ClothingItemEmbeddings)
         {
             Gender[] genders = [ciEmbedding.Gender, Gender.Unknown, Gender.Unisex];
@@ -103,8 +105,6 @@ public class UploadService(
                 await this.uploadMatchesRepository.AddAsync(uploadMatch);
             }
         }
-
-        await this.uploadRepository.AddAsync(upload);
 
         return this.mapper.Map<UploadDto>(upload);
     }

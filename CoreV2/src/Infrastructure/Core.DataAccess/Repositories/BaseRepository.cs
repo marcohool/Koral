@@ -33,7 +33,7 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
             query = query.Skip(skip).Take(pageSize.Value);
         }
 
-        return await query.ToListAsync();
+        return await query.ToListAsync(cancellationToken: cancellationToken);
     }
 
     public async Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> predicate)

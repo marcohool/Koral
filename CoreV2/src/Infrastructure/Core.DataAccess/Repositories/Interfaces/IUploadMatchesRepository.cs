@@ -2,4 +2,7 @@
 
 namespace Core.DataAccess.Repositories.Interfaces;
 
-public interface IUploadMatchesRepository : IBaseRepository<UploadMatch> { }
+public interface IUploadMatchesRepository
+{
+    Task AddAsync(UploadMatch uploadMatch);
+}
