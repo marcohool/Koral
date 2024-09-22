@@ -1,3 +1,4 @@
+using Core.Application.Dtos.ClothingItem;
 using Core.Domain.Enums;
 
 namespace Core.Application.Dtos.Upload;
@@ -17,4 +18,6 @@ public class UploadDto
     public DateTime CreatedOn { get; set; }
 
     public DateTime? LastUpdatedOn { get; set; }
+
+    public List<ClothingItemResponseDto> ClothingItems { get; set; } = [];
 }

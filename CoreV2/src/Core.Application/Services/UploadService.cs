@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoMapper;
 using Core.Application.APIs.KoralMatch;
 using Core.Application.APIs.KoralMatch.Models;
@@ -67,7 +68,12 @@ public class UploadService(
 
         foreach (ClothingItemEmbedding ciEmbedding in uploadEmbedding.ClothingItemEmbeddings)
         {
-            Gender[] genders = [ciEmbedding.Gender, Gender.Unknown, Gender.Unisex];
+            List<Gender> genders = [Gender.Unknown, Gender.Unisex];
+            genders.AddRange(
+                ciEmbedding.Gender == Gender.Unknown || ciEmbedding.Gender == Gender.Unisex
+                    ? [Gender.Male, Gender.Female]
+                    : [ciEmbedding.Gender]
+            );
 
             List<ClothingItem> clothingItemsToSearch =
                 await this.clothingItemRepository.GetAllAsync(
