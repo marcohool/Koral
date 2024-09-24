@@ -8,9 +8,9 @@ namespace Core.DataAccess.Repositories;
 public class UploadMatchesRepository(DatabaseContext context) : IUploadMatchesRepository
 {
     private readonly DatabaseContext context = context;
-    private readonly DbSet<UploadMatch> dbSet = context.Set<UploadMatch>();
+    private readonly DbSet<ItemMatch> dbSet = context.Set<ItemMatch>();
 
-    public async Task AddAsync(UploadMatch uploadMatch)
+    public async Task AddAsync(ItemMatch uploadMatch)
     {
         this.dbSet.Add(uploadMatch);
         await this.context.SaveChangesAsync();

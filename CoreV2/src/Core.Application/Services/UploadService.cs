@@ -98,7 +98,7 @@ public class UploadService(
                     ci.Id == searchResult.Id
                 );
 
-                UploadMatch uploadMatch =
+                ItemMatch uploadMatch =
                     new()
                     {
                         UploadItemDescription = ciEmbedding.Description,

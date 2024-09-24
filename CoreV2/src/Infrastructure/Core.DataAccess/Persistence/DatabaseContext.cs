@@ -14,22 +14,22 @@ public class DatabaseContext(DbContextOptions options) : IdentityDbContext<Appli
 
     public DbSet<Upload> Uploads { get; set; }
 
-    public DbSet<UploadMatch> UploadMatches { get; set; }
+    public DbSet<ItemMatch> UploadMatches { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-        builder.Entity<UploadMatch>().HasKey(uci => new { uci.UploadId, uci.ClothingItemId });
+        builder.Entity<ItemMatch>().HasKey(uci => new { uci.UploadId, uci.ClothingItemId });
 
         builder
-            .Entity<UploadMatch>()
+            .Entity<ItemMatch>()
             .HasOne(uc => uc.Upload)
             .WithMany(u => u.UploadMatches)
             .HasForeignKey(uc => uc.UploadId);
 
         builder
-            .Entity<UploadMatch>()
+            .Entity<ItemMatch>()
             .HasOne(uc => uc.ClothingItem)
             .WithMany(c => c.UploadMatches)
             .HasForeignKey(uc => uc.ClothingItemId);
