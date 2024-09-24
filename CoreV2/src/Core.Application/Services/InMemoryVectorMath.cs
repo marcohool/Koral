@@ -32,7 +32,7 @@ public class InMemoryVectorMath : IVectorMath
         return results.OrderByDescending(r => r.Similarity).Take(topN).ToList();
     }
 
-    public static float CosineSimilarity(float[] vector1, float[] vector2)
+    private static float CosineSimilarity(float[] vector1, float[] vector2)
     {
         float dotProduct = 0f;
         float magnitudeA = 0f;
@@ -53,7 +53,7 @@ public class InMemoryVectorMath : IVectorMath
         return dotProduct / ((float)Math.Sqrt(magnitudeA) * (float)Math.Sqrt(magnitudeB));
     }
 
-    public static float EuclideanDistance(float[] vector1, float[] vector2)
+    private static float EuclideanDistance(float[] vector1, float[] vector2)
     {
         float sum = 0f;
         for (int i = 0; i < vector1.Length; i++)

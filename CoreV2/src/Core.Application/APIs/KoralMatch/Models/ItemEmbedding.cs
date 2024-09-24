@@ -2,7 +2,7 @@
 
 namespace Core.Application.APIs.KoralMatch.Models;
 
-public class ClothingItemEmbedding
+public class ItemEmbedding
 {
     public required string Description { get; set; }
 

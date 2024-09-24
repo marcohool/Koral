@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using AutoMapper;
 using Core.Application.APIs.KoralMatch;
 using Core.Application.APIs.KoralMatch.Models;
@@ -38,8 +39,6 @@ public class UploadService(
     private readonly IItemMatchRepository uploadMatchesRepository = uploadMatchesRepository;
     private readonly IUploadItemRepository uploadItemRepository = uploadItemRepository;
 
-    private readonly List<Gender> BaseGenders = [Gender.Unknown, Gender.Unisex];
-
     public async Task<UploadDto> CreateAsync(
         CreateUploadDto createClothingItemRequestModel,
         CancellationToken cancellationToken = default
@@ -48,8 +47,7 @@ public class UploadService(
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
         IFormFile image = createClothingItemRequestModel.Image;
-        //string imageUrl = await this.imageStorageService.UploadImageAsync(image, cancellationToken);
-        string imageUrl = "www.testing.com";
+        string imageUrl = await this.imageStorageService.UploadImageAsync(image, cancellationToken);
 
         UploadEmbedding uploadEmbedding = await this.koralMatchApi.GetUploadEmbedding(image);
 
@@ -63,55 +61,42 @@ public class UploadService(
 
         await this.uploadRepository.AddAsync(upload);
 
-        foreach (ClothingItemEmbedding ciEmbedding in uploadEmbedding.ClothingItemEmbeddings ?? [])
+        foreach (ItemEmbedding itemEmbedding in uploadEmbedding.ItemEmbeddings ?? [])
         {
             UploadItem uploadItem =
                 new()
                 {
-                    Description = ciEmbedding.Description,
-                    Embedding = ciEmbedding.EmbeddingVector,
-                    HexColours = ciEmbedding.Colours,
+                    Description = itemEmbedding.Description,
+                    Embedding = itemEmbedding.EmbeddingVector,
+                    HexColours = itemEmbedding.Colours,
                     Upload = upload
                 };
+
             await this.uploadItemRepository.AddAsync(uploadItem);
 
-            this.BaseGenders.AddRange(
-                this.BaseGenders.Contains(ciEmbedding.Gender)
-                    ? [Gender.Male, Gender.Female]
-                    : [ciEmbedding.Gender]
+            List<ClothingItem> clothingItemsToSearch = await this.GetClothingItemsToSearch(
+                itemEmbedding,
+                cancellationToken
             );
 
-            List<ClothingItem> clothingItemsToSearch =
-                await this.clothingItemRepository.GetAllAsync(
-                    ci =>
-                        ci.Category == ciEmbedding.Category && this.BaseGenders.Contains(ci.Gender),
-                    cancellationToken: cancellationToken
-                );
-
-            List<VectorData> vectors = clothingItemsToSearch
-                .Select(ci => new VectorData { Vector = ci.EmbeddingVector, Id = ci.Id })
-                .ToList();
-
             List<SearchResult> matches = this.vectorMath.ComputeCosignSimilarity(
-                ciEmbedding.EmbeddingVector,
-                vectors,
-                0.5f,
-                10
+                itemEmbedding.EmbeddingVector,
+                clothingItemsToSearch
+                    .Select(ci => new VectorData { Vector = ci.EmbeddingVector, Id = ci.Id })
+                    .ToList(),
+                threshold: 0.5f,
+                topN: 10
             );
 
             foreach (SearchResult searchResult in matches)
             {
-                ClothingItem clothingItem = clothingItemsToSearch.First(ci =>
-                    ci.Id == searchResult.Id
-                );
-
                 ItemMatch uploadMatch =
                     new()
                     {
                         EmbeddingSimilarity = searchResult.Similarity,
                         ColourSimilarity = 0f,
                         UploadItem = uploadItem,
-                        ClothingItem = clothingItem,
+                        ClothingItem = clothingItemsToSearch.First(ci => ci.Id == searchResult.Id),
                     };
 
                 await this.uploadMatchesRepository.AddAsync(uploadMatch);
@@ -203,6 +188,27 @@ public class UploadService(
         Upload upload = await this.GetUserUpload(id);
 
         return this.mapper.Map<UploadDto>(upload);
+    }
+
+    private async Task<List<ClothingItem>> GetClothingItemsToSearch(
+        ItemEmbedding itemEmbedding,
+        CancellationToken cancellationToken
+    )
+    {
+        List<Gender> baseGenders = [Gender.Unknown, Gender.Unisex];
+
+        baseGenders.AddRange(
+            baseGenders.Contains(itemEmbedding.Gender)
+                ? [Gender.Male, Gender.Female]
+                : [itemEmbedding.Gender]
+        );
+
+        List<ClothingItem> clothingItemsToSearch = await this.clothingItemRepository.GetAllAsync(
+            ci => ci.Category == itemEmbedding.Category && baseGenders.Contains(ci.Gender),
+            cancellationToken: cancellationToken
+        );
+
+        return clothingItemsToSearch;
     }
 
     public async Task<UploadDto> FavouriteUpload(Guid id)
