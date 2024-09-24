@@ -11,7 +11,6 @@ using Core.DataAccess.Identity;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
 using Core.Domain.Enums;
-using Core.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -37,6 +36,8 @@ public class UploadService(
     private readonly IVectorMath vectorMath = vectorMath;
     private readonly IUploadMatchesRepository uploadMatchesRepository = uploadMatchesRepository;
 
+    private readonly List<Gender> BaseGenders = [Gender.Unknown, Gender.Unisex];
+
     public async Task<UploadDto> CreateAsync(
         CreateUploadDto createClothingItemRequestModel,
         CancellationToken cancellationToken = default
@@ -50,12 +51,6 @@ public class UploadService(
 
         UploadEmbedding uploadEmbedding = await this.koralMatchApi.GetUploadEmbedding(image);
 
-        // To-do: Update handling of no identified clothing items
-        if (uploadEmbedding.ClothingItemEmbeddings is null)
-        {
-            throw new EmbeddingGenerationException("Embedding failed to generate");
-        }
-
         Upload upload =
             new()
             {
@@ -64,20 +59,30 @@ public class UploadService(
                 AppUserId = user.Id
             };
 
+        // TODO: Add add without async
         await this.uploadRepository.AddAsync(upload);
 
-        foreach (ClothingItemEmbedding ciEmbedding in uploadEmbedding.ClothingItemEmbeddings)
+        foreach (ClothingItemEmbedding ciEmbedding in uploadEmbedding.ClothingItemEmbeddings ?? [])
         {
-            List<Gender> genders = [Gender.Unknown, Gender.Unisex];
-            genders.AddRange(
-                ciEmbedding.Gender == Gender.Unknown || ciEmbedding.Gender == Gender.Unisex
+            UploadItem uploadItem =
+                new()
+                {
+                    Description = ciEmbedding.Description,
+                    Embedding = ciEmbedding.EmbeddingVector,
+                    HexColours = ciEmbedding.Colours,
+                    Upload = upload
+                };
+
+            this.BaseGenders.AddRange(
+                this.BaseGenders.Contains(ciEmbedding.Gender)
                     ? [Gender.Male, Gender.Female]
                     : [ciEmbedding.Gender]
             );
 
             List<ClothingItem> clothingItemsToSearch =
                 await this.clothingItemRepository.GetAllAsync(
-                    ci => ci.Category == ciEmbedding.Category && genders.Contains(ci.Gender),
+                    ci =>
+                        ci.Category == ciEmbedding.Category && this.BaseGenders.Contains(ci.Gender),
                     cancellationToken: cancellationToken
                 );
 
@@ -101,11 +106,10 @@ public class UploadService(
                 ItemMatch uploadMatch =
                     new()
                     {
-                        UploadItemDescription = ciEmbedding.Description,
-                        UploadItemEmbedding = ciEmbedding.EmbeddingVector,
-                        Similarity = searchResult.Similarity,
+                        EmbeddingSimilarity = searchResult.Similarity,
+                        ColourSimilarity = 0f,
+                        UploadItem = uploadItem,
                         ClothingItem = clothingItem,
-                        Upload = upload
                     };
 
                 await this.uploadMatchesRepository.AddAsync(uploadMatch);

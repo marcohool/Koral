@@ -4,7 +4,7 @@ namespace Core.Domain.Entities;
 
 public record UploadItem : BaseEntity
 {
-    public required Guid UploadId { get; set; }
+    public Guid? UploadId { get; set; }
     public required Upload Upload { get; set; }
 
     public required string Description { get; set; }
@@ -13,5 +13,5 @@ public record UploadItem : BaseEntity
 
     public required List<string> HexColours { get; set; }
 
-    public required ICollection<ItemMatch> ItemMatches { get; set; }
+    public ICollection<ItemMatch> ItemMatches { get; set; } = [];
 }
