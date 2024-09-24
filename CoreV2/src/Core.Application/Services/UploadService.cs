@@ -24,7 +24,8 @@ public class UploadService(
     IClaimService claimService,
     IKoralMatchApi koralMatchApi,
     IVectorMath vectorMath,
-    IUploadMatchesRepository uploadMatchesRepository
+    IItemMatchRepository uploadMatchesRepository,
+    IUploadItemRepository uploadItemRepository
 ) : IUploadService
 {
     private readonly IMapper mapper = mapper;
@@ -34,7 +35,8 @@ public class UploadService(
     private readonly IClaimService claimService = claimService;
     private readonly IKoralMatchApi koralMatchApi = koralMatchApi;
     private readonly IVectorMath vectorMath = vectorMath;
-    private readonly IUploadMatchesRepository uploadMatchesRepository = uploadMatchesRepository;
+    private readonly IItemMatchRepository uploadMatchesRepository = uploadMatchesRepository;
+    private readonly IUploadItemRepository uploadItemRepository = uploadItemRepository;
 
     private readonly List<Gender> BaseGenders = [Gender.Unknown, Gender.Unisex];
 
@@ -59,7 +61,6 @@ public class UploadService(
                 AppUserId = user.Id
             };
 
-        // TODO: Add add without async
         await this.uploadRepository.AddAsync(upload);
 
         foreach (ClothingItemEmbedding ciEmbedding in uploadEmbedding.ClothingItemEmbeddings ?? [])
@@ -72,6 +73,7 @@ public class UploadService(
                     HexColours = ciEmbedding.Colours,
                     Upload = upload
                 };
+            await this.uploadItemRepository.AddAsync(uploadItem);
 
             this.BaseGenders.AddRange(
                 this.BaseGenders.Contains(ciEmbedding.Gender)

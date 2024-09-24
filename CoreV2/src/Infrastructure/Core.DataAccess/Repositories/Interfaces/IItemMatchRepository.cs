@@ -2,7 +2,7 @@
 
 namespace Core.DataAccess.Repositories.Interfaces;
 
-public interface IUploadMatchesRepository
+public interface IItemMatchRepository
 {
     Task AddAsync(ItemMatch uploadMatch);
 }

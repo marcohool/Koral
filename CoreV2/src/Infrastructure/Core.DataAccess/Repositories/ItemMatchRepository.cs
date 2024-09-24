@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.DataAccess.Repositories;
 
-public class UploadMatchesRepository(DatabaseContext context) : IUploadMatchesRepository
+public class ItemMatchRepository(DatabaseContext context) : IItemMatchRepository
 {
     private readonly DatabaseContext context = context;
     private readonly DbSet<ItemMatch> dbSet = context.Set<ItemMatch>();
