@@ -25,5 +25,5 @@ public record Upload : BaseEntity, IAuditedEntity
 
     public required string AppUserId { get; set; }
 
-    public ICollection<ItemMatch> UploadMatches { get; set; } = [];
+    public ICollection<UploadItem> UploadItems { get; set; } = [];
 }

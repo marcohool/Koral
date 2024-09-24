@@ -1,6 +1,8 @@
-﻿namespace Core.Domain.Entities;
+﻿using Core.Domain.Common;
 
-public class UploadItem
+namespace Core.Domain.Entities;
+
+public record UploadItem : BaseEntity
 {
     public required Guid UploadId { get; set; }
     public required Upload Upload { get; set; }
@@ -10,4 +12,6 @@ public class UploadItem
     public required float[] Embedding { get; set; }
 
     public required List<string> HexColours { get; set; }
+
+    public required ICollection<ItemMatch> ItemMatches { get; set; }
 }
