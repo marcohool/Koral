@@ -80,7 +80,9 @@ public class ClothingItemService(
         CancellationToken cancellationToken = default
     )
     {
-        List<ClothingItem> clothingItems = await this.clothingItemRepository.GetAllAsync();
+        List<ClothingItem> clothingItems = await this.clothingItemRepository.GetAllAsync(
+            cancellationToken: cancellationToken
+        );
 
         return this.mapper.Map<IEnumerable<ClothingItemResponseDto>>(clothingItems);
     }
