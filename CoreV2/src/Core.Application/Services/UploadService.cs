@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading;
 using AutoMapper;
 using Core.Application.APIs.KoralMatch;
 using Core.Application.APIs.KoralMatch.Models;
@@ -7,12 +5,10 @@ using Core.Application.Dtos;
 using Core.Application.Dtos.ClothingItem;
 using Core.Application.Dtos.Upload;
 using Core.Application.Exceptions;
-using Core.Application.Models.Vectors;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Identity;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
-using Core.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -33,7 +29,6 @@ public class UploadService(
     private readonly IMapper mapper = mapper;
     private readonly IImageStorageService imageStorageService = imageStorageService;
     private readonly IUploadRepository uploadRepository = uploadRepository;
-    private readonly IClothingItemRepository clothingItemRepository = clothingItemRepository;
     private readonly IClaimService claimService = claimService;
     private readonly IKoralMatchApi koralMatchApi = koralMatchApi;
     private readonly IMatchingService matchingService = matchingService;

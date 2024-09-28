@@ -1,27 +1,27 @@
 ﻿using ColorMine.ColorSpaces;
 using ColorMine.ColorSpaces.Comparisons;
 using Core.Application.APIs.KoralMatch.Models;
+using Core.Application.Configuration;
 using Core.Application.Models.Matching;
 using Core.Application.Models.Vectors;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
 using Core.Domain.Enums;
+using Microsoft.Extensions.Options;
 
 namespace Core.Application.Services;
 
 public class MatchingService(
     IVectorMath vectorMathService,
-    IClothingItemRepository clothingItemRepository
+    IClothingItemRepository clothingItemRepository,
+    IOptionsMonitor<MatchingConfiguration> matchingConfiguration
 ) : IMatchingService
 {
     private readonly IVectorMath vectorMatchService = vectorMathService;
     private readonly IClothingItemRepository clothingItemRepository = clothingItemRepository;
-
-    // TODO: Move to configuration
-    private const double DeltaEThreshold = 60d;
-    private const float CosineSimilarityThreshold = 0.5f;
-    private const int TopN = 10;
+    private readonly IOptionsMonitor<MatchingConfiguration> matchingConfiguration =
+        matchingConfiguration;
 
     public async Task<IEnumerable<MatchResult>> GetMatches(
         ItemEmbedding itemEmbedding,
@@ -43,7 +43,7 @@ public class MatchingService(
                         Entity = ci
                     })
                     .ToList(),
-                threshold: CosineSimilarityThreshold
+                threshold: this.matchingConfiguration.CurrentValue.CosineSimilarityThreshold
             );
 
         List<MatchResult> matches = [];
@@ -52,7 +52,7 @@ public class MatchingService(
         {
             double colourDifference = ComputeColourDifference(itemEmbedding.Colour, match.Result);
 
-            if (colourDifference < DeltaEThreshold)
+            if (colourDifference < this.matchingConfiguration.CurrentValue.DeltaEThreshold)
             {
                 matches.Add(
                     new MatchResult()
@@ -65,7 +65,7 @@ public class MatchingService(
             }
         }
 
-        return matches.Take(TopN);
+        return matches.Take(this.matchingConfiguration.CurrentValue.TopN);
     }
 
     private static double ComputeColourDifference(string itemColour, ClothingItem matchedItem)
