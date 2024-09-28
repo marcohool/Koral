@@ -13,7 +13,7 @@ public record ClothingItem : BaseEntity, IAuditedEntity
 
     public required Category Category { get; set; }
 
-    public required List<string>? Colours { get; set; }
+    public required List<string> Colours { get; set; } = [];
 
     public required decimal Price { get; set; }
 

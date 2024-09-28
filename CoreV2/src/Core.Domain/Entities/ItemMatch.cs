@@ -10,5 +10,5 @@ public record ItemMatch
 
     public required float EmbeddingSimilarity { get; set; }
 
-    public required float ColourSimilarity { get; set; }
+    public required double ColourSimilarity { get; set; }
 }

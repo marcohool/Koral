@@ -8,7 +8,7 @@ public class ItemEmbedding
 
     public required Category Category { get; set; }
 
-    public required List<string> Colours { get; set; }
+    public required string Colour { get; set; }
 
     public required Gender Gender { get; set; }
 

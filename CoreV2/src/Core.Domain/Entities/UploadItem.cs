@@ -11,7 +11,7 @@ public record UploadItem : BaseEntity
 
     public required float[] Embedding { get; set; }
 
-    public required List<string> HexColours { get; set; }
+    public required string HexColour { get; set; }
 
     public ICollection<ItemMatch> ItemMatches { get; set; } = [];
 }

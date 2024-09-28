@@ -5,16 +5,16 @@ namespace Core.Application.Services;
 
 public class InMemoryVectorMath : IVectorMath
 {
-    const float FloatTolerance = 1e-6f;
+    private const float FloatTolerance = 1e-6f;
 
-    public List<SearchResult> ComputeCosignSimilarity(
+    // TODO: Make async
+    public List<SearchResult<T>> ComputeCosignSimilarity<T>(
         float[] queryVector,
-        List<VectorData> searchItems,
-        float threshold,
-        int topN
+        List<VectorData<T>> searchItems,
+        float threshold
     )
     {
-        List<SearchResult> results = [];
+        List<SearchResult<T>> results = [];
 
         Parallel.ForEach(
             searchItems,
@@ -24,12 +24,14 @@ public class InMemoryVectorMath : IVectorMath
 
                 if (similarity >= threshold)
                 {
-                    results.Add(new SearchResult { Id = vectorData.Id, Similarity = similarity });
+                    results.Add(
+                        new SearchResult<T> { Result = vectorData.Entity, Similarity = similarity }
+                    );
                 }
             }
         );
 
-        return results.OrderByDescending(r => r.Similarity).Take(topN).ToList();
+        return results.OrderByDescending(r => r.Similarity).ToList();
     }
 
     private static float CosineSimilarity(float[] vector1, float[] vector2)

@@ -15,4 +15,10 @@ public class ItemMatchRepository(DatabaseContext context) : IItemMatchRepository
         this.dbSet.Add(uploadMatch);
         await this.context.SaveChangesAsync();
     }
+
+    public async Task AddRangeAsync(IEnumerable<ItemMatch> uploadMatches)
+    {
+        this.dbSet.AddRange(uploadMatches);
+        await this.context.SaveChangesAsync();
+    }
 }
