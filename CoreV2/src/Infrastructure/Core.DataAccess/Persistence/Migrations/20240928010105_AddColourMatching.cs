@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -13,32 +12,32 @@ namespace Core.DataAccess.Persistence.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_UploadMatches_Uploads_UploadId",
-                table: "UploadMatches");
+                table: "UploadMatches"
+            );
 
-            migrationBuilder.DropColumn(
-                name: "UploadItemDescription",
-                table: "UploadMatches");
+            migrationBuilder.DropColumn(name: "UploadItemDescription", table: "UploadMatches");
 
-            migrationBuilder.DropColumn(
-                name: "UploadItemEmbedding",
-                table: "UploadMatches");
+            migrationBuilder.DropColumn(name: "UploadItemEmbedding", table: "UploadMatches");
 
             migrationBuilder.RenameColumn(
                 name: "Similarity",
                 table: "UploadMatches",
-                newName: "EmbeddingSimilarity");
+                newName: "EmbeddingSimilarity"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "UploadId",
                 table: "UploadMatches",
-                newName: "UploadItemId");
+                newName: "UploadItemId"
+            );
 
             migrationBuilder.AddColumn<double>(
                 name: "ColourSimilarity",
                 table: "UploadMatches",
                 type: "float",
                 nullable: false,
-                defaultValue: 0.0);
+                defaultValue: 0.0
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Colours",
@@ -48,7 +47,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 defaultValue: "[]",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
-                oldNullable: true);
+                oldNullable: true
+            );
 
             migrationBuilder.CreateTable(
                 name: "UploadItems",
@@ -67,13 +67,16 @@ namespace Core.DataAccess.Persistence.Migrations
                         name: "FK_UploadItems_Uploads_UploadId",
                         column: x => x.UploadId,
                         principalTable: "Uploads",
-                        principalColumn: "Id");
-                });
+                        principalColumn: "Id"
+                    );
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_UploadItems_UploadId",
                 table: "UploadItems",
-                column: "UploadId");
+                column: "UploadId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_UploadMatches_UploadItems_UploadItemId",
@@ -81,7 +84,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 column: "UploadItemId",
                 principalTable: "UploadItems",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
 
         /// <inheritdoc />
@@ -89,38 +93,40 @@ namespace Core.DataAccess.Persistence.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_UploadMatches_UploadItems_UploadItemId",
-                table: "UploadMatches");
+                table: "UploadMatches"
+            );
 
-            migrationBuilder.DropTable(
-                name: "UploadItems");
+            migrationBuilder.DropTable(name: "UploadItems");
 
-            migrationBuilder.DropColumn(
-                name: "ColourSimilarity",
-                table: "UploadMatches");
+            migrationBuilder.DropColumn(name: "ColourSimilarity", table: "UploadMatches");
 
             migrationBuilder.RenameColumn(
                 name: "EmbeddingSimilarity",
                 table: "UploadMatches",
-                newName: "Similarity");
+                newName: "Similarity"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "UploadItemId",
                 table: "UploadMatches",
-                newName: "UploadId");
+                newName: "UploadId"
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "UploadItemDescription",
                 table: "UploadMatches",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
 
             migrationBuilder.AddColumn<string>(
                 name: "UploadItemEmbedding",
                 table: "UploadMatches",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
 
             migrationBuilder.AlterColumn<string>(
                 name: "Colours",
@@ -128,7 +134,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
+                oldType: "nvarchar(max)"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_UploadMatches_Uploads_UploadId",
@@ -136,7 +143,8 @@ namespace Core.DataAccess.Persistence.Migrations
                 column: "UploadId",
                 principalTable: "Uploads",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
     }
 }

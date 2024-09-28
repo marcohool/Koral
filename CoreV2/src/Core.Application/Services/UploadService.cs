@@ -18,7 +18,6 @@ public class UploadService(
     IMapper mapper,
     IImageStorageService imageStorageService,
     IUploadRepository uploadRepository,
-    IClothingItemRepository clothingItemRepository,
     IClaimService claimService,
     IKoralMatchApi koralMatchApi,
     IMatchingService matchingService,
