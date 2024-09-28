@@ -6,7 +6,7 @@ namespace Core.Application.Services.Interfaces;
 public interface IClothingItemService
 {
     Task<ClothingItemResponseDto> CreateAsync(
-        CreateClothingItemDto createClothingItemRequestModel,
+        CreateClothingItemDto createClothingItemModel,
         CancellationToken cancellationToken = default
     );
 

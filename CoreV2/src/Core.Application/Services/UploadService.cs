@@ -1,17 +1,14 @@
-using System.Collections.Generic;
 using AutoMapper;
 using Core.Application.APIs.KoralMatch;
 using Core.Application.APIs.KoralMatch.Models;
 using Core.Application.Dtos;
+using Core.Application.Dtos.ClothingItem;
 using Core.Application.Dtos.Upload;
 using Core.Application.Exceptions;
-using Core.Application.Models.Vectors;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Identity;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
-using Core.Domain.Enums;
-using Core.Domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -24,18 +21,19 @@ public class UploadService(
     IClothingItemRepository clothingItemRepository,
     IClaimService claimService,
     IKoralMatchApi koralMatchApi,
-    IVectorMath vectorMath,
-    IUploadMatchesRepository uploadMatchesRepository
+    IMatchingService matchingService,
+    IItemMatchRepository uploadMatchesRepository,
+    IUploadItemRepository uploadItemRepository
 ) : IUploadService
 {
     private readonly IMapper mapper = mapper;
     private readonly IImageStorageService imageStorageService = imageStorageService;
     private readonly IUploadRepository uploadRepository = uploadRepository;
-    private readonly IClothingItemRepository clothingItemRepository = clothingItemRepository;
     private readonly IClaimService claimService = claimService;
     private readonly IKoralMatchApi koralMatchApi = koralMatchApi;
-    private readonly IVectorMath vectorMath = vectorMath;
-    private readonly IUploadMatchesRepository uploadMatchesRepository = uploadMatchesRepository;
+    private readonly IMatchingService matchingService = matchingService;
+    private readonly IItemMatchRepository uploadMatchesRepository = uploadMatchesRepository;
+    private readonly IUploadItemRepository uploadItemRepository = uploadItemRepository;
 
     public async Task<UploadDto> CreateAsync(
         CreateUploadDto createClothingItemRequestModel,
@@ -46,15 +44,9 @@ public class UploadService(
 
         IFormFile image = createClothingItemRequestModel.Image;
         //string imageUrl = await this.imageStorageService.UploadImageAsync(image, cancellationToken);
-        string imageUrl = "www.testing.com";
+        string imageUrl = "www.test.com/image";
 
         UploadEmbedding uploadEmbedding = await this.koralMatchApi.GetUploadEmbedding(image);
-
-        // To-do: Update handling of no identified clothing items
-        if (uploadEmbedding.ClothingItemEmbeddings is null)
-        {
-            throw new EmbeddingGenerationException("Embedding failed to generate");
-        }
 
         Upload upload =
             new()
@@ -66,53 +58,44 @@ public class UploadService(
 
         await this.uploadRepository.AddAsync(upload);
 
-        foreach (ClothingItemEmbedding ciEmbedding in uploadEmbedding.ClothingItemEmbeddings)
+        List<ItemMatch> allMatches = [];
+
+        foreach (ItemEmbedding itemEmbedding in uploadEmbedding.ItemEmbeddings ?? [])
         {
-            List<Gender> genders = [Gender.Unknown, Gender.Unisex];
-            genders.AddRange(
-                ciEmbedding.Gender == Gender.Unknown || ciEmbedding.Gender == Gender.Unisex
-                    ? [Gender.Male, Gender.Female]
-                    : [ciEmbedding.Gender]
-            );
+            UploadItem uploadItem =
+                new()
+                {
+                    Description = itemEmbedding.Description,
+                    Embedding = itemEmbedding.EmbeddingVector,
+                    HexColour = itemEmbedding.Colour,
+                    Upload = upload
+                };
 
-            List<ClothingItem> clothingItemsToSearch =
-                await this.clothingItemRepository.GetAllAsync(
-                    ci => ci.Category == ciEmbedding.Category && genders.Contains(ci.Gender),
-                    cancellationToken: cancellationToken
-                );
+            await this.uploadItemRepository.AddAsync(uploadItem);
 
-            List<VectorData> vectors = clothingItemsToSearch
-                .Select(ci => new VectorData { Vector = ci.EmbeddingVector, Id = ci.Id })
-                .ToList();
-
-            List<SearchResult> matches = this.vectorMath.ComputeCosignSimilarity(
-                ciEmbedding.EmbeddingVector,
-                vectors,
-                0.5f,
-                10
-            );
-
-            foreach (SearchResult searchResult in matches)
+            IEnumerable<ItemMatch> matches = (
+                await this.matchingService.GetMatches(itemEmbedding, cancellationToken)
+            ).Select(x => new ItemMatch()
             {
-                ClothingItem clothingItem = clothingItemsToSearch.First(ci =>
-                    ci.Id == searchResult.Id
-                );
+                UploadItem = uploadItem,
+                ClothingItem = x.ClothingItem,
+                EmbeddingSimilarity = x.EmbeddingSimilarity,
+                ColourSimilarity = x.ColourSimilarity
+            });
 
-                UploadMatch uploadMatch =
-                    new()
-                    {
-                        UploadItemDescription = ciEmbedding.Description,
-                        UploadItemEmbedding = ciEmbedding.EmbeddingVector,
-                        Similarity = searchResult.Similarity,
-                        ClothingItem = clothingItem,
-                        Upload = upload
-                    };
-
-                await this.uploadMatchesRepository.AddAsync(uploadMatch);
-            }
+            await this.uploadMatchesRepository.AddRangeAsync(matches);
+            allMatches.AddRange(matches);
         }
 
-        return this.mapper.Map<UploadDto>(upload);
+        UploadDto uploadDto = this.mapper.Map<UploadDto>(upload);
+        uploadDto.MatchedClothingItems =
+            allMatches.Count > 0
+                ? this.mapper.Map<List<ClothingItemResponseDto>>(
+                    allMatches.Select(x => x.ClothingItem)
+                )
+                : [];
+
+        return uploadDto;
     }
 
     public async Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)

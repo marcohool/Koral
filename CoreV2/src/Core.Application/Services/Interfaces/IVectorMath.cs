@@ -4,10 +4,9 @@ namespace Core.Application.Services.Interfaces;
 
 public interface IVectorMath
 {
-    List<SearchResult> ComputeCosignSimilarity(
+    List<SearchResult<T>> ComputeCosignSimilarity<T>(
         float[] queryVector,
-        List<VectorData> searchItems,
-        float threshold,
-        int topN
+        List<VectorData<T>> searchItems,
+        float threshold
     );
 }

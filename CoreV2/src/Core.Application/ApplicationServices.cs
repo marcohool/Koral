@@ -27,6 +27,7 @@ public static class ApplicationServices
         services.AddScoped<IClothingItemParser, JsonClothingItemParser>();
         services.AddHttpClient<IKoralMatchApi, KoralMatchApi>();
         services.AddScoped<IVectorMath, InMemoryVectorMath>();
+        services.AddScoped<IMatchingService, MatchingService>();
     }
 
     private static void RegisterAutoMappers(this IServiceCollection services)

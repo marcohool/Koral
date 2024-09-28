@@ -46,6 +46,8 @@ public class KoralMatchApi(
             throw new HttpRequestException("Failed to get upload embedding from KoralMatch API.");
         }
 
+        // TODO: Update handling of no identified clothing items
+
         return uploadEmbedding;
     }
 }

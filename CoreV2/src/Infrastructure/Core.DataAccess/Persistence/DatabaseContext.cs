@@ -10,28 +10,30 @@ namespace Core.DataAccess.Persistence;
 
 public class DatabaseContext(DbContextOptions options) : IdentityDbContext<ApplicationUser>(options)
 {
-    public DbSet<ClothingItem> ClothingItems { get; set; }
-
     public DbSet<Upload> Uploads { get; set; }
 
-    public DbSet<UploadMatch> UploadMatches { get; set; }
+    public DbSet<UploadItem> UploadItems { get; set; }
+
+    public DbSet<ItemMatch> UploadMatches { get; set; }
+
+    public DbSet<ClothingItem> ClothingItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-        builder.Entity<UploadMatch>().HasKey(uci => new { uci.UploadId, uci.ClothingItemId });
+        builder.Entity<ItemMatch>().HasKey(uci => new { uci.UploadItemId, uci.ClothingItemId });
 
         builder
-            .Entity<UploadMatch>()
-            .HasOne(uc => uc.Upload)
-            .WithMany(u => u.UploadMatches)
-            .HasForeignKey(uc => uc.UploadId);
+            .Entity<ItemMatch>()
+            .HasOne(im => im.UploadItem)
+            .WithMany(u => u.ItemMatches)
+            .HasForeignKey(im => im.UploadItemId);
 
         builder
-            .Entity<UploadMatch>()
+            .Entity<ItemMatch>()
             .HasOne(uc => uc.ClothingItem)
-            .WithMany(c => c.UploadMatches)
+            .WithMany(c => c.ItemMatches)
             .HasForeignKey(uc => uc.ClothingItemId);
 
         base.OnModelCreating(builder);

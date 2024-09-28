@@ -46,6 +46,12 @@ public static class ApiServices
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
+        services
+            .AddOptions<MatchingConfiguration>()
+            .BindConfiguration("Matching")
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
+
         services.AddJwt(
             services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>().Value
         );

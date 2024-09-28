@@ -26,7 +26,8 @@ public static class DataAccessServices
     {
         services.AddScoped<IUploadRepository, UploadRepository>();
         services.AddScoped<IClothingItemRepository, ClothingItemRepository>();
-        services.AddScoped<IUploadMatchesRepository, UploadMatchesRepository>();
+        services.AddScoped<IItemMatchRepository, ItemMatchRepository>();
+        services.AddScoped<IUploadItemRepository, UploadItemRepository>();
     }
 
     private static void AddDatabase(this IServiceCollection services, IConfiguration configuration)

@@ -1,8 +1,10 @@
-﻿namespace Core.Application.Models.Vectors;
+﻿using Core.Domain.Entities;
 
-public class SearchResult
+namespace Core.Application.Models.Vectors;
+
+public class SearchResult<T>
 {
-    public required Guid Id { get; set; }
+    public required T Result { get; set; }
 
     public float Similarity { get; set; }
 }

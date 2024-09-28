@@ -13,7 +13,7 @@ public record ClothingItem : BaseEntity, IAuditedEntity
 
     public required Category Category { get; set; }
 
-    public required List<string>? Colours { get; set; }
+    public required List<string> Colours { get; set; } = [];
 
     public required decimal Price { get; set; }
 
@@ -33,5 +33,5 @@ public record ClothingItem : BaseEntity, IAuditedEntity
 
     public DateTime? LastUpdatedOn { get; set; }
 
-    public ICollection<UploadMatch> UploadMatches { get; set; } = [];
+    public ICollection<ItemMatch> ItemMatches { get; set; } = [];
 }
