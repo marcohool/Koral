@@ -1,6 +1,4 @@
-﻿using Core.Domain.Entities;
-
-namespace Core.Application.Models.Vectors;
+﻿namespace Core.Application.Models.Vectors;
 
 public class SearchResult<T>
 {
