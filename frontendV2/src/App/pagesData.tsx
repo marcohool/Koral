@@ -1,6 +1,6 @@
 import { routerType } from "./router.types.ts";
-import Landing from "../pages/Landing.tsx";
-import About from "../pages/About.tsx";
+import Landing from "pages/Landing.tsx";
+import About from "pages/About.tsx";
 
 const pagesData: routerType[] = [
   {
