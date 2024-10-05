@@ -3,25 +3,27 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    :root {
+      --primary: 18 25% 48%; /* #996e5b */
+      --primary-foreground: 30 20% 95%; /* A light, complementary foreground for primary */
+      --secondary: 10 30% 85%; /* A soft tone that complements the primary and background */
+      --secondary-foreground: 10 10% 20%; /* Darker foreground for secondary */
+      --background: 10 60% 98%; /* #fdf8f7 */
+      --foreground: 18 25% 20%; /* A deeper brown for general text */
+      --card: 10 50% 95%; /* Slightly darker background for card elements */
+      --card-foreground: 18 20% 40%; /* Darker text on cards */
+      --popover: 18 20% 92%; /* Light background for popover */
+      --popover-foreground: 18 25% 48%; /* Same as primary for popover text */
+      --muted: 10 20% 90%; /* Soft muted color for low-emphasis text or elements */
+      --muted-foreground: 18 25% 40%; /* Muted text color */
+      --accent: 18 50% 55%; /* A deeper, saturated accent derived from primary */
+      --accent-foreground: 30 25% 95%; /* Light foreground for accent elements */
+      --destructive: 0 65% 50%; /* A balanced red for destructive actions */
+      --destructive-foreground: 0 0% 100%; /* White foreground for destructive elements */
+      --border: 18 20% 85%; /* Border color, a light brown to complement the theme */
+      --input: 18 20% 90%; /* Light input background color */
+      --ring: 18 35% 65%; /* A ring color derived from primary with more saturation */
+    }
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
