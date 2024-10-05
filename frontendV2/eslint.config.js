@@ -3,6 +3,7 @@ import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
+import importPlugin from "eslint-plugin-import";
 
 export default tseslint.config(
   { ignores: ["dist"] },
@@ -11,6 +12,9 @@ export default tseslint.config(
       js.configs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
+      importPlugin.flatConfigs.recommended,
+      importPlugin.flatConfigs.react,
+      importPlugin.flatConfigs.typescript,
     ],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
@@ -31,6 +35,23 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          tsx: "never",
+          ts: "never",
+          js: "never",
+          jsx: "never",
+        },
+      ],
+    },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          project: "./tsconfig.app.json",
+        },
+      },
     },
   },
 );
