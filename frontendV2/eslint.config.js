@@ -35,6 +35,7 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
+      "@typescript-eslint/no-unsafe-call": "off",
       "import/extensions": [
         "error",
         "ignorePackages",
@@ -45,7 +46,7 @@ export default tseslint.config(
           jsx: "never",
         },
       ],
-      'quotes': ['error', 'single'],
+      quotes: ["error", "single"],
     },
     settings: {
       "import/resolver": {

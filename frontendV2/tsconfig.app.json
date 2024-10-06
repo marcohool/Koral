@@ -26,8 +26,10 @@
         "./src/*",
         "*"
       ],
-      "@components/*": ["components/*"],
-      "@pages/*": ["pages/*"],
+      "components/*": ["components/*"],
+      "pages/*": ["pages/*"],
+      "public/*": ["public/*"],
+      "utils/*": ["utils/*"]
     }
   },
   "include": ["src"]
