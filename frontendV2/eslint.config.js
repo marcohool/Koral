@@ -45,6 +45,7 @@ export default tseslint.config(
           jsx: "never",
         },
       ],
+      'quotes': ['error', 'single'],
     },
     settings: {
       "import/resolver": {
