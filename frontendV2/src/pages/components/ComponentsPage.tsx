@@ -1,7 +1,7 @@
 import {FC} from 'react';
-import Button from 'components/button';
+import Button from '@components/button';
 
-const Components: FC = () => {
+const ComponentsPage: FC = () => {
   return (
     <div className="px-4 py-4 flex justify-center items-center flex-col gap-10">
       <h1 className="text-5xl">Components</h1>
@@ -14,4 +14,4 @@ const Components: FC = () => {
   );
 };
 
-export default Components
+export default ComponentsPage;
