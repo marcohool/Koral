@@ -1,5 +1,5 @@
-import { RefObject, useEffect, useState } from "react";
-import { normaliseToRange } from "utils/useMath.ts";
+import { RefObject, useEffect, useState } from 'react';
+import { normaliseToRange } from 'utils/useMath';
 
 interface ParallaxRef {
   current: number;
@@ -7,11 +7,11 @@ interface ParallaxRef {
 }
 
 export function useParallaxScroll(parallaxRef: RefObject<ParallaxRef>) {
-  const [width, setWidth] = useState({ width: "100%" });
+  const [width, setWidth] = useState({ width: '100%' });
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    console.log("blol");
+    console.log('blol');
     const handleScroll = () => {
       if (parallaxRef.current) {
         const scrollY = parallaxRef.current.current;
@@ -37,10 +37,10 @@ export function useParallaxScroll(parallaxRef: RefObject<ParallaxRef>) {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [parallaxRef]);
 

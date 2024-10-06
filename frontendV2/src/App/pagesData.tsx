@@ -1,7 +1,7 @@
 import { routerType } from './router.types';
-import LandingPage from '@pages/landing/LandingPage.tsx';
-import AboutPage from '@pages/about/AboutPage.tsx';
-import ComponentsPage from '@pages/components/ComponentsPage.tsx';
+import LandingPage from 'pages/landing/LandingPage';
+import AboutPage from 'pages/about/AboutPage';
+import ComponentsPage from 'pages/components/ComponentsPage';
 
 const pagesData: routerType[] = [
   {
@@ -18,7 +18,7 @@ const pagesData: routerType[] = [
     path: 'components',
     title: 'components',
     element: <ComponentsPage />,
-  }
+  },
 ];
 
 export default pagesData;
