@@ -16,7 +16,7 @@ const Navbar: FC<{ scrolled: boolean }> = ({ scrolled }) => {
       >
         Koral
       </Link>
-      <nav className="hidden lg:flex gap-20 transition-all duration-500 ease-out">
+      <nav className="hidden lg:flex gap-24 transition-all duration-500 ease-out">
         <Link to="#" className="mr-6">
           About
         </Link>
