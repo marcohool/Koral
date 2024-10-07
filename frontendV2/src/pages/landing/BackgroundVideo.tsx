@@ -1,45 +1,27 @@
-import { FC, RefObject, useCallback, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { normaliseToRange } from 'utils/useMath';
-import { IParallax } from '@react-spring/parallax';
+
+const MIN_WIDTH = 80;
+const WIDTH_ACCELERATION = 40;
 
 const BackgroundVideo: FC<{
-  parallax: RefObject<IParallax>;
-  minWidth: number;
-  acceleration: number;
+  scrollY: number;
+  pageHeight: number;
   totalPages: number;
-}> = ({ parallax, minWidth, acceleration, totalPages }) => {
+}> = ({ scrollY, pageHeight, totalPages }) => {
   const [{ width }, setWidth] = useSpring(() => ({ width: '100%' }));
 
-  const handleScroll = useCallback(() => {
-    if (parallax.current) {
-      const scrollY = parallax.current.current;
-      const parallaxPageHeight = parallax.current.space;
-
-      const backgroundVideoWidth = Math.max(
-        100 -
-          normaliseToRange(
-            scrollY,
-            parallaxPageHeight / totalPages,
-            parallaxPageHeight,
-          ) *
-            acceleration,
-        minWidth,
-      );
-
-      void setWidth.start({ width: `${backgroundVideoWidth}%` });
-    }
-  }, [acceleration, minWidth, parallax, setWidth, totalPages]);
-
   useEffect(() => {
-    const container = parallax.current?.container
-      .current as HTMLDivElement | null;
+    const backgroundVideoWidth = Math.max(
+      100 -
+        normaliseToRange(scrollY, pageHeight / totalPages, pageHeight) *
+          WIDTH_ACCELERATION,
+      MIN_WIDTH,
+    );
 
-    container?.addEventListener('scroll', handleScroll);
-    return () => {
-      container?.removeEventListener('scroll', handleScroll);
-    };
-  }, [handleScroll, parallax, parallax.current?.container]);
+    void setWidth.start({ width: `${backgroundVideoWidth}%` });
+  }, [scrollY, pageHeight, totalPages, setWidth]);
 
   return (
     <animated.video
