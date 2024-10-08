@@ -67,3 +67,52 @@
     @apply bg-background text-foreground;
   }
 }
+
+@font-face {
+  font-family: 'Butler';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Butler UltraLight'), url('assets/fonts/Butler/Butler_Ultra_Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Butler';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Butler Light'), url('assets/fonts/Butler/Butler_Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Butler';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Butler Regular'), url('assets/fonts/Butler/Butler_Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Butler';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Butler Medium'), url('assets/fonts/Butler/Butler_Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Butler';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Butler Bold'), url('assets/fonts/Butler/Butler_Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Butler';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Butler ExtraBold'), url('assets/fonts/Butler/Butler_ExtraBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Butler';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Butler Black'), url('assets/fonts/Butler/Butler_Black.woff') format('woff');
+}

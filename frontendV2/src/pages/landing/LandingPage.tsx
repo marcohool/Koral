@@ -46,7 +46,7 @@ const LandingPage: FC = () => {
         </ParallaxLayer>
         <ParallaxLayer offset={0} factor={1} sticky={{ start: 0, end: 0.4 }}>
           <div className="flex flex-col items-center justify-center h-full gap-24 text-background">
-            <h1 className="text-8xl text-center max-w-4xl">
+            <h1 className="text-8xl text-center max-w-4xl font-butler font-medium">
               Find your dream closet using AI
             </h1>
             <Button variant="transparent" size="2xl">

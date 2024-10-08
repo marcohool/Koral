@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 const Navbar: FC<{ scrolled: boolean }> = ({ scrolled }) => {
   return (
     <header
-      className={`flex w-full lg:px-14 px-8 items-center z-10 justify-between transition-all duration-500 ease-out ${scrolled ? 'h-32 text-primary-foreground' : 'bg-background h-16'}`}
+      className={`flex w-full font-butler font-medium lg:px-14 px-8 items-center z-10 justify-between transition-all duration-500 ease-out ${scrolled ? 'h-32 text-primary-foreground' : 'bg-background h-16'}`}
     >
       <Link
         to="#"
-        className={`transition-all duration-500 ease-out ${scrolled && 'text-6xl mb-2'}`}
+        className={`transition-all duration-500 ease-out font-medium ${scrolled ? 'text-6xl mb-2' : 'text-2xl'}`}
       >
         Koral
       </Link>
