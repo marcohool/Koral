@@ -4,6 +4,10 @@ import Button from 'components/button';
 import MenuIcon from 'components/navbar/icons/MenuIcon';
 import { SheetContent } from 'components/sheet/Sheet';
 import { Link } from 'react-router-dom';
+import { getPageData } from 'App/pagesData';
+import { Page } from 'App/router.types';
+
+const NavbarPages: Page[] = [Page.About, Page.Contact, Page.Login, Page.SignUp];
 
 const Navbar: FC<{ scrolled: boolean }> = ({ scrolled }) => {
   return (
@@ -17,18 +21,17 @@ const Navbar: FC<{ scrolled: boolean }> = ({ scrolled }) => {
         Koral
       </Link>
       <nav className="hidden lg:flex gap-24 transition-all duration-500 ease-out">
-        <Link to="#" className="mr-6">
-          About
-        </Link>
-        <Link to="#" className="mr-6">
-          Contact
-        </Link>
-        <Link to="#" className="mr-6">
-          Log in
-        </Link>
-        <Link to="#" className="mr-6">
-          Sign up
-        </Link>
+        {NavbarPages.map((page) => {
+          const pageData = getPageData(page);
+
+          if (!pageData) throw new Error('Page not found');
+
+          return (
+            <Link to={pageData.path} className="mr-6">
+              {pageData.title}
+            </Link>
+          );
+        })}
       </nav>
       <Sheet modal={false}>
         <SheetTrigger asChild>
@@ -41,32 +44,20 @@ const Navbar: FC<{ scrolled: boolean }> = ({ scrolled }) => {
           </Button>
         </SheetTrigger>
         <SheetContent side="right">
-          <div className="grid gap-2 py-6">
-            <Link
-              to="#"
-              className="flex w-full items-center py-2 text-lg font-semibold"
-            >
-              About
-            </Link>
-            <Link
-              to="#"
-              className="flex w-full items-center py-2 text-lg font-semibold"
-            >
-              Contact
-            </Link>
-            <Link
-              to="#"
-              className="flex w-full items-center py-2 text-lg font-semibold"
-            >
-              Log in
-            </Link>
-            <Link
-              to="#"
-              className="flex w-full items-center py-2 text-lg font-semibold"
-            >
-              Sign up
-            </Link>
-          </div>
+          {NavbarPages.map((page) => {
+            const pageData = getPageData(page);
+
+            if (!pageData) throw new Error('Page not found');
+
+            return (
+              <Link
+                to={pageData.path}
+                className="flex w-full items-center py-2 text-lg font-semibold"
+              >
+                {pageData.title}
+              </Link>
+            );
+          })}
         </SheetContent>
       </Sheet>
     </header>

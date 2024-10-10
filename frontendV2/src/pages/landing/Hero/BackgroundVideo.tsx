@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { animated, useSpring } from '@react-spring/web';
-import { normaliseToRange } from 'utils/useMath.ts';
+import { normaliseToRange } from 'utils/useMath';
 
 const MIN_WIDTH = 80;
 const WIDTH_ACCELERATION = 40;
