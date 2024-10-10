@@ -1,9 +1,10 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
-import BackgroundVideo from 'pages/landing/BackgroundVideo';
+import BackgroundVideo from './Hero/BackgroundVideo';
 import Navbar from 'components/navbar';
-import Hero from './Hero';
-import HeroHelper from './HeroHelper';
+import Hero from './Hero/Hero';
+import HeroFooter from './Hero/HeroFooter';
+import About from './About/About';
 
 const PARALLAX_PAGES = 4;
 
@@ -46,17 +47,13 @@ const LandingPage: FC = () => {
           />
         </ParallaxLayer>
         <ParallaxLayer offset={0} factor={1} sticky={{ start: 0, end: 0.4 }}>
-          <div className="flex flex-col items-center justify-center h-full gap-24 text-background">
-            <Hero />
-          </div>
+          <Hero className="flex flex-col items-center justify-center h-full gap-24 text-background" />
         </ParallaxLayer>
         <ParallaxLayer offset={1.6} factor={0.4}>
-          <div className="flex h-full items-center justify-center">
-            <HeroHelper />
-          </div>
+          <HeroFooter className="flex h-full items-center justify-center" />
         </ParallaxLayer>
         <ParallaxLayer offset={2} factor={2}>
-          <div className=""></div>
+          <About scrollY={scrollY} pageHeight={parallaxPageHeight} />
         </ParallaxLayer>
       </Parallax>
     </>
