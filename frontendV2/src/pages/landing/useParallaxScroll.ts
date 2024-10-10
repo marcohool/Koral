@@ -11,7 +11,6 @@ export function useParallaxScroll(parallaxRef: RefObject<ParallaxRef>) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    console.log('blol');
     const handleScroll = () => {
       if (parallaxRef.current) {
         const scrollY = parallaxRef.current.current;

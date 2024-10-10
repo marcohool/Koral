@@ -2,7 +2,8 @@ import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
 import BackgroundVideo from 'pages/landing/BackgroundVideo';
 import Navbar from 'components/navbar';
-import Button from 'components/button';
+import Hero from './Hero';
+import HeroHelper from './HeroHelper';
 
 const PARALLAX_PAGES = 4;
 
@@ -46,13 +47,16 @@ const LandingPage: FC = () => {
         </ParallaxLayer>
         <ParallaxLayer offset={0} factor={1} sticky={{ start: 0, end: 0.4 }}>
           <div className="flex flex-col items-center justify-center h-full gap-24 text-background">
-            <h1 className="text-8xl text-center max-w-4xl font-butler font-medium">
-              Find your dream closet using AI
-            </h1>
-            <Button variant="transparent" size="2xl">
-              Get Started
-            </Button>
+            <Hero />
           </div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={1.6} factor={0.4}>
+          <div className="flex h-full items-center justify-center">
+            <HeroHelper />
+          </div>
+        </ParallaxLayer>
+        <ParallaxLayer offset={2} factor={2}>
+          <div className=""></div>
         </ParallaxLayer>
       </Parallax>
     </>
