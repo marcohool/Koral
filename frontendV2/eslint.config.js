@@ -49,6 +49,12 @@ export default tseslint.config(
         },
       ],
       quotes: ['error', 'single'],
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        {
+          checksVoidReturn: false,
+        },
+      ],
     },
     settings: {
       'import/resolver': {
