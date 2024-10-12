@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import AuthLayout from 'pages/auth/AuthLayout';
 import { useForm } from 'react-hook-form';
 import Input from 'components/input';
@@ -7,17 +7,37 @@ import Checkbox from 'components/checkbox';
 import Button from 'components/button';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
+import { cn } from 'utils/utils';
+import { buttonVariants } from 'components/button/Button';
+import { GoArrowLeft } from 'react-icons/go';
+import Spinner from 'components/spinner';
 
 const LoginPage: FC = () => {
   const { register, handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onSubmit = () => {
-    console.log('Form Submitted');
+  const onSubmit = (event: React.SyntheticEvent) => {
+    setIsLoading(true);
+
+    setTimeout(() => {
+      event.preventDefault();
+
+      setIsLoading(false);
+    }, 3000);
   };
 
   return (
     <AuthLayout contentOnLeft={true} imageSrc="Login-Image.jpg">
+      <Link
+        to="/signup"
+        className={cn(
+          buttonVariants({ variant: 'ghost' }),
+          'absolute left-4 top-4 md:left-8 md:top-8',
+        )}
+      >
+        <GoArrowLeft className="mr-2" />
+        Sign up
+      </Link>
       <div className="flex flex-col space-y-3 text-center mb-6">
         <h1 className="text-4xl font-normal tracking-tight">Login</h1>
         <p className="text-sm text-muted-foreground">
@@ -25,8 +45,8 @@ const LoginPage: FC = () => {
         </p>
       </div>
       <form
-        onSubmit={void handleSubmit(onSubmit)}
-        className="mx-auto flex flex-col justify-center space-y-5 px-10 w-[450px] md:w-[500px] lg:px-16"
+        onSubmit={onSubmit}
+        className="mx-auto flex flex-col justify-center space-y-6 px-10 w-[450px] md:w-[500px] lg:px-16"
       >
         <div className="my-4 space-y-5">
           <Input
@@ -51,7 +71,10 @@ const LoginPage: FC = () => {
         </div>
 
         <div className="flex flex-col space-y-4 w-full">
-          <Button type="submit">Log In</Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
+            Log In
+          </Button>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
@@ -64,7 +87,7 @@ const LoginPage: FC = () => {
           </div>
           <Button variant="outline" type="button" disabled={isLoading}>
             {isLoading ? (
-              <FcGoogle className="mr-2 h-4 w-4 animate-spin" />
+              <Spinner className="mr-2 h-4 w-4 animate-spin" />
             ) : (
               <FcGoogle className="mr-2 h-4 w-4" />
             )}
