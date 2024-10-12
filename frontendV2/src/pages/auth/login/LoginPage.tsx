@@ -29,14 +29,14 @@ const LoginPage: FC = () => {
   return (
     <AuthLayout contentOnLeft={true} imageSrc="Login-Image.jpg">
       <Link
-        to="/signup"
+        to="/"
         className={cn(
           buttonVariants({ variant: 'ghost' }),
           'absolute left-4 top-4 md:left-8 md:top-8',
         )}
       >
         <GoArrowLeft className="mr-2" />
-        Sign up
+        Home
       </Link>
       <div className="flex flex-col space-y-3 text-center mb-6">
         <h1 className="text-4xl font-normal tracking-tight">Login</h1>
@@ -95,6 +95,12 @@ const LoginPage: FC = () => {
           </Button>
         </div>
       </form>
+      <Link to="signup" className="pt-20">
+        <Label>
+          Don't have an account?{' '}
+          <span className="font-semibold hover:cursor-pointer">Sign up</span>
+        </Label>
+      </Link>
     </AuthLayout>
   );
 };
