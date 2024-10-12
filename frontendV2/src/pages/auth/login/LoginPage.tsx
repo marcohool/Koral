@@ -39,35 +39,38 @@ const LoginPage: FC = () => {
             placeholder="Password"
             {...register('password', { required: true })}
           />
-        </div>
-        <div className="flex justify-between">
-          <div className="flex items-center space-x-2">
-            <Checkbox id="remember" />
-            <Label htmlFor="remember">Remember me</Label>
-          </div>
-          <Label>
-            <Link to="/help">Forgot password?</Link>
-          </Label>
-        </div>
-        <Button type="submit">Log In</Button>
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
-              Or continue with
-            </span>
+          <div className="flex justify-between">
+            <div className="flex items-center space-x-2">
+              <Checkbox id="remember" />
+              <Label htmlFor="remember">Remember me</Label>
+            </div>
+            <Label>
+              <Link to="/help">Forgot password?</Link>
+            </Label>
           </div>
         </div>
-        <Button variant="outline" type="button" disabled={isLoading}>
-          {isLoading ? (
-            <FcGoogle className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            <FcGoogle className="mr-2 h-4 w-4" />
-          )}
-          Google
-        </Button>
+
+        <div className="flex flex-col space-y-4 w-full">
+          <Button type="submit">Log In</Button>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                Or continue with
+              </span>
+            </div>
+          </div>
+          <Button variant="outline" type="button" disabled={isLoading}>
+            {isLoading ? (
+              <FcGoogle className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <FcGoogle className="mr-2 h-4 w-4" />
+            )}
+            Google
+          </Button>
+        </div>
       </form>
     </AuthLayout>
   );
