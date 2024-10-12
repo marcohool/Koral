@@ -2,7 +2,7 @@ import { Page, routerType } from './router.types';
 import LandingPage from 'pages/landing/LandingPage';
 import AboutPage from 'pages/about/AboutPage';
 import ComponentsPage from 'pages/components/ComponentsPage';
-import LoginPage from 'pages/login/LoginPage';
+import LoginPage from 'pages/auth/login/LoginPage';
 
 const pagesData: routerType[] = [
   {
