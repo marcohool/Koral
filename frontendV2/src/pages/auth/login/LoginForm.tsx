@@ -6,11 +6,11 @@ import Form from 'components/form';
 import {
   FormControl,
   FormField,
+  FormInput,
   FormItem,
   FormLabel,
   FormMessage,
 } from 'components/form/Form';
-import Input from 'components/input';
 import Button from 'components/button';
 import Spinner from 'components/spinner';
 import { FcGoogle } from 'react-icons/fc';
@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 
 const LoginForm: FC = () => {
   const form = useForm<LoginFormData>({
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     resolver: yupResolver(loginSchema),
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -44,7 +45,7 @@ const LoginForm: FC = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your email" {...field} />
+                  <FormInput placeholder="Enter your email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -57,7 +58,7 @@ const LoginForm: FC = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your password" {...field} />
+                  <FormInput placeholder="Enter your password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

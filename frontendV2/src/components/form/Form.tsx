@@ -11,6 +11,7 @@ import {
 } from 'react-hook-form';
 import { cn } from 'lib/utils';
 import Label from 'components/label';
+import Input from 'components/input';
 
 const Form = FormProvider;
 
@@ -101,6 +102,23 @@ const FormLabel = React.forwardRef<
 });
 FormLabel.displayName = 'FormLabel';
 
+const FormInput = React.forwardRef<
+  HTMLInputElement,
+  React.InputHTMLAttributes<HTMLInputElement>
+>(({ className, ...props }, ref) => {
+  const { error, formItemId } = useFormField();
+
+  return (
+    <Input
+      ref={ref}
+      className={cn(error && 'border-destructive', className)}
+      id={formItemId}
+      aria-invalid={!!error}
+      {...props}
+    />
+  );
+});
+
 const FormControl = React.forwardRef<
   React.ElementRef<typeof Slot>,
   React.ComponentPropsWithoutRef<typeof Slot>
@@ -173,6 +191,7 @@ export {
   FormDescription,
   FormMessage,
   FormField,
+  FormInput,
 };
 
 export default Form;
