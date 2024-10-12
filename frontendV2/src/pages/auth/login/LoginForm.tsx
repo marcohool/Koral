@@ -20,6 +20,10 @@ import { Link } from 'react-router-dom';
 
 const LoginForm: FC = () => {
   const form = useForm<LoginFormData>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     resolver: yupResolver(loginSchema),
   });
@@ -58,7 +62,11 @@ const LoginForm: FC = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <FormInput placeholder="Enter your password" {...field} />
+                  <FormInput
+                    placeholder="Enter your password"
+                    {...field}
+                    type={'password'}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
