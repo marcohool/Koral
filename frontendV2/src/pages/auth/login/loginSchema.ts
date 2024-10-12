@@ -2,14 +2,11 @@ import * as yup from 'yup';
 
 const loginSchema = yup
   .object({
-    email: yup
-      .string()
-      .email('Must be a valid email')
-      .required('Email is required'),
+    email: yup.string().email('Must be a valid email').required('Required'),
     password: yup
       .string()
       .min(6, 'Password must be at least 6 characters')
-      .required('Password is required'),
+      .required('Required'),
   })
   .required();
 

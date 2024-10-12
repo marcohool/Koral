@@ -9,6 +9,7 @@ const labelVariants = cva(
     variants: {
       fontWeight: {
         normal: 'font-normal',
+        medium: 'font-medium',
         bold: 'font-bold',
       },
     },
