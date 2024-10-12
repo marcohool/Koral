@@ -27,7 +27,7 @@ const Navbar: FC<{ scrolled: boolean }> = ({ scrolled }) => {
           if (!pageData) throw new Error('Page not found');
 
           return (
-            <Link to={pageData.path} className="mr-6">
+            <Link to={pageData.path} className="mr-6" key={pageData.path}>
               {pageData.title}
             </Link>
           );
@@ -53,6 +53,7 @@ const Navbar: FC<{ scrolled: boolean }> = ({ scrolled }) => {
               <Link
                 to={pageData.path}
                 className="flex w-full items-center py-2 text-lg font-semibold"
+                key={pageData.path}
               >
                 {pageData.title}
               </Link>
