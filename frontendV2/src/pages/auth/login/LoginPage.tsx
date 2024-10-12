@@ -95,7 +95,7 @@ const LoginPage: FC = () => {
           </Button>
         </div>
       </form>
-      <Link to="signup" className="pt-20">
+      <Link to="/signup" className="pt-20">
         <Label>
           Don't have an account?{' '}
           <span className="font-semibold hover:cursor-pointer">Sign up</span>
