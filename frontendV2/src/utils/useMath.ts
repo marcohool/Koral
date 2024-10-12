@@ -1,4 +1,3 @@
-
 function normaliseToRange(
   input: number,
   rangeStart: number,
@@ -6,7 +5,7 @@ function normaliseToRange(
 ): number {
   if (input > rangeEnd) input = rangeEnd;
 
-  if (input < rangeStart) return 0;
+  if (input <= rangeStart) return 0;
 
   return (input - rangeStart) / (rangeEnd - rangeStart);
 }
