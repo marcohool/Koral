@@ -15,9 +15,10 @@ const LoginPage: FC = () => {
         className={cn(
           buttonVariants({ variant: 'ghost' }),
           'absolute left-2 top-2 sm:top-4 sm:left-4 md:left-6 md:top-6 lg:left-8 lg:top-8',
+          'group',
         )}
       >
-        <GoArrowLeft className="size-5" />
+        <GoArrowLeft className="size-5 transition-transform duration-300 ease-in-out group-hover:-translate-x-1" />
         <span className="ml-2 hidden sm:inline">Home</span>
       </Link>
 
