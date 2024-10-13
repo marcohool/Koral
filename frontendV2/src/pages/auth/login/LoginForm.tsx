@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import loginSchema, { LoginFormData } from 'pages/auth/login/loginSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -16,23 +16,32 @@ import Spinner from 'components/spinner';
 import { FcGoogle } from 'react-icons/fc';
 import Checkbox from 'components/checkbox';
 import Label from 'components/label';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useLogin from './useLogin';
+
+const formProps = {
+  defaultValues: {
+    email: '',
+    password: '',
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  resolver: yupResolver(loginSchema),
+};
 
 const LoginForm: FC = () => {
-  const form = useForm<LoginFormData>({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    resolver: yupResolver(loginSchema),
-  });
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { mutate: login, isPending, error } = useLogin();
+  const form = useForm<LoginFormData>({ ...formProps });
+  const navigate = useNavigate();
 
   const onSubmit = (data: LoginFormData) => {
-    setIsLoading(true);
-
-    console.log(data);
+    login(data, {
+      onSuccess: () => {
+        navigate('/');
+      },
+      onError: () => {
+        console.log(error);
+      },
+    });
   };
 
   return (
@@ -84,8 +93,8 @@ const LoginForm: FC = () => {
         </div>
 
         <div className="flex flex-col space-y-4 w-full">
-          <Button type="submit" disabled={isLoading}>
-            {isLoading && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
+          <Button type="submit" disabled={isPending}>
+            {isPending && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
             Log In
           </Button>
           <div className="relative">
@@ -98,8 +107,8 @@ const LoginForm: FC = () => {
               </span>
             </div>
           </div>
-          <Button variant="outline" type="button" disabled={isLoading}>
-            {isLoading ? (
+          <Button variant="outline" type="button" disabled={isPending}>
+            {isPending ? (
               <Spinner className="mr-2 h-4 w-4 animate-spin" />
             ) : (
               <FcGoogle className="mr-2 h-4 w-4" />
