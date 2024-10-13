@@ -55,6 +55,12 @@ const LoginForm: FC = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mx-auto flex flex-col justify-center space-y-6 w-full"
       >
+        <div className="flex flex-col space-y-3 text-center mb-6">
+          <h1 className="text-4xl font-normal tracking-tight">Login</h1>
+          <p className="text-sm text-muted-foreground">
+            Enter your email & password to login to your account
+          </p>
+        </div>
         {form.formState.errors.root && (
           <FormMessage
             className="mx-auto text-center"

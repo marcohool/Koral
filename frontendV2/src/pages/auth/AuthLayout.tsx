@@ -1,4 +1,8 @@
 import { FC, ReactNode } from 'react';
+import { cn } from 'utils/utils';
+import { buttonVariants } from 'components/button/Button';
+import { GoArrowLeft } from 'react-icons/go';
+import { Link } from 'react-router-dom';
 
 const AuthLayout: FC<{
   children: ReactNode;
@@ -9,6 +13,20 @@ const AuthLayout: FC<{
 
   return (
     <div className="flex relative overflow-hidden h-screen">
+      <Link
+        to="/"
+        className={cn(
+          buttonVariants({ variant: 'ghost' }),
+          'absolute top-2 sm:top-4 md:top-6 lg:top-8 z-10',
+          contentOnLeft
+            ? 'left-2 sm:left-4 md:left-6 lg:left-8'
+            : 'right-2 sm:right-4 md:right-6 lg-right-8',
+          'group',
+        )}
+      >
+        <GoArrowLeft className="size-5 transition-transform duration-300 ease-in-out group-hover:-translate-x-1" />
+        <span className="ml-2 hidden sm:inline">Home</span>
+      </Link>
       <div
         className={`flex-1 ${contentOnLeft ? 'order-1' : 'order-2'} flex flex-col items-center justify-center lg:w-1/2 w-full fixed left-0 h-screen`}
       >
