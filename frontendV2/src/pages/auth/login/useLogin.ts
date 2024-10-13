@@ -11,11 +11,7 @@ interface LoginData {
 const useLogin = () => {
   const { setToken } = useAuth();
 
-  return useMutation<
-    { token: string },
-    AxiosError<{ errorMessage: string }>,
-    LoginData
-  >({
+  return useMutation<{ token: string }, AxiosError, LoginData>({
     mutationFn: async (loginData) => {
       const response = await axiosInstance.post<{ token: string }>(
         '/users/login',
@@ -28,10 +24,7 @@ const useLogin = () => {
       localStorage.setItem('authToken', data.token);
     },
     onError: (error) => {
-      console.error(
-        'Login failed:',
-        error.response?.data.errorMessage ?? error.message,
-      );
+      console.error('Login failed:', error.response?.data);
     },
   });
 };

@@ -24,12 +24,12 @@ const formProps = {
     email: '',
     password: '',
   },
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
   resolver: yupResolver(loginSchema),
 };
 
 const LoginForm: FC = () => {
-  const { mutate: login, isPending, error } = useLogin();
+  const { mutate: login, isPending } = useLogin();
   const form = useForm<LoginFormData>({ ...formProps });
   const navigate = useNavigate();
 
@@ -38,8 +38,11 @@ const LoginForm: FC = () => {
       onSuccess: () => {
         navigate('/');
       },
-      onError: () => {
-        console.log(error);
+      onError: (error) => {
+        form.setError('root', {
+          type: 'manual',
+          message: (error.response?.data as string) ?? 'An error has occurred',
+        });
       },
     });
   };
@@ -50,6 +53,11 @@ const LoginForm: FC = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mx-auto flex flex-col justify-center space-y-6 w-full"
       >
+        {form.formState.errors.root && (
+          <FormMessage className="mx-auto">
+            {form.formState.errors.root.message}
+          </FormMessage>
+        )}
         <div className="my-4 space-y-5">
           <FormField
             control={form.control}
