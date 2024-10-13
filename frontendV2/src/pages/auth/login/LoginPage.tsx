@@ -80,17 +80,14 @@ const LoginPage: FC = () => {
 
   const onSubmit = (data: LoginFormData) => {
     login(data, {
-      onSuccess: () => {
-        navigate('/');
-      },
-      onError: (error) => {
+      onSuccess: () => navigate('/'),
+      onError: (error) =>
         form.setError('root', {
           type: 'manual',
           message:
             (error.response?.data as string) ??
             `An unexpected error has occurred. Please try again later\n${error.message}`,
-        });
-      },
+        }),
     });
   };
 

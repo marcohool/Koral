@@ -16,6 +16,7 @@ import {
 } from 'components/form/Form';
 import { TermsPrompt } from 'pages/auth/signup/SignupPage';
 import useSignup from 'pages/auth/signup/useSignup';
+import { useNavigate } from 'react-router-dom';
 
 const signupPasswordFormProps = {
   defaultValues: {
@@ -29,12 +30,13 @@ const signupPasswordFormProps = {
 const SignupPasswordForm: FC<{ email: string }> = ({ email }) => {
   const form = useForm<SignupPasswordFormData>({ ...signupPasswordFormProps });
   const { mutate: signup, isPending } = useSignup();
+  const navigate = useNavigate();
 
   const onSubmit = (data: SignupPasswordFormData) => {
     signup(
       { email, ...data },
       {
-        onSuccess: () => console.log('Success'),
+        onSuccess: () => navigate('/'),
         onError: (error) =>
           form.setError('root', {
             type: 'manual',
