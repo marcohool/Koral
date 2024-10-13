@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import {
   SignupPasswordFormData,
   signupPasswordSchema,
-} from 'pages/auth/signup/signupEmailSchema';
+} from 'pages/auth/signup/signupSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AuthForm from 'pages/auth/AuthForm';
 import {
@@ -31,7 +31,6 @@ const SignupPasswordForm: FC<{ email: string }> = ({ email }) => {
   const { mutate: signup, isPending } = useSignup();
 
   const onSubmit = (data: SignupPasswordFormData) => {
-    console.log('Signup password form submitted', data, email);
     signup(
       { email, ...data },
       {

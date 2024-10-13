@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   SignupEmailFormData,
-  signupEmailSchema,
-} from 'pages/auth/signup/signupEmailSchema';
+  signupSchema,
+} from 'pages/auth/signup/signupSchema';
 import {
   FormControl,
   FormField,
@@ -46,7 +46,7 @@ const signupFormProps = {
     email: '',
   },
 
-  resolver: yupResolver(signupEmailSchema),
+  resolver: yupResolver(signupSchema),
 };
 
 const SignupPage: FC = () => {
