@@ -14,7 +14,7 @@ const pagesData: routerType[] = [
     element: (
       <ConditionalRoute component={<HomePage />} fallback={<LandingPage />} />
     ),
-    page: Page.Landing,
+    page: Page.Home,
   },
   {
     path: 'about',
