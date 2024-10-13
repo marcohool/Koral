@@ -82,7 +82,7 @@ const SignupPage: FC = () => {
       </AuthForm>
       <TermsPrompt />
       <RedirectPrompt
-        to={'/login'}
+        to="/login"
         className="mt-20"
         prompt="Already have an account?"
         redirect="Log in"

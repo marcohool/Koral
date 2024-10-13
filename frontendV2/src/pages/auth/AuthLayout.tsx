@@ -18,9 +18,8 @@ const AuthLayout: FC<{
         className={cn(
           buttonVariants({ variant: 'ghost' }),
           'absolute top-2 sm:top-4 md:top-6 lg:top-8 z-10',
-          contentOnLeft
-            ? 'left-2 sm:left-4 md:left-6 lg:left-8'
-            : 'right-2 sm:right-4 md:right-6 lg-right-8',
+          'left-2 sm:left-4 md:left-6 lg:left-8',
+          !contentOnLeft && 'lg:ml-[50%]',
           'group',
         )}
       >
@@ -28,7 +27,7 @@ const AuthLayout: FC<{
         <span className="ml-2 hidden sm:inline">Home</span>
       </Link>
       <div
-        className={`flex-1 ${contentOnLeft ? 'order-1' : 'order-2'} flex flex-col items-center justify-center lg:w-1/2 w-full fixed left-0 h-screen`}
+        className={`flex-1 ${!contentOnLeft && 'lg:ml-[50%]'} flex flex-col items-center justify-center lg:w-1/2 w-full fixed left-0 h-screen`}
       >
         <div className="flex flex-col items-center px-4 w-max-[450px] w-full md:w-[500px] lg:px-16">
           {children}

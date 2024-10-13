@@ -109,7 +109,7 @@ const LoginPage: FC = () => {
         <FormContent control={form.control} />
       </AuthForm>
       <RedirectPrompt
-        to={'/signup'}
+        to="/signup"
         className="mt-20"
         prompt="Don't have an account?"
         redirect="Sign up"
