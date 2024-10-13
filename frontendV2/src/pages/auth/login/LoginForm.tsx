@@ -41,7 +41,9 @@ const LoginForm: FC = () => {
       onError: (error) => {
         form.setError('root', {
           type: 'manual',
-          message: (error.response?.data as string) ?? 'An error has occurred',
+          message:
+            (error.response?.data as string) ??
+            `An unexpected error has occurred. Please try again later\n${error.message}`,
         });
       },
     });
@@ -54,7 +56,10 @@ const LoginForm: FC = () => {
         className="mx-auto flex flex-col justify-center space-y-6 w-full"
       >
         {form.formState.errors.root && (
-          <FormMessage className="mx-auto">
+          <FormMessage
+            className="mx-auto text-center"
+            style={{ whiteSpace: 'pre-line' }}
+          >
             {form.formState.errors.root.message}
           </FormMessage>
         )}

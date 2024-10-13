@@ -24,7 +24,7 @@ const useLogin = () => {
       localStorage.setItem('authToken', data.token);
     },
     onError: (error) => {
-      console.error('Login failed:', error.response?.data);
+      console.error('Login error:', error);
     },
   });
 };
