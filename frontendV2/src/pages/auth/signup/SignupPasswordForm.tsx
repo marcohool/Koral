@@ -54,7 +54,11 @@ const SignupPasswordForm: FC<{ email: string }> = ({ email }) => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <FormInput placeholder="Enter your password" {...field} />
+                <FormInput
+                  placeholder="Enter your password"
+                  {...field}
+                  type="password"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -67,7 +71,11 @@ const SignupPasswordForm: FC<{ email: string }> = ({ email }) => {
             <FormItem>
               <FormLabel>Confirm password</FormLabel>
               <FormControl>
-                <FormInput placeholder="Confirm your password" {...field} />
+                <FormInput
+                  placeholder="Confirm your password"
+                  {...field}
+                  type="password"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

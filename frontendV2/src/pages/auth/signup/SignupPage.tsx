@@ -17,7 +17,7 @@ import {
 } from 'components/form/Form';
 import useLogin from 'pages/auth/login/useLogin';
 import RedirectPrompt from 'pages/auth/RedirectPrompt';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SignupPasswordForm from 'pages/auth/signup/SignupPasswordForm';
 
 export const TermsPrompt = () => {
@@ -54,6 +54,7 @@ const SignupPage: FC = () => {
   const form = useForm<SignupEmailFormData>({ ...signupFormProps });
 
   const { isPending } = useLogin(); // Change this
+  const navigate = useNavigate();
 
   const [passwordForm, setPasswordForm] = useState(false);
   const [email, setEmail] = useState('');
@@ -64,7 +65,25 @@ const SignupPage: FC = () => {
   };
 
   return (
-    <AuthLayout contentOnLeft={false} imageSrc="Signup-Image.jpg">
+    <AuthLayout
+      contentOnLeft={false}
+      imageSrc="Signup-Image.jpg"
+      redirect={
+        passwordForm
+          ? {
+              text: 'Back',
+              onClick: () => {
+                setPasswordForm(false);
+              },
+            }
+          : {
+              text: 'Home',
+              onClick: () => {
+                navigate('/');
+              },
+            }
+      }
+    >
       {passwordForm ? (
         <SignupPasswordForm email={email} />
       ) : (

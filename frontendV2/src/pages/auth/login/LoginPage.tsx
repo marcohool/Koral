@@ -95,7 +95,16 @@ const LoginPage: FC = () => {
   };
 
   return (
-    <AuthLayout contentOnLeft={true} imageSrc="Login-Image.jpg">
+    <AuthLayout
+      contentOnLeft={true}
+      imageSrc="Login-Image.jpg"
+      redirect={{
+        text: 'Home',
+        onClick: () => {
+          navigate('/');
+        },
+      }}
+    >
       <AuthForm
         form={form}
         heading={{
