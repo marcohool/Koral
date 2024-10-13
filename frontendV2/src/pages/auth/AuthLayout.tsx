@@ -30,7 +30,7 @@ const AuthLayout: FC<{
       <div
         className={`flex-1 ${contentOnLeft ? 'order-1' : 'order-2'} flex flex-col items-center justify-center lg:w-1/2 w-full fixed left-0 h-screen`}
       >
-        <div className="flex flex-col items-center px-4 w-max-[450px] md:w-[500px] lg:px-16">
+        <div className="flex flex-col items-center px-4 w-max-[450px] w-full md:w-[500px] lg:px-16">
           {children}
         </div>
       </div>
