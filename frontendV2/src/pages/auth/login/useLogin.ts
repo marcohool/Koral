@@ -1,11 +1,15 @@
 import { useMutation } from '@tanstack/react-query';
-import { axiosInstance } from 'utils/axiosInstance';
 import { AxiosError } from 'axios';
 import useAuth from 'context/useAuth';
+import apiCall from 'utils/apiCall';
 
 interface LoginData {
   email: string;
   password: string;
+}
+
+interface LoginResponse {
+  token: string;
 }
 
 const useLogin = () => {
@@ -13,11 +17,12 @@ const useLogin = () => {
 
   return useMutation<{ token: string }, AxiosError, LoginData>({
     mutationFn: async (loginData) => {
-      const response = await axiosInstance.post<{ token: string }>(
+      return apiCall<LoginResponse, LoginData>(
         '/users/login',
+        'POST',
+        undefined,
         loginData,
-      );
-      return response.data;
+      ).then((response) => response.data);
     },
     onSuccess: (data) => {
       setToken(data.token);
