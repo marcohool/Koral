@@ -27,7 +27,7 @@ const PageContent: FC<{ contentOnLeft?: boolean; children: ReactNode }> = ({
 }) => (
   <div
     className={cn(
-      'flex flex-col items-center justify-center lg:w-1/2 w-full fixed left-0 h-screen ',
+      'flex flex-col items-center justify-center lg:w-1/2 w-full relative left-0 max-h-screen overflow-y-auto',
       !contentOnLeft && 'lg:ml-[50%]',
     )}
   >
