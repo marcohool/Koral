@@ -14,7 +14,7 @@ const useSignup = () => {
   return useMutation<{ token: string }, AxiosError, SignupData>({
     mutationFn: async (signupData) => {
       const response = await axiosInstance.post<{ token: string }>(
-        '/users/signup',
+        '/users/register',
         signupData,
       );
       return response.data;
