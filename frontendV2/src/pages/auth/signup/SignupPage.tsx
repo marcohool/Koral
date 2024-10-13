@@ -1,9 +1,12 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import AuthLayout from '../AuthLayout';
 import AuthForm from 'pages/auth/AuthForm';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import signupSchema, { SignupFormData } from 'pages/auth/signup/signupSchema';
+import {
+  SignupEmailFormData,
+  signupEmailSchema,
+} from 'pages/auth/signup/signupEmailSchema';
 import {
   FormControl,
   FormField,
@@ -15,8 +18,9 @@ import {
 import useLogin from 'pages/auth/login/useLogin';
 import RedirectPrompt from 'pages/auth/RedirectPrompt';
 import { Link } from 'react-router-dom';
+import SignupPasswordForm from 'pages/auth/signup/SignupPasswordForm';
 
-const TermsPrompt = () => {
+export const TermsPrompt = () => {
   return (
     <p className="px-5 pt-7 text-center text-sm text-muted-foreground-light">
       By clicking continue, you agree to our{' '}
@@ -43,50 +47,61 @@ const signupFormProps = {
     email: '',
   },
 
-  resolver: yupResolver(signupSchema),
+  resolver: yupResolver(signupEmailSchema),
 };
 
 const SignupPage: FC = () => {
-  const { isPending } = useLogin(); // Change this
-  const form = useForm<SignupFormData>({ ...signupFormProps });
+  const form = useForm<SignupEmailFormData>({ ...signupFormProps });
 
-  const onSubmit = () => {
-    console.log('Signup form submitted');
+  const { isPending } = useLogin(); // Change this
+
+  const [passwordForm, setPasswordForm] = useState(false);
+  const [email, setEmail] = useState('');
+
+  const onSubmit = (data: SignupEmailFormData) => {
+    setEmail(data.email);
+    setPasswordForm(true);
   };
 
   return (
     <AuthLayout contentOnLeft={false} imageSrc="Signup-Image.jpg">
-      <AuthForm
-        form={form}
-        heading={{
-          title: 'Sign up',
-          subtitle: 'Enter your email to create an account',
-        }}
-        submitText="Sign up"
-        onSubmit={onSubmit}
-        isPending={isPending}
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <FormInput placeholder="Enter your email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </AuthForm>
-      <TermsPrompt />
-      <RedirectPrompt
-        to="/login"
-        className="mt-20"
-        prompt="Already have an account?"
-        redirect="Log in"
-      />
+      {passwordForm ? (
+        <SignupPasswordForm email={email} />
+      ) : (
+        <>
+          <AuthForm
+            form={form}
+            heading={{
+              title: 'Sign up',
+              subtitle: 'Enter your email to create an account',
+            }}
+            submitText="Sign up"
+            onSubmit={onSubmit}
+            isPending={isPending}
+          >
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <FormInput placeholder="Enter your email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </AuthForm>
+          <TermsPrompt />
+          <RedirectPrompt
+            to="/login"
+            className="mt-20"
+            prompt="Already have an account?"
+            redirect="Log in"
+          />
+        </>
+      )}
     </AuthLayout>
   );
 };

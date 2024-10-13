@@ -13,6 +13,7 @@ interface AuthFormProps<T extends FieldValues> {
   children: ReactNode;
   submitText: string;
   isPending: boolean;
+  displayThirdPartyAuth?: boolean;
 }
 
 const FormHeading = ({
@@ -39,7 +40,7 @@ const FormError = ({ error }: { error: string }) => (
   </FormMessage>
 );
 
-const FormContent = ({
+export const FormContent = ({
   children,
   error,
   className,
@@ -58,34 +59,40 @@ const FormButtons = ({
   isPending,
   submitText,
   className,
+  displayThirdPartyAuth,
 }: {
   isPending: boolean;
   submitText: string;
   className?: string;
+  displayThirdPartyAuth: boolean;
 }) => (
   <div className={className}>
     <Button type="submit" disabled={isPending}>
       {isPending && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
       {submitText}
     </Button>
-    <div className="relative">
-      <div className="absolute inset-0 flex items-center">
-        <span className="w-full border-t" />
-      </div>
-      <div className="relative flex justify-center text-xs uppercase">
-        <span className="bg-background px-2 text-muted-foreground">
-          Or continue with
-        </span>
-      </div>
-    </div>
-    <Button variant="outline" type="button" disabled={isPending}>
-      {isPending ? (
-        <Spinner className="mr-2 h-4 w-4 animate-spin" />
-      ) : (
-        <FcGoogle className="mr-2 h-4 w-4" />
-      )}
-      Google
-    </Button>
+    {displayThirdPartyAuth && (
+      <>
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
+        </div>
+        <Button variant="outline" type="button" disabled={isPending}>
+          {isPending ? (
+            <Spinner className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            <FcGoogle className="mr-2 h-4 w-4" />
+          )}
+          Google
+        </Button>
+      </>
+    )}
   </div>
 );
 
@@ -96,6 +103,7 @@ const AuthForm = <T extends FieldValues>({
   submitText,
   isPending,
   onSubmit,
+  displayThirdPartyAuth = true,
 }: AuthFormProps<T>) => {
   return (
     <Form {...form}>
@@ -118,6 +126,7 @@ const AuthForm = <T extends FieldValues>({
           isPending={isPending}
           submitText={submitText}
           className="flex flex-col space-y-4 w-full pt-4"
+          displayThirdPartyAuth={displayThirdPartyAuth}
         />
       </form>
     </Form>
