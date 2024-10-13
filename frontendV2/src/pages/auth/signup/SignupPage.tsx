@@ -55,7 +55,7 @@ const SignupPage: FC = () => {
   };
 
   return (
-    <AuthLayout contentOnLeft={false} imageSrc="Login-Image.jpg">
+    <AuthLayout contentOnLeft={false} imageSrc="Signup-Image.jpg">
       <AuthForm
         form={form}
         heading={{
