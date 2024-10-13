@@ -30,11 +30,11 @@ const PageContent: FC<{ contentOnLeft?: boolean; children: ReactNode }> = ({
 }) => (
   <div
     className={cn(
-      'flex flex-col items-center justify-center lg:w-1/2 w-full relative left-0 max-h-screen overflow-y-auto',
+      'flex flex-col items-center justify-center lg:w-1/2 w-full relative left-0 max-h-screen',
       !contentOnLeft && 'lg:ml-[50%]',
     )}
   >
-    <div className="flex flex-col items-center px-4 w-max-[450px] w-full md:w-[500px] lg:px-16">
+    <div className="flex flex-col items-center px-4 max-w-[500px] w-full lg:px-16">
       {children}
     </div>
   </div>
@@ -49,7 +49,7 @@ const AuthLayout: FC<{
   const imagePositionClass = contentOnLeft ? 'right-0' : 'left-0';
 
   return (
-    <div className="flex relative overflow-hidden h-screen">
+    <div className="flex relative overflow-hidden h-screen  min-h-[35rem] items-center">
       <RedirectButton
         contentOnLeft={contentOnLeft}
         text={redirect.text}
@@ -58,7 +58,7 @@ const AuthLayout: FC<{
       <PageContent contentOnLeft={contentOnLeft}>{children}</PageContent>
       <img
         src={`images/${imageSrc}`}
-        className={`hidden lg:flex fixed ${imagePositionClass} w-1/2 h-screen object-cover`}
+        className={`hidden lg:flex fixed ${imagePositionClass} w-1/2 h-screen object-cover  top-0`}
         alt="Layout Image"
       />
     </div>
