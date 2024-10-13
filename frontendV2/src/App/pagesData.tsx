@@ -4,13 +4,17 @@ import AboutPage from 'pages/about/AboutPage';
 import ComponentsPage from 'pages/components/ComponentsPage';
 import LoginPage from 'pages/auth/login/LoginPage';
 import SignupPage from 'pages/auth/signup/SignupPage';
+import HomePage from 'pages/home';
+import ConditionalRoute from '@/App/ConditionalRoute';
 
 const pagesData: routerType[] = [
   {
     path: '',
     title: 'Home',
-    element: <LandingPage />,
-    page: Page.Home,
+    element: (
+      <ConditionalRoute component={<HomePage />} fallback={<LandingPage />} />
+    ),
+    page: Page.Landing,
   },
   {
     path: 'about',

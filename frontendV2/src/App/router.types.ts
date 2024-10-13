@@ -1,12 +1,13 @@
 import { ReactElement } from 'react';
 
 export enum Page {
-  Home,
+  Landing,
   Components,
   About,
   Contact,
   Login,
   SignUp,
+  Home,
 }
 
 export interface routerType {
@@ -14,5 +15,6 @@ export interface routerType {
   title: string;
   element: ReactElement;
   children?: routerType[];
+  requireAuth?: boolean;
   page: Page;
 }
