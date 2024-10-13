@@ -3,6 +3,7 @@ import LandingPage from 'pages/landing/LandingPage';
 import AboutPage from 'pages/about/AboutPage';
 import ComponentsPage from 'pages/components/ComponentsPage';
 import LoginPage from 'pages/auth/login/LoginPage';
+import SignupPage from 'pages/auth/signup/SignupPage';
 
 const pagesData: routerType[] = [
   {
@@ -38,7 +39,7 @@ const pagesData: routerType[] = [
   {
     path: 'signup',
     title: 'Sign Up',
-    element: <LoginPage />,
+    element: <SignupPage />,
     page: Page.SignUp,
   },
 ];
