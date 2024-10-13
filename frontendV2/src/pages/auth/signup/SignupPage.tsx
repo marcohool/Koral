@@ -23,7 +23,7 @@ const signupFormProps = {
 };
 
 const SignupPage: FC = () => {
-  const { mutate: login, isPending } = useLogin(); // Change this
+  const { isPending } = useLogin(); // Change this
   const form = useForm<SignupFormData>({ ...signupFormProps });
 
   const onSubmit = () => {
