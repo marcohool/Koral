@@ -15,7 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from 'components/form/Form';
-import useLogin from 'pages/auth/login/useLogin';
 import RedirectPrompt from 'pages/auth/RedirectPrompt';
 import { Link, useNavigate } from 'react-router-dom';
 import SignupPasswordForm from 'pages/auth/signup/SignupPasswordForm';
@@ -53,7 +52,6 @@ const signupFormProps = {
 const SignupPage: FC = () => {
   const form = useForm<SignupEmailFormData>({ ...signupFormProps });
 
-  const { isPending } = useLogin(); // Change this
   const navigate = useNavigate();
 
   const [passwordForm, setPasswordForm] = useState(false);
@@ -96,7 +94,7 @@ const SignupPage: FC = () => {
             }}
             submitText="Sign up"
             onSubmit={onSubmit}
-            isPending={isPending}
+            isPending={false}
           >
             <FormField
               control={form.control}

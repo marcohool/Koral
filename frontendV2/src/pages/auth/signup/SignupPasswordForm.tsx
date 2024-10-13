@@ -14,8 +14,8 @@ import {
   FormLabel,
   FormMessage,
 } from 'components/form/Form';
-import useLogin from 'pages/auth/login/useLogin';
 import { TermsPrompt } from 'pages/auth/signup/SignupPage';
+import useSignup from 'pages/auth/signup/useSignup';
 
 const signupPasswordFormProps = {
   defaultValues: {
@@ -28,10 +28,23 @@ const signupPasswordFormProps = {
 
 const SignupPasswordForm: FC<{ email: string }> = ({ email }) => {
   const form = useForm<SignupPasswordFormData>({ ...signupPasswordFormProps });
-  const { isPending } = useLogin(); // Change this
+  const { mutate: signup, isPending } = useSignup();
 
   const onSubmit = (data: SignupPasswordFormData) => {
     console.log('Signup password form submitted', data, email);
+    signup(
+      { email, ...data },
+      {
+        onSuccess: () => console.log('Success'),
+        onError: (error) =>
+          form.setError('root', {
+            type: 'manual',
+            message:
+              (error.response?.data as string) ??
+              `An unexpected error has occurred. Please try again later\n${error.message}`,
+          }),
+      },
+    );
   };
 
   return (
