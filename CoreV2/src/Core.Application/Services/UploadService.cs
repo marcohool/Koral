@@ -1,7 +1,6 @@
 using AutoMapper;
 using Core.Application.APIs.KoralMatch;
 using Core.Application.APIs.KoralMatch.Models;
-using Core.Application.Dtos;
 using Core.Application.Dtos.ClothingItem;
 using Core.Application.Dtos.Upload;
 using Core.Application.Exceptions;
@@ -121,9 +120,7 @@ public class UploadService(
         return uploadGuid;
     }
 
-    public async Task<PaginatedResponse<UploadDto>> GetAllAsync(
-        int pageNumber,
-        int pageSize,
+    public async Task<IEnumerable<UploadDto>> GetAllAsync(
         CancellationToken cancellationToken = default
     )
     {
@@ -133,21 +130,13 @@ public class UploadService(
 
         List<Upload> uploads = await this.uploadRepository.GetAllAsync(
             u => u.AppUserId == user.Id,
-            pageNumber,
-            pageSize
+            cancellationToken: cancellationToken
         );
 
-        return new PaginatedResponse<UploadDto>(
-            this.mapper.Map<IEnumerable<UploadDto>>(uploads),
-            pageNumber,
-            pageSize,
-            totalUploads
-        );
+        return this.mapper.Map<IEnumerable<UploadDto>>(uploads);
     }
 
-    public async Task<PaginatedResponse<UploadDto>> GetFavouritesAsync(
-        int pageNumber,
-        int pageSize,
+    public async Task<IEnumerable<UploadDto>> GetFavouritesAsync(
         CancellationToken cancellationToken = default
     )
     {
@@ -159,16 +148,10 @@ public class UploadService(
 
         List<Upload> uploads = await this.uploadRepository.GetAllAsync(
             u => u.AppUserId == user.Id && u.IsFavourited,
-            pageNumber,
-            pageSize
+            cancellationToken: cancellationToken
         );
 
-        return new PaginatedResponse<UploadDto>(
-            this.mapper.Map<IEnumerable<UploadDto>>(uploads),
-            pageNumber,
-            pageSize,
-            totalUploads
-        );
+        return this.mapper.Map<IEnumerable<UploadDto>>(uploads);
     }
 
     public async Task<UploadDto> GetByIdAsync(
