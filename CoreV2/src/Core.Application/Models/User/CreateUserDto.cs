@@ -7,4 +7,7 @@ public record CreateUserDto
     public required string Password { get; set; }
 }
 
-public record CreateUserResponseDto : BaseResponseDto { }
+public record CreateUserResponseDto : BaseResponseDto
+{
+    public required string Token { get; set; }
+}
