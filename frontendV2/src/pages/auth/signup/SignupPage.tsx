@@ -13,6 +13,30 @@ import {
   FormMessage,
 } from 'components/form/Form';
 import useLogin from 'pages/auth/login/useLogin';
+import RedirectPrompt from 'pages/auth/RedirectPrompt';
+import { Link } from 'react-router-dom';
+
+const TermsPrompt = () => {
+  return (
+    <p className="px-5 pt-7 text-center text-sm text-muted-foreground-light">
+      By clicking continue, you agree to our{' '}
+      <Link
+        to="/terms"
+        className="underline underline-offset-4 hover:text-primary"
+      >
+        Terms of Service
+      </Link>{' '}
+      and{' '}
+      <Link
+        to="/privacy"
+        className="underline underline-offset-4 hover:text-primary"
+      >
+        Privacy Policy
+      </Link>
+      .
+    </p>
+  );
+};
 
 const signupFormProps = {
   defaultValues: {
@@ -56,6 +80,13 @@ const SignupPage: FC = () => {
           )}
         />
       </AuthForm>
+      <TermsPrompt />
+      <RedirectPrompt
+        to={'/login'}
+        className="mt-20"
+        prompt="Already have an account?"
+        redirect="Log in"
+      />
     </AuthLayout>
   );
 };
