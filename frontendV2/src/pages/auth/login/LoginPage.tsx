@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from 'components/form/Form';
 import Checkbox from 'components/checkbox';
+import RedirectPrompt from 'pages/auth/RedirectPrompt';
 
 const FormContent: FC<{ control: Control<LoginFormData> }> = ({ control }) => {
   return (
@@ -95,26 +96,24 @@ const LoginPage: FC = () => {
 
   return (
     <AuthLayout contentOnLeft={true} imageSrc="Login-Image.jpg">
-      <div className="px-4 w-max-[450px] md:w-[500px] lg:px-16">
-        <AuthForm
-          form={form}
-          heading={{
-            title: 'Log in',
-            subtitle: 'Enter your email & password to login to your account',
-          }}
-          submitText="Log in"
-          onSubmit={onSubmit}
-          isPending={isPending}
-        >
-          <FormContent control={form.control} />
-        </AuthForm>
-      </div>
-      <Link to="/signup" className="pt-20">
-        <Label>
-          Don't have an account?{' '}
-          <span className="font-semibold hover:cursor-pointer">Sign up</span>
-        </Label>
-      </Link>
+      <AuthForm
+        form={form}
+        heading={{
+          title: 'Log in',
+          subtitle: 'Enter your email & password to login to your account',
+        }}
+        submitText="Log in"
+        onSubmit={onSubmit}
+        isPending={isPending}
+      >
+        <FormContent control={form.control} />
+      </AuthForm>
+      <RedirectPrompt
+        to={'/signup'}
+        className="mt-20"
+        prompt="Don't have an account?"
+        redirect="Sign up"
+      />
     </AuthLayout>
   );
 };

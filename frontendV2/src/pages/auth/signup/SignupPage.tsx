@@ -32,32 +32,30 @@ const SignupPage: FC = () => {
 
   return (
     <AuthLayout contentOnLeft={false} imageSrc="Login-Image.jpg">
-      <div className="px-4 w-max-[450px] md:w-[500px] lg:px-16">
-        <AuthForm
-          form={form}
-          heading={{
-            title: 'Sign up',
-            subtitle: 'Enter your email to create an account',
-          }}
-          submitText="Sign up"
-          onSubmit={onSubmit}
-          isPending={isPending}
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <FormInput placeholder="Enter your email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </AuthForm>
-      </div>
+      <AuthForm
+        form={form}
+        heading={{
+          title: 'Sign up',
+          subtitle: 'Enter your email to create an account',
+        }}
+        submitText="Sign up"
+        onSubmit={onSubmit}
+        isPending={isPending}
+      >
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <FormInput placeholder="Enter your email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </AuthForm>
     </AuthLayout>
   );
 };
