@@ -18,6 +18,7 @@ import {
 import RedirectPrompt from 'pages/auth/RedirectPrompt';
 import { Link, useNavigate } from 'react-router-dom';
 import SignupPasswordForm from 'pages/auth/signup/SignupPasswordForm';
+import useAuth from '@/context/useAuth';
 
 export const TermsPrompt = () => {
   return (
@@ -56,6 +57,9 @@ const SignupPage: FC = () => {
 
   const [passwordForm, setPasswordForm] = useState(false);
   const [email, setEmail] = useState('');
+
+  const { setToken } = useAuth();
+  setToken(null);
 
   const onSubmit = (data: SignupEmailFormData) => {
     setEmail(data.email);

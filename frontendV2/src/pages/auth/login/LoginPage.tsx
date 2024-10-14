@@ -17,6 +17,7 @@ import {
 } from 'components/form/Form';
 import Checkbox from 'components/checkbox';
 import RedirectPrompt from 'pages/auth/RedirectPrompt';
+import useAuth from '@/context/useAuth';
 
 const FormContent: FC<{ control: Control<LoginFormData> }> = ({ control }) => {
   return (
@@ -74,9 +75,14 @@ const loginFormProps = {
 };
 
 const LoginPage: FC = () => {
-  const { mutate: login, isPending } = useLogin();
   const form = useForm<LoginFormData>({ ...loginFormProps });
+
   const navigate = useNavigate();
+
+  const { mutate: login, isPending } = useLogin();
+
+  const { setToken } = useAuth();
+  setToken(null);
 
   const onSubmit = (data: LoginFormData) => {
     login(data, {

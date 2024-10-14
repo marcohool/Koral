@@ -15,8 +15,17 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setToken(storedToken);
   }, []);
 
+  const updateToken = (newToken: string | null) => {
+    if (newToken) {
+      localStorage.setItem('authToken', newToken);
+    } else {
+      localStorage.removeItem('authToken');
+    }
+    setToken(newToken);
+  };
+
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ token, setToken: updateToken }}>
       {children}
     </AuthContext.Provider>
   );
