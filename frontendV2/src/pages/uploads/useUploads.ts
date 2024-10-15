@@ -3,12 +3,12 @@ import { AxiosError } from 'axios';
 import apiCall from 'utils/apiCall';
 import useAuth from '@/context/useAuth';
 
-interface Upload {
+export interface Upload {
   id: string;
   title: string;
   status: string;
   imageUrl: string;
-  isFavorited: boolean;
+  isFavourited: boolean;
   createdOn: string;
   lastUpdatedOn: string;
 }
