@@ -1,40 +1,53 @@
-import { FC, HTMLAttributes } from 'react';
+import { FC, ReactNode } from 'react';
 import { cn } from 'utils/utils';
 import { Upload } from 'pages/uploads/useUploads';
 
-interface UploadCardProps extends HTMLAttributes<HTMLDivElement> {
-  upload: Upload;
-  aspectRatio?: 'portrait' | 'square';
-  width?: number;
-  height?: number;
-}
-
-const UploadCard: FC<UploadCardProps> = ({
-  upload,
-  width,
-  height,
-  aspectRatio = 'portrait',
-  className,
-  ...props
-}) => {
+const CardHeader: FC<{
+  title: string;
+  subtitle: string;
+  className?: string;
+}> = ({ title, subtitle, className }) => {
   return (
-    <div className={cn('space-y-3', className)} {...props}>
-      <div className="overflow-hidden rounded-md">
+    <div className={cn(className)}>
+      <h3 className="font-medium leading-none">{title}</h3>
+      <p className="text-xs text-muted-foreground">{subtitle}</p>
+    </div>
+  );
+};
+
+const CardImage: FC<{ children: ReactNode; className?: string }> = ({
+  children,
+  className,
+}) => {
+  return <div className={cn('overflow-hidden', className)}>{children}</div>;
+};
+
+const UploadCard: FC<{
+  upload: Upload;
+  className?: string;
+}> = ({ upload, className }) => {
+  return (
+    <div
+      className={cn(
+        'relative cursor-pointer overflow-hidden',
+        'border border-transparent',
+        'aspect-[7/8] flex flex-col',
+        'hover:border-black',
+        className,
+      )}
+    >
+      <CardImage className="h-[100%]">
         <img
           src={upload.imageUrl}
           alt={upload.title}
-          width={width}
-          height={height}
-          className={cn(
-            'object-cover transition-all hover:scale-105',
-            aspectRatio === 'portrait' ? 'aspect-[9/10]' : 'aspect-square',
-          )}
+          className="object-cover w-full h-full"
         />
-      </div>
-      <div className="space-y-1 text-sm">
-        <h3 className="font-medium leading-none">{upload.title}</h3>
-        <p className="text-xs text-muted-foreground">{upload.title}</p>
-      </div>
+      </CardImage>
+      <CardHeader
+        title={upload.title}
+        subtitle={upload.title}
+        className="px-2 py-3 text-sm"
+      />
     </div>
   );
 };
