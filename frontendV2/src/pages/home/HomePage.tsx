@@ -28,13 +28,13 @@ const HomePage: FC = () => {
   }
 
   return (
-    <div>
+    <>
       <UploadGrid
         uploads={data}
-        className="grid grid-cols-4 mt-20 gap-2 max-w-7xl mx-auto"
+        className="grid mt-20 gap-[0.5px] sm:gap-2 md:px-2 max-w-7xl mx-auto grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
         cardHeight={500}
       />
-    </div>
+    </>
   );
 };
 

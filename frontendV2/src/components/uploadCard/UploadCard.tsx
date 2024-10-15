@@ -30,8 +30,8 @@ const UploadCard: FC<{
     <div
       className={cn(
         'relative cursor-pointer overflow-hidden',
-        'border border-transparent',
-        'aspect-[7/8] flex flex-col',
+        'md:border border-transparent',
+        'aspect-[8/11] flex flex-col',
         'hover:border-black',
         className,
       )}
