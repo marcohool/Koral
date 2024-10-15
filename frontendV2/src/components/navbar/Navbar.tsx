@@ -6,33 +6,42 @@ import { SheetContent } from 'components/sheet/Sheet';
 import { Link } from 'react-router-dom';
 import { getPageData } from 'App/pagesData';
 import { Page } from 'App/router.types';
+import { cn } from 'utils/utils';
 
-const NavbarPages: Page[] = [Page.About, Page.Contact, Page.Login, Page.SignUp];
+const PageData: Page[] = [Page.Home];
 
-const Navbar: FC<{ scrolled: boolean }> = ({ scrolled }) => {
+const Navbar: FC<{
+  scrolled: boolean;
+  pages?: Page[];
+  className?: string;
+}> = ({ scrolled, pages = PageData, className }) => {
   return (
     <header
-      className={`flex w-full font-butler font-medium lg:px-14 px-8 items-center z-10 justify-between transition-all duration-500 ease-out ${scrolled ? 'h-32 text-primary-foreground' : 'bg-background h-16'}`}
+      className={`flex sticky top-0 z-50 font-butler justify-center font-medium lg:px-14 px-8 transition-all items-center duration-500 ease-out ${scrolled ? 'h-32 text-primary-foreground' : 'bg-background h-16'}`}
     >
-      <Link
-        to="#"
-        className={`transition-all duration-500 ease-out font-medium ${scrolled ? 'text-6xl mb-2' : 'text-2xl'}`}
+      <div
+        className={cn('flex justify-between w-full items-center', className)}
       >
-        Koral
-      </Link>
-      <nav className="hidden lg:flex gap-24 transition-all duration-500 ease-out">
-        {NavbarPages.map((page) => {
-          const pageData = getPageData(page);
+        <Link
+          to="#"
+          className={`transition-all duration-500 ease-out font-medium ${scrolled ? 'text-6xl mb-2' : 'text-2xl'}`}
+        >
+          Koral
+        </Link>
+        <nav className="hidden lg:flex gap-24 transition-all duration-500 ease-out">
+          {pages.map((page) => {
+            const pageData = getPageData(page);
 
-          if (!pageData) throw new Error('Page not found');
+            if (!pageData) throw new Error('Page not found');
 
-          return (
-            <Link to={pageData.path} className="mr-6" key={pageData.path}>
-              {pageData.title}
-            </Link>
-          );
-        })}
-      </nav>
+            return (
+              <Link to={pageData.path} className="mr-6" key={pageData.path}>
+                {pageData.title}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
       <Sheet modal={false}>
         <SheetTrigger asChild>
           <Button
@@ -44,7 +53,7 @@ const Navbar: FC<{ scrolled: boolean }> = ({ scrolled }) => {
           </Button>
         </SheetTrigger>
         <SheetContent side="right">
-          {NavbarPages.map((page) => {
+          {pages.map((page) => {
             const pageData = getPageData(page);
 
             if (!pageData) throw new Error('Page not found');

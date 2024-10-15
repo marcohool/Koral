@@ -5,8 +5,10 @@ import Navbar from 'components/navbar';
 import Hero from './Hero/Hero';
 import HeroFooter from './Hero/HeroFooter';
 import About from './About/About';
+import { Page } from '@/App/router.types';
 
 const PARALLAX_PAGES = 4;
+const NavbarPages: Page[] = [Page.About, Page.Contact, Page.Login, Page.SignUp];
 
 const LandingPage: FC = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -32,7 +34,7 @@ const LandingPage: FC = () => {
 
   return (
     <>
-      <Navbar scrolled={scrollY == 0} />
+      <Navbar scrolled={scrollY == 0} pages={NavbarPages} />
       <Parallax
         ref={parallax}
         pages={PARALLAX_PAGES}
