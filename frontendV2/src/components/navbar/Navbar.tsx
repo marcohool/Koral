@@ -11,8 +11,8 @@ const NavbarPages: { title: string; to: string }[] = [
 
 const Navbar: FC = () => {
   return (
-    <header className="flex flex-col font-butler h-24 bg-background">
-      <div className="flex-1 flex w-full justify-center">
+    <header className="flex flex-col h-24 bg-background">
+      <div className="flex-1 flex w-full justify-center font-butler">
         <div className="flex-1 flex justify-between items-center max-w-content">
           <Link to="#" className="font-medium text-2xl">
             Koral

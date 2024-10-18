@@ -5,6 +5,7 @@ export default {
   theme: {
     fontFamily: {
       butler: ['Butler', 'sans-serif'],
+      sans: ['GeneralSans', 'sans-serif'],
     },
     extend: {
       maxWidth: {

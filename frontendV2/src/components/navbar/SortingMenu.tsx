@@ -77,7 +77,7 @@ ListItem.displayName = 'ListItem';
 
 const SortingMenu: FC = () => {
   return (
-    <NavigationMenu className="font-butler">
+    <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Brands</NavigationMenuTrigger>
