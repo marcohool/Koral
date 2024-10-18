@@ -33,8 +33,11 @@ const HomePage: FC = () => {
   return (
     <>
       <Navbar />
-      <section className="max-w-content mx-auto flex flex-col gap-3">
-        <h1 className="mt-9 py-2.5 text-xl font-normal font-butler">Uploads</h1>
+      <section className="max-w-content mx-auto flex flex-col gap-4">
+        <div className="mt-8 font-butler flex items-center w-full justify-center text-primary/[.6]">
+          <p className="text-xs/loose">{'-----------<----(@'}</p>
+        </div>
+        <h1 className="py-2.5 text-xl font-normal font-butler">Uploads</h1>
         <Divider className="" />
         <SortingMenu />
         <UploadGrid
