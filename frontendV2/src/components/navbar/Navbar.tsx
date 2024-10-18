@@ -1,75 +1,36 @@
 import { FC } from 'react';
-import Sheet, { SheetTrigger } from 'components/sheet';
-import Button from 'components/button';
-import MenuIcon from 'components/navbar/icons/MenuIcon';
-import { SheetContent } from 'components/sheet/Sheet';
 import { Link } from 'react-router-dom';
-import { getPageData } from 'App/pagesData';
-import { Page } from 'App/router.types';
-import { cn } from 'utils/utils';
+import { GoHeart, GoPerson } from 'react-icons/go';
 
-const PageData: Page[] = [Page.Home];
+const NavbarPages: { title: string; to: string }[] = [
+  { title: 'Home', to: '/' },
+  { title: 'Uploads', to: '/uploads' },
+  { title: 'Matches', to: '/matches' },
+  { title: 'Favourites', to: '/favourites' },
+];
 
-const Navbar: FC<{
-  scrolled: boolean;
-  pages?: Page[];
-  className?: string;
-}> = ({ scrolled, pages = PageData, className }) => {
+const Navbar: FC = () => {
   return (
-    <header
-      className={`flex sticky top-0 z-50 font-butler justify-center font-medium lg:px-14 px-8 transition-all items-center duration-500 ease-out ${scrolled ? 'h-32 text-primary-foreground' : 'bg-background h-16'}`}
-    >
-      <div
-        className={cn('flex justify-between w-full items-center', className)}
-      >
-        <Link
-          to="#"
-          className={`transition-all duration-500 ease-out font-medium ${scrolled ? 'text-6xl mb-2' : 'text-2xl'}`}
-        >
-          Koral
-        </Link>
-        <nav className="hidden lg:flex gap-24 transition-all duration-500 ease-out">
-          {pages.map((page) => {
-            const pageData = getPageData(page);
-
-            if (!pageData) throw new Error('Page not found');
-
-            return (
-              <Link to={pageData.path} className="mr-6" key={pageData.path}>
-                {pageData.title}
-              </Link>
-            );
-          })}
-        </nav>
+    <header className="flex flex-col font-butler h-24 bg-background">
+      <div className="flex-1 flex w-full justify-center">
+        <div className="flex-1 flex justify-between items-center max-w-content">
+          <Link to="#" className="font-medium text-2xl">
+            Koral
+          </Link>
+          <nav className="flex gap-5">
+            <GoHeart fontSize="18" />
+            <GoPerson fontSize="18" />
+          </nav>
+        </div>
       </div>
-      <Sheet modal={false}>
-        <SheetTrigger asChild>
-          <Button
-            variant="outline"
-            size="icon"
-            className="lg:hidden border-0 shadow-none bg-transparent"
-          >
-            <MenuIcon className="h-6 w-6" />
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="right">
-          {pages.map((page) => {
-            const pageData = getPageData(page);
 
-            if (!pageData) throw new Error('Page not found');
-
-            return (
-              <Link
-                to={pageData.path}
-                className="flex w-full items-center py-2 text-lg font-semibold"
-                key={pageData.path}
-              >
-                {pageData.title}
-              </Link>
-            );
-          })}
-        </SheetContent>
-      </Sheet>
+      <div className="flex-1 border flex items-center justify-center">
+        <div className="flex-1 flex gap-x-10 text-sm max-w-content justify-start">
+          {NavbarPages.map((page) => (
+            <Link to={page.to}>{page.title}</Link>
+          ))}
+        </div>
+      </div>
     </header>
   );
 };

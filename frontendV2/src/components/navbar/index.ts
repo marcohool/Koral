@@ -1,3 +1,4 @@
+import LandingNavbar from './LandingNavbar';
 import Navbar from './Navbar';
 
-export default Navbar;
+export { LandingNavbar, Navbar };

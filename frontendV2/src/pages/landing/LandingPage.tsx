@@ -1,11 +1,11 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
 import BackgroundVideo from './Hero/BackgroundVideo';
-import Navbar from 'components/navbar';
 import Hero from './Hero/Hero';
 import HeroFooter from './Hero/HeroFooter';
 import About from './About/About';
 import { Page } from '@/App/router.types';
+import { LandingNavbar } from 'components/navbar';
 
 const PARALLAX_PAGES = 4;
 const NavbarPages: Page[] = [Page.About, Page.Contact, Page.Login, Page.SignUp];
@@ -34,7 +34,7 @@ const LandingPage: FC = () => {
 
   return (
     <>
-      <Navbar scrolled={scrollY == 0} pages={NavbarPages} />
+      <LandingNavbar scrolled={scrollY == 0} pages={NavbarPages} />
       <Parallax
         ref={parallax}
         pages={PARALLAX_PAGES}

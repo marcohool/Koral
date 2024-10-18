@@ -7,6 +7,9 @@ export default {
       butler: ['Butler', 'sans-serif'],
     },
     extend: {
+      maxWidth: {
+        content: '80rem',
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
