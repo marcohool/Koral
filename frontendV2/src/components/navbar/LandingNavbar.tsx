@@ -17,7 +17,7 @@ const LandingNavbar: FC<{
 }> = ({ scrolled, pages = PageData, className }) => {
   return (
     <header
-      className={`flex sticky top-0 z-50 font-butler justify-center font-medium lg:px-14 px-8 transition-all items-center duration-500 ease-out ${scrolled ? 'h-32 text-primary-foreground' : 'bg-background h-16'}`}
+      className={`flex sticky top-0 z-50 font-butler justify-center font-medium lg:px-14 transition-all items-center duration-500 ease-out ${scrolled ? 'h-32 text-primary-foreground' : 'bg-background h-16'}`}
     >
       <div
         className={cn('flex justify-between w-full items-center', className)}
@@ -61,7 +61,7 @@ const LandingNavbar: FC<{
             return (
               <Link
                 to={pageData.path}
-                className="flex w-full items-center py-2 text-lg font-semibold"
+                className="flex w-full items-center py-4 text-lg"
                 key={pageData.path}
               >
                 {pageData.title}

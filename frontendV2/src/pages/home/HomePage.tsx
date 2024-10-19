@@ -34,7 +34,7 @@ const HomePage: FC = () => {
     <>
       <Navbar />
       <section className="max-w-content mx-auto flex flex-col gap-4">
-        <div className="mt-8 flex items-center w-full justify-center text-primary/[.6]">
+        <div className="mt-2 sm:mt-8 flex items-center w-full justify-center text-primary/[.6]">
           <p className="text-xs/loose">{'-----------<----(@'}</p>
         </div>
         <h1 className="py-2.5 text-xl font-normal ">Uploads</h1>
