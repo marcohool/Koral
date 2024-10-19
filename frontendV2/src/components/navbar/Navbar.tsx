@@ -6,7 +6,6 @@ import Sheet, { SheetTrigger } from 'components/sheet';
 import Button from 'components/button';
 import MenuIcon from 'components/navbar/icons/MenuIcon';
 import { SheetContent } from 'components/sheet/Sheet';
-import { getPageData } from '@/App/pagesData';
 
 const NavbarPages: { title: string; to: string }[] = [
   { title: 'Home', to: '/' },

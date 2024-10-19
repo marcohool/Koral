@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useState } from 'react';
-import { normaliseToRange } from 'utils/useMath';
+import { normaliseToRange } from 'utils/math';
 
 interface ParallaxRef {
   current: number;

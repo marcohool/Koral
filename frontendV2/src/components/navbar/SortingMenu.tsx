@@ -5,11 +5,9 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from 'components/navigationMenu';
 import { cn } from 'utils/utils';
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
 
 const components: { title: string; href: string; description: string }[] = [
   {

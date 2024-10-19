@@ -4,6 +4,9 @@ import UploadCard from 'components/uploadCard';
 import { Navbar } from 'components/navbar';
 import Divider from 'components/divider';
 import SortingMenu from 'components/navbar/SortingMenu';
+import Button from 'components/button';
+import DropzoneDialog from 'components/dropzone';
+import { GoPlus } from 'react-icons/go';
 
 const UploadGrid: FC<{
   cardHeight: number;
@@ -37,7 +40,15 @@ const HomePage: FC = () => {
         <div className="mt-2 sm:mt-8 flex items-center w-full justify-center text-primary/[.6]">
           <p className="text-xs/loose">{'-----------<----(@'}</p>
         </div>
-        <h1 className="py-2.5 text-xl font-normal ">Uploads</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="py-2.5 text-xl font-normal">Uploads</h1>
+          <DropzoneDialog>
+            <Button variant="outline">
+              <GoPlus className="mr-2" />
+              New Upload
+            </Button>
+          </DropzoneDialog>
+        </div>
         <Divider className="" />
         <SortingMenu />
         <UploadGrid

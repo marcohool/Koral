@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { normaliseToRange } from 'utils/useMath';
+import { normaliseToRange } from 'utils/math';
 
 const About: FC<{ scrollY: number; pageHeight: number }> = ({
   scrollY,
