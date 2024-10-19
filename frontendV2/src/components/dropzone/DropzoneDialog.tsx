@@ -10,7 +10,6 @@ import {
   DialogTrigger,
 } from 'components/dialog';
 import Button from 'components/button';
-import { GoUpload } from 'react-icons/go';
 import DropzoneInput from 'components/dropzone/DropzoneInput';
 
 const DropzoneDialog: FC<{ children?: ReactNode }> = ({ children }) => {
