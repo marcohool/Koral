@@ -1,3 +1,3 @@
-import DropzoneDialog from './DropzoneDialog';
+import DropzoneInput from './DropzoneInput';
 
-export default DropzoneDialog;
+export default DropzoneInput;

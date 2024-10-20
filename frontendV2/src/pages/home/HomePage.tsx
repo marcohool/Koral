@@ -5,7 +5,7 @@ import { Navbar } from 'components/navbar';
 import Divider from 'components/divider';
 import SortingMenu from 'components/navbar/SortingMenu';
 import Button from 'components/button';
-import DropzoneDialog from 'components/dropzone';
+import UploadDialog from 'components/uploadDialog';
 import { GoPlus } from 'react-icons/go';
 
 const UploadGrid: FC<{
@@ -42,12 +42,12 @@ const HomePage: FC = () => {
         </div>
         <div className="flex justify-between items-center">
           <h1 className="py-2.5 text-xl font-normal">Uploads</h1>
-          <DropzoneDialog>
+          <UploadDialog>
             <Button variant="outline">
               <GoPlus className="mr-2" />
               New Upload
             </Button>
-          </DropzoneDialog>
+          </UploadDialog>
         </div>
         <Divider className="" />
         <SortingMenu />

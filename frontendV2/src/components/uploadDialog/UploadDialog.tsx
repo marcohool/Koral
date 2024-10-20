@@ -12,8 +12,13 @@ import {
 import Button from 'components/button';
 import DropzoneInput from 'components/dropzone/DropzoneInput';
 
-const DropzoneDialog: FC<{ children?: ReactNode }> = ({ children }) => {
-  const [open, setOpen] = useState(false);
+const MAX_UPLOAD_SIZE = 1024 * 1024 * 10;
+const ACCEPTED_FILES = {
+  'image/jpeg': ['.jpg', '.jpeg'],
+  'image/png': ['.png'],
+};
+
+const UploadDialog: FC<{ children?: ReactNode }> = ({ children }) => {
   const [files, setFiles] = useState<File[]>([]);
 
   return (
@@ -26,14 +31,21 @@ const DropzoneDialog: FC<{ children?: ReactNode }> = ({ children }) => {
             Drag and drop your image upload here or click to browse
           </DialogDescription>
         </DialogHeader>
-        <DropzoneInput />
+        <DropzoneInput
+          value={files}
+          onValueChange={(files) => setFiles(files)}
+          maxFileCount={1}
+          maxSize={MAX_UPLOAD_SIZE}
+          accept={ACCEPTED_FILES}
+          className="h-64"
+        />
         <DialogFooter className="justify-between">
           <DialogClose asChild>
             <Button type="submit" className="w-25" variant="ghost">
               Cancel
             </Button>
           </DialogClose>
-          <Button type="submit" className="w-24" disabled={true}>
+          <Button type="submit" className="w-24" disabled={files.length == 0}>
             Upload
           </Button>
         </DialogFooter>
@@ -42,4 +54,4 @@ const DropzoneDialog: FC<{ children?: ReactNode }> = ({ children }) => {
   );
 };
 
-export default DropzoneDialog;
+export default UploadDialog;

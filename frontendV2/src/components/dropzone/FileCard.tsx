@@ -37,11 +37,11 @@ const FileCard: FC<{ file: File; onRemove: () => void; progress?: number }> = ({
 }) => {
   return (
     <div className="relative flex items-center gap-2.5">
-      <div className="flex flex-1 gap-2.5">
+      <div className="flex flex-1 gap-2.5 min-w-0">
         {isFileWithPreview(file) ? <FilePreview file={file} /> : null}
         <div className="flex w-full flex-col gap-2">
           <div className="flex flex-col gap-px">
-            <p className="line-clamp-1 text-sm font-medium text-foreground/80">
+            <p className="line-clamp-1 text-sm font-medium text-foreground/80 ">
               {file.name}
             </p>
             <p className="text-xs text-muted-foreground">
@@ -54,7 +54,7 @@ const FileCard: FC<{ file: File; onRemove: () => void; progress?: number }> = ({
       <div className="flex items-center gap-2">
         <Button
           type="button"
-          variant="outline"
+          variant="ghost"
           size="icon"
           className="size-7"
           onClick={onRemove}
