@@ -39,7 +39,7 @@ const UploadDialog: FC<{ children?: ReactNode }> = ({ children }) => {
           accept={ACCEPTED_FILES}
           className="h-64"
         />
-        <DialogFooter className="justify-between">
+        <DialogFooter className="flex justify-between">
           <DialogClose asChild>
             <Button type="submit" className="w-25" variant="ghost">
               Cancel
