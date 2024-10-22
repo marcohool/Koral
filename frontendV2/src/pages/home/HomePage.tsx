@@ -10,9 +10,14 @@ import { GoPlus } from 'react-icons/go';
 
 const UploadGrid: FC<{
   cardHeight: number;
+  isLoading: boolean;
   uploads?: Upload[];
   className?: string;
-}> = ({ uploads, className }) => {
+}> = ({ uploads, className, isLoading }) => {
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   if (!uploads || uploads.length === 0) {
     return <>No uploads!</>;
   }
@@ -28,10 +33,6 @@ const UploadGrid: FC<{
 
 const HomePage: FC = () => {
   const { data, isLoading, error } = useUploads();
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
 
   return (
     <>
@@ -54,6 +55,7 @@ const HomePage: FC = () => {
         <UploadGrid
           uploads={data}
           className="grid gap-[0.5px] sm:gap-2 md:px-2 xl:px-0 max-w-content mx-auto grid-cols-2 md:grid-cols-3 xl:grid-cols-5"
+          isLoading={isLoading}
           cardHeight={500}
         />
       </section>
