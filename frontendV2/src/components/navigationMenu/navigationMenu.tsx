@@ -9,7 +9,7 @@ const NavigationMenu = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>
 >(({ className, children, ...props }, ref) => (
   <div className="h-10">
-    <div className="overflow-x-scroll h-[600px]">
+    <div className="overflow-x-scroll scrollbar-hide h-[600px]">
       <NavigationMenuPrimitive.Root
         ref={ref}
         className={cn(
