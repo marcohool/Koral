@@ -3,6 +3,18 @@ import { AxiosError } from 'axios';
 import apiCall from 'utils/apiCall';
 import useAuth from '@/context/useAuth';
 
+export interface ClothingItem {
+  id: string;
+  name: string;
+  description: string;
+  brand: string;
+  category: string;
+  gender: string;
+  imageUrl: string;
+  sourceUrl: string;
+  sourceRegion: string;
+}
+
 export interface Upload {
   id: string;
   title: string;
@@ -11,6 +23,7 @@ export interface Upload {
   isFavourited: boolean;
   createdOn: string;
   lastUpdatedOn: string;
+  matchedClothingItems: ClothingItem[];
 }
 
 const useUploads = () => {

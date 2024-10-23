@@ -1,17 +1,34 @@
 import { FC, ReactNode, useState } from 'react';
 import { cn } from 'utils/utils';
-import { Upload } from 'pages/uploads/useUploads';
+import { ClothingItem, Upload } from 'pages/uploads/useUploads';
 
 const CardHeader: FC<{
   title: string;
   subtitle: string;
+  matchedClothingItems?: ClothingItem[];
   className?: string;
   hovered?: boolean;
-}> = ({ title, subtitle, className }) => {
+}> = ({ title, subtitle, matchedClothingItems, className, hovered }) => {
   return (
-    <div className={cn(className, 'text-ellipsis overflow-hidden')}>
-      <h3 className="font-medium leading-none line-clamp-2">{title}</h3>
-      <p className="text-xs text-muted-foreground line-clamp-1">{subtitle}</p>
+    <div className="flex flex-col gap-2">
+      {hovered && (
+        <div className="grid grid-cols-4 max-h-16 overflow-hidden">
+          {matchedClothingItems?.map((ci) => {
+            return (
+              <img
+                src={ci.imageUrl}
+                key={ci.id}
+                alt={ci.name}
+                className="object-cover w-full h-full"
+              />
+            );
+          })}
+        </div>
+      )}
+      <div className={cn(className, 'text-ellipsis overflow-hidden')}>
+        <h3 className="font-medium leading-none line-clamp-2">{title}</h3>
+        <p className="text-xs text-muted-foreground line-clamp-1">{subtitle}</p>
+      </div>
     </div>
   );
 };
@@ -49,21 +66,21 @@ const UploadCard: FC<{
         'hover:border-black hover:z-20 ',
         className,
       )}
-      style={{ height: `${isHovered ? '130%' : '100%'}` }}
+      style={{ height: isHovered ? 'calc(100% + 100px)' : '100%' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="absolute top-0 left-0 w-full h-full">
-        <CardImage className="h-[80%]">
+      <div className="relative w-full h-full flex flex-col">
+        <CardImage className="flex-grow">
           <img
             src={upload.imageUrl}
             alt={upload.title}
             className="object-cover w-full h-full"
+            style={{ minHeight: isHovered ? '130%' : '100%' }}
           />
         </CardImage>
         <CardBody
           isHovered={isHovered}
-          className="h-[20%]"
           visible={
             <CardHeader
               title={upload.title}
@@ -76,6 +93,7 @@ const UploadCard: FC<{
               title={upload.title}
               subtitle={upload.title}
               className="text-sm"
+              matchedClothingItems={upload.matchedClothingItems}
               hovered={true}
             />
           }
