@@ -15,12 +15,16 @@ const CardHeader: FC<{
         <div className="grid grid-cols-4 max-h-16 overflow-hidden">
           {matchedClothingItems?.map((ci) => {
             return (
-              <img
-                src={ci.imageUrl}
+              <div
                 key={ci.id}
-                alt={ci.name}
-                className="object-cover w-full h-full"
-              />
+                className="relative w-full h-full overflow-hidden"
+              >
+                <img
+                  src={ci.imageUrl}
+                  alt={ci.name}
+                  className="object-cover w-full h-full hover:scale-125"
+                />
+              </div>
             );
           })}
         </div>
