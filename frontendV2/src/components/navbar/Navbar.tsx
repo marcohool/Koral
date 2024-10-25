@@ -62,6 +62,7 @@ const Navbar: FC = () => {
 
             return (
               <Link
+                key={page.to}
                 to={page.to}
                 className={cn(
                   'h-full items-center flex',
