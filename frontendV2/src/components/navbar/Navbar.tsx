@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { GoHeart, GoPerson } from 'react-icons/go';
+import { GoBell, GoPerson } from 'react-icons/go';
 import { cn } from 'lib/utils';
 import Sheet, { SheetTrigger } from 'components/sheet';
 import Button from 'components/button';
@@ -25,7 +25,7 @@ const Navbar: FC = () => {
             Koral
           </Link>
           <nav className="flex gap-5 items-center">
-            <GoHeart fontSize="18" />
+            <GoBell fontSize="18" />
             <GoPerson fontSize="18" />
             <Sheet modal={false}>
               <SheetTrigger asChild>
