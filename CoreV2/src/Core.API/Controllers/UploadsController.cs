@@ -51,12 +51,9 @@ public class UploadsController(IUploadService uploadService) : ApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<PaginatedResponse<UploadDto>>> GetAllUploadsAsync(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10
-    )
+    public async Task<ActionResult<PaginatedResponse<UploadDto>>> GetAllUploadsAsync()
     {
-        return this.Ok(await this.uploadService.GetAllAsync(pageNumber, pageSize));
+        return this.Ok(await this.uploadService.GetAllAsync());
     }
 
     [HttpGet("{id:Guid}")]
@@ -73,12 +70,9 @@ public class UploadsController(IUploadService uploadService) : ApiController
     }
 
     [HttpGet("favourites")]
-    public async Task<ActionResult<PaginatedResponse<UploadDto>>> GetFavouriteUploadsAsync(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10
-    )
+    public async Task<ActionResult<UploadDto>> GetFavouriteUploadsAsync()
     {
-        return this.Ok(await this.uploadService.GetFavouritesAsync(pageNumber, pageSize));
+        return this.Ok(await this.uploadService.GetFavouritesAsync());
     }
 
     [HttpPost("favourite/{id:Guid}")]

@@ -34,12 +34,16 @@ public class UserService(
 
         // To-do: Set up email confirmation
 
-        return new CreateUserResponseDto { Id = Guid.Parse(user.Id), };
+        return new CreateUserResponseDto
+        {
+            Id = Guid.Parse(user.Id),
+            Token = JwtHelper.GenerateToken(user, jwtOptions.CurrentValue)
+        };
     }
 
     public async Task<LoginUserResponseDto> LoginAsync(LoginUserDto loginUserDto)
     {
-        const string errorMessage = "Invalid email or password.";
+        const string errorMessage = "Invalid email or password";
 
         ApplicationUser? user = await this.userManager.FindByEmailAsync(loginUserDto.Email);
 
@@ -64,7 +68,7 @@ public class UserService(
 
         if (signInResult.IsLockedOut)
         {
-            throw new BadRequestException("Account is locked out.");
+            throw new BadRequestException("Account is locked out");
         }
 
         throw new BadRequestException(errorMessage);
