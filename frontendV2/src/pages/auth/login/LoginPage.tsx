@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import AuthLayout from 'pages/auth/AuthLayout';
 import Label from 'components/label';
 import { Link, useNavigate } from 'react-router-dom';
@@ -75,14 +75,16 @@ const loginFormProps = {
 };
 
 const LoginPage: FC = () => {
+  const { setToken } = useAuth();
   const form = useForm<LoginFormData>({ ...loginFormProps });
 
   const navigate = useNavigate();
 
   const { mutate: login, isPending } = useLogin();
 
-  const { setToken } = useAuth();
-  setToken(null);
+  useEffect(() => {
+    setToken(null);
+  }, [setToken]);
 
   const onSubmit = (data: LoginFormData) => {
     login(data, {

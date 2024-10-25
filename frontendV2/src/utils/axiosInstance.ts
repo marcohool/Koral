@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import useAuth from '@/context/useAuth';
-import { useNavigate } from 'react-router-dom';
+import globalRouter from '@/App/globalRouter';
 
 const apiBaseUrl = import.meta.env.VITE_KORAL_API_URL as string;
 
@@ -17,11 +16,7 @@ axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      const { setToken } = useAuth();
-      const navigate = useNavigate();
-
-      setToken(null);
-      navigate('/login');
+      globalRouter.navigate?.('/login');
 
       return Promise.reject(new Error('Unauthorized. Please log in again.'));
     }
