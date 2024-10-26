@@ -13,6 +13,9 @@ const apiCall = async <TResponse, TRequest = undefined>(
     data: body as TRequest,
     headers: {
       Authorization: token ? `Bearer ${token}` : '',
+      ...(body instanceof FormData
+        ? { 'Content-Type': 'multipart/form-data' }
+        : {}),
     },
   };
 
