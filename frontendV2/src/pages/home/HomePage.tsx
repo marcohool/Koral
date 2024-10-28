@@ -27,7 +27,7 @@ const HomePage: FC = () => {
             </Button>
           </UploadDialog>
         </div>
-        <Divider className="" />
+        <Divider />
         <SortingMenu />
         <UploadGrid
           uploads={data}

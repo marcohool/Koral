@@ -12,6 +12,9 @@ import {
 import Button from 'components/button';
 import DropzoneInput from 'components/dropzone/DropzoneInput';
 import { useAddUpload } from 'pages/uploads/useUploads';
+import Alert, { AlertDescription, AlertTitle } from 'components/Alert';
+import { GoAlert } from 'react-icons/go';
+import Spinner from 'components/spinner';
 
 const MAX_UPLOAD_SIZE = 1024 * 1024 * 10;
 const ACCEPTED_FILES = {
@@ -23,7 +26,11 @@ const UploadDialog: FC<{
   children?: ReactNode;
 }> = ({ children }) => {
   const [files, setFiles] = useState<File[]>([]);
-  const { mutate } = useAddUpload();
+  const { mutate, isPending, error } = useAddUpload();
+
+  if (error) {
+    console.error(error);
+  }
 
   return (
     <Dialog>
@@ -51,14 +58,34 @@ const UploadDialog: FC<{
             accept={ACCEPTED_FILES}
             className="h-64"
           />
+          {error && (
+            <Alert variant="destructive">
+              <GoAlert size={16} />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription className="flex flex-col">
+                <span>
+                  An unexpected error has occurred. Please try again later
+                </span>
+                <span>{error.message}</span>
+              </AlertDescription>
+            </Alert>
+          )}
           <DialogFooter className="flex justify-between">
             <DialogClose asChild>
               <Button type="submit" className="w-25" variant="ghost">
                 Cancel
               </Button>
             </DialogClose>
-            <Button type="submit" className="w-24" disabled={files.length == 0}>
-              Upload
+            <Button
+              type="submit"
+              className="w-24"
+              disabled={files.length == 0 || isPending}
+            >
+              {isPending ? (
+                <Spinner className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                'Upload'
+              )}
             </Button>
           </DialogFooter>
         </form>
