@@ -68,7 +68,7 @@ const FormButtons = ({
 }) => (
   <div className={className}>
     <Button type="submit" disabled={isPending}>
-      {isPending && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
+      {isPending && <Spinner className="mr-2 h-4 w-4" />}
       {submitText}
     </Button>
     {displayThirdPartyAuth && (
@@ -85,7 +85,7 @@ const FormButtons = ({
         </div>
         <Button variant="outline" type="button" disabled={isPending}>
           {isPending ? (
-            <Spinner className="mr-2 h-4 w-4 animate-spin" />
+            <Spinner className="mr-2 h-4 w-4" />
           ) : (
             <FcGoogle className="mr-2 h-4 w-4" />
           )}

@@ -81,11 +81,7 @@ const UploadDialog: FC<{
               className="w-24"
               disabled={files.length == 0 || isPending}
             >
-              {isPending ? (
-                <Spinner className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                'Upload'
-              )}
+              {isPending ? <Spinner className="mr-2 h-4 w-4" /> : 'Upload'}
             </Button>
           </DialogFooter>
         </form>
