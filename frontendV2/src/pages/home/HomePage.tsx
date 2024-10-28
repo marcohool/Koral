@@ -13,7 +13,7 @@ const HomeContent: FC = () => {
   const { data, isLoading, error } = useUploads();
 
   if (isLoading) {
-    return <Spinner className="" />;
+    return <Spinner height={24} />;
   }
 
   if (error) {
