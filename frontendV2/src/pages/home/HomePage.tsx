@@ -1,13 +1,14 @@
 import { FC } from 'react';
-import useUploads, { Upload } from 'pages/uploads/useUploads';
+import useUploads from 'pages/uploads/useUploads';
 import { Navbar } from 'components/navbar';
 import Divider from 'components/divider';
 import SortingMenu from 'components/navbar/SortingMenu';
 import Button from 'components/button';
 import UploadDialog from 'components/uploadDialog';
-import { GoPlus } from 'react-icons/go';
+import { GoAlert, GoPlus } from 'react-icons/go';
 import UploadGrid from 'components/uploadGrid';
 import Spinner from 'components/spinner';
+import Alert, { AlertDescription, AlertTitle } from 'components/Alert';
 
 const HomeContent: FC = () => {
   const { data, isLoading, error } = useUploads();
@@ -17,7 +18,23 @@ const HomeContent: FC = () => {
   }
 
   if (error) {
-    return 'Error';
+    return (
+      <div className="relative">
+        <Alert
+          variant="destructive"
+          className="max-w-screen-sm absolute left-0 right-0 ml-auto mr-auto mt-5"
+        >
+          <GoAlert size={16} />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription className="flex flex-col">
+            <span>
+              An unexpected error has occurred. Please try again later
+            </span>
+            <span>{error.message}</span>
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
   }
 
   return (
