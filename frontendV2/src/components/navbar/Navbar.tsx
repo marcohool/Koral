@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { GoBell, GoPerson } from 'react-icons/go';
 import { cn } from 'lib/utils';
 import Sheet, { SheetTrigger } from 'components/sheet';
@@ -16,8 +16,13 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from 'components/dropdownMenu';
+import globalRouter from '@/App/globalRouter';
 
 const UserNav: FC = () => {
+  const handleLogout = () => {
+    globalRouter.navigate?.('/login');
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -54,9 +59,9 @@ const UserNav: FC = () => {
           <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogout}>
           Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+          <DropdownMenuShortcut>Ctrl+L</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
