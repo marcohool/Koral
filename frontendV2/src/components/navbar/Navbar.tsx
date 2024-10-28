@@ -6,6 +6,59 @@ import Sheet, { SheetTrigger } from 'components/sheet';
 import Button from 'components/button';
 import MenuIcon from 'components/navbar/icons/MenuIcon';
 import { SheetContent } from 'components/sheet/Sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from 'components/dropdownMenu';
+
+const UserNav: FC = () => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="border-0 p-2 rounded-full">
+          <GoPerson fontSize="18" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56" align="end" forceMount>
+        <DropdownMenuLabel className="font-normal">
+          <div className="flex flex-col space-y-1">
+            <p className="text-sm font-medium leading-none">marco</p>
+            <p className="text-xs leading-none text-muted-foreground">
+              hool@example.com
+            </p>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            Profile
+            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Billing
+            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Settings
+            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>New Team</DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          Log out
+          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
 
 const NavbarPages: { title: string; to: string }[] = [
   { title: 'Home', to: '/' },
@@ -26,7 +79,7 @@ const Navbar: FC = () => {
           </Link>
           <nav className="flex gap-5 items-center">
             <GoBell fontSize="18" />
-            <GoPerson fontSize="18" />
+            <UserNav />
             <Sheet modal={false}>
               <SheetTrigger asChild>
                 <Button

@@ -12,7 +12,7 @@ import {
 import Button from 'components/button';
 import DropzoneInput from 'components/dropzone/DropzoneInput';
 import { useAddUpload } from 'pages/uploads/useUploads';
-import Alert, { AlertDescription, AlertTitle } from 'components/Alert';
+import Alert, { AlertDescription, AlertTitle } from 'components/alert';
 import { GoAlert } from 'react-icons/go';
 import Spinner from 'components/spinner';
 

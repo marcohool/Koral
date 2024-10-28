@@ -8,7 +8,7 @@ import UploadDialog from 'components/uploadDialog';
 import { GoAlert, GoPlus } from 'react-icons/go';
 import UploadGrid from 'components/uploadGrid';
 import Spinner from 'components/spinner';
-import Alert, { AlertDescription, AlertTitle } from 'components/Alert';
+import Alert, { AlertDescription, AlertTitle } from 'components/alert';
 
 const HomeContent: FC = () => {
   const { data, isLoading, error } = useUploads();
