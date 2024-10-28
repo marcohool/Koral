@@ -21,7 +21,10 @@ const UserNav: FC = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="border-0 p-2 rounded-full">
+        <Button
+          variant="ghost"
+          className="border-0 p-2 rounded-full focus-visible:ring-0"
+        >
           <GoPerson fontSize="18" />
         </Button>
       </DropdownMenuTrigger>
