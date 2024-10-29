@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { GoBell, GoPerson } from 'react-icons/go';
 import { cn } from 'lib/utils';
@@ -77,6 +77,30 @@ const NavbarPages: { title: string; to: string }[] = [
 
 const Navbar: FC = () => {
   const currentPath = useLocation().pathname;
+  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const [activeLinkPosition, setActiveLinkPosition] = useState<{
+    left: number;
+    width: number;
+  }>({ left: 0, width: 0 });
+
+  console.log(activeLinkPosition);
+
+  useEffect(() => {
+    const activeLinkIndex = NavbarPages.findIndex(
+      (page) => currentPath === page.to,
+    );
+
+    if (activeLinkIndex !== -1) {
+      const activeLink = linkRefs.current[activeLinkIndex];
+
+      if (activeLink) {
+        setActiveLinkPosition({
+          left: activeLink.offsetLeft,
+          width: activeLink.offsetWidth,
+        });
+      }
+    }
+  }, [currentPath]);
 
   return (
     <header className="h-12 sm:h-24 flex flex-col bg-background">
@@ -116,19 +140,29 @@ const Navbar: FC = () => {
         </div>
       </div>
 
-      <div className="hidden sm:flex flex-1 border  items-center justify-center">
+      <div className="relative hidden sm:flex flex-1 border  items-center justify-center">
         <div className="flex-1 flex gap-x-8 text-[13px] max-w-content justify-start h-full items-center">
-          {NavbarPages.map((page) => {
-            const isActive = currentPath === page.to;
-
+          <span
+            className="absolute top-0 h-[1px] bg-black transition-all duration-200"
+            style={{
+              left: `${activeLinkPosition.left}px`,
+              width: `${activeLinkPosition.width}px`,
+            }}
+          />
+          <span
+            className="absolute bottom-0 h-[1px] bg-black transition-all duration-200"
+            style={{
+              left: `${activeLinkPosition.left}px`,
+              width: `${activeLinkPosition.width}px`,
+            }}
+          />
+          {NavbarPages.map((page, index) => {
             return (
               <Link
                 key={page.to}
                 to={page.to}
-                className={cn(
-                  'h-full items-center flex',
-                  isActive && 'border-t border-b border-black',
-                )}
+                className={cn('h-full items-center flex')}
+                ref={(el) => (linkRefs.current[index] = el)}
               >
                 <p className="p-2">{page.title}</p>
               </Link>

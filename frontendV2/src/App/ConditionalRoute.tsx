@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import useAuth from 'context/useAuth';
-import { PageConfiguration } from 'App/router';
+import { PageLayout } from 'App/router';
 
 interface ConditionalRouteProps {
   component: ReactElement;
@@ -13,7 +13,7 @@ const ConditionalRoute: React.FC<ConditionalRouteProps> = ({
 }) => {
   const { token } = useAuth();
 
-  return token ? <PageConfiguration>{component}</PageConfiguration> : fallback;
+  return token ? <PageLayout>{component}</PageLayout> : fallback;
 };
 
 export default ConditionalRoute;
