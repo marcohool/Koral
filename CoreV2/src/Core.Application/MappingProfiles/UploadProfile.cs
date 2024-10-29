@@ -8,6 +8,13 @@ public class UploadProfile : Profile
 {
     public UploadProfile()
     {
-        this.CreateMap<Upload, UploadDto>();
+        this.CreateMap<Upload, UploadDto>()
+            .ForMember(
+                dest => dest.MatchedClothingItems,
+                opt =>
+                    opt.MapFrom(src =>
+                        src.UploadItems.SelectMany(x => x.ItemMatches).Select(y => y.ClothingItem)
+                    )
+            );
     }
 }

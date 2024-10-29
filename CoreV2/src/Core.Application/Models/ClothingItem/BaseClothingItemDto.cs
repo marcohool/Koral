@@ -25,6 +25,4 @@ public record BaseClothingItemDto
     public required string SourceUrl { get; set; }
 
     public required SourceRegion SourceRegion { get; set; }
-
-    public required float[] EmbeddingVector { get; set; }
 }

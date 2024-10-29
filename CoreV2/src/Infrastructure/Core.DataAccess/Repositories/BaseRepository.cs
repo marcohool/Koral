@@ -15,8 +15,6 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
 
     public async Task<List<TEntity>> GetAllAsync(
         Expression<Func<TEntity, bool>>? predicate = null,
-        int? pageNumber = null,
-        int? pageSize = null,
         CancellationToken cancellationToken = default
     )
     {
@@ -25,12 +23,6 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
         if (predicate != null)
         {
             query = query.Where(predicate);
-        }
-
-        if (pageNumber.HasValue && pageSize.HasValue && pageNumber > 0 && pageSize > 0)
-        {
-            int skip = (pageNumber.Value - 1) * pageSize.Value;
-            query = query.Skip(skip).Take(pageSize.Value);
         }
 
         return await query.ToListAsync(cancellationToken: cancellationToken);

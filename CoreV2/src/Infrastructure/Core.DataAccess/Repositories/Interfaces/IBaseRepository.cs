@@ -9,8 +9,6 @@ public interface IBaseRepository<TEntity>
 {
     Task<List<TEntity>> GetAllAsync(
         Expression<Func<TEntity, bool>>? predicate = null,
-        int? pageNumber = null,
-        int? pageSize = null,
         CancellationToken cancellationToken = default
     );
 

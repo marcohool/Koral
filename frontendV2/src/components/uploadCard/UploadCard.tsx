@@ -65,14 +65,16 @@ const UploadCard: FC<{
     <div
       className={cn(
         'relative cursor-pointer overflow-hidden bg-background w-full',
-        'md:border border-transparent',
+        'border border-transparent',
         'aspect-[8/11] flex flex-col',
         'hover:border-black hover:z-20 ',
         className,
       )}
       style={{ height: isHovered ? 'calc(100% + 100px)' : '100%' }}
       onMouseEnter={() => setIsHovered(true)}
+      onTouchStart={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchEnd={() => setIsHovered(false)}
     >
       <div className="relative w-full h-full flex flex-col">
         <CardImage className="flex-grow">
