@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import useUploads from 'pages/uploads/useUploads';
-import { Navbar } from 'components/navbar';
 import Divider from 'components/divider';
 import SortingMenu from 'components/navbar/SortingMenu';
 import Button from 'components/button';
@@ -61,15 +60,12 @@ const HomeContent: FC = () => {
 
 const HomePage: FC = () => {
   return (
-    <>
-      <Navbar />
-      <section className="max-w-content mx-auto flex flex-col gap-4 relative">
-        <div className="mt-2 sm:mt-8 flex items-center w-full justify-center text-primary/[.6]">
-          <p className="text-xs/loose">{'-----------<----(@'}</p>
-        </div>
-        <HomeContent />
-      </section>
-    </>
+    <div className="flex flex-col gap-4 relative">
+      <div className="mt-2 sm:mt-8 flex items-center w-full justify-center text-primary/[.6]">
+        <p className="text-xs/loose">{'-----------<----(@'}</p>
+      </div>
+      <HomeContent />
+    </div>
   );
 };
 

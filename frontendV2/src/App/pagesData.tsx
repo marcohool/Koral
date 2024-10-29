@@ -6,6 +6,7 @@ import LoginPage from 'pages/auth/login/LoginPage';
 import SignupPage from 'pages/auth/signup/SignupPage';
 import HomePage from 'pages/home';
 import ConditionalRoute from '@/App/ConditionalRoute';
+import UploadsPage from 'pages/uploads/UploadsPage';
 
 const pagesData: routerType[] = [
   {
@@ -45,6 +46,13 @@ const pagesData: routerType[] = [
     title: 'Sign Up',
     element: <SignupPage />,
     page: Page.SignUp,
+  },
+  {
+    path: 'uploads',
+    title: 'Uploads',
+    element: <UploadsPage />,
+    page: Page.Uploads,
+    requireAuth: true,
   },
 ];
 

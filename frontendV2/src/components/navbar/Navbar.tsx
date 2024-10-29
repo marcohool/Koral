@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { GoBell, GoPerson } from 'react-icons/go';
 import { cn } from 'lib/utils';
 import Sheet, { SheetTrigger } from 'components/sheet';
