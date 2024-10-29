@@ -12,26 +12,28 @@ import Alert, { AlertDescription, AlertTitle } from 'components/alert';
 const HomeContent: FC = () => {
   const { data, isLoading, error } = useUploads();
 
-  if (isLoading) {
-    return <Spinner height={24} />;
-  }
-
-  if (error) {
+  if (isLoading || error) {
     return (
-      <div className="relative">
-        <Alert
-          variant="destructive"
-          className="max-w-screen-sm absolute left-0 right-0 ml-auto mr-auto mt-5"
-        >
-          <GoAlert size={16} />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription className="flex flex-col">
-            <span>
-              An unexpected error has occurred. Please try again later
-            </span>
-            <span>{error.message}</span>
-          </AlertDescription>
-        </Alert>
+      <div className="mt-[20vh]">
+        {isLoading ? (
+          <Spinner height={24} />
+        ) : (
+          <div className="relative">
+            <Alert
+              variant="destructive"
+              className="max-w-screen-sm absolute left-0 right-0 ml-auto mr-auto"
+            >
+              <GoAlert size={16} />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription className="flex flex-col">
+                <span>
+                  An unexpected error has occurred. Please try again later
+                </span>
+                <span>{error?.message}</span>
+              </AlertDescription>
+            </Alert>
+          </div>
+        )}
       </div>
     );
   }
@@ -60,7 +62,7 @@ const HomeContent: FC = () => {
 
 const HomePage: FC = () => {
   return (
-    <div className="flex flex-col gap-4 relative">
+    <div className="flex flex-col gap-4 relative w-full">
       <div className="mt-2 sm:mt-8 flex items-center w-full justify-center text-primary/[.6]">
         <p className="text-xs/loose">{'-----------<----(@'}</p>
       </div>

@@ -6,7 +6,11 @@ import globalRouter from '@/App/globalRouter';
 import { FC, ReactNode } from 'react';
 
 export const PageLayout: FC<{ children: ReactNode }> = ({ children }) => {
-  return <section className="flex max-w-content mx-auto">{children}</section>;
+  return (
+    <section className="flex justify-center max-w-content mx-auto">
+      {children}
+    </section>
+  );
 };
 
 const Router = () => {
