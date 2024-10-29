@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { GoBell, GoPerson } from 'react-icons/go';
 import { cn } from 'lib/utils';
@@ -83,16 +83,13 @@ const Navbar: FC = () => {
     width: number;
   }>({ left: 0, width: 0 });
 
-  console.log(activeLinkPosition);
-
-  useEffect(() => {
+  const updateActiveLinkPosition = useCallback(() => {
     const activeLinkIndex = NavbarPages.findIndex(
       (page) => currentPath === page.to,
     );
 
     if (activeLinkIndex !== -1) {
       const activeLink = linkRefs.current[activeLinkIndex];
-
       if (activeLink) {
         setActiveLinkPosition({
           left: activeLink.offsetLeft,
@@ -101,6 +98,15 @@ const Navbar: FC = () => {
       }
     }
   }, [currentPath]);
+
+  useLayoutEffect(() => {
+    updateActiveLinkPosition();
+
+    const handleResize = () => updateActiveLinkPosition();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [currentPath, updateActiveLinkPosition]);
 
   return (
     <header className="h-12 sm:h-24 flex flex-col bg-background">
@@ -143,14 +149,14 @@ const Navbar: FC = () => {
       <div className="relative hidden sm:flex flex-1 border  items-center justify-center">
         <div className="flex-1 flex gap-x-8 text-[13px] max-w-content justify-start h-full items-center">
           <span
-            className="absolute top-0 h-[1px] bg-black transition-all duration-200"
+            className="absolute top-0 h-[1px] bg-black transition-all duration-100"
             style={{
               left: `${activeLinkPosition.left}px`,
               width: `${activeLinkPosition.width}px`,
             }}
           />
           <span
-            className="absolute bottom-0 h-[1px] bg-black transition-all duration-200"
+            className="absolute bottom-0 h-[1px] bg-black transition-all duration-100"
             style={{
               left: `${activeLinkPosition.left}px`,
               width: `${activeLinkPosition.width}px`,
