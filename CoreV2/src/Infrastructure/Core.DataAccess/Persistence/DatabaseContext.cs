@@ -22,20 +22,6 @@ public class DatabaseContext(DbContextOptions options) : IdentityDbContext<Appli
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-        builder.Entity<ItemMatch>().HasKey(uci => new { uci.UploadItemId, uci.ClothingItemId });
-
-        builder
-            .Entity<ItemMatch>()
-            .HasOne(im => im.UploadItem)
-            .WithMany(u => u.ItemMatches)
-            .HasForeignKey(im => im.UploadItemId);
-
-        builder
-            .Entity<ItemMatch>()
-            .HasOne(uc => uc.ClothingItem)
-            .WithMany(c => c.ItemMatches)
-            .HasForeignKey(uc => uc.ClothingItemId);
-
         base.OnModelCreating(builder);
     }
 
