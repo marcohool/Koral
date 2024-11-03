@@ -1,6 +1,7 @@
 import { FC, ReactNode, useState } from 'react';
 import { cn } from 'utils/utils';
 import { ClothingItem, Upload } from 'pages/uploads/useUploads';
+import globalRouter from 'App/globalRouter';
 
 const CardHeader: FC<{
   title: string;
@@ -75,6 +76,7 @@ const UploadCard: FC<{
       onTouchStart={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchEnd={() => setIsHovered(false)}
+      onClick={() => globalRouter.navigate?.('/uploads/' + upload.id)}
     >
       <div className="relative w-full h-full flex flex-col">
         <CardImage className="flex-grow">

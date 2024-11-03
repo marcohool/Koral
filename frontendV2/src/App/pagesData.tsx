@@ -7,6 +7,8 @@ import SignupPage from 'pages/auth/signup/SignupPage';
 import HomePage from 'pages/home';
 import ConditionalRoute from '@/App/ConditionalRoute';
 import UploadsPage from 'pages/uploads/UploadsPage';
+import UploadPage from 'pages/uploads/upload';
+import { Outlet } from 'react-router-dom';
 
 const pagesData: routerType[] = [
   {
@@ -50,9 +52,23 @@ const pagesData: routerType[] = [
   {
     path: 'uploads',
     title: 'Uploads',
-    element: <UploadsPage />,
+    element: <Outlet />,
     page: Page.Uploads,
     requireAuth: true,
+    children: [
+      {
+        path: '',
+        title: 'Uploads',
+        element: <UploadsPage />,
+        page: Page.Uploads,
+      },
+      {
+        path: ':id',
+        title: 'Upload',
+        element: <UploadPage />,
+        page: Page.Upload,
+      },
+    ],
   },
 ];
 

@@ -8,6 +8,7 @@ export enum Page {
   Login,
   SignUp,
   Uploads,
+  Upload,
 }
 
 export interface routerType {

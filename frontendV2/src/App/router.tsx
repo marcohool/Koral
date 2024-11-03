@@ -17,7 +17,7 @@ const Router = () => {
   globalRouter.navigate = useNavigate();
 
   const pageRoutes = pagesData.map(
-    ({ path, title, element, requireAuth }: routerType) => {
+    ({ path, title, element, requireAuth, children }: routerType) => {
       const routeElement = requireAuth ? (
         <ProtectedRoute>
           <PageLayout>{element}</PageLayout>
@@ -26,10 +26,31 @@ const Router = () => {
         element
       );
 
+      const childRoutes = children?.map(
+        ({ path: childPath, title: childTitle, element: childElement }) => (
+          <Route
+            key={childTitle}
+            path={childPath}
+            element={
+              requireAuth ? (
+                <ProtectedRoute>
+                  <PageLayout>{childElement}</PageLayout>
+                </ProtectedRoute>
+              ) : (
+                childElement
+              )
+            }
+          />
+        ),
+      );
+
       return (
-        <>
-          <Route key={title} path={`/${path}`} element={routeElement} />
-        </>
+        <Route
+          key={title}
+          path={`/${path}`}
+          element={routeElement}
+          children={childRoutes}
+        />
       );
     },
   );
