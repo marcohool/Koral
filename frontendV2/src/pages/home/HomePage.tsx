@@ -8,6 +8,7 @@ import { GoAlert, GoPlus } from 'react-icons/go';
 import UploadGrid from 'components/uploadGrid';
 import Spinner from 'components/spinner';
 import Alert, { AlertDescription, AlertTitle } from 'components/alert';
+import ContentPage from 'shared/layouts/contentPage';
 
 const HomeContent: FC = () => {
   const { data, isLoading, error } = useUploads();
@@ -62,12 +63,7 @@ const HomeContent: FC = () => {
 
 const HomePage: FC = () => {
   return (
-    <div className="flex flex-col gap-4 relative w-full">
-      <div className="mt-2 sm:mt-8 flex items-center w-full justify-center text-primary/[.6]">
-        <p className="text-xs/loose">{'-----------<----(@'}</p>
-      </div>
-      <HomeContent />
-    </div>
+    <ContentPage heading={'-----------<----(@'} content={<HomeContent />} />
   );
 };
 
