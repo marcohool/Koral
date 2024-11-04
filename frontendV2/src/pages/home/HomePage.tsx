@@ -40,7 +40,7 @@ const HomeContent: FC = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col max-w-content mx-auto gap-4">
       <div className="flex justify-between items-center">
         <h1 className="py-2.5 text-xl font-normal">Uploads</h1>
         <UploadDialog>
@@ -57,7 +57,7 @@ const HomeContent: FC = () => {
         className="grid gap-[0.5px] sm:gap-2 md:px-2 xl:px-0 max-w-content mx-auto grid-cols-2 md:grid-cols-3 xl:grid-cols-5"
         isLoading={false}
       />
-    </>
+    </div>
   );
 };
 

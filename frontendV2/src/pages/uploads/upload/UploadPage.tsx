@@ -29,12 +29,7 @@ const UploadPageContent: FC = () => {
           <p>Accuracy rating: 5</p>
         </div>
       </div>
-      <div
-        className="w-screen !max-w-none mt-10 bg-gray-100 absolute"
-        style={{ left: '0' }}
-      >
-        test
-      </div>
+      <div>test</div>
     </>
   );
 };
