@@ -45,6 +45,22 @@ export const useAddUpload = () => {
   });
 };
 
+export const useUpload = (id: string) => {
+  const { token } = useAuth();
+
+  return useQuery<Upload, AxiosError>({
+    queryKey: ['uploads', id],
+    queryFn: async () => {
+      const response = await apiCall<Upload>(
+        '/uploads/' + id,
+        'GET',
+        token ?? undefined,
+      );
+      return response.data;
+    },
+  });
+};
+
 const useUploads = () => {
   const { token } = useAuth();
 

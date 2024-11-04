@@ -10,7 +10,6 @@ public class UploadRepository(DatabaseContext context)
     : BaseRepository<Upload>(context),
         IUploadRepository
 {
-    private readonly DatabaseContext context = context;
     private readonly DbSet<Upload> dbSet = context.Set<Upload>();
 
     public new async Task<List<Upload>> GetAllAsync(

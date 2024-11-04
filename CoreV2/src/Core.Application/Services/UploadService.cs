@@ -127,8 +127,6 @@ public class UploadService(
     {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
-        int totalUploads = await this.uploadRepository.CountAsync(u => u.AppUserId == user.Id);
-
         List<Upload> uploads = await this.uploadRepository.GetAllAsync(
             u => u.AppUserId == user.Id,
             cancellationToken: cancellationToken
@@ -142,10 +140,6 @@ public class UploadService(
     )
     {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
-
-        int totalUploads = await this.uploadRepository.CountAsync(u =>
-            u.AppUserId == user.Id && u.IsFavourited
-        );
 
         List<Upload> uploads = await this.uploadRepository.GetAllAsync(
             u => u.AppUserId == user.Id && u.IsFavourited,
@@ -178,7 +172,7 @@ public class UploadService(
     {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
-        Upload? upload = await this.uploadRepository.GetFirstAsync(u =>
+        Upload? upload = (await this.uploadRepository.GetAllAsync()).Find(u =>
             u.Id == id && u.AppUserId == user.Id
         );
 
