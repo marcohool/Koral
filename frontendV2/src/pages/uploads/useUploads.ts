@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import apiCall from 'utils/apiCall';
 import useAuth from '@/context/useAuth';
+import globalRouter from '@/App/globalRouter';
 
 export interface ClothingItem {
   id: string;
@@ -41,6 +42,10 @@ export const useAddUpload = () => {
         upload,
       );
       return response.data;
+    },
+    onSuccess: (response) => {
+      console.log('Upload successful');
+      globalRouter.navigate?.('/uploads/' + response.id);
     },
   });
 };

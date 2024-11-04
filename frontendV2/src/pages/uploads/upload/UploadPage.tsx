@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import { Upload, useUpload } from 'pages/uploads/useUploads';
+import { useUpload } from 'pages/uploads/useUploads';
 import ContentPage from '@/shared/layouts/contentPage';
+import ClothingItemCarousel from 'components/UploadCarousel';
 
 const UploadPageContent: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,7 +30,11 @@ const UploadPageContent: FC = () => {
           <p>Accuracy rating: 5</p>
         </div>
       </div>
-      <div>test</div>
+      <ClothingItemCarousel
+        title="Matched Clothing Items"
+        data={upload.matchedClothingItems}
+        className="mt-32"
+      />
     </>
   );
 };
