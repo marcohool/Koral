@@ -8,6 +8,7 @@ import {
 } from 'components/carousel';
 import { cn } from 'utils/utils';
 import { Category, ClothingItem } from 'pages/uploads/types';
+import ClothingItemCarouselCard from 'components/ClothingItemCarousel/ClothingItemCarouselCard';
 
 const ClothingItemCarousel: FC<{
   data: ClothingItem[];
@@ -23,10 +24,10 @@ const ClothingItemCarousel: FC<{
         }}
         className={cn('w-full')}
       >
-        <CarouselContent>
+        <CarouselContent className="border-l border-secondary-foreground">
           {data.map((item, index) => (
             <CarouselItem key={index} className="basis-1/6">
-              <img src={item.imageUrl} />
+              <ClothingItemCarouselCard item={item} />
             </CarouselItem>
           ))}
         </CarouselContent>

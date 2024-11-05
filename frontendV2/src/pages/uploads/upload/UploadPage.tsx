@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUpload } from 'pages/uploads/useUploads';
 import ContentPage from '@/shared/layouts/contentPage';
-import ClothingItemCarousel from 'components/UploadCarousel';
+import ClothingItemCarousel from 'components/ClothingItemCarousel';
 import _ from 'lodash';
 import { Category } from 'pages/uploads/types';
 
