@@ -82,6 +82,7 @@ const Navbar: FC = () => {
     left: number;
     width: number;
   }>({ left: 0, width: 0 });
+  const [activeLinkOpacity, setActiveLinkOpacity] = useState(0);
 
   const updateActiveLinkPosition = useCallback(() => {
     const activeLinkIndex = NavbarPages.findIndex(
@@ -95,7 +96,10 @@ const Navbar: FC = () => {
           left: activeLink.offsetLeft,
           width: activeLink.offsetWidth,
         });
+        setActiveLinkOpacity(1);
       }
+    } else {
+      setActiveLinkOpacity(0);
     }
   }, [currentPath]);
 
@@ -153,6 +157,7 @@ const Navbar: FC = () => {
             style={{
               left: `${activeLinkPosition.left}px`,
               width: `${activeLinkPosition.width}px`,
+              opacity: activeLinkOpacity,
             }}
           />
           <span
@@ -160,6 +165,7 @@ const Navbar: FC = () => {
             style={{
               left: `${activeLinkPosition.left}px`,
               width: `${activeLinkPosition.width}px`,
+              opacity: activeLinkOpacity,
             }}
           />
           {NavbarPages.map((page, index) => {
