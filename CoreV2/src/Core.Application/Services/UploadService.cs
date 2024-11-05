@@ -44,8 +44,8 @@ public class UploadService(
 
         UploadEmbedding uploadEmbedding = await this.koralMatchApi.GetUploadEmbedding(image);
 
-        //string imageUrl = await this.imageStorageService.UploadImageAsync(image, cancellationToken);
-        string imageUrl = "www.test.com/image";
+        string imageUrl = await this.imageStorageService.UploadImageAsync(image, cancellationToken);
+        //string imageUrl = "www.test.com/image";
 
         Upload upload =
             new()

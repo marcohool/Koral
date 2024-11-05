@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useUpload } from 'pages/uploads/useUploads';
 import ContentPage from '@/shared/layouts/contentPage';
 import ClothingItemCarousel from 'components/UploadCarousel';
+import _ from 'lodash';
 
 const UploadPageContent: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -12,7 +13,7 @@ const UploadPageContent: FC = () => {
     return null;
   }
 
-  console.log(upload);
+  const matchedCategories = _.groupBy(upload.matchedClothingItems, 'category');
 
   return (
     <>
@@ -30,11 +31,17 @@ const UploadPageContent: FC = () => {
           <p>Accuracy rating: 5</p>
         </div>
       </div>
-      <ClothingItemCarousel
-        title="Matched Clothing Items"
-        data={upload.matchedClothingItems}
-        className="mt-32"
-      />
+      <div className="flex flex-col gap-y-7 mt-20">
+        {Object.entries(matchedCategories).map(([category, items]) => {
+          return (
+            <ClothingItemCarousel
+              key={category}
+              title={category}
+              data={items}
+            />
+          );
+        })}
+      </div>
     </>
   );
 };
