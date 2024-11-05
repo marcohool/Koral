@@ -4,6 +4,7 @@ import { useUpload } from 'pages/uploads/useUploads';
 import ContentPage from '@/shared/layouts/contentPage';
 import ClothingItemCarousel from 'components/UploadCarousel';
 import _ from 'lodash';
+import { Category } from 'pages/uploads/types';
 
 const UploadPageContent: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,7 +15,7 @@ const UploadPageContent: FC = () => {
   }
 
   const matchedCategories = _.groupBy(upload.matchedClothingItems, 'category');
-
+  console.log(matchedCategories);
   return (
     <>
       <div className="flex w-full justify-center mt-10 gap-12">
@@ -33,10 +34,11 @@ const UploadPageContent: FC = () => {
       </div>
       <div className="flex flex-col gap-y-7 mt-20">
         {Object.entries(matchedCategories).map(([category, items]) => {
+          const categoryText = Category[category as keyof typeof Category];
           return (
             <ClothingItemCarousel
               key={category}
-              title={category}
+              title={categoryText}
               data={items}
             />
           );

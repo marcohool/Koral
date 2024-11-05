@@ -6,13 +6,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from 'components/carousel';
-import { ClothingItem } from 'pages/uploads/useUploads';
 import { cn } from 'utils/utils';
+import { Category, ClothingItem } from 'pages/uploads/types';
 
 const ClothingItemCarousel: FC<{
   data: ClothingItem[];
   className?: string;
-  title?: string;
+  title?: Category;
 }> = ({ data, className, title }) => {
   return (
     <div className={cn(className)}>

@@ -3,29 +3,7 @@ import { AxiosError } from 'axios';
 import apiCall from 'utils/apiCall';
 import useAuth from '@/context/useAuth';
 import globalRouter from '@/App/globalRouter';
-
-export interface ClothingItem {
-  id: string;
-  name: string;
-  description: string;
-  brand: string;
-  category: string;
-  gender: string;
-  imageUrl: string;
-  sourceUrl: string;
-  sourceRegion: string;
-}
-
-export interface Upload {
-  id: string;
-  title: string;
-  status: string;
-  imageUrl: string;
-  isFavourited: boolean;
-  createdOn: string;
-  lastUpdatedOn: string;
-  matchedClothingItems: ClothingItem[];
-}
+import { Upload } from 'pages/uploads/types';
 
 export const useAddUpload = () => {
   const { token } = useAuth();
