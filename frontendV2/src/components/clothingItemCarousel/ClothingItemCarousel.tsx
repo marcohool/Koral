@@ -8,7 +8,7 @@ import {
 } from 'components/carousel';
 import { cn } from 'utils/utils';
 import { Category, ClothingItem } from 'pages/uploads/types';
-import ClothingItemCarouselCard from 'components/ClothingItemCarousel/ClothingItemCarouselCard';
+import ClothingItemCarouselCard from 'components/clothingItemCarousel/ClothingItemCarouselCard';
 
 const ClothingItemCarousel: FC<{
   data: ClothingItem[];

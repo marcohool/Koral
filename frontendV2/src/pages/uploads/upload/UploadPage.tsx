@@ -2,13 +2,13 @@ import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUpload } from 'pages/uploads/useUploads';
 import ContentPage from '@/shared/layouts/contentPage';
-import ClothingItemCarousel from 'components/ClothingItemCarousel';
+import ClothingItemCarousel from 'components/clothingItemCarousel';
 import _ from 'lodash';
 import { Category } from 'pages/uploads/types';
 
 const UploadPageContent: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: upload, isLoading } = useUpload(id ?? '');
+  const { data: upload } = useUpload(id ?? '');
 
   if (!upload) {
     return null;
