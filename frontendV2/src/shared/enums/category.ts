@@ -19,3 +19,29 @@ export enum Category {
   ACCESSORIES = 17,
   OTHER = 18,
 }
+
+const CategoryNames = {
+  [Category.HAT]: 'Hats',
+  [Category.SCARF]: 'Scarfs',
+  [Category.COAT]: 'Coats',
+  [Category.JACKET]: 'Jackets',
+  [Category.SWEATER]: 'Sweaters',
+  [Category.TOP]: 'Tops',
+  [Category.HOODIE]: 'Hoodies',
+  [Category.DRESS]: 'Dresses',
+  [Category.GLOVES]: 'Gloves',
+  [Category.BAG]: 'Bags',
+  [Category.JEANS]: 'Jeans',
+  [Category.BOTTOMS]: 'Bottoms',
+  [Category.SHORTS]: 'Shorts',
+  [Category.SKIRT]: 'Skirts',
+  [Category.BELT]: 'Belts',
+  [Category.SOCKS]: 'Socks',
+  [Category.SHOES]: 'Shoes',
+  [Category.ACCESSORIES]: 'Accessories',
+  [Category.OTHER]: 'Other',
+};
+
+export function getCategoryName(category: Category) {
+  return CategoryNames[category];
+}

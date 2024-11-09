@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useUpload } from 'pages/uploads/useUploads';
 import ContentPage from 'shared/layouts/contentPage';
 import ClothingItemCarousel from 'components/clothingItemCarousel';
-import _ from 'lodash';
-import { Category } from 'shared/enums/category';
+import { Category, getCategoryName } from 'shared/enums/category';
+import { ClothingItem } from 'shared/types/clothingItem';
 
 const UploadPageContent: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,8 +14,15 @@ const UploadPageContent: FC = () => {
     return null;
   }
 
-  const matchedCategories = _.groupBy(upload.matchedClothingItems, 'category');
-  console.log(matchedCategories);
+  const matchedCategories = upload.matchedClothingItems.reduce((acc, item) => {
+    const category = item.category;
+    if (!acc.has(category)) {
+      acc.set(category, []);
+    }
+    acc.get(category)!.push(item);
+    return acc;
+  }, new Map<Category, ClothingItem[]>());
+
   return (
     <>
       <div className="flex w-full justify-center mt-10 gap-12">
@@ -33,16 +40,13 @@ const UploadPageContent: FC = () => {
         </div>
       </div>
       <div className="flex flex-col gap-y-7 mt-20">
-        {Object.entries(matchedCategories).map(([category, items]) => {
-          const categoryText = Category[category as keyof typeof Category];
-          return (
-            <ClothingItemCarousel
-              key={category}
-              title={categoryText}
-              data={items}
-            />
-          );
-        })}
+        {Array.from(matchedCategories, ([category, items]) => (
+          <ClothingItemCarousel
+            key={category}
+            title={getCategoryName(category)}
+            data={items}
+          />
+        ))}
       </div>
     </>
   );
