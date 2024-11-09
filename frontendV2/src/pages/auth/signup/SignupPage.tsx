@@ -18,7 +18,7 @@ import {
 import RedirectPrompt from 'pages/auth/RedirectPrompt';
 import { Link, useNavigate } from 'react-router-dom';
 import SignupPasswordForm from 'pages/auth/signup/SignupPasswordForm';
-import useAuth from '@/context/useAuth';
+import useAuth from 'context/useAuth';
 
 export const TermsPrompt = () => {
   return (

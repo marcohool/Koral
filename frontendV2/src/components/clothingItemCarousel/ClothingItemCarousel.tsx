@@ -7,8 +7,9 @@ import {
   CarouselPrevious,
 } from 'components/carousel';
 import { cn } from 'utils/utils';
-import { Category, ClothingItem } from 'pages/uploads/types';
 import ClothingItemCarouselCard from 'components/clothingItemCarousel/ClothingItemCarouselCard';
+import { ClothingItem } from 'shared/types/clothingItem';
+import { Category } from 'shared/enums/category';
 
 const ClothingItemCarousel: FC<{
   data: ClothingItem[];

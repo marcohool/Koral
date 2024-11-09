@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import globalRouter from '@/App/globalRouter';
+import globalRouter from 'App/globalRouter';
 
 const apiBaseUrl = import.meta.env.VITE_KORAL_API_URL as string;
 

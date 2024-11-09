@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { useUpload } from 'pages/uploads/useUploads';
-import ContentPage from '@/shared/layouts/contentPage';
+import ContentPage from 'shared/layouts/contentPage';
 import ClothingItemCarousel from 'components/clothingItemCarousel';
 import _ from 'lodash';
-import { Category } from 'pages/uploads/types';
+import { Category } from 'shared/enums/category';
 
 const UploadPageContent: FC = () => {
   const { id } = useParams<{ id: string }>();

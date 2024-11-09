@@ -4,7 +4,7 @@ import BackgroundVideo from './Hero/BackgroundVideo';
 import Hero from './Hero/Hero';
 import HeroFooter from './Hero/HeroFooter';
 import About from './About/About';
-import { Page } from '@/App/router.types';
+import { Page } from 'App/router.types';
 import { LandingNavbar } from 'components/navbar';
 
 const PARALLAX_PAGES = 4;

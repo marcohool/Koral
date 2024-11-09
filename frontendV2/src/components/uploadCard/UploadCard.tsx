@@ -1,7 +1,7 @@
 import { FC, ReactNode, useState } from 'react';
 import { cn } from 'utils/utils';
 import globalRouter from 'App/globalRouter';
-import { ClothingItem, Upload } from 'pages/uploads/types';
+import { ClothingItem } from 'shared/types/clothingItem';
 
 const CardHeader: FC<{
   title: string;

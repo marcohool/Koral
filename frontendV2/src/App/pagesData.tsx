@@ -5,7 +5,7 @@ import ComponentsPage from 'pages/components/ComponentsPage';
 import LoginPage from 'pages/auth/login/LoginPage';
 import SignupPage from 'pages/auth/signup/SignupPage';
 import HomePage from 'pages/home';
-import ConditionalRoute from '@/App/ConditionalRoute';
+import ConditionalRoute from 'App/ConditionalRoute';
 import UploadsPage from 'pages/uploads/UploadsPage';
 import UploadPage from 'pages/uploads/upload';
 import { Outlet } from 'react-router-dom';

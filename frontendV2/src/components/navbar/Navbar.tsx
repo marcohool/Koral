@@ -16,7 +16,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from 'components/dropdownMenu';
-import globalRouter from '@/App/globalRouter';
+import globalRouter from 'App/globalRouter';
 
 const UserNav: FC = () => {
   const handleLogout = () => {

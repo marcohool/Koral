@@ -1,9 +1,9 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import apiCall from 'utils/apiCall';
-import useAuth from '@/context/useAuth';
-import globalRouter from '@/App/globalRouter';
-import { Upload } from 'pages/uploads/types';
+import useAuth from 'context/useAuth';
+import globalRouter from 'App/globalRouter';
+import { Upload } from 'shared/types/upload';
 
 export const useAddUpload = () => {
   const { token } = useAuth();

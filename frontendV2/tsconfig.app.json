@@ -22,14 +22,15 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@/*": [
+      "/*": [
         "./src/*",
         "*"
       ],
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],
       "public/*": ["public/*"],
-      "utils/*": ["utils/*"]
+      "utils/*": ["utils/*"],
+      "shared/*": ["shared/*"],
     }
   },
   "include": ["src"]

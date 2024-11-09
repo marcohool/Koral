@@ -2,7 +2,7 @@ import pagesData from './pagesData';
 import ProtectedRoute from './ProtectedRoute';
 import { routerType } from './router.types';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import globalRouter from '@/App/globalRouter';
+import globalRouter from 'App/globalRouter';
 
 const Router = () => {
   globalRouter.navigate = useNavigate();

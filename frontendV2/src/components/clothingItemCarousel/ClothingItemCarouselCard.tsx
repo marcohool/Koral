@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ClothingItem } from 'pages/uploads/types';
+import { ClothingItem } from 'shared/types/clothingItem';
 
 const ClothingItemCarouselCard: FC<{ item: ClothingItem }> = ({ item }) => {
   return (

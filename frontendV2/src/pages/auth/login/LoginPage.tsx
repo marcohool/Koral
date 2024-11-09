@@ -17,7 +17,7 @@ import {
 } from 'components/form/Form';
 import Checkbox from 'components/checkbox';
 import RedirectPrompt from 'pages/auth/RedirectPrompt';
-import useAuth from '@/context/useAuth';
+import useAuth from 'context/useAuth';
 
 const FormContent: FC<{ control: Control<LoginFormData> }> = ({ control }) => {
   return (
