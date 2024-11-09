@@ -21,6 +21,7 @@ public class ItemMatchProfile : Profile
 
     private float CalculateSimilarity(float embeddingSimilarity, double colourSimilarity)
     {
-        return (float)((embeddingSimilarity + colourSimilarity) / 2.0);
+        //return (float)((embeddingSimilarity + colourSimilarity) / 2.0);
+        return embeddingSimilarity;
     }
 }
