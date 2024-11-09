@@ -87,12 +87,7 @@ public class UploadService(
         }
 
         UploadDto uploadDto = this.mapper.Map<UploadDto>(upload);
-        uploadDto.MatchedClothingItems =
-            allMatches.Count > 0
-                ? this.mapper.Map<List<ClothingItemResponseDto>>(
-                    allMatches.Select(x => x.ClothingItem)
-                )
-                : [];
+        uploadDto.MatchedClothingItems = this.mapper.Map<List<ClothingItemResponseDto>>(allMatches);
 
         return uploadDto;
     }

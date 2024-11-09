@@ -11,10 +11,7 @@ public class UploadProfile : Profile
         this.CreateMap<Upload, UploadDto>()
             .ForMember(
                 dest => dest.MatchedClothingItems,
-                opt =>
-                    opt.MapFrom(src =>
-                        src.UploadItems.SelectMany(x => x.ItemMatches).Select(y => y.ClothingItem)
-                    )
+                opt => opt.MapFrom(src => src.UploadItems.SelectMany(x => x.ItemMatches))
             );
     }
 }
