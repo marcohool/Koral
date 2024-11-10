@@ -74,7 +74,7 @@ const UploadPageContent: FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-y-7 mt-20">
+      <div className="flex flex-col mt-20">
         {Array.from(matchedCategories, ([category, items]) => (
           <ClothingItemCarousel
             key={category}

@@ -80,7 +80,7 @@ const ClothingItemCarousel: FC<{
 }> = ({ data, className, title, cardBodyOverride, disableHover }) => {
   return (
     <div className={cn(className)}>
-      {title && <h2 className="text-2xl mb-6 ml-12 uppercase">{title}</h2>}
+      {title && <h2 className="text-2xl mt-6 mb-6 ml-12 uppercase">{title}</h2>}
       <Carousel
         opts={{
           align: 'start',
