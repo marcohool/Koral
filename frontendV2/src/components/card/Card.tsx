@@ -20,7 +20,7 @@ const CardBody: FC<{
   className?: string;
   children: ReactNode;
 }> = ({ className, children }) => {
-  return <div className={cn('p-2', className)}>{children}</div>;
+  return <div className={cn('p-3', className)}>{children}</div>;
 };
 
 const Card: FC<CardProps> = ({
@@ -36,7 +36,7 @@ const Card: FC<CardProps> = ({
     <div
       className={cn(
         'flex flex-col aspect-[8/11] overflow-hidden bg-background w-full relative',
-        'hover:z-50',
+        'hover:z-40',
         className,
       )}
       style={{ height: isHovered ? 'calc(100% + 100px)' : '100%' }}

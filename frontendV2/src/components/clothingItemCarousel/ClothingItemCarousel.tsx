@@ -12,6 +12,13 @@ import Card from 'components/card';
 import { getBrandImagePath } from 'shared/helpers/getBrandImagePath';
 import { getCurrencyCodeName } from 'shared/enums/currencyCode';
 import { GoArrowUpRight } from 'react-icons/go';
+import Progress from 'components/progress';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from 'components/tooltip';
 
 const CardBody: FC<{ item: ClothingItem; isHovered: boolean }> = ({
   item,
@@ -19,8 +26,23 @@ const CardBody: FC<{ item: ClothingItem; isHovered: boolean }> = ({
 }) => {
   const brandImagePath = getBrandImagePath(item.brand);
 
+  const similarity = Math.round(item.similarity * 100);
+
   return (
-    <div className="flex flex-col p-2 gap-y-2">
+    <div className="flex flex-col gap-y-2">
+      <TooltipProvider delayDuration={0}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <a className="flex items-center gap-3 mb-1.5">
+              <Progress value={similarity} />
+              {isHovered && <p className="text-sm">{similarity}%</p>}
+            </a>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p className="text-sm">Similarity rating</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <h1>{item.name}</h1>
       {brandImagePath ? (
         <div>
@@ -36,7 +58,7 @@ const CardBody: FC<{ item: ClothingItem; isHovered: boolean }> = ({
         </p>
         {isHovered && (
           <a
-            className="flex items-center gap-x-0.5 line-clamp-1 whitespace-nowrap border-b border-secondary-foreground hover:text-blue-700 hover:border-blue-700"
+            className="flex items-center gap-x-0.5 line-clamp-1 whitespace-nowrap border-b border-secondary-foreground hover:text-primary hover:border-primary"
             href={item.sourceUrl}
             target="_blank"
           >
