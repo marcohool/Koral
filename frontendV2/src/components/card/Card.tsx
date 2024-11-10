@@ -1,5 +1,6 @@
 import { FC, ReactNode, useState } from 'react';
 import { cn } from 'utils/utils';
+import { ScrollArea } from 'components/scrollArea';
 
 interface CardProps {
   imageUrl: string;
@@ -13,7 +14,11 @@ const CardImage: FC<{ children: ReactNode; className?: string }> = ({
   children,
   className,
 }) => {
-  return <div className={cn('overflow-hidden', className)}>{children}</div>;
+  return (
+    <div className={cn('overflow-hidden', className)}>
+      <ScrollArea className="h-full">{children}</ScrollArea>
+    </div>
+  );
 };
 
 const CardBody: FC<{
