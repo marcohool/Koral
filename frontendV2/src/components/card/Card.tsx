@@ -35,8 +35,8 @@ const Card: FC<CardProps> = ({
   return (
     <div
       className={cn(
-        'flex flex-col aspect-[8/11] relative overflow-hidden bg-background w-full border border-transparent',
-        'hover:border-black hover:z-20',
+        'flex flex-col aspect-[8/11] relative overflow-hidden bg-background w-full z-0',
+        'hover:z-50',
         className,
       )}
       style={{ height: isHovered ? 'calc(100% + 100px)' : '100%' }}

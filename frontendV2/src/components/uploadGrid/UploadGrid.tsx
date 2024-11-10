@@ -60,7 +60,7 @@ const UploadGrid: FC<{
           key={upload.id}
           imageUrl={upload.imageUrl}
           onClick={() => globalRouter.navigate?.('/uploads/' + upload.id)}
-          className="hover:cursor-pointer"
+          className="hover:cursor-pointer hover:border hover:border-secondary-foreground"
           visibleBody={
             <CardBody
               title={upload.title}
