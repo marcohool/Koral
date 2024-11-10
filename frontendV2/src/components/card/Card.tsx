@@ -8,6 +8,7 @@ interface CardProps {
   visibleBody: ReactNode;
   hoveredBody: ReactNode;
   onClick?: () => void;
+  disableHover?: boolean;
 }
 
 const CardImage: FC<{ children: ReactNode; className?: string }> = ({
@@ -21,19 +22,13 @@ const CardImage: FC<{ children: ReactNode; className?: string }> = ({
   );
 };
 
-const CardBody: FC<{
-  className?: string;
-  children: ReactNode;
-}> = ({ className, children }) => {
-  return <div className={cn('p-3', className)}>{children}</div>;
-};
-
 const Card: FC<CardProps> = ({
   imageUrl,
   className,
   visibleBody,
   hoveredBody,
   onClick,
+  disableHover,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -44,7 +39,13 @@ const Card: FC<CardProps> = ({
         'hover:z-40',
         className,
       )}
-      style={{ height: isHovered ? 'calc(100% + 100px)' : '100%' }}
+      style={{
+        height: disableHover
+          ? '100%'
+          : isHovered
+            ? 'calc(100% + 100px)'
+            : '100%',
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={() => setIsHovered(true)}
@@ -59,7 +60,7 @@ const Card: FC<CardProps> = ({
           style={{ minHeight: isHovered ? '130%' : '100%' }}
         />
       </CardImage>
-      <CardBody>{isHovered ? hoveredBody : visibleBody}</CardBody>
+      {isHovered ? hoveredBody : visibleBody}
     </div>
   );
 };

@@ -13,7 +13,7 @@ const CardBody: FC<{
   hovered?: boolean;
 }> = ({ title, subtitle, matchedClothingItems, className, hovered }) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 p-3">
       {hovered && (
         <div className="grid grid-cols-4 max-h-16 overflow-hidden">
           {matchedClothingItems?.map((ci) => {

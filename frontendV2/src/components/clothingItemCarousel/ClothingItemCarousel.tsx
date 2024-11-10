@@ -29,7 +29,7 @@ const CardBody: FC<{ item: ClothingItem; isHovered: boolean }> = ({
   const similarity = Math.round(item.similarity * 100);
 
   return (
-    <div className="flex flex-col gap-y-2">
+    <div className="flex flex-col gap-y-2 p-3">
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger asChild>
@@ -75,10 +75,12 @@ const ClothingItemCarousel: FC<{
   data: ClothingItem[];
   className?: string;
   title?: string;
-}> = ({ data, className, title }) => {
+  cardBodyOverride?: FC<{ item: ClothingItem; isHovered: boolean }>;
+  disableHover?: boolean;
+}> = ({ data, className, title, cardBodyOverride, disableHover }) => {
   return (
     <div className={cn(className)}>
-      <h2 className="text-2xl mb-6 ml-12 uppercase">{title}</h2>
+      {title && <h2 className="text-2xl mb-6 ml-12 uppercase">{title}</h2>}
       <Carousel
         opts={{
           align: 'start',
@@ -90,9 +92,22 @@ const ClothingItemCarousel: FC<{
             <CarouselItem key={index} className="basis-1/6">
               <Card
                 imageUrl={item.imageUrl}
-                visibleBody={<CardBody item={item} isHovered={false} />}
-                hoveredBody={<CardBody item={item} isHovered={true} />}
+                visibleBody={
+                  cardBodyOverride ? (
+                    cardBodyOverride({ item, isHovered: false })
+                  ) : (
+                    <CardBody item={item} isHovered={false} />
+                  )
+                }
+                hoveredBody={
+                  cardBodyOverride ? (
+                    cardBodyOverride({ item, isHovered: true })
+                  ) : (
+                    <CardBody item={item} isHovered={true} />
+                  )
+                }
                 className="outline outline-1 outline-secondary-foreground"
+                disableHover={disableHover}
               />
             </CarouselItem>
           ))}
