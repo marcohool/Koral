@@ -46,7 +46,7 @@ const ClothingItemCarousel: FC<{
         opts={{
           align: 'start',
         }}
-        className={cn('w-full')}
+        className={cn('w-full hover:z-50')}
       >
         <CarouselContent className="border-l border-secondary-foreground">
           {data.map((item, index) => (

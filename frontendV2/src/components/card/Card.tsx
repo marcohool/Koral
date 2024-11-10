@@ -35,7 +35,7 @@ const Card: FC<CardProps> = ({
   return (
     <div
       className={cn(
-        'flex flex-col aspect-[8/11] relative overflow-hidden bg-background w-full z-0',
+        'flex flex-col aspect-[8/11] overflow-hidden bg-background w-full relative',
         'hover:z-50',
         className,
       )}
