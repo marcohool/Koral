@@ -44,7 +44,7 @@ const UploadPageContent: FC = () => {
           <ClothingItemCarousel
             key={category}
             title={getCategoryName(category)}
-            data={items}
+            data={items.sort((a, b) => b.similarity - a.similarity)}
           />
         ))}
       </div>
