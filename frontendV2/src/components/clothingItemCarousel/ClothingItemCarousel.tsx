@@ -36,13 +36,11 @@ const CardBody: FC<{ item: ClothingItem; isHovered: boolean }> = ({
         </p>
         {isHovered && (
           <a
-            className="flex items-center gap-x-0.5 line-clamp-1 whitespace-nowrap border-b border-secondary-foreground"
+            className="flex items-center gap-x-0.5 line-clamp-1 whitespace-nowrap border-b border-secondary-foreground hover:text-blue-700 hover:border-blue-700"
             href={item.sourceUrl}
             target="_blank"
           >
-            <p className="text-sm text-secondary-foreground">
-              Visit on Retailers Website
-            </p>
+            <p className="text-sm">Visit on Retailers Website</p>
             {<GoArrowUpRight size={14} />}
           </a>
         )}
