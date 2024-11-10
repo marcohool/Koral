@@ -10,12 +10,17 @@ import { cn } from 'utils/utils';
 import { ClothingItem } from 'shared/types/clothingItem';
 import Card from 'components/card';
 import { getBrandImagePath } from 'shared/helpers/getBrandImagePath';
+import { getCurrencyCodeName } from 'shared/enums/currencyCode';
+import { GoArrowUpRight } from 'react-icons/go';
 
-const CardBody: FC<{ item: ClothingItem }> = ({ item }) => {
+const CardBody: FC<{ item: ClothingItem; isHovered: boolean }> = ({
+  item,
+  isHovered,
+}) => {
   const brandImagePath = getBrandImagePath(item.brand);
 
   return (
-    <div className="flex flex-col p-2">
+    <div className="flex flex-col p-2 gap-y-2">
       <h1>{item.name}</h1>
       {brandImagePath ? (
         <div>
@@ -24,12 +29,24 @@ const CardBody: FC<{ item: ClothingItem }> = ({ item }) => {
       ) : (
         item.brand
       )}
-      <p>
-        {item.currencyCode}
-        {item.price}
-      </p>
-      <p>{item.similarity}</p>
-      <p>{item.sourceUrl}</p>
+      <div className="flex items-center justify-between">
+        <p>
+          {getCurrencyCodeName(item.currencyCode)}
+          {item.price}
+        </p>
+        {isHovered && (
+          <a
+            className="flex items-center gap-x-0.5 line-clamp-1 whitespace-nowrap border-b border-secondary-foreground"
+            href={item.sourceUrl}
+            target="_blank"
+          >
+            <p className="text-sm text-secondary-foreground">
+              Visit on Retailers Website
+            </p>
+            {<GoArrowUpRight size={14} />}
+          </a>
+        )}
+      </div>
     </div>
   );
 };
@@ -53,8 +70,8 @@ const ClothingItemCarousel: FC<{
             <CarouselItem key={index} className="basis-1/6">
               <Card
                 imageUrl={item.imageUrl}
-                visibleBody={<CardBody item={item} />}
-                hoveredBody={<CardBody item={item} />}
+                visibleBody={<CardBody item={item} isHovered={false} />}
+                hoveredBody={<CardBody item={item} isHovered={true} />}
                 className="outline outline-1 outline-secondary-foreground"
               />
             </CarouselItem>
