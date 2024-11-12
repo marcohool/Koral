@@ -53,52 +53,71 @@ const HeroTitle: FC<{
             <GoHeart className="" onClick={onFavourite} />
           </>
         ) : (
-          <div className="w-max">
-            <Skeleton className="h-24 w-96" />
-          </div>
+          <Skeleton>
+            <h2 className="opacity-0">Placeholder Upload Text Skeleton</h2>
+          </Skeleton>
         )}
       </div>
       {createdOn && (
-        <p className="text-xs right-0 text-muted-foreground">
-          {parseDate(createdOn)}
-        </p>
+        <p className="text-xs text-muted-foreground">{parseDate(createdOn)}</p>
       )}
     </div>
   );
 };
 
 const TopMatchesGrid: FC<{ items?: ClothingItem[] }> = ({ items }) => {
+  const placeholderCard = (
+    <Card
+      imageUrl="https://placehold.co/300"
+      visibleBody={<TopMatchesCardBody itemName="Placeholder name" />}
+      hoveredBody={<TopMatchesCardBody itemName="Placeholder name" />}
+      disableHover
+      className="outline outline-1"
+    />
+  );
+
   return (
     <>
-      {items && (
-        <div>
-          <h3 className="text-base uppercase">Top Matches</h3>
-          <div className="grid grid-cols-4 mt-3">
-            {items
-              .sort((a, b) => b.similarity - a.similarity)
-              .slice(0, 8)
-              .map((item) => (
-                <Card
-                  key={item.id}
-                  imageUrl={item.imageUrl}
-                  visibleBody={<TopMatchesCardBody item={item} />}
-                  hoveredBody={<TopMatchesCardBody item={item} />}
-                  disableHover
-                  className="outline outline-1"
-                />
+      <div>
+        {items && (
+          <>
+            <h3 className="text-base uppercase">Top Matches</h3>
+            <div className="grid grid-cols-4 mt-3">
+              {items
+                .sort((a, b) => b.similarity - a.similarity)
+                .slice(0, 8)
+                .map((item) => (
+                  <Card
+                    key={item.id}
+                    imageUrl={item.imageUrl}
+                    visibleBody={<TopMatchesCardBody itemName={item.name} />}
+                    hoveredBody={<TopMatchesCardBody itemName={item.name} />}
+                    disableHover
+                    className="outline outline-1"
+                  />
+                ))}
+            </div>
+          </>
+        )}
+        {!items && (
+          <Skeleton>
+            <div className="grid grid-cols-4 mt-3 opacity-0">
+              {Array.from({ length: 8 }, (_, i) => (
+                <div key={i}>{placeholderCard}</div>
               ))}
-          </div>
-        </div>
-      )}
+            </div>
+          </Skeleton>
+        )}
+      </div>
     </>
   );
 };
 
-const TopMatchesCardBody: FC<{ item: ClothingItem }> = ({ item }) => {
+const TopMatchesCardBody: FC<{ itemName: string }> = ({ itemName }) => {
   return (
     <div className="p-2">
       <p className="text-xs text-ellipsis overflow-hidden line-clamp-1">
-        {item.name}
+        {itemName}
       </p>
     </div>
   );
