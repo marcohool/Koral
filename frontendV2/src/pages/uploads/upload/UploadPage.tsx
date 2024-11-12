@@ -25,18 +25,16 @@ const UploadPageContent: FC = () => {
     <>
       <UploadHero upload={upload} />
       <div className="flex flex-col mt-20 w-full">
-        {(matchedCategories &&
+        {matchedCategories &&
           Array.from(matchedCategories, ([category, items]) => (
             <ClothingItemCarousel
               key={category}
               title={getCategoryName(category)}
               data={items.sort((a, b) => b.similarity - a.similarity)}
             />
-          ))) ?? (
-          <>
-            <Skeleton className="mb-6 ml-12 h-20 w-72 mt-20" />
-            <Skeleton className="w-full h-96" />
-          </>
+          ))}
+        {!matchedCategories && (
+          <Skeleton className="w-full h-96 mt-20 rounded-none" />
         )}
       </div>
     </>
