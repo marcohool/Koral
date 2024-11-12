@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import apiCall from 'utils/apiCall';
 import useAuth from 'context/useAuth';
@@ -30,9 +30,16 @@ export const useAddUpload = () => {
 
 export const useUpload = (id: string) => {
   const { token } = useAuth();
+  const queryClient = useQueryClient();
 
   return useQuery<Upload, AxiosError>({
     queryKey: ['uploads', id],
+    initialData: () =>
+      queryClient
+        .getQueryData<Upload[]>(['uploads'])
+        ?.find((upload) => upload.id === id),
+    initialDataUpdatedAt: () =>
+      queryClient.getQueryState(['uploads'])?.dataUpdatedAt,
     queryFn: async () => {
       const response = await apiCall<Upload>(
         '/uploads/' + id,
