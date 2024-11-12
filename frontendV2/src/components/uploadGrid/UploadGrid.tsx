@@ -41,14 +41,9 @@ const CardBody: FC<{
 };
 
 const UploadGrid: FC<{
-  isLoading: boolean;
   uploads?: Upload[];
   className?: string;
-}> = ({ uploads, className, isLoading }) => {
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
+}> = ({ uploads, className }) => {
   if (!uploads || uploads.length === 0) {
     return <>No uploads!</>;
   }

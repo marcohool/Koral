@@ -15,7 +15,7 @@ const HomeContent: FC = () => {
 
   if (isLoading || error) {
     return (
-      <div className="mt-[20vh]">
+      <div className="mt-[20vh] w-full">
         {isLoading ? (
           <Spinner height={24} />
         ) : (
@@ -55,7 +55,6 @@ const HomeContent: FC = () => {
       <UploadGrid
         uploads={data}
         className="grid gap-[0.5px] sm:gap-2 md:px-2 xl:px-0 max-w-content mx-auto grid-cols-2 md:grid-cols-3 xl:grid-cols-5"
-        isLoading={false}
       />
     </div>
   );
