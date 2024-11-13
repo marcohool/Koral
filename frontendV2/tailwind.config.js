@@ -8,6 +8,16 @@ export default {
       sans: ['GeneralSans', 'sans-serif'],
     },
     extend: {
+      animation: {
+        pop: 'pop 0.8s cubic-bezier(0.25, 1.25, 0.5, 1)',
+      },
+      keyframes: {
+        pop: {
+          '0%': { transform: 'scale(1)', opacity: '0.8' },
+          '40%': { transform: 'scale(1.2)', opacity: '1' },
+          '100%': { transform: 'scale(1)', opacity: '0.8' },
+        },
+      },
       maxWidth: {
         content: '80rem',
       },

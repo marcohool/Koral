@@ -65,7 +65,11 @@ const HeroTitle: FC<{
           <>
             <h2 className="uppercase">{title}</h2>
             <button onClick={onFavourite}>
-              {isFavourite ? <GoHeartFill /> : <GoHeart />}
+              {isFavourite ? (
+                <GoHeartFill className="text-red-500 animate-pop transition-transform duration-200" />
+              ) : (
+                <GoHeart className="transition-transform duration-150" />
+              )}
             </button>
           </>
         ) : (
