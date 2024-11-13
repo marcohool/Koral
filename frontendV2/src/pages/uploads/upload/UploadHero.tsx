@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Upload } from 'shared/types/upload';
 import Skeleton from 'components/skeleton';
-import { GoHeart } from 'react-icons/go';
+import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { parseDate } from 'utils/date';
 import Card from 'components/card';
 import { ClothingItem } from 'shared/types/clothingItem';
@@ -24,17 +24,30 @@ const UploadImage: FC<{
   );
 };
 
-const HeroContent: FC<{ upload?: Upload }> = ({ upload }) => {
+const HeroContent: FC<{
+  isFavourite: boolean;
+  handleFavourite: () => void;
+  title?: string;
+  createdOn?: string;
+  matchedClothingItems?: ClothingItem[];
+}> = ({
+  isFavourite,
+  handleFavourite,
+  title,
+  createdOn,
+  matchedClothingItems,
+}) => {
   return (
     <div className="flex flex-col items-start w-full justify-between text-2xl">
       <HeroTitle
-        title={upload?.title}
-        createdOn={upload?.createdOn}
+        title={title}
+        createdOn={createdOn}
+        isFavourite={isFavourite}
         onFavourite={() => {
-          console.log('Favourite clicked');
+          handleFavourite();
         }}
       />
-      <TopMatchesGrid items={upload?.matchedClothingItems} />
+      <TopMatchesGrid items={matchedClothingItems} />
     </div>
   );
 };
@@ -42,15 +55,18 @@ const HeroContent: FC<{ upload?: Upload }> = ({ upload }) => {
 const HeroTitle: FC<{
   title?: string;
   createdOn?: string;
+  isFavourite: boolean;
   onFavourite: () => void;
-}> = ({ title, createdOn, onFavourite }) => {
+}> = ({ title, createdOn, isFavourite, onFavourite }) => {
   return (
     <div className="flex flex-col w-full">
       <div className="flex gap-x-32 items-center w-full justify-between">
         {title ? (
           <>
             <h2 className="uppercase">{title}</h2>
-            <GoHeart className="" onClick={onFavourite} />
+            <button onClick={onFavourite}>
+              {isFavourite ? <GoHeartFill /> : <GoHeart />}
+            </button>
           </>
         ) : (
           <Skeleton>
@@ -123,7 +139,10 @@ const TopMatchesCardBody: FC<{ itemName: string }> = ({ itemName }) => {
   );
 };
 
-const UploadHero: FC<{ upload?: Upload }> = ({ upload }) => {
+const UploadHero: FC<{ upload?: Upload; onFavourite: () => void }> = ({
+  upload,
+  onFavourite,
+}) => {
   return (
     <div className="flex max-w-content justify-center mt-10 gap-12">
       <UploadImage
@@ -131,7 +150,13 @@ const UploadHero: FC<{ upload?: Upload }> = ({ upload }) => {
         imageAlt={upload?.title}
         className="object-cover h-[650px] flex-shrink-0 max-w-[50%] border border-secondary-foreground"
       />
-      <HeroContent upload={upload} />
+      <HeroContent
+        isFavourite={upload?.isFavourited ?? false}
+        handleFavourite={onFavourite}
+        matchedClothingItems={upload?.matchedClothingItems}
+        title={upload?.title}
+        createdOn={upload?.createdOn}
+      />
     </div>
   );
 };

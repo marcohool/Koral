@@ -7,10 +7,12 @@ import { Category, getCategoryName } from 'shared/enums/category';
 import { ClothingItem } from 'shared/types/clothingItem';
 import Skeleton from 'components/skeleton';
 import UploadHero from './UploadHero';
+import { useFavourite } from 'shared/hooks/useFavourites';
 
 const UploadPageContent: FC = () => {
   const { id } = useParams<{ id: string }>();
   const { data: upload } = useUpload(id ?? '');
+  const { mutate } = useFavourite();
 
   const matchedCategories = upload?.matchedClothingItems.reduce((acc, item) => {
     const category = item.category;
@@ -21,9 +23,15 @@ const UploadPageContent: FC = () => {
     return acc;
   }, new Map<Category, ClothingItem[]>());
 
+  const handleFavourite = () => {
+    if (upload) {
+      mutate(upload.id);
+    }
+  };
+
   return (
     <>
-      <UploadHero upload={upload} />
+      <UploadHero upload={upload} onFavourite={handleFavourite} />
       <div className="flex flex-col mt-20 w-full">
         {matchedCategories &&
           Array.from(matchedCategories, ([category, items]) => (
