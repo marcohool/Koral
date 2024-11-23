@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace Core.Application.Dtos.Upload;
+namespace Core.Application.Models.Upload;
 
 public class CreateUploadDto
 {

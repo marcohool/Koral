@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Application.Dtos.ClothingItem;
+using Core.Application.Models.ClothingItem;
 using Core.Domain.Entities;
 
 namespace Core.Application.MappingProfiles;

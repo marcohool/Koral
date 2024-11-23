@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Application.Dtos.Upload;
+using Core.Application.Models.Upload;
 using Core.Domain.Entities;
 
 namespace Core.Application.MappingProfiles;

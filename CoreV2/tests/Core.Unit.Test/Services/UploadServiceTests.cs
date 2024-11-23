@@ -2,9 +2,9 @@
 using System.Drawing.Printing;
 using System.Linq.Expressions;
 using AutoMapper;
-using Core.Application.Dtos;
-using Core.Application.Dtos.Upload;
 using Core.Application.MappingProfiles;
+using Core.Application.Models;
+using Core.Application.Models.Upload;
 using Core.Application.Services;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Repositories.Interfaces;

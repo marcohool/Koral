@@ -1,5 +1,5 @@
-using Core.Application.Dtos.User;
 using Core.Application.Exceptions;
+using Core.Application.Models.User;
 using Core.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,4 @@
-﻿using Core.Application.Dtos.ClothingItem;
+﻿using Core.Application.Models.ClothingItem;
 using Core.Application.Models.Parsing;
 using Microsoft.AspNetCore.Http;
 

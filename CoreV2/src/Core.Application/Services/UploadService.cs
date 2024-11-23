@@ -1,9 +1,9 @@
 using AutoMapper;
 using Core.Application.APIs.KoralMatch;
 using Core.Application.APIs.KoralMatch.Models;
-using Core.Application.Dtos.ClothingItem;
-using Core.Application.Dtos.Upload;
 using Core.Application.Exceptions;
+using Core.Application.Models.ClothingItem;
+using Core.Application.Models.Upload;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Identity;
 using Core.DataAccess.Repositories.Interfaces;

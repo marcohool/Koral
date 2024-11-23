@@ -1,4 +1,4 @@
-﻿namespace Core.Application.Dtos.User;
+﻿namespace Core.Application.Models.User;
 
 public record LoginUserDto
 {

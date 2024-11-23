@@ -1,5 +1,4 @@
-﻿using Core.Application.Dtos.ClothingItem;
-using Core.Domain.Enums;
+﻿using Core.Domain.Enums;
 
 namespace Core.Application.Models.ClothingItem;
 

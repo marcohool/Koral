@@ -1,6 +1,6 @@
 using AutoMapper;
-using Core.Application.Dtos.ClothingItem;
 using Core.Application.Exceptions;
+using Core.Application.Models.ClothingItem;
 using Core.Application.Models.Parsing;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Repositories.Interfaces;
@@ -47,9 +47,9 @@ public class ClothingItemService(
     public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
         ClothingItem? clothingItem = await this
-            .clothingItemRepository.GetAll()
+            .clothingItemRepository.GetAll(cancellationToken: cancellationToken)
             .Where(ci => ci.Id == id)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
         if (clothingItem is null)
         {
@@ -80,9 +80,9 @@ public class ClothingItemService(
         CancellationToken cancellationToken = default
     )
     {
-        List<ClothingItem> clothingItems = await (
-            this.clothingItemRepository.GetAll(cancellationToken: cancellationToken)
-        ).ToListAsync();
+        List<ClothingItem> clothingItems = await this
+            .clothingItemRepository.GetAll(cancellationToken: cancellationToken)
+            .ToListAsync(cancellationToken: cancellationToken);
 
         return this.mapper.Map<IEnumerable<ClothingItemResponseDto>>(clothingItems);
     }
@@ -93,9 +93,9 @@ public class ClothingItemService(
     )
     {
         ClothingItem? clothingItem = await this
-            .clothingItemRepository.GetAll()
+            .clothingItemRepository.GetAll(cancellationToken: cancellationToken)
             .Where(ci => ci.Id == id)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
         if (clothingItem is null)
         {

@@ -1,7 +1,7 @@
 using AutoMapper;
-using Core.Application.Dtos.ClothingItem;
 using Core.Application.Exceptions;
 using Core.Application.MappingProfiles;
+using Core.Application.Models.ClothingItem;
 using Core.Application.Services;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Repositories.Interfaces;

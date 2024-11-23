@@ -1,4 +1,4 @@
-﻿namespace Core.Application.Dtos.ClothingItem;
+﻿namespace Core.Application.Models.ClothingItem;
 
 public record ClothingItemImport : BaseClothingItemDto
 {

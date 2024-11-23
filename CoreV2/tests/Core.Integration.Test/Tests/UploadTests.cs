@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
 using CloudinaryDotNet.Actions;
-using Core.Application.Dtos;
-using Core.Application.Dtos.Upload;
+using Core.Application.Models;
+using Core.Application.Models.Upload;
 using Core.Domain.Entities;
 using Core.Integration.Test.Helpers;
 using Core.Test.Shared.Helpers;

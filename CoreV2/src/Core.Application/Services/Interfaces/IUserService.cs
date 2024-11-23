@@ -1,4 +1,4 @@
-﻿using Core.Application.Dtos.User;
+﻿using Core.Application.Models.User;
 
 namespace Core.Application.Services.Interfaces;
 

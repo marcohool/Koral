@@ -1,4 +1,4 @@
-using Core.Application.Dtos.Upload;
+using Core.Application.Models.Upload;
 
 namespace Core.Application.Services.Interfaces;
 

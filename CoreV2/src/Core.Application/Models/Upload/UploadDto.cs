@@ -1,7 +1,7 @@
-using Core.Application.Dtos.ClothingItem;
+using Core.Application.Models.ClothingItem;
 using Core.Domain.Enums;
 
-namespace Core.Application.Dtos.Upload;
+namespace Core.Application.Models.Upload;
 
 public class UploadDto
 {

@@ -1,6 +1,6 @@
 using Core.Domain.Enums;
 
-namespace Core.Application.Dtos.ClothingItem;
+namespace Core.Application.Models.ClothingItem;
 
 public record BaseClothingItemDto
 {

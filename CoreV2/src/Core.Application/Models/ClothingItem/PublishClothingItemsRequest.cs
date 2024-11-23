@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Core.Application.Dtos.ClothingItem;
+namespace Core.Application.Models.ClothingItem;
 
 public record PublishClothingItemsRequest
 {

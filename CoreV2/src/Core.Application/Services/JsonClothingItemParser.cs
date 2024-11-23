@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using Core.Application.Dtos.ClothingItem;
+using Core.Application.Models.ClothingItem;
 using Core.Application.Models.Parsing;
 using Core.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Http;

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
 using CloudinaryDotNet.Actions;
-using Core.Application.Dtos.ClothingItem;
+using Core.Application.Models.ClothingItem;
 using Core.Domain.Entities;
 using Core.Domain.Enums;
 using Core.Test.Shared.Helpers;

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Application.Dtos.User;
+using Core.Application.Models.User;
 using Core.DataAccess.Identity;
 
 namespace Core.Application.MappingProfiles;

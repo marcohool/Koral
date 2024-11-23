@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Core.Application.Configuration;
-using Core.Application.Dtos.User;
 using Core.Application.Exceptions;
 using Core.Application.Helpers;
+using Core.Application.Models.User;
 using Core.Application.Services.Interfaces;
 using Core.DataAccess.Identity;
 using Microsoft.AspNetCore.Identity;

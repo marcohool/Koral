@@ -1,4 +1,4 @@
-using Core.Application.Dtos.ClothingItem;
+using Core.Application.Models.ClothingItem;
 using Microsoft.AspNetCore.Http;
 
 namespace Core.Application.Services.Interfaces;

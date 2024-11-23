@@ -1,4 +1,4 @@
-﻿namespace Core.Application.Dtos;
+﻿namespace Core.Application.Models;
 
 public record BaseResponseDto
 {
