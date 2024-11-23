@@ -9,7 +9,7 @@ public interface IUploadService
         CancellationToken cancellationToken = default
     );
 
-    Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 
     Task<IEnumerable<UploadDto>> GetAllAsync(CancellationToken cancellationToken = default);
 
@@ -17,5 +17,5 @@ public interface IUploadService
 
     Task<UploadDto> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
-    Task<UploadDto> FavouriteUpload(Guid id);
+    Task FavouriteUpload(Guid id);
 }

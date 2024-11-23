@@ -13,7 +13,7 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
     private readonly DatabaseContext context = context;
     private readonly DbSet<TEntity> dbSet = context.Set<TEntity>();
 
-    public async Task<List<TEntity>> GetAllAsync(
+    public IQueryable<TEntity> GetAll(
         Expression<Func<TEntity, bool>>? predicate = null,
         CancellationToken cancellationToken = default
     )
@@ -25,24 +25,7 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
             query = query.Where(predicate);
         }
 
-        return await query.ToListAsync(cancellationToken: cancellationToken);
-    }
-
-    public async Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> predicate)
-    {
-        return await this.dbSet.Where(predicate).FirstOrDefaultAsync();
-    }
-
-    public async Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null)
-    {
-        IQueryable<TEntity> query = this.dbSet;
-
-        if (predicate != null)
-        {
-            query = query.Where(predicate);
-        }
-
-        return await query.CountAsync();
+        return query;
     }
 
     public async Task AddAsync(TEntity entity)
@@ -51,20 +34,16 @@ public class BaseRepository<TEntity>(DatabaseContext context) : IBaseRepository<
         await this.context.SaveChangesAsync();
     }
 
-    public async Task<TEntity> UpdateAsync(TEntity entity)
+    public async Task UpdateAsync(TEntity entity)
     {
         this.dbSet.Update(entity);
         await this.context.SaveChangesAsync();
-
-        return entity;
     }
 
-    public async Task<Guid> DeleteAsync(TEntity entity)
+    public async Task DeleteAsync(TEntity entity)
     {
-        TEntity removedEntity = this.dbSet.Remove(entity).Entity;
+        this.dbSet.Remove(entity);
         await this.context.SaveChangesAsync();
-
-        return removedEntity.Id;
     }
 
     public async Task<IDbContextTransaction> BeginTransactionAsync()

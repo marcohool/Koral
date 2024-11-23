@@ -10,7 +10,7 @@ public interface IClothingItemService
         CancellationToken cancellationToken = default
     );
 
-    Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default);
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 
     Task<IEnumerable<ClothingItemResponseDto>> GetAllAsync(
         CancellationToken cancellationToken = default

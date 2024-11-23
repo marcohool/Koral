@@ -9,6 +9,7 @@ using Core.DataAccess.Identity;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Core.Application.Services;
@@ -92,13 +93,13 @@ public class UploadService(
         return uploadDto;
     }
 
-    public async Task<Guid> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
-        Upload? upload = await this.uploadRepository.GetFirstAsync(u =>
-            u.Id == id && u.AppUserId == user.Id
-        );
+        Upload? upload = await this
+            .uploadRepository.GetAll(u => u.Id == id && u.AppUserId == user.Id, cancellationToken)
+            .FirstOrDefaultAsync();
 
         if (upload is null)
         {
@@ -107,13 +108,10 @@ public class UploadService(
 
         IDbContextTransaction transaction = await this.uploadRepository.BeginTransactionAsync();
 
-        Guid uploadGuid = await this.uploadRepository.DeleteAsync(upload);
-
+        await this.uploadRepository.DeleteAsync(upload);
         await this.imageStorageService.DeleteImageAsync(upload.ImageUrl, cancellationToken);
 
         await transaction.CommitAsync(cancellationToken);
-
-        return uploadGuid;
     }
 
     public async Task<IEnumerable<UploadDto>> GetAllAsync(
@@ -122,10 +120,10 @@ public class UploadService(
     {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
-        List<Upload> uploads = await this.uploadRepository.GetAllAsync(
-            u => u.AppUserId == user.Id,
-            cancellationToken: cancellationToken
-        );
+        List<Upload> uploads = await this
+            .uploadRepository.GetAll()
+            .Where(u => u.AppUserId == user.Id)
+            .ToListAsync();
 
         return this.mapper.Map<IEnumerable<UploadDto>>(uploads);
     }
@@ -136,10 +134,10 @@ public class UploadService(
     {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
-        List<Upload> uploads = await this.uploadRepository.GetAllAsync(
-            u => u.AppUserId == user.Id && u.IsFavourited,
-            cancellationToken: cancellationToken
-        );
+        List<Upload> uploads = await this
+            .uploadRepository.GetAll()
+            .Where(u => u.AppUserId == user.Id && u.IsFavourited)
+            .ToListAsync();
 
         return this.mapper.Map<IEnumerable<UploadDto>>(uploads);
     }
@@ -154,22 +152,21 @@ public class UploadService(
         return this.mapper.Map<UploadDto>(upload);
     }
 
-    public async Task<UploadDto> FavouriteUpload(Guid id)
+    public async Task FavouriteUpload(Guid id)
     {
         Upload upload = await this.GetUserUpload(id);
 
         upload.IsFavourited = !upload.IsFavourited;
-
-        return this.mapper.Map<UploadDto>(await this.uploadRepository.UpdateAsync(upload));
     }
 
     private async Task<Upload> GetUserUpload(Guid id)
     {
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
-        Upload? upload = (await this.uploadRepository.GetAllAsync()).Find(u =>
-            u.Id == id && u.AppUserId == user.Id
-        );
+        Upload? upload = await this
+            .uploadRepository.GetAll()
+            .Where(u => u.Id == id && u.AppUserId == user.Id)
+            .FirstOrDefaultAsync();
 
         if (upload is null)
         {

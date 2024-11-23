@@ -7,20 +7,16 @@ namespace Core.DataAccess.Repositories.Interfaces;
 public interface IBaseRepository<TEntity>
     where TEntity : BaseEntity
 {
-    Task<List<TEntity>> GetAllAsync(
+    IQueryable<TEntity> GetAll(
         Expression<Func<TEntity, bool>>? predicate = null,
         CancellationToken cancellationToken = default
     );
 
-    Task<TEntity?> GetFirstAsync(Expression<Func<TEntity, bool>> predicate);
-
-    Task<int> CountAsync(Expression<Func<TEntity, bool>>? predicate = null);
-
     Task AddAsync(TEntity entity);
 
-    Task<TEntity> UpdateAsync(TEntity entity);
+    Task UpdateAsync(TEntity entity);
 
-    Task<Guid> DeleteAsync(TEntity entity);
+    Task DeleteAsync(TEntity entity);
 
     Task<IDbContextTransaction> BeginTransactionAsync();
 

@@ -8,6 +8,7 @@ using Core.Application.Services.Interfaces;
 using Core.DataAccess.Repositories.Interfaces;
 using Core.Domain.Entities;
 using Core.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace Core.Application.Services;
@@ -100,10 +101,10 @@ public class MatchingService(
                 : [itemEmbedding.Gender]
         );
 
-        List<ClothingItem> clothingItemsToSearch = await this.clothingItemRepository.GetAllAsync(
-            ci => ci.Category == itemEmbedding.Category && baseGenders.Contains(ci.Gender),
-            cancellationToken: cancellationToken
-        );
+        List<ClothingItem> clothingItemsToSearch = await this
+            .clothingItemRepository.GetAll()
+            .Where(ci => ci.Category == itemEmbedding.Category && baseGenders.Contains(ci.Gender))
+            .ToListAsync(cancellationToken);
 
         return clothingItemsToSearch;
     }

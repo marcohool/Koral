@@ -7,13 +7,9 @@ using Newtonsoft.Json;
 
 namespace Core.API.Controllers;
 
-public class ClothingItemsController(
-    IClothingItemService clothingItemService,
-    IClothingItemParser clothingItemParser
-) : ApiController
+public class ClothingItemsController(IClothingItemService clothingItemService) : ApiController
 {
     private readonly IClothingItemService clothingItemService = clothingItemService;
-    private readonly IClothingItemParser clothingItemParser = clothingItemParser;
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ClothingItemResponseDto>>> GetAllAsync()
