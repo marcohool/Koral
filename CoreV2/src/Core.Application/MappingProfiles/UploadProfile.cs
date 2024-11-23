@@ -31,6 +31,7 @@ public class UploadProfile : Profile
                                         )
                                         .ToList()
                                 })
+                                .OrderByDescending(cim => cim.Category)
                     )
             );
     }
