@@ -1,6 +1,11 @@
 import { Category } from 'shared/enums/category';
 import { CurrencyCode } from 'shared/enums/currencyCode';
 
+export interface CategorisedClothingItems {
+  category: Category;
+  itemMatches: ClothingItem[];
+}
+
 export interface ClothingItem {
   id: string;
   name: string;
@@ -10,5 +15,7 @@ export interface ClothingItem {
   currencyCode: CurrencyCode;
   imageUrl: string;
   sourceUrl: string;
-  similarity: number;
+  embeddingSimilarity: number;
+  colourSimilarity: number;
+  overallSimilarity: number;
 }

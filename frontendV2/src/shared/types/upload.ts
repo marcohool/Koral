@@ -1,4 +1,4 @@
-import { ClothingItem } from './clothingItem';
+import { CategorisedClothingItems } from './clothingItem';
 
 export interface Upload {
   id: string;
@@ -8,5 +8,5 @@ export interface Upload {
   isFavourited: boolean;
   createdOn: string;
   lastUpdatedOn: string;
-  matchedClothingItems: ClothingItem[];
+  matchedClothingItems: CategorisedClothingItems[];
 }

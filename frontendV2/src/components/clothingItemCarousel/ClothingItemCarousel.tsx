@@ -26,7 +26,7 @@ const CardBody: FC<{ item: ClothingItem; isHovered: boolean }> = ({
 }) => {
   const brandImagePath = getBrandImagePath(item.brand);
 
-  const similarity = Math.round(item.similarity * 100);
+  const similarity = Math.round(item.overallSimilarity * 100);
 
   return (
     <div className="flex flex-col gap-y-2 p-3">

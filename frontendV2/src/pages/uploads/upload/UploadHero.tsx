@@ -104,7 +104,7 @@ const TopMatchesGrid: FC<{ items?: ClothingItem[] }> = ({ items }) => {
             <h3 className="text-base uppercase">Top Matches</h3>
             <div className="grid grid-cols-4 mt-3">
               {items
-                .sort((a, b) => b.similarity - a.similarity)
+                .sort((a, b) => b.overallSimilarity - a.overallSimilarity)
                 .slice(0, 8)
                 .map((item) => (
                   <Card
@@ -157,7 +157,9 @@ const UploadHero: FC<{ upload?: Upload; onFavourite: () => void }> = ({
       <HeroContent
         isFavourite={upload?.isFavourited ?? false}
         handleFavourite={onFavourite}
-        matchedClothingItems={upload?.matchedClothingItems}
+        matchedClothingItems={upload?.matchedClothingItems.flatMap(
+          (item) => item.itemMatches,
+        )}
         title={upload?.title}
         createdOn={upload?.createdOn}
       />

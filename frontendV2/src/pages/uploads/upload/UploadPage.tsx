@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useUpload } from 'pages/uploads/useUploads';
 import ContentPage from 'shared/layouts/contentPage';
 import ClothingItemCarousel from 'components/clothingItemCarousel';
-import { Category, getCategoryName } from 'shared/enums/category';
-import { ClothingItem } from 'shared/types/clothingItem';
+import { getCategoryName } from 'shared/enums/category';
 import Skeleton from 'components/skeleton';
 import UploadHero from './UploadHero';
 import { useFavourite } from 'shared/hooks/useFavourites';
@@ -14,34 +13,27 @@ const UploadPageContent: FC = () => {
   const { data: upload } = useUpload(id ?? '');
   const { mutate } = useFavourite();
 
-  const matchedCategories = upload?.matchedClothingItems.reduce((acc, item) => {
-    const category = item.category;
-    if (!acc.has(category)) {
-      acc.set(category, []);
-    }
-    acc.get(category)!.push(item);
-    return acc;
-  }, new Map<Category, ClothingItem[]>());
-
   const handleFavourite = () => {
     if (upload) {
       mutate(upload.id);
     }
   };
 
+  console.log(upload);
+
   return (
     <>
       <UploadHero upload={upload} onFavourite={handleFavourite} />
       <div className="flex flex-col mt-20 w-full">
-        {matchedCategories &&
-          Array.from(matchedCategories, ([category, items]) => (
+        {upload ? (
+          upload.matchedClothingItems.map((item) => (
             <ClothingItemCarousel
-              key={category}
-              title={getCategoryName(category)}
-              data={items.sort((a, b) => b.similarity - a.similarity)}
+              key={item.category}
+              title={getCategoryName(item.category)}
+              data={item.itemMatches ?? []}
             />
-          ))}
-        {!matchedCategories && (
+          ))
+        ) : (
           <Skeleton className="w-full h-96 mt-20 rounded-none" />
         )}
       </div>
