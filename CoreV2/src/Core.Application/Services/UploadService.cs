@@ -46,7 +46,6 @@ public class UploadService(
         UploadEmbedding uploadEmbedding = await this.koralMatchApi.GetUploadEmbedding(image);
 
         string imageUrl = await this.imageStorageService.UploadImageAsync(image, cancellationToken);
-        //string imageUrl = "www.test.com/image";
 
         Upload upload =
             new()
@@ -99,7 +98,7 @@ public class UploadService(
 
         Upload? upload = await this
             .uploadRepository.GetAll(u => u.Id == id && u.AppUserId == user.Id, cancellationToken)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
         if (upload is null)
         {
@@ -121,9 +120,9 @@ public class UploadService(
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
         List<Upload> uploads = await this
-            .uploadRepository.GetAll()
+            .uploadRepository.GetAll(cancellationToken: cancellationToken)
             .Where(u => u.AppUserId == user.Id)
-            .ToListAsync();
+            .ToListAsync(cancellationToken: cancellationToken);
 
         return this.mapper.Map<IEnumerable<UploadDto>>(uploads);
     }
@@ -135,9 +134,9 @@ public class UploadService(
         ApplicationUser user = await this.claimService.GetCurrentUserAsync();
 
         List<Upload> uploads = await this
-            .uploadRepository.GetAll()
+            .uploadRepository.GetAll(cancellationToken: cancellationToken)
             .Where(u => u.AppUserId == user.Id && u.IsFavourited)
-            .ToListAsync();
+            .ToListAsync(cancellationToken: cancellationToken);
 
         return this.mapper.Map<IEnumerable<UploadDto>>(uploads);
     }
