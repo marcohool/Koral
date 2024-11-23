@@ -2,7 +2,6 @@ using AutoMapper;
 using Core.Application.APIs.KoralMatch;
 using Core.Application.APIs.KoralMatch.Models;
 using Core.Application.Exceptions;
-using Core.Application.Models.ClothingItem;
 using Core.Application.Models.ItemMatch;
 using Core.Application.Models.Upload;
 using Core.Application.Services.Interfaces;
@@ -88,7 +87,7 @@ public class UploadService(
         }
 
         UploadDto uploadDto = this.mapper.Map<UploadDto>(upload);
-        uploadDto.MatchedClothingItems = this.mapper.Map<List<ItemMatchResponseDto>>(allMatches);
+        uploadDto.MatchedClothingItems = this.mapper.Map<List<CategorisedItemMatches>>(allMatches);
 
         return uploadDto;
     }
@@ -125,6 +124,7 @@ public class UploadService(
             .Where(u => u.AppUserId == user.Id)
             .Include(u => u.UploadItems)
             .ThenInclude(ui => ui.ItemMatches)
+            .ThenInclude(im => im.ClothingItem)
             .ToListAsync(cancellationToken: cancellationToken);
 
         return this.mapper.Map<IEnumerable<UploadDto>>(uploads);

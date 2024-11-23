@@ -19,5 +19,5 @@ public class UploadDto
 
     public DateTime? LastUpdatedOn { get; set; }
 
-    public List<ItemMatchResponseDto> MatchedClothingItems { get; set; } = [];
+    public IEnumerable<CategorisedItemMatches> MatchedClothingItems { get; set; } = [];
 }
