@@ -1,4 +1,4 @@
-using Core.Application.Models.ClothingItem;
+using Core.Application.Models.ItemMatch;
 using Core.Domain.Enums;
 
 namespace Core.Application.Models.Upload;
@@ -19,5 +19,5 @@ public class UploadDto
 
     public DateTime? LastUpdatedOn { get; set; }
 
-    public List<ClothingItemResponseDto> MatchedClothingItems { get; set; } = [];
+    public List<ItemMatchResponseDto> MatchedClothingItems { get; set; } = [];
 }

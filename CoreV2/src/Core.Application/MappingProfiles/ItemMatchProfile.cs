@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Application.Models.ClothingItem;
+using Core.Application.Models.ItemMatch;
 using Core.Domain.Entities;
 
 namespace Core.Application.MappingProfiles;
@@ -8,10 +8,10 @@ public class ItemMatchProfile : Profile
 {
     public ItemMatchProfile()
     {
-        this.CreateMap<ItemMatch, ClothingItemResponseDto>()
+        this.CreateMap<ItemMatch, ItemMatchResponseDto>()
             .IncludeMembers(src => src.ClothingItem)
             .ForMember(
-                dest => dest.Similarity,
+                dest => dest.OverallSimilarity,
                 opt =>
                     opt.MapFrom(src =>
                         this.CalculateSimilarity(src.EmbeddingSimilarity, src.ColourSimilarity)
