@@ -88,29 +88,31 @@ const ClothingItemCarousel: FC<{
         className={cn('w-full hover:z-50')}
       >
         <CarouselContent className="border-l border-secondary-foreground">
-          {data.map((item, index) => (
-            <CarouselItem key={index} className="basis-1/6">
-              <Card
-                imageUrl={item.imageUrl}
-                visibleBody={
-                  cardBodyOverride ? (
-                    cardBodyOverride({ item, isHovered: false })
-                  ) : (
-                    <CardBody item={item} isHovered={false} />
-                  )
-                }
-                hoveredBody={
-                  cardBodyOverride ? (
-                    cardBodyOverride({ item, isHovered: true })
-                  ) : (
-                    <CardBody item={item} isHovered={true} />
-                  )
-                }
-                className="outline outline-1 outline-secondary-foreground"
-                disableHover={disableHover}
-              />
-            </CarouselItem>
-          ))}
+          {data
+            .sort((a, b) => b.overallSimilarity - a.overallSimilarity)
+            .map((item, index) => (
+              <CarouselItem key={index} className="basis-1/6">
+                <Card
+                  imageUrl={item.imageUrl}
+                  visibleBody={
+                    cardBodyOverride ? (
+                      cardBodyOverride({ item, isHovered: false })
+                    ) : (
+                      <CardBody item={item} isHovered={false} />
+                    )
+                  }
+                  hoveredBody={
+                    cardBodyOverride ? (
+                      cardBodyOverride({ item, isHovered: true })
+                    ) : (
+                      <CardBody item={item} isHovered={true} />
+                    )
+                  }
+                  className="outline outline-1 outline-secondary-foreground"
+                  disableHover={disableHover}
+                />
+              </CarouselItem>
+            ))}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
