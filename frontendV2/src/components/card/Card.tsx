@@ -17,7 +17,9 @@ const CardImage: FC<{ children: ReactNode; className?: string }> = ({
 }) => {
   return (
     <div className={cn('overflow-hidden', className)}>
-      <ScrollArea className="h-full">{children}</ScrollArea>
+      <ScrollArea className="h-full" scrollHideDelay={0}>
+        {children}
+      </ScrollArea>
     </div>
   );
 };
