@@ -18,17 +18,13 @@ public class UploadProfile : Profile
                             src
                                 .UploadItems.Where(ui => ui.ItemMatches.Count != 0)
                                 .SelectMany(ui => ui.ItemMatches)
-                                .Select(ci => ci.ClothingItem)
-                                .GroupBy(ci => ci.Category)
+                                .GroupBy(ci => ci.ClothingItem.Category)
                                 .Select(group => new CategorisedItemMatches
                                 {
                                     Category = group.Key,
                                     ItemMatches = group
-                                        .SelectMany(im =>
-                                            context.Mapper.Map<List<ItemMatchResponseDto>>(
-                                                im.ItemMatches
-                                            )
-                                        )
+                                        .DistinctBy(ci => ci.ClothingItemId)
+                                        .Select(ci => context.Mapper.Map<ItemMatchResponseDto>(ci))
                                         .ToList()
                                 })
                     )
