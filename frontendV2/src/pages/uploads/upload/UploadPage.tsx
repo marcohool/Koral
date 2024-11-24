@@ -19,8 +19,6 @@ const UploadPageContent: FC = () => {
     }
   };
 
-  console.log(upload);
-
   return (
     <>
       <UploadHero upload={upload} onFavourite={handleFavourite} />

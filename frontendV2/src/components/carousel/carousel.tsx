@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
 import { cn } from 'lib/utils';
+import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 import Button from 'components/button';
 
 type CarouselApi = UseEmblaCarouselType[1];
@@ -154,7 +154,7 @@ const CarouselContent = React.forwardRef<
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef}>
+    <div ref={carouselRef} className="overflow-x-clip overflow-y-visible">
       <div
         ref={ref}
         className={cn(
