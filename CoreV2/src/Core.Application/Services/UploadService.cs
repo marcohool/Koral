@@ -1,3 +1,4 @@
+using System.Threading;
 using AutoMapper;
 using Core.Application.APIs.KoralMatch;
 using Core.Application.APIs.KoralMatch.Models;
@@ -168,6 +169,9 @@ public class UploadService(
         Upload? upload = await this
             .uploadRepository.GetAll()
             .Where(u => u.Id == id && u.AppUserId == user.Id)
+            .Include(u => u.UploadItems)
+            .ThenInclude(ui => ui.ItemMatches)
+            .ThenInclude(im => im.ClothingItem)
             .FirstOrDefaultAsync();
 
         if (upload is null)

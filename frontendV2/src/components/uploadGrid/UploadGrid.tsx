@@ -33,7 +33,9 @@ const CardBody: FC<{
         </div>
       )}
       <div className={cn(className, 'text-ellipsis overflow-hidden')}>
-        <h3 className="font-medium leading-none line-clamp-2">{title}</h3>
+        <h3 className="font-medium leading-none line-clamp-1 text-ellipsis">
+          {title}
+        </h3>
         <p className="text-xs text-muted-foreground line-clamp-1">{subtitle}</p>
       </div>
     </div>
@@ -68,7 +70,9 @@ const UploadGrid: FC<{
               title={upload.title}
               subtitle={upload.title}
               className="text-sm"
-              matchedClothingItems={upload.matchedClothingItems}
+              matchedClothingItems={upload.matchedClothingItems.flatMap(
+                (item) => item.itemMatches,
+              )}
               hovered={true}
             />
           }
